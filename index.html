@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estudios de Mercado Inmobiliario</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><rect width='20' height='20' rx='4' fill='%23C9A84C'/><rect x='2' y='10' width='4' height='8' fill='white' rx='1'/><rect x='8' y='6' width='4' height='12' fill='white' rx='1'/><rect x='14' y='2' width='4' height='16' fill='white' rx='1'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:   #1F3864;
+    --navy2:  #162a4f;
+    --gold:   #C9A84C;
+    --gold-l: #F4E4B0;
+    --cream:  #FAF8F4;
+    --text:   #1a1a2e;
+    --muted:  #6b7280;
+  }
+
+  html, body { height: 100%; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  /* ── decorative grid bg ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(31,56,100,.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(31,56,100,.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── header strip ── */
+  header {
+    position: relative;
+    z-index: 1;
+    background: var(--navy);
+    padding: 18px 48px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-bottom: 3px solid var(--gold);
+  }
+
+  .logo-mark {
+    width: 36px; height: 36px;
+    background: var(--gold);
+    border-radius: 6px;
+    display: grid;
+    place-items: center;
+  }
+  .logo-mark svg { width: 20px; height: 20px; }
+
+  .brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: #fff;
+    letter-spacing: .02em;
+  }
+  .brand span { color: var(--gold); }
+
+  /* ── main container ── */
+  main {
+    flex: 1;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 24px;
+  }
+
+  .card {
+    background: #fff;
+    border: 1px solid rgba(31,56,100,.12);
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(31,56,100,.10), 0 2px 8px rgba(31,56,100,.06);
+    padding: 56px 52px 48px;
+    width: 100%;
+    max-width: 480px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* gold corner accent */
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 120px; height: 4px;
+    background: linear-gradient(90deg, transparent, var(--gold));
+  }
+  .card::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 4px; height: 120px;
+    background: linear-gradient(180deg, var(--gold), transparent);
+  }
+
+  .eyebrow {
+    font-size: .72rem;
+    font-weight: 500;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    line-height: 1.2;
+    color: var(--navy);
+    margin-bottom: 10px;
+  }
+
+  .subtitle {
+    font-size: .92rem;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 40px;
+  }
+
+  label {
+    display: block;
+    font-size: .8rem;
+    font-weight: 500;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+
+  .input-wrap {
+    position: relative;
+    margin-bottom: 16px;
+  }
+
+  input[type="text"] {
+    width: 100%;
+    padding: 14px 18px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    letter-spacing: .06em;
+    border: 1.5px solid rgba(31,56,100,.2);
+    border-radius: 8px;
+    background: var(--cream);
+    color: var(--text);
+    outline: none;
+    transition: border-color .2s, box-shadow .2s;
+  }
+  input[type="text"]::placeholder { color: #bbb; letter-spacing: .06em; }
+  input[type="text"]:focus {
+    border-color: var(--navy);
+    box-shadow: 0 0 0 3px rgba(31,56,100,.08);
+  }
+
+  button {
+    width: 100%;
+    padding: 15px;
+    background: var(--navy);
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: .95rem;
+    font-weight: 500;
+    letter-spacing: .04em;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background .2s, transform .1s;
+    position: relative;
+    overflow: hidden;
+  }
+  button::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transition: transform .25s;
+  }
+  button:hover { background: var(--navy2); }
+  button:hover::after { transform: scaleX(1); }
+  button:active { transform: scale(.98); }
+
+  .error-msg {
+    display: none;
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: #fff3f3;
+    border: 1px solid #fca5a5;
+    border-radius: 6px;
+    font-size: .85rem;
+    color: #b91c1c;
+  }
+  .error-msg.show { display: block; }
+
+  .hint {
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(31,56,100,.08);
+    font-size: .8rem;
+    color: var(--muted);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    line-height: 1.6;
+  }
+  .hint svg { flex-shrink: 0; margin-top: 2px; }
+
+  /* demo badge */
+  .demo-badge {
+    margin-top: 16px;
+    text-align: center;
+    font-size: .78rem;
+    color: var(--muted);
+  }
+  .demo-badge a {
+    color: var(--gold);
+    text-decoration: none;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  .demo-badge a:hover { text-decoration: underline; }
+
+  /* ── footer ── */
+  footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 20px;
+    font-size: .78rem;
+    color: var(--muted);
+    border-top: 1px solid rgba(31,56,100,.08);
+  }
+
+  /* loading spinner */
+  .spinner {
+    display: none;
+    width: 18px; height: 18px;
+    border: 2px solid rgba(255,255,255,.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin .7s linear infinite;
+    margin: 0 auto;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  button.loading .btn-text { display: none; }
+  button.loading .spinner { display: block; }
+
+  @media (max-width: 520px) {
+    .card { padding: 36px 24px 32px; }
+    h1 { font-size: 1.6rem; }
+    header { padding: 14px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-mark">
+    <svg viewBox="0 0 20 20" fill="none">
+      <rect x="2" y="10" width="4" height="8" fill="white" rx="1"/>
+      <rect x="8" y="6"  width="4" height="12" fill="white" rx="1"/>
+      <rect x="14" y="2" width="4" height="16" fill="white" rx="1"/>
+    </svg>
+  </div>
+  <div class="brand">Estudios de Mercado <span>Inmobiliario</span></div>
+</header>
+
+<main>
+  <div class="card">
+    <div class="eyebrow">Acceso al estudio</div>
+    <h1>Consulta tu<br>informe de mercado</h1>
+    <p class="subtitle">Ingresa el código de acceso que recibiste para visualizar el estudio de mercado de tu proyecto.</p>
+
+    <label for="codigo">Código de acceso</label>
+    <div class="input-wrap">
+      <input type="text" id="codigo" placeholder="EST-2025-XX-XXXX" autocomplete="off" autocapitalize="characters" spellcheck="false">
+    </div>
+
+    <button id="btn-acceder" onclick="acceder()">
+      <span class="btn-text">Ver estudio &nbsp;→</span>
+      <div class="spinner"></div>
+    </button>
+
+    <div class="error-msg" id="error-msg">
+      Código no encontrado. Verifica que esté escrito correctamente o contacta a tu analista.
+    </div>
+
+    <div class="demo-badge">
+      ¿Primera vez? <a onclick="usarDemo()">Usar código de demo</a>
+    </div>
+
+    <div class="hint">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <circle cx="7" cy="7" r="6" stroke="#9ca3af" stroke-width="1.2"/>
+        <path d="M7 6.5v4M7 4.5v.5" stroke="#9ca3af" stroke-width="1.2" stroke-linecap="round"/>
+      </svg>
+      El código de acceso es entregado por tu analista inmobiliario junto con la notificación del estudio completado.
+    </div>
+  </div>
+</main>
+
+<footer>
+  © 2025 Estudios de Mercado Inmobiliario · Todos los derechos reservados
+</footer>
+
+<script>
+  const input = document.getElementById('codigo');
+  const btn   = document.getElementById('btn-acceder');
+  const err   = document.getElementById('error-msg');
+
+  input.addEventListener('keydown', e => { if (e.key === 'Enter') acceder(); });
+  input.addEventListener('input', () => err.classList.remove('show'));
+
+  function usarDemo() {
+    input.value = 'EST-2025-GC-8F3K';
+    input.focus();
+  }
+
+  function acceder() {
+    const codigo = input.value.trim().toUpperCase();
+    if (!codigo) { input.focus(); return; }
+
+    btn.classList.add('loading');
+    err.classList.remove('show');
+
+    // Intenta cargar el JSON del estudio
+    fetch(`estudios/${codigo}.json`)
+      .then(res => {
+        if (!res.ok) throw new Error('not found');
+        return res.json();
+      })
+      .then(data => {
+        // Guardar en sessionStorage y redirigir
+        sessionStorage.setItem('estudio', JSON.stringify(data));
+        window.location.href = `viewer.html?codigo=${codigo}`;
+      })
+      .catch(() => {
+        btn.classList.remove('loading');
+        err.classList.add('show');
+        input.select();
+      });
+  }
+</script>
+</body>
+</html>

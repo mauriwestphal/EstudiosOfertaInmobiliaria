@@ -1,0 +1,704 @@
+{
+  "meta": {
+    "id": "EST-2026-KANT-PUQON",
+    "cliente": "Kant Inmobiliaria",
+    "proyecto": "PUQON Edificio",
+    "ubicacion_proyecto": "Camino al Volcán, Pucón, Araucanía",
+    "fecha_estudio": "2026-03-26",
+    "autor": "MW Consulting",
+    "version": "1.0",
+    "metodologia": {
+      "fuente_precios": "Portales inmobiliarios (Portal Inmobiliario, MercadoLibre, webs oficiales)",
+      "criterio_precio": "Precio de lista sin estacionamiento ni bodega",
+      "descuento_estimado": "8% sobre precio de lista (pendiente validación con salas de venta)",
+      "formula_ufm2": "Valor UF / (Superficie útil + Terraza / 2)",
+      "tipo_proyectos": "Solo proyectos nuevos (excluye usados/reventa)",
+      "orientaciones": "Pendiente levantamiento en terreno",
+      "notas": [
+        "Precios validados contra portales web en marzo 2026",
+        "Descuento 8% es estimación estándar — se ajusta con llamadas a salas de venta",
+        "La Poza: superficies brutas inconsistentes, se usa solo útil + terraza",
+        "Parque Payllahue: portal indica precios incluyen est+bod — pendiente confirmar"
+      ]
+    }
+  },
+  "proyecto_evaluado": {
+    "nombre": "PUQON Edificio",
+    "desarrollador": "Kant Inmobiliaria + RVL Investment",
+    "direccion": "Camino al Volcán, Pucón",
+    "sector": "Camino al Volcán",
+    "distancia_centro_m": 800,
+    "pisos": 4,
+    "total_unidades": 132,
+    "superficie_vendible_m2": 7100,
+    "superficie_promedio_m2": 54,
+    "precio_promedio_uf": 4383,
+    "uf_m2_neto_depto": 69.0,
+    "venta_neta_total_uf": 578508,
+    "amenities": [
+      "Piscina",
+      "2 Quinchos",
+      "Hot Tubs",
+      "Áreas verdes"
+    ],
+    "estacionamientos": 132,
+    "bodegas": 66,
+    "mix_unidades": [
+      {
+        "tipo": "1D+1B",
+        "cantidad": 24
+      },
+      {
+        "tipo": "1.5D+2B",
+        "cantidad": 32
+      },
+      {
+        "tipo": "2D+2B",
+        "cantidad": 48
+      },
+      {
+        "tipo": "3D+2B",
+        "cantidad": 28
+      }
+    ]
+  },
+  "competencia": [
+    {
+      "id": 1,
+      "nombre": "Edificio Playa Pucón",
+      "inmobiliaria": "No identificada",
+      "direccion": "Ramón Quezada 515, Playa Grande, Pucón",
+      "sector": "Playa Grande / Centro",
+      "zona": "centro",
+      "distancia_centro_m": 200,
+      "estado": "Entrega inmediata",
+      "pisos": 4,
+      "total_unidades": 35,
+      "disponibles": 6,
+      "vista_principal": "Lago y Volcán",
+      "amenities": [
+        "Hidromasajes azotea",
+        "Vista panorámica",
+        "Ascensor",
+        "Est. subterráneos",
+        "Piscina",
+        "Quinchos"
+      ],
+      "estacionamiento_uf": null,
+      "bodega_uf": null,
+      "lat": -39.2718,
+      "lng": -71.9773,
+      "fuente": "Portal Inmobiliario",
+      "tipologias": [
+        {
+          "tipo": "2D+2B",
+          "sup_util": 72.0,
+          "terraza": 14.64,
+          "precio_lista_uf": 9827,
+          "precio_dcto_uf": 9041,
+          "uf_m2_lista": 123.9,
+          "uf_m2_dcto": 114.0
+        },
+        {
+          "tipo": "3D+2B",
+          "sup_util": 94.51,
+          "terraza": 10.8,
+          "precio_lista_uf": 15553,
+          "precio_dcto_uf": 14309,
+          "uf_m2_lista": 155.7,
+          "uf_m2_dcto": 143.2
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "nombre": "Terrazsu Holzapfel",
+      "inmobiliaria": "No identificada",
+      "direccion": "C. Clemente Holzapfel 612, Pucón",
+      "sector": "Centro",
+      "zona": "centro",
+      "distancia_centro_m": 400,
+      "estado": "Venta en verde",
+      "pisos": null,
+      "total_unidades": null,
+      "disponibles": 16,
+      "vista_principal": "Urbano",
+      "amenities": [
+        "No detalladas"
+      ],
+      "estacionamiento_uf": 450,
+      "bodega_uf": 80,
+      "lat": -39.2728,
+      "lng": -71.9738,
+      "fuente": "Planilla Kant / Portal Inmobiliario (stock)",
+      "tipologias": [
+        {
+          "tipo": "1D+1B",
+          "sup_util": 37.7,
+          "terraza": 5.6,
+          "precio_lista_uf": 3356,
+          "precio_dcto_uf": 3088,
+          "uf_m2_lista": 82.9,
+          "uf_m2_dcto": 76.2
+        },
+        {
+          "tipo": "2D+2B",
+          "sup_util": 67.03,
+          "terraza": 21.33,
+          "precio_lista_uf": 6433,
+          "precio_dcto_uf": 5918,
+          "uf_m2_lista": 82.8,
+          "uf_m2_dcto": 76.2
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "nombre": "Natura Pucón",
+      "inmobiliaria": "No identificada",
+      "direccion": "Centro de Pucón (cercano a playa)",
+      "sector": "Centro / Playa",
+      "zona": "centro",
+      "distancia_centro_m": 300,
+      "estado": "Entrega inmediata",
+      "pisos": null,
+      "total_unidades": 38,
+      "disponibles": 23,
+      "vista_principal": "Urbano / Bosque",
+      "amenities": [
+        "1.100 m² áreas verdes",
+        "Espacios comunitarios",
+        "Ascensor"
+      ],
+      "estacionamiento_uf": 400,
+      "bodega_uf": 72,
+      "lat": -39.2712,
+      "lng": -71.9758,
+      "fuente": "Portal Inmobiliario (desde 3.629 UF) + Planilla Kant (tipologías)",
+      "tipologias": [
+        {
+          "tipo": "1D+1B",
+          "sup_util": 32.6,
+          "terraza": 10.8,
+          "precio_lista_uf": 4848,
+          "precio_dcto_uf": 4460,
+          "uf_m2_lista": 127.6,
+          "uf_m2_dcto": 117.4
+        },
+        {
+          "tipo": "2D+2B",
+          "sup_util": 49.5,
+          "terraza": 16.3,
+          "precio_lista_uf": 6924,
+          "precio_dcto_uf": 6370,
+          "uf_m2_lista": 120.1,
+          "uf_m2_dcto": 110.5
+        },
+        {
+          "tipo": "3D+2B",
+          "sup_util": 75.9,
+          "terraza": 13.1,
+          "precio_lista_uf": 10088,
+          "precio_dcto_uf": 9281,
+          "uf_m2_lista": 122.4,
+          "uf_m2_dcto": 112.6
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "nombre": "Origen",
+      "inmobiliaria": "No identificada",
+      "direccion": "Camino Internacional 1605, Pucón",
+      "sector": "Camino Internacional / Estadio",
+      "zona": "internacional",
+      "distancia_centro_m": 1500,
+      "estado": "Entrega inmediata",
+      "pisos": 4,
+      "total_unidades": null,
+      "disponibles": 5,
+      "vista_principal": "Jardín interior / Bosque",
+      "amenities": [
+        "Piscina",
+        "Quinchos",
+        "Conserjería 24h",
+        "Ascensor",
+        "Bicicletero",
+        "Lavandería",
+        "Sala multiuso"
+      ],
+      "estacionamiento_uf": 450,
+      "bodega_uf": 80,
+      "lat": -39.2808,
+      "lng": -71.9648,
+      "fuente": "Planilla Kant + Portal Inmobiliario (confirma)",
+      "tipologias": [
+        {
+          "tipo": "1D+1B",
+          "sup_util": 29.83,
+          "terraza": 7.98,
+          "precio_lista_uf": 3103,
+          "precio_dcto_uf": 2855,
+          "uf_m2_lista": 91.8,
+          "uf_m2_dcto": 84.4
+        },
+        {
+          "tipo": "1.5D+1B",
+          "sup_util": 38.58,
+          "terraza": 11.95,
+          "precio_lista_uf": 3824,
+          "precio_dcto_uf": 3518,
+          "uf_m2_lista": 85.8,
+          "uf_m2_dcto": 79.0
+        },
+        {
+          "tipo": "2D+2B",
+          "sup_util": 55.63,
+          "terraza": 13.53,
+          "precio_lista_uf": 4444,
+          "precio_dcto_uf": 4088,
+          "uf_m2_lista": 71.2,
+          "uf_m2_dcto": 65.5
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "nombre": "Parque Pucón Oriente",
+      "inmobiliaria": "Parque Pucón",
+      "direccion": "Variante Camino Internacional 1265, Pucón",
+      "sector": "Camino Internacional",
+      "zona": "internacional",
+      "distancia_centro_m": 1800,
+      "estado": "Entrega inmediata",
+      "pisos": 6,
+      "total_unidades": 140,
+      "disponibles": 63,
+      "vista_principal": "Bosque / Urbano",
+      "amenities": [
+        "Termopanel",
+        "Eficiencia energética",
+        "Áreas verdes",
+        "Piscina"
+      ],
+      "estacionamiento_uf": null,
+      "bodega_uf": 50,
+      "lat": -39.2832,
+      "lng": -71.9618,
+      "fuente": "Planilla Kant (precios) + Portal Inmobiliario (stock: 63 uds)",
+      "tipologias": [
+        {
+          "tipo": "1D+1B",
+          "sup_util": 38.0,
+          "terraza": 2.0,
+          "precio_lista_uf": 2430,
+          "precio_dcto_uf": 2236,
+          "uf_m2_lista": 62.3,
+          "uf_m2_dcto": 57.3
+        },
+        {
+          "tipo": "2D+2B",
+          "sup_util": 52.0,
+          "terraza": 2.0,
+          "precio_lista_uf": 3060,
+          "precio_dcto_uf": 2815,
+          "uf_m2_lista": 57.7,
+          "uf_m2_dcto": 53.1
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "nombre": "Parque Payllahue",
+      "inmobiliaria": "Ambienta Inmobiliaria",
+      "direccion": "Camino al Volcán Km 1, Pucón",
+      "sector": "Camino al Volcán",
+      "zona": "volcan",
+      "distancia_centro_m": 1000,
+      "estado": "Últimas unidades",
+      "pisos": 4,
+      "total_unidades": null,
+      "disponibles": 14,
+      "vista_principal": "Bosque / Volcán",
+      "amenities": [
+        "Piscina",
+        "Club House",
+        "Gimnasio",
+        "Sauna",
+        "Hot Tub",
+        "Sala de juegos",
+        "Salón Gourmet",
+        "Quinchos"
+      ],
+      "estacionamiento_uf": 200,
+      "bodega_uf": 100,
+      "lat": -39.2793,
+      "lng": -71.9683,
+      "fuente": "Planilla Kant + Web oficial (desde 3.744 UF) + Portal Inmob (desde 2.459 incl est+bod)",
+      "tipologias": [
+        {
+          "tipo": "E+1B",
+          "sup_util": 23.0,
+          "terraza": 7.0,
+          "precio_lista_uf": 2895,
+          "precio_dcto_uf": 2663,
+          "uf_m2_lista": 109.2,
+          "uf_m2_dcto": 100.5
+        },
+        {
+          "tipo": "1D+1B",
+          "sup_util": 32.0,
+          "terraza": 11.0,
+          "precio_lista_uf": 3090,
+          "precio_dcto_uf": 2843,
+          "uf_m2_lista": 82.4,
+          "uf_m2_dcto": 75.8
+        },
+        {
+          "tipo": "2D+2B",
+          "sup_util": 42.0,
+          "terraza": 11.0,
+          "precio_lista_uf": 4190,
+          "precio_dcto_uf": 3855,
+          "uf_m2_lista": 88.2,
+          "uf_m2_dcto": 81.2
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "nombre": "Pucón Andino",
+      "inmobiliaria": "No identificada",
+      "direccion": "Camino al Volcán 1500, Pucón",
+      "sector": "Camino al Volcán",
+      "zona": "volcan",
+      "distancia_centro_m": 1500,
+      "estado": "Entrega inmediata",
+      "pisos": 4,
+      "total_unidades": null,
+      "disponibles": 4,
+      "vista_principal": "Bosque / Volcán",
+      "amenities": [
+        "Piscina",
+        "Quincho",
+        "Gimnasio",
+        "Cowork",
+        "Multicancha",
+        "Senderos"
+      ],
+      "estacionamiento_uf": 200,
+      "bodega_uf": 80,
+      "lat": -39.2848,
+      "lng": -71.9628,
+      "fuente": "Planilla Kant",
+      "tipologias": [
+        {
+          "tipo": "1D+1B",
+          "sup_util": 34.68,
+          "terraza": 10.98,
+          "precio_lista_uf": 3609,
+          "precio_dcto_uf": 3320,
+          "uf_m2_lista": 89.8,
+          "uf_m2_dcto": 82.7
+        },
+        {
+          "tipo": "2D+1B",
+          "sup_util": 47.61,
+          "terraza": 11.79,
+          "precio_lista_uf": 5204,
+          "precio_dcto_uf": 4788,
+          "uf_m2_lista": 97.3,
+          "uf_m2_dcto": 89.5
+        },
+        {
+          "tipo": "2D+2B",
+          "sup_util": 63.3,
+          "terraza": 8.9,
+          "precio_lista_uf": 6028,
+          "precio_dcto_uf": 5546,
+          "uf_m2_lista": 89.0,
+          "uf_m2_dcto": 81.9
+        },
+        {
+          "tipo": "3D+2B",
+          "sup_util": 80.44,
+          "terraza": 11.66,
+          "precio_lista_uf": 7175,
+          "precio_dcto_uf": 6601,
+          "uf_m2_lista": 83.2,
+          "uf_m2_dcto": 76.5
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "nombre": "El Refugio",
+      "inmobiliaria": "No identificada",
+      "direccion": "Cam. Villarrica-Pucón 20, Sector Los Riscos",
+      "sector": "Camino Villarrica / 1ª línea lago",
+      "zona": "villarrica",
+      "distancia_centro_m": 7000,
+      "estado": "Entrega inmediata",
+      "pisos": null,
+      "total_unidades": null,
+      "disponibles": 10,
+      "vista_principal": "Lago",
+      "amenities": [
+        "1ª línea lago",
+        "Parrilla empotrada",
+        "Jardín propio",
+        "Vista panorámica lago"
+      ],
+      "estacionamiento_uf": null,
+      "bodega_uf": 180,
+      "lat": -39.2548,
+      "lng": -71.9948,
+      "fuente": "Planilla Kant + Portal Inmobiliario (confirma)",
+      "tipologias": [
+        {
+          "tipo": "4D+3B",
+          "sup_util": 137.0,
+          "terraza": 50.0,
+          "precio_lista_uf": 17944,
+          "precio_dcto_uf": 16508,
+          "uf_m2_lista": 110.8,
+          "uf_m2_dcto": 101.9
+        },
+        {
+          "tipo": "4D+3B",
+          "sup_util": 139.0,
+          "terraza": 32.0,
+          "precio_lista_uf": 17790,
+          "precio_dcto_uf": 16367,
+          "uf_m2_lista": 114.8,
+          "uf_m2_dcto": 105.6
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "nombre": "Los Castaños de Alicura",
+      "inmobiliaria": "No identificada",
+      "direccion": "Av. Gran Alicura S/N, Camino a Villarrica, Pucón",
+      "sector": "Camino Villarrica",
+      "zona": "villarrica",
+      "distancia_centro_m": 3000,
+      "estado": "Entrega inmediata",
+      "pisos": null,
+      "total_unidades": null,
+      "disponibles": 16,
+      "vista_principal": "Bosque",
+      "amenities": [
+        "No detalladas"
+      ],
+      "estacionamiento_uf": 200,
+      "bodega_uf": 50,
+      "lat": -39.2618,
+      "lng": -71.9898,
+      "fuente": "Planilla Kant + Portal Inmobiliario (stock)",
+      "tipologias": [
+        {
+          "tipo": "1.5D+1B",
+          "sup_util": 35.0,
+          "terraza": 4.0,
+          "precio_lista_uf": 4100,
+          "precio_dcto_uf": 3772,
+          "uf_m2_lista": 110.8,
+          "uf_m2_dcto": 101.9
+        },
+        {
+          "tipo": "2D+1B",
+          "sup_util": 39.0,
+          "terraza": 7.0,
+          "precio_lista_uf": 4000,
+          "precio_dcto_uf": 3680,
+          "uf_m2_lista": 94.1,
+          "uf_m2_dcto": 86.6
+        },
+        {
+          "tipo": "2.5D+2B",
+          "sup_util": 50.0,
+          "terraza": 9.0,
+          "precio_lista_uf": 5650,
+          "precio_dcto_uf": 5198,
+          "uf_m2_lista": 103.7,
+          "uf_m2_dcto": 95.4
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "nombre": "La Poza de Pucón",
+      "inmobiliaria": "Ebco Desarrollo y Rentas / Atacama Invest",
+      "direccion": "Cam. Villarrica-Pucón 1200, Pucón",
+      "sector": "La Poza / 1ª línea lago",
+      "zona": "villarrica",
+      "distancia_centro_m": 400,
+      "estado": "Pronta entrega",
+      "pisos": 6,
+      "total_unidades": 170,
+      "disponibles": 57,
+      "vista_principal": "Lago y Volcán",
+      "amenities": [
+        "Piscina",
+        "Quincho",
+        "Gimnasio",
+        "Embarcadero",
+        "Áreas verdes",
+        "Seguridad 24h"
+      ],
+      "estacionamiento_uf": null,
+      "bodega_uf": null,
+      "lat": -39.2678,
+      "lng": -71.9718,
+      "fuente": "Planilla Kant (precios) + Portal Inmobiliario (stock: 57 uds)",
+      "tipologias": [
+        {
+          "tipo": "1.5D+1B",
+          "sup_util": 37.99,
+          "terraza": 4.14,
+          "precio_lista_uf": 3578,
+          "precio_dcto_uf": 3292,
+          "uf_m2_lista": 89.3,
+          "uf_m2_dcto": 82.2
+        },
+        {
+          "tipo": "2D+1B",
+          "sup_util": 48.59,
+          "terraza": 3.41,
+          "precio_lista_uf": 5668,
+          "precio_dcto_uf": 5215,
+          "uf_m2_lista": 112.7,
+          "uf_m2_dcto": 103.7
+        },
+        {
+          "tipo": "2D+2B",
+          "sup_util": 49.64,
+          "terraza": 5.6,
+          "precio_lista_uf": 6826,
+          "precio_dcto_uf": 6280,
+          "uf_m2_lista": 130.2,
+          "uf_m2_dcto": 119.8
+        },
+        {
+          "tipo": "3D+2B",
+          "sup_util": 102.85,
+          "terraza": 11.8,
+          "precio_lista_uf": 11519,
+          "precio_dcto_uf": 10597,
+          "uf_m2_lista": 105.9,
+          "uf_m2_dcto": 97.4
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "nombre": "Edificio Pewén",
+      "inmobiliaria": "Nouvel Inmobiliaria",
+      "direccion": "Arauco 160, Centro de Pucón",
+      "sector": "Centro",
+      "zona": "centro",
+      "distancia_centro_m": 100,
+      "estado": "Entrega inmediata",
+      "pisos": 4,
+      "total_unidades": null,
+      "disponibles": 4,
+      "vista_principal": "Urbano / Lago+Volcán (pisos altos)",
+      "amenities": [
+        "Terraza común azotea",
+        "Coworking",
+        "Sala lounge",
+        "Bicicletero",
+        "Ascensor"
+      ],
+      "estacionamiento_uf": null,
+      "bodega_uf": null,
+      "lat": -39.2732,
+      "lng": -71.9748,
+      "fuente": "Planilla Kant (2D) + Web oficial (desde 3.385 UF para 1D omitido)",
+      "tipologias": [
+        {
+          "tipo": "2D+2B",
+          "sup_util": 59.4,
+          "terraza": 10.18,
+          "precio_lista_uf": 5490,
+          "precio_dcto_uf": 5051,
+          "uf_m2_lista": 85.1,
+          "uf_m2_dcto": 78.3
+        }
+      ]
+    }
+  ],
+  "resumen_mercado": {
+    "total_proyectos": 11,
+    "total_disponibles": 218,
+    "rango_uf_m2_lista": {
+      "min": 57.7,
+      "max": 155.7
+    },
+    "rango_uf_m2_dcto": {
+      "min": 53.1,
+      "max": 143.2
+    },
+    "promedio_por_tipologia_dcto": {
+      "1D": {
+        "min": 57.3,
+        "max": 117.4,
+        "promedio": 84.9,
+        "n_proyectos": 7
+      },
+      "1.5D": {
+        "min": 79.0,
+        "max": 101.9,
+        "promedio": 87.7,
+        "n_proyectos": 3
+      },
+      "2D": {
+        "min": 53.1,
+        "max": 119.8,
+        "promedio": 88.3,
+        "n_proyectos": 10
+      },
+      "3D": {
+        "min": 76.5,
+        "max": 143.2,
+        "promedio": 107.4,
+        "n_proyectos": 4
+      }
+    },
+    "puqon_posicionamiento": {
+      "uf_m2_propuesto": 69.0,
+      "vs_promedio_1D": "-19%",
+      "vs_promedio_2D": "-22%",
+      "vs_promedio_3D": "-36%",
+      "competidores_directos_zona": [
+        "Parque Payllahue (Camino Volcán Km 1)",
+        "Pucón Andino (Camino Volcán 1500)"
+      ],
+      "vs_payllahue_1D": "69 vs 75.8 = -9%",
+      "vs_andino_1D": "69 vs 82.6 = -16%"
+    },
+    "por_zona": {
+      "centro": {
+        "proyectos": 4,
+        "rango_uf_m2": "76-143 UF/m²",
+        "disponibles": 49
+      },
+      "camino_volcan": {
+        "proyectos": 2,
+        "rango_uf_m2": "76-101 UF/m²",
+        "disponibles": 18
+      },
+      "camino_internacional": {
+        "proyectos": 2,
+        "rango_uf_m2": "53-84 UF/m²",
+        "disponibles": 68
+      },
+      "camino_villarrica": {
+        "proyectos": 3,
+        "rango_uf_m2": "87-143 UF/m²",
+        "disponibles": 83
+      }
+    }
+  }
+}
