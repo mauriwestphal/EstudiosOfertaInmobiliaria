@@ -169,9 +169,7 @@ body {
   font-size: .78rem;
   color: rgba(255,255,255,.75);
 }
-.hero-code {
-  text-align: center;
-}
+.hero-code { text-align: center; }
 .hero-code .lbl { font-size: .65rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.4); }
 .hero-code .val {
   font-size: .95rem;
@@ -222,6 +220,107 @@ body {
   color: #7a5c00;
 }
 
+/* ══ KPI CARDS ═══════════════════════════════════════════════════ */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.kpi-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px 20px;
+  box-shadow: 0 2px 8px rgba(31,56,100,.06);
+}
+.kpi-label {
+  font-size: .68rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.kpi-value {
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.1;
+}
+.kpi-sub {
+  font-size: .7rem;
+  color: var(--muted);
+  margin-top: 3px;
+}
+
+/* ══ PROYECTO EVALUADO ═══════════════════════════════════════════ */
+.proyecto-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 4px;
+}
+.detail-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px 24px;
+  box-shadow: 0 2px 8px rgba(31,56,100,.06);
+}
+.detail-card-title {
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--navy);
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.amenity-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.amenity-chip {
+  padding: 4px 12px;
+  background: var(--gold-l);
+  border: 1px solid rgba(201,168,76,.3);
+  border-radius: 100px;
+  font-size: .78rem;
+  font-weight: 500;
+  color: #7a5c00;
+}
+.mix-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(31,56,100,.05);
+}
+.mix-row:last-child { border-bottom: none; }
+.mix-tipo { font-weight: 600; color: var(--navy); width: 80px; font-size: .85rem; flex-shrink: 0; }
+.mix-bar-wrap { flex: 1; height: 8px; background: rgba(31,56,100,.08); border-radius: 4px; overflow: hidden; }
+.mix-bar { height: 100%; background: var(--gold); border-radius: 4px; }
+.mix-qty { font-size: .8rem; color: var(--muted); width: 36px; text-align: right; flex-shrink: 0; }
+.ubicacion-row { display: flex; gap: 6px; align-items: baseline; margin-bottom: 8px; }
+.ubicacion-label { font-size: .72rem; color: var(--muted); width: 120px; flex-shrink: 0; }
+.ubicacion-val { font-size: .85rem; font-weight: 500; color: var(--text); }
+
+/* ══ ZONA FILTERS ════════════════════════════════════════════════ */
+.zona-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.zona-btn {
+  padding: 5px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 100px;
+  background: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: .78rem;
+  font-weight: 500;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all .15s;
+}
+.zona-btn:hover { border-color: var(--navy); color: var(--navy); }
+.zona-btn.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+
 /* ══ TABLES ══════════════════════════════════════════════════════ */
 .table-wrap {
   background: var(--white);
@@ -256,17 +355,14 @@ td {
   vertical-align: middle;
 }
 td:last-child { border-right: none; }
-
 tr:last-child td { border-bottom: none; }
 tr:hover td { background: rgba(31,56,100,.025); }
 tr.even td { background: rgba(31,56,100,.015); }
 tr.even:hover td { background: rgba(31,56,100,.035); }
+tr.hidden-row { display: none; }
 
-.td-price {
-  font-weight: 700;
-  color: var(--green);
-  background: var(--green-l) !important;
-}
+.td-price { font-weight: 700; color: var(--green); background: var(--green-l) !important; }
+.td-price-dcto { font-weight: 600; color: #3b5ea6; background: var(--blue-l) !important; }
 .td-ufm2 { font-weight: 600; color: var(--navy); }
 .td-medio { font-weight: 700; color: var(--green); }
 
@@ -276,8 +372,7 @@ tr.even:hover td { background: rgba(31,56,100,.035); }
 .tipo-2D2BM td:first-child { border-left: 3px solid #e07b4f; }
 
 .separator-row td {
-  padding: 0;
-  height: 3px;
+  padding: 0; height: 3px;
   background: rgba(31,56,100,.08);
   border: none;
 }
@@ -295,6 +390,7 @@ tr.even:hover td { background: rgba(31,56,100,.035); }
 .badge-blue   { background: #dbeafe; color: #1e40af; }
 .badge-amber  { background: #fef3c7; color: #92400e; }
 .badge-purple { background: #ede9fe; color: #5b21b6; }
+.badge-red    { background: #fee2e2; color: #991b1b; }
 
 /* delta pills */
 .delta-pos { color: #166534; font-weight: 700; }
@@ -339,6 +435,7 @@ tr.even:hover td { background: rgba(31,56,100,.035); }
 }
 .chart-wrap { position: relative; height: 260px; }
 canvas { max-height: 260px; }
+.chart-full { grid-column: 1 / -1; }
 
 /* ══ MAP ══════════════════════════════════════════════════════════ */
 .map-card {
@@ -364,6 +461,54 @@ canvas { max-height: 260px; }
 }
 #mapa { height: 380px; }
 
+/* ══ RESUMEN DE MERCADO ══════════════════════════════════════════ */
+.resumen-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 4px; }
+.resumen-tipologias { background: var(--white); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px rgba(31,56,100,.06); }
+.resumen-zona { background: var(--white); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px rgba(31,56,100,.06); }
+.pos-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px 24px;
+  margin-top: 16px;
+  box-shadow: 0 2px 8px rgba(31,56,100,.06);
+}
+.pos-card-title {
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--navy);
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.pos-uf-highlight {
+  display: inline-block;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 12px;
+}
+.pos-uf-sub { font-size: .8rem; color: var(--muted); margin-bottom: 16px; }
+.pos-comparisons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 10px;
+}
+.pos-comp-item {
+  background: var(--cream);
+  border-radius: 8px;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+}
+.pos-comp-label { font-size: .7rem; color: var(--muted); margin-bottom: 4px; }
+.pos-comp-value { font-size: 1.1rem; font-weight: 700; color: var(--navy); }
+.pos-comp-value.neg { color: #991b1b; }
+.pos-directos { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border); }
+.pos-directos-label { font-size: .72rem; color: var(--muted); margin-bottom: 6px; }
+.pos-directos-val { font-size: .83rem; color: var(--text); margin-bottom: 3px; }
+
 /* ══ NOTAS ════════════════════════════════════════════════════════ */
 .notas-grid { display: grid; gap: 10px; }
 .nota-item {
@@ -376,11 +521,7 @@ canvas { max-height: 260px; }
   gap: 16px;
   align-items: start;
 }
-.nota-titulo {
-  font-size: .8rem;
-  font-weight: 600;
-  color: var(--navy);
-}
+.nota-titulo { font-size: .8rem; font-weight: 600; color: var(--navy); }
 .nota-texto { font-size: .83rem; color: #4b5563; line-height: 1.6; }
 
 /* ══ FOOTER ══════════════════════════════════════════════════════ */
@@ -412,6 +553,8 @@ canvas { max-height: 260px; }
   .hero-code { text-align: left; }
   .page { padding: 20px 16px 48px; }
   .nota-item { grid-template-columns: 1fr; gap: 4px; }
+  .proyecto-details { grid-template-columns: 1fr; }
+  .resumen-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 640px) {
   .header-inner { padding: 12px 16px; }
@@ -425,6 +568,7 @@ canvas { max-height: 260px; }
 .section:nth-child(2) { animation-delay: .05s; }
 .section:nth-child(3) { animation-delay: .10s; }
 .section:nth-child(4) { animation-delay: .15s; }
+.section:nth-child(5) { animation-delay: .20s; }
 </style>
 </head>
 <body>
@@ -440,7 +584,7 @@ canvas { max-height: 260px; }
           <rect x="14" y="2" width="4" height="16" fill="white" rx="1"/>
         </svg>
       </div>
-      <div class="brand-name">Estudios de Mercado <span>Inmobiliario</span></div>
+      <div class="brand-name">RW <span>Consulting</span></div>
     </div>
     <div class="header-meta">
       <div class="code" id="hdr-code">Cargando…</div>
@@ -449,16 +593,9 @@ canvas { max-height: 260px; }
   </div>
 </header>
 
-<!-- NAV TABS -->
+<!-- NAV TABS (filled by JS) -->
 <nav class="nav-tabs">
-  <div class="nav-tabs-inner">
-    <a class="nav-tab active" href="#sec-competencia">1. Competencia</a>
-    <a class="nav-tab" href="#sec-precios">2. Precios base</a>
-    <a class="nav-tab" href="#sec-graficos">3. Gráficos</a>
-    <a class="nav-tab" href="#sec-mapa">4. Mapa</a>
-    <a class="nav-tab" href="#sec-ponderacion">5. Orientaciones</a>
-    <a class="nav-tab" href="#sec-notas">6. Notas</a>
-  </div>
+  <div class="nav-tabs-inner" id="nav-tabs-inner"></div>
 </nav>
 
 <!-- PAGE -->
@@ -478,138 +615,8 @@ canvas { max-height: 260px; }
     </div>
   </div>
 
-  <!-- S1: COMPETENCIA -->
-  <section class="section" id="sec-competencia">
-    <div class="section-header">
-      <div class="section-number">1</div>
-      <div class="section-title">Competencia directa — Proyectos nuevos</div>
-      <div class="section-badge" id="badge-comp">0 proyectos</div>
-    </div>
-    <div class="table-wrap">
-      <div class="table-scroll">
-        <table id="tabla-competencia">
-          <thead>
-            <tr>
-              <th>Proyecto / Tipología</th>
-              <th>Dirección</th>
-              <th>Inmobiliaria</th>
-              <th>Estado</th>
-              <th>Pisos</th>
-              <th>D/B</th>
-              <th>m² útil</th>
-              <th>Terraza</th>
-              <th>Orientación</th>
-              <th>Precio UF</th>
-              <th>UF/m²</th>
-              <th>Fuente</th>
-            </tr>
-          </thead>
-          <tbody id="tbody-competencia"></tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <!-- S2: PRECIOS BASE -->
-  <section class="section" id="sec-precios">
-    <div class="section-header">
-      <div class="section-number">2</div>
-      <div class="section-title">Precios base por tipología y orientación</div>
-      <div class="section-badge" id="badge-precios">0 combinaciones</div>
-    </div>
-    <div class="table-wrap">
-      <div class="table-scroll">
-        <table id="tabla-precios">
-          <thead>
-            <tr>
-              <th>Distribución</th>
-              <th>Orientación</th>
-              <th>Código mix</th>
-              <th>m² útil</th>
-              <th>UF/m² mín.</th>
-              <th>UF/m² medio</th>
-              <th>UF/m² máx.</th>
-              <th>Precio mín. (UF)</th>
-              <th>Precio medio (UF)</th>
-              <th>Precio máx. (UF)</th>
-              <th>Base modelo</th>
-              <th>Fuente</th>
-            </tr>
-          </thead>
-          <tbody id="tbody-precios"></tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <!-- S3: GRÁFICOS -->
-  <section class="section" id="sec-graficos">
-    <div class="section-header">
-      <div class="section-number">3</div>
-      <div class="section-title">Análisis gráfico</div>
-    </div>
-    <div class="charts-grid">
-      <div class="chart-card">
-        <div class="chart-title">Precio UF por combinación tipología + orientación</div>
-        <div class="chart-wrap"><canvas id="chart-precios"></canvas></div>
-      </div>
-      <div class="chart-card">
-        <div class="chart-title">UF/m² comparativo — proyectos de competencia</div>
-        <div class="chart-wrap"><canvas id="chart-ufm2"></canvas></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- S4: MAPA -->
-  <section class="section" id="sec-mapa">
-    <div class="section-header">
-      <div class="section-number">4</div>
-      <div class="section-title">Ubicación de competencia</div>
-    </div>
-    <div class="map-card">
-      <div class="map-header">
-        <div class="map-title">Radio de mercado relevante</div>
-        <div style="font-size:.78rem;color:var(--muted)">
-          <span style="display:inline-block;width:10px;height:10px;background:#1F3864;border-radius:50%;margin-right:4px;vertical-align:middle;"></span>Proyecto evaluado &nbsp;
-          <span style="display:inline-block;width:10px;height:10px;background:#C9A84C;border-radius:50%;margin-right:4px;vertical-align:middle;"></span>Competencia
-        </div>
-      </div>
-      <div id="mapa"></div>
-    </div>
-  </section>
-
-  <!-- S5: PONDERACIÓN -->
-  <section class="section" id="sec-ponderacion">
-    <div class="section-header">
-      <div class="section-number">5</div>
-      <div class="section-title">Escala de ponderación por orientación</div>
-    </div>
-    <div class="table-wrap">
-      <div class="table-scroll">
-        <table id="tabla-pond">
-          <thead>
-            <tr>
-              <th>Orientación</th>
-              <th>Código</th>
-              <th>Δ% vs medio</th>
-              <th>Justificación</th>
-              <th>Aplica a</th>
-            </tr>
-          </thead>
-          <tbody id="tbody-pond"></tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <!-- S6: NOTAS -->
-  <section class="section" id="sec-notas">
-    <div class="section-header">
-      <div class="section-number">6</div>
-      <div class="section-title">Notas metodológicas y fuentes</div>
-    </div>
-    <div class="notas-grid" id="notas-grid"></div>
-  </section>
+  <!-- DYNAMIC SECTIONS -->
+  <div id="sections-container"></div>
 
   <!-- FOOTER -->
   <div class="page-footer">
@@ -622,8 +629,8 @@ canvas { max-height: 260px; }
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
 // ── Helpers ────────────────────────────────────────────────────────
-const fmt  = n => n?.toLocaleString('es-CL', {minimumFractionDigits:0, maximumFractionDigits:1}) ?? '—';
-const fmtUF= n => n?.toLocaleString('es-CL', {minimumFractionDigits:0, maximumFractionDigits:0}) ?? '—';
+const fmt   = n => (n != null) ? n.toLocaleString('es-CL', {minimumFractionDigits:0, maximumFractionDigits:1}) : '—';
+const fmtUF = n => (n != null) ? n.toLocaleString('es-CL', {minimumFractionDigits:0, maximumFractionDigits:0}) : '—';
 
 function estadoBadge(e) {
   const map = {
@@ -631,30 +638,32 @@ function estadoBadge(e) {
     'Pronta entrega':    'badge-blue',
     'Venta en verde':    'badge-amber',
     'Venta en blanco':   'badge-purple',
+    'Últimas unidades':  'badge-red',
   };
-  return `<span class="badge ${map[e]||'badge-blue'}">${e}</span>`;
+  return `<span class="badge ${map[e]||'badge-blue'}">${e||'—'}</span>`;
 }
 
 function orientChip(o) {
+  if (!o) return '—';
   return o.split('/').map(s => {
     const k = s.trim();
-    const cls = `chip-${k}`;
-    return `<span class="orient-chip ${cls}">${k}</span>`;
+    return `<span class="orient-chip chip-${k}">${k}</span>`;
   }).join('');
 }
 
-function tipoClass(dist) {
-  if (dist.includes('2D2B M') || dist.includes('2D2B M')) return 'tipo-2D2BM';
-  if (dist.includes('2D2B')) return 'tipo-2D2B';
-  if (dist.includes('2D1B')) return 'tipo-2D1B';
-  return 'tipo-1D1B';
-}
-
 function tipoBg(dist) {
-  if (dist === '2D2B M') return '#FCE4D6';
-  if (dist === '2D2B')   return '#E2EFDA';
-  if (dist === '2D1B')   return '#FFF3CD';
+  if (!dist) return '#FAF8F4';
+  if (dist.includes('2D2B M') || dist === '2D2B M') return '#FCE4D6';
+  if (dist.includes('2D2B')) return '#E2EFDA';
+  if (dist.includes('2D1B')) return '#FFF3CD';
   return '#DEEAF1';
+}
+function tipoClass(dist) {
+  if (!dist) return '';
+  if (dist.includes('2D2B M')) return 'tipo-2D2BM';
+  if (dist.includes('2D2B'))   return 'tipo-2D2B';
+  if (dist.includes('2D1B'))   return 'tipo-2D1B';
+  return 'tipo-1D1B';
 }
 
 // ── Load data ────────────────────────────────────────────────────
@@ -662,15 +671,15 @@ const params = new URLSearchParams(location.search);
 const codigo = params.get('codigo') || '';
 
 let DATA = null;
-try {
-  DATA = JSON.parse(sessionStorage.getItem('estudio'));
-} catch(e) {}
+try { DATA = JSON.parse(sessionStorage.getItem('estudio')); } catch(e) {}
 
 if (!DATA && codigo) {
   fetch(`estudios/${codigo}.json`)
     .then(r => r.ok ? r.json() : Promise.reject())
     .then(renderAll)
-    .catch(() => { document.body.innerHTML = '<div style="padding:60px;text-align:center;font-family:sans-serif"><h2>Código no válido o sesión expirada.</h2><a href="index.html">← Volver</a></div>'; });
+    .catch(() => {
+      document.body.innerHTML = '<div style="padding:60px;text-align:center;font-family:sans-serif"><h2>Código no válido o sesión expirada.</h2><br><a href="index.html">← Volver</a></div>';
+    });
 } else if (DATA) {
   renderAll(DATA);
 } else {
@@ -682,71 +691,278 @@ function renderAll(d) {
   DATA = d;
   const m = d.meta;
 
-  // Header
   document.title = `${m.proyecto} — Estudio de Mercado`;
-  document.getElementById('hdr-code').textContent    = m.codigo;
+  document.getElementById('hdr-code').textContent     = m.codigo;
   document.getElementById('hdr-proyecto').textContent = m.proyecto;
 
-  // Hero
+  renderHero(d);
+
+  // Build sections array dynamically
+  const sections = [];
+  if (d.proyecto_evaluado)
+    sections.push({key:'proyecto',     title:'Proyecto evaluado',                        render: () => renderProyecto(d)});
+  if (d.competencia?.length)
+    sections.push({key:'competencia',  title:'Competencia directa — Proyectos nuevos',   render: () => renderCompetencia(d)});
+  if (d.precios_base?.length)
+    sections.push({key:'precios',      title:'Precios base por tipología y orientación', render: () => renderPrecios(d)});
+  if (d.competencia?.length)
+    sections.push({key:'graficos',     title:'Análisis gráfico',                         render: () => renderGraficos(d)});
+  if (d.competencia?.some(r => r.lat))
+    sections.push({key:'mapa',         title:'Ubicación de competencia',                 render: () => renderMapa(d)});
+  if (d.resumen_mercado)
+    sections.push({key:'resumen',      title:'Resumen de mercado',                       render: () => renderResumen(d)});
+  if (d.ponderacion_orientacion?.length)
+    sections.push({key:'ponderacion',  title:'Escala de ponderación por orientación',    render: () => renderPonderacion(d)});
+  if (d.notas?.length)
+    sections.push({key:'notas',        title:'Notas metodológicas y fuentes',            render: () => renderNotas(d)});
+
+  buildNavTabs(sections);
+  buildSectionContainers(sections);
+  sections.forEach(s => s.render());
+  setupNavScroll(sections);
+
+  const analista = m.analista || m.autor || '';
+  document.getElementById('footer-meta').textContent = `${analista} · ${m.fecha} · Código: ${m.codigo}`;
+}
+
+// ── HERO ──────────────────────────────────────────────────────────
+function renderHero(d) {
+  const m = d.meta;
   document.getElementById('hero-proyecto').textContent = m.proyecto;
-  document.getElementById('hero-dir').textContent = m.direccion;
-  document.getElementById('hero-code').textContent = m.codigo;
-  const pills = [
-    m.inmobiliaria,
-    `${m.unidades} unidades`,
-    `Pisos ${m.pisos}`,
-    m.fecha,
-  ];
+  document.getElementById('hero-dir').textContent      = m.direccion || '';
+  document.getElementById('hero-code').textContent     = m.codigo;
+
+  const pills = [];
+  if (m.inmobiliaria) pills.push(m.inmobiliaria);
+  else if (m.cliente) pills.push(`Cliente: ${m.cliente}`);
+  if (m.unidades)     pills.push(`${m.unidades} unidades`);
+  if (m.pisos)        pills.push(`Pisos ${m.pisos}`);
+  if (m.fecha)        pills.push(m.fecha);
+  if (m.analista)     pills.push(m.analista);
+  else if (m.autor)   pills.push(m.autor);
+
   document.getElementById('hero-pills').innerHTML = pills.map(p => `<span class="hero-pill">${p}</span>`).join('');
-
-  renderCompetencia(d.competencia);
-  renderPrecios(d.precios_base);
-  renderGraficos(d);
-  renderMapa(d);
-  renderPonderacion(d.ponderacion_orientacion);
-  renderNotas(d.notas);
-
-  document.getElementById('footer-meta').textContent = `${m.analista} · ${m.fecha} · Código: ${m.codigo}`;
-
-  // Nav tab active on scroll
-  setupNavScroll();
 }
 
-// ── S1: COMPETENCIA ───────────────────────────────────────────────
-function renderCompetencia(rows) {
-  document.getElementById('badge-comp').textContent = `${rows.length} proyectos`;
-  const tbody = document.getElementById('tbody-competencia');
-  tbody.innerHTML = rows.map((r, i) => `
-    <tr class="${i%2===1?'even':''}">
-      <td><strong>${r.proyecto}</strong></td>
-      <td style="color:var(--muted)">${r.direccion}</td>
-      <td>${r.inmobiliaria}</td>
-      <td>${estadoBadge(r.estado)}</td>
-      <td style="text-align:center">${r.pisos}</td>
-      <td style="text-align:center;font-weight:600">${r.dorms}${r.banos}</td>
-      <td style="text-align:center">${fmt(r.m2_util)}</td>
-      <td style="text-align:center">${fmt(r.terraza)}</td>
-      <td>${orientChip(r.orientacion)}</td>
-      <td class="td-price">${fmtUF(r.precio_uf)}</td>
-      <td class="td-ufm2">${fmt(r.uf_m2)}</td>
-      <td style="font-size:.75rem;color:var(--muted)">${r.fuente}</td>
-    </tr>
-  `).join('');
+// ── NAV + SECTION BUILDERS ────────────────────────────────────────
+function buildNavTabs(sections) {
+  document.getElementById('nav-tabs-inner').innerHTML = sections.map((s, i) =>
+    `<a class="nav-tab${i===0?' active':''}" href="#sec-${s.key}">${i+1}. ${s.title.split('—')[0].trim()}</a>`
+  ).join('');
 }
 
-// ── S2: PRECIOS BASE ──────────────────────────────────────────────
-function renderPrecios(rows) {
-  document.getElementById('badge-precios').textContent = `${rows.length} combinaciones`;
-  const tbody = document.getElementById('tbody-precios');
-  let html = '';
+function buildSectionContainers(sections) {
+  const container = document.getElementById('sections-container');
+  container.innerHTML = '';
+  sections.forEach((s, i) => {
+    const el = document.createElement('section');
+    el.className = 'section';
+    el.id = `sec-${s.key}`;
+    el.innerHTML = `
+      <div class="section-header">
+        <div class="section-number">${i+1}</div>
+        <div class="section-title">${s.title}</div>
+        <div class="section-badge" id="badge-${s.key}" style="display:none"></div>
+      </div>
+      <div id="body-${s.key}"></div>`;
+    container.appendChild(el);
+  });
+}
+
+function setBadge(key, text) {
+  const el = document.getElementById(`badge-${key}`);
+  if (el) { el.textContent = text; el.style.display = ''; }
+}
+
+// ── S: PROYECTO EVALUADO ──────────────────────────────────────────
+function renderProyecto(d) {
+  const p = d.proyecto_evaluado;
+  const body = document.getElementById('body-proyecto');
+
+  // KPI Cards
+  const kpis = [];
+  if (p.total_unidades)         kpis.push({label:'Unidades totales',  val: p.total_unidades, sub:''});
+  if (p.superficie_vendible_m2) kpis.push({label:'m² vendibles',      val: `${p.superficie_vendible_m2.toLocaleString('es-CL')} m²`, sub:''});
+  if (p.superficie_promedio_m2) kpis.push({label:'m² promedio',       val: `${p.superficie_promedio_m2} m²`, sub:''});
+  if (p.precio_promedio_uf)     kpis.push({label:'Precio promedio',    val: `UF ${fmtUF(p.precio_promedio_uf)}`, sub:'por unidad'});
+  if (p.uf_m2_neto_depto)      kpis.push({label:'UF/m² neto depto',   val: fmt(p.uf_m2_neto_depto), sub:'sin est. ni bod.'});
+  if (p.venta_neta_total_uf)    kpis.push({label:'Venta neta total',   val: `UF ${(p.venta_neta_total_uf/1000).toFixed(0)}k`, sub:'ingresos brutos'});
+
+  let html = `<div class="kpi-grid">${kpis.map(k => `
+    <div class="kpi-card">
+      <div class="kpi-label">${k.label}</div>
+      <div class="kpi-value">${k.val}</div>
+      ${k.sub ? `<div class="kpi-sub">${k.sub}</div>` : ''}
+    </div>`).join('')}</div>`;
+
+  // Details row
+  html += '<div class="proyecto-details">';
+
+  // Amenities
+  if (p.amenities?.length) {
+    html += `<div class="detail-card">
+      <div class="detail-card-title">Amenities</div>
+      <div class="amenity-chips">${p.amenities.map(a => `<span class="amenity-chip">${a}</span>`).join('')}</div>
+    </div>`;
+  }
+
+  // Mix de unidades
+  if (p.mix_unidades?.length) {
+    const maxQty = Math.max(...p.mix_unidades.map(m => m.cantidad));
+    html += `<div class="detail-card">
+      <div class="detail-card-title">Mix de unidades</div>
+      ${p.mix_unidades.map(m => `
+        <div class="mix-row">
+          <div class="mix-tipo">${m.tipo}</div>
+          <div class="mix-bar-wrap"><div class="mix-bar" style="width:${Math.round(m.cantidad/maxQty*100)}%"></div></div>
+          <div class="mix-qty">${m.cantidad}</div>
+        </div>`).join('')}
+    </div>`;
+  }
+
+  // Ubicación
+  const ubicRows = [];
+  if (p.desarrollador)        ubicRows.push(['Desarrollador', p.desarrollador]);
+  if (p.direccion)            ubicRows.push(['Dirección', p.direccion]);
+  if (p.sector)               ubicRows.push(['Sector', p.sector]);
+  if (p.distancia_centro_m)   ubicRows.push(['Dist. al centro', `${p.distancia_centro_m.toLocaleString('es-CL')} m`]);
+  if (p.pisos)                ubicRows.push(['Pisos', p.pisos]);
+  if (p.estacionamientos)     ubicRows.push(['Estacionamientos', p.estacionamientos]);
+  if (p.bodegas)              ubicRows.push(['Bodegas', p.bodegas]);
+  if (ubicRows.length) {
+    html += `<div class="detail-card">
+      <div class="detail-card-title">Datos del proyecto</div>
+      ${ubicRows.map(r => `<div class="ubicacion-row"><span class="ubicacion-label">${r[0]}</span><span class="ubicacion-val">${r[1]}</span></div>`).join('')}
+    </div>`;
+  }
+
+  html += '</div>';
+  body.innerHTML = html;
+}
+
+// ── S: COMPETENCIA ────────────────────────────────────────────────
+function renderCompetencia(d) {
+  const rows = d.competencia;
+  const body = document.getElementById('body-competencia');
+  setBadge('competencia', `${rows.length} tipologías`);
+
+  // Determine visible columns
+  const hasZona      = rows.some(r => r.zona        != null);
+  const hasDisp      = rows.some(r => r.disponibles != null);
+  const hasPrecioDcto= rows.some(r => r.precio_dcto_uf != null);
+  const hasUfDcto    = rows.some(r => r.uf_m2_dcto  != null);
+  const hasVista     = rows.some(r => r.vista_principal != null);
+  const hasOrient    = rows.some(r => r.orientacion  != null);
+  const hasEstac     = rows.some(r => r.estacionamiento_uf != null);
+  const hasBodega    = rows.some(r => r.bodega_uf    != null);
+
+  // Zona filter buttons
+  let filterHtml = '';
+  let zonas = [];
+  if (hasZona) {
+    zonas = [...new Set(rows.map(r => r.zona).filter(Boolean))].sort();
+    filterHtml = `<div class="zona-filters">
+      <button class="zona-btn active" onclick="filtrarZona('todos',this)">Todos (${rows.length})</button>
+      ${zonas.map(z => {
+        const count = rows.filter(r => r.zona === z).length;
+        return `<button class="zona-btn" onclick="filtrarZona('${z}',this)">${capitalize(z)} (${count})</button>`;
+      }).join('')}
+    </div>`;
+  }
+
+  // Table header
+  const headers = ['Proyecto / Tipología','Dirección','Inmobiliaria','Estado','Pisos','D/B','m² útil','Terraza'];
+  if (hasOrient)    headers.push('Orientación');
+  if (hasZona)      headers.push('Zona');
+  if (hasVista)     headers.push('Vista');
+  if (hasDisp)      headers.push('Disponibles');
+  headers.push('Precio lista');
+  if (hasPrecioDcto) headers.push('Precio dcto');
+  headers.push('UF/m² lista');
+  if (hasUfDcto)    headers.push('UF/m² dcto');
+  if (hasEstac)     headers.push('Est. UF');
+  if (hasBodega)    headers.push('Bod. UF');
+  headers.push('Fuente');
+
+  const headHtml = `<tr>${headers.map(h => `<th>${h}</th>`).join('')}</tr>`;
+
+  // Table rows
+  const bodyHtml = rows.map((r, i) => {
+    const cells = [
+      `<td><strong>${r.proyecto}</strong></td>`,
+      `<td style="color:var(--muted);font-size:.78rem">${r.direccion||'—'}</td>`,
+      `<td>${r.inmobiliaria||'—'}</td>`,
+      `<td>${estadoBadge(r.estado)}</td>`,
+      `<td style="text-align:center">${r.pisos != null ? r.pisos : '—'}</td>`,
+      `<td style="text-align:center;font-weight:600">${(r.dorms||'')+(r.banos||'')}</td>`,
+      `<td style="text-align:center">${fmt(r.m2_util)}</td>`,
+      `<td style="text-align:center">${fmt(r.terraza)}</td>`,
+    ];
+    if (hasOrient) cells.push(`<td>${r.orientacion ? orientChip(r.orientacion) : '—'}</td>`);
+    if (hasZona)   cells.push(`<td>${r.zona ? capitalize(r.zona) : '—'}</td>`);
+    if (hasVista)  cells.push(`<td style="font-size:.78rem">${r.vista_principal||'—'}</td>`);
+    if (hasDisp)   cells.push(`<td style="text-align:center">${r.disponibles != null ? r.disponibles : '—'}</td>`);
+    cells.push(`<td class="td-price">${fmtUF(r.precio_lista_uf)}</td>`);
+    if (hasPrecioDcto) cells.push(`<td class="td-price-dcto">${r.precio_dcto_uf != null ? fmtUF(r.precio_dcto_uf) : '—'}</td>`);
+    cells.push(`<td class="td-ufm2">${fmt(r.uf_m2_lista)}</td>`);
+    if (hasUfDcto) cells.push(`<td class="td-ufm2" style="color:#3b5ea6">${r.uf_m2_dcto != null ? fmt(r.uf_m2_dcto) : '—'}</td>`);
+    if (hasEstac)  cells.push(`<td style="text-align:center;font-size:.8rem">${r.estacionamiento_uf != null ? fmtUF(r.estacionamiento_uf) : '—'}</td>`);
+    if (hasBodega) cells.push(`<td style="text-align:center;font-size:.8rem">${r.bodega_uf != null ? fmtUF(r.bodega_uf) : '—'}</td>`);
+    cells.push(`<td style="font-size:.75rem;color:var(--muted)">${r.fuente||'—'}</td>`);
+
+    return `<tr class="${i%2===1?'even':''}" data-zona="${r.zona||''}">${cells.join('')}</tr>`;
+  }).join('');
+
+  body.innerHTML = `
+    ${filterHtml}
+    <div class="table-wrap">
+      <div class="table-scroll">
+        <table id="tabla-competencia">
+          <thead>${headHtml}</thead>
+          <tbody>${bodyHtml}</tbody>
+        </table>
+      </div>
+    </div>`;
+}
+
+function filtrarZona(zona, btn) {
+  document.querySelectorAll('.zona-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('#tabla-competencia tbody tr').forEach(tr => {
+    if (zona === 'todos' || tr.dataset.zona === zona) {
+      tr.classList.remove('hidden-row');
+    } else {
+      tr.classList.add('hidden-row');
+    }
+  });
+}
+
+function capitalize(s) {
+  return s ? s.charAt(0).toUpperCase() + s.slice(1).replace(/_/g,' ') : s;
+}
+
+// ── S: PRECIOS BASE ───────────────────────────────────────────────
+function renderPrecios(d) {
+  const rows = d.precios_base;
+  setBadge('precios', `${rows.length} combinaciones`);
+  const body = document.getElementById('body-precios');
+
+  let html = `<div class="table-wrap"><div class="table-scroll">
+    <table>
+      <thead><tr>
+        <th>Distribución</th><th>Orientación</th><th>Código mix</th><th>m² útil</th>
+        <th>UF/m² mín.</th><th>UF/m² medio</th><th>UF/m² máx.</th>
+        <th>Precio mín. (UF)</th><th>Precio medio (UF)</th><th>Precio máx. (UF)</th>
+        <th>Base modelo</th><th>Fuente</th>
+      </tr></thead><tbody>`;
+
   let prevDist = null;
   rows.forEach((r, i) => {
     const bg = tipoBg(r.distribucion);
     if (prevDist && prevDist !== r.distribucion) {
       html += `<tr class="separator-row"><td colspan="12"></td></tr>`;
     }
-    html += `
-    <tr class="${tipoClass(r.distribucion)} ${i%2===1?'even':''}">
+    html += `<tr class="${tipoClass(r.distribucion)} ${i%2===1?'even':''}">
       <td style="background:${bg}20;font-weight:600">${r.distribucion}</td>
       <td>${orientChip(r.orientacion)}</td>
       <td style="font-family:monospace;font-size:.82rem;font-weight:600">${r.codigo}</td>
@@ -762,215 +978,388 @@ function renderPrecios(rows) {
     </tr>`;
     prevDist = r.distribucion;
   });
-  tbody.innerHTML = html;
+
+  html += '</tbody></table></div></div>';
+  body.innerHTML = html;
 }
 
-// ── S3: GRÁFICOS ──────────────────────────────────────────────────
+// ── S: GRÁFICOS ───────────────────────────────────────────────────
 function renderGraficos(d) {
-  const NAVY  = '#1F3864';
-  const GOLD  = '#C9A84C';
+  const NAVY = '#1F3864';
+  const GOLD = '#C9A84C';
+  const body = document.getElementById('body-graficos');
 
-  const tipColors = {
-    '1D1B':   'rgba(74,144,217,.75)',
-    '2D1B':   'rgba(230,168,23,.75)',
-    '2D2B':   'rgba(76,175,80,.75)',
-    '2D2B M': 'rgba(224,123,79,.75)',
-  };
+  const hasZona     = d.competencia?.some(r => r.zona != null);
+  const hasDcto     = d.competencia?.some(r => r.precio_dcto_uf != null);
+  const hasPrecios  = d.precios_base?.length;
 
-  // Chart 1: Precio medio por código mix
-  const pb = d.precios_base;
-  const chart1 = new Chart(document.getElementById('chart-precios'), {
-    type: 'bar',
-    data: {
-      labels: pb.map(r => r.codigo),
-      datasets: [{
-        label: 'Precio medio (UF)',
-        data: pb.map(r => r.precio_medio),
-        backgroundColor: pb.map(r => tipColors[r.distribucion] || NAVY),
-        borderRadius: 4,
-        borderSkipped: false,
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          callbacks: {
-            label: ctx => `UF ${fmtUF(ctx.raw)}`
-          }
-        }
+  // Build grid HTML
+  let html = `<div class="charts-grid">`;
+  html += `<div class="chart-card"><div class="chart-title">${hasPrecios ? 'Precio UF por combinación tipología + orientación' : 'Precio UF por distribución (competencia)'}</div><div class="chart-wrap"><canvas id="chart-1"></canvas></div></div>`;
+  html += `<div class="chart-card"><div class="chart-title">UF/m² comparativo — proyectos de competencia</div><div class="chart-wrap"><canvas id="chart-2"></canvas></div></div>`;
+  html += `</div>`;
+
+  if (hasZona) {
+    html += `<div class="chart-card chart-full" style="margin-top:0"><div class="chart-title">Distribución de stock disponible por zona</div><div class="chart-wrap" style="max-height:220px"><canvas id="chart-3"></canvas></div></div>`;
+  }
+
+  body.innerHTML = html;
+
+  // Chart 1
+  if (hasPrecios) {
+    const tipColors = {
+      '1D1B':'rgba(74,144,217,.75)', '2D1B':'rgba(230,168,23,.75)',
+      '2D2B':'rgba(76,175,80,.75)',  '2D2B M':'rgba(224,123,79,.75)',
+    };
+    new Chart(document.getElementById('chart-1'), {
+      type: 'bar',
+      data: {
+        labels: d.precios_base.map(r => r.codigo),
+        datasets: [{
+          label: 'Precio medio (UF)',
+          data: d.precios_base.map(r => r.precio_medio),
+          backgroundColor: d.precios_base.map(r => tipColors[r.distribucion] || NAVY),
+          borderRadius: 4, borderSkipped: false,
+        }]
       },
-      scales: {
-        x: {
-          ticks: { font: { size: 9 }, maxRotation: 45, color: '#555' },
-          grid: { display: false }
-        },
-        y: {
-          ticks: {
-            font: { size: 9 },
-            callback: v => `UF ${fmtUF(v)}`,
-            color: '#555'
-          },
-          grid: { color: 'rgba(0,0,0,.05)' }
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend:{display:false}, tooltip:{callbacks:{label: ctx => `UF ${fmtUF(ctx.raw)}`}} },
+        scales: {
+          x: { ticks:{font:{size:9},maxRotation:45,color:'#555'}, grid:{display:false} },
+          y: { ticks:{font:{size:9},callback:v=>`UF ${fmtUF(v)}`,color:'#555'}, grid:{color:'rgba(0,0,0,.05)'} }
         }
       }
-    }
-  });
+    });
+  } else {
+    // Group by dorms+banos from competencia
+    const distMap = {};
+    d.competencia.forEach(r => {
+      const key = (r.dorms||'') + (r.banos||'');
+      if (!distMap[key]) distMap[key] = {lista:[], dcto:[]};
+      distMap[key].lista.push(r.precio_lista_uf);
+      if (r.precio_dcto_uf != null) distMap[key].dcto.push(r.precio_dcto_uf);
+    });
+    const labels = Object.keys(distMap);
+    const avgLista = labels.map(k => Math.round(distMap[k].lista.reduce((a,b)=>a+b,0)/distMap[k].lista.length));
+    const avgDcto  = labels.map(k => distMap[k].dcto.length ? Math.round(distMap[k].dcto.reduce((a,b)=>a+b,0)/distMap[k].dcto.length) : null);
+    const colors = ['rgba(74,144,217,.75)','rgba(230,168,23,.75)','rgba(76,175,80,.75)','rgba(224,123,79,.75)','rgba(156,100,196,.75)','rgba(224,85,85,.75)','rgba(80,180,180,.75)','rgba(200,130,80,.75)'];
+    const datasets = [{
+      label: 'Precio lista (UF)',
+      data: avgLista,
+      backgroundColor: hasDcto ? 'rgba(31,56,100,.75)' : labels.map((_,i)=>colors[i%colors.length]),
+      borderRadius: 4, borderSkipped: false,
+    }];
+    if (hasDcto) datasets.push({
+      label: 'Precio dcto (UF)',
+      data: avgDcto,
+      backgroundColor: 'rgba(201,168,76,.8)',
+      borderRadius: 4, borderSkipped: false,
+    });
+    new Chart(document.getElementById('chart-1'), {
+      type: 'bar',
+      data: { labels, datasets },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { display: hasDcto, position:'bottom', labels:{font:{size:10}} },
+          tooltip: { callbacks: { label: ctx => `UF ${fmtUF(ctx.raw)}` } }
+        },
+        scales: {
+          x: { ticks:{font:{size:9},color:'#555'}, grid:{display:false} },
+          y: { ticks:{font:{size:9},callback:v=>`UF ${fmtUF(v)}`,color:'#555'}, grid:{color:'rgba(0,0,0,.05)'} }
+        }
+      }
+    });
+  }
 
-  // Chart 2: UF/m² por proyecto competidor (único por proyecto, promedio si hay varias tipologías)
+  // Chart 2: UF/m² promedio por proyecto (horizontal bars)
   const proyMap = {};
   d.competencia.forEach(r => {
     if (!proyMap[r.proyecto]) proyMap[r.proyecto] = [];
-    proyMap[r.proyecto].push(r.uf_m2);
+    const val = r.uf_m2_dcto != null ? r.uf_m2_dcto : r.uf_m2_lista;
+    if (val != null) proyMap[r.proyecto].push(val);
   });
-  const proyNombres = Object.keys(proyMap).map(k => {
-    // Shorten name
-    return k.replace(' (Los Silos)', '').replace(' (Alborada)', '').replace(' (Sencorp)', '');
-  });
-  const proyVals = Object.values(proyMap).map(arr => Math.round(arr.reduce((a,b)=>a+b,0)/arr.length * 10)/10);
+  const proyNombres = Object.keys(proyMap).map(k =>
+    k.length > 28 ? k.substring(0,26)+'…' : k
+  );
+  const proyVals = Object.values(proyMap).map(arr =>
+    Math.round(arr.reduce((a,b)=>a+b,0)/arr.length * 10)/10
+  );
 
-  const chart2 = new Chart(document.getElementById('chart-ufm2'), {
+  new Chart(document.getElementById('chart-2'), {
     type: 'bar',
     data: {
       labels: proyNombres,
-      datasets: [{
-        label: 'UF/m² promedio',
-        data: proyVals,
-        backgroundColor: proyVals.map(() => GOLD),
-        borderRadius: 4,
-        borderSkipped: false,
-      }]
+      datasets: [{ label:'UF/m² promedio', data:proyVals, backgroundColor: proyVals.map(()=>GOLD), borderRadius:4, borderSkipped:false }]
     },
     options: {
-      responsive: true,
-      maintainAspectRatio: false,
+      responsive: true, maintainAspectRatio: false,
       indexAxis: 'y',
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          callbacks: {
-            label: ctx => `${fmt(ctx.raw)} UF/m²`
-          }
-        }
-      },
+      plugins: { legend:{display:false}, tooltip:{callbacks:{label:ctx=>`${fmt(ctx.raw)} UF/m²`}} },
       scales: {
-        x: {
-          ticks: { font: { size: 9 }, callback: v => `${v}`, color: '#555' },
-          grid: { color: 'rgba(0,0,0,.05)' }
-        },
-        y: {
-          ticks: { font: { size: 9 }, color: '#555' },
-          grid: { display: false }
-        }
+        x: { ticks:{font:{size:9},color:'#555'}, grid:{color:'rgba(0,0,0,.05)'} },
+        y: { ticks:{font:{size:9},color:'#555'}, grid:{display:false} }
       }
     }
   });
+
+  // Chart 3: zona donut (only if hasZona)
+  if (hasZona) {
+    const zonaDisp = {};
+    d.competencia.forEach(r => {
+      const z = r.zona || 'Sin zona';
+      if (!zonaDisp[z]) zonaDisp[z] = 0;
+      if (r.disponibles != null) zonaDisp[z] += r.disponibles;
+    });
+    const zonaLabels = Object.keys(zonaDisp).map(capitalize);
+    const zonaVals   = Object.values(zonaDisp);
+    const zonaColors = ['rgba(31,56,100,.8)','rgba(201,168,76,.8)','rgba(74,144,217,.8)','rgba(76,175,80,.8)','rgba(224,123,79,.8)'];
+
+    new Chart(document.getElementById('chart-3'), {
+      type: 'doughnut',
+      data: {
+        labels: zonaLabels,
+        datasets: [{ data:zonaVals, backgroundColor:zonaColors, borderWidth:2, borderColor:'#fff' }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { position:'right', labels:{font:{size:10},padding:12} },
+          tooltip: { callbacks: { label: ctx => `${ctx.label}: ${ctx.raw} disponibles` } }
+        }
+      }
+    });
+  }
 }
 
-// ── S4: MAPA ──────────────────────────────────────────────────────
+// ── S: MAPA ───────────────────────────────────────────────────────
 function renderMapa(d) {
+  const body = document.getElementById('body-mapa');
+  body.innerHTML = `<div class="map-card">
+    <div class="map-header">
+      <div class="map-title">Radio de mercado relevante</div>
+      <div style="font-size:.78rem;color:var(--muted)">
+        <span style="display:inline-block;width:10px;height:10px;background:#1F3864;border-radius:50%;margin-right:4px;vertical-align:middle"></span>Proyecto evaluado &nbsp;
+        <span style="display:inline-block;width:10px;height:10px;background:#C9A84C;border-radius:50%;margin-right:4px;vertical-align:middle"></span>Competencia
+      </div>
+    </div>
+    <div id="mapa" style="height:380px"></div>
+  </div>`;
+
   const comp = d.competencia;
-  const lats = comp.map(r => r.lat).filter(Boolean);
-  const lngs = comp.map(r => r.lng).filter(Boolean);
+  const allCoords = comp.filter(r => r.lat && r.lng);
+  if (!allCoords.length) return;
+
+  const lats = allCoords.map(r => r.lat);
+  const lngs = allCoords.map(r => r.lng);
   const centerLat = lats.reduce((a,b)=>a+b,0)/lats.length;
   const centerLng = lngs.reduce((a,b)=>a+b,0)/lngs.length;
 
-  const map = L.map('mapa').setView([centerLat, centerLng], 15);
-
+  const map = L.map('mapa').setView([centerLat, centerLng], 14);
   L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-    attribution: '© OpenStreetMap, © CARTO',
-    maxZoom: 19
+    attribution: '© OpenStreetMap, © CARTO', maxZoom: 19
   }).addTo(map);
 
-  // Proyecto evaluado (navy pin)
   const mainIcon = L.divIcon({
-    html: `<div style="width:16px;height:16px;background:#1F3864;border:2px solid white;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,.3)"></div>`,
-    className: '', iconAnchor: [8,8]
+    html: `<div style="width:18px;height:18px;background:#1F3864;border:2.5px solid white;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,.35)"></div>`,
+    className: '', iconAnchor: [9,9]
   });
-
   const goldIcon = L.divIcon({
     html: `<div style="width:14px;height:14px;background:#C9A84C;border:2px solid white;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,.3)"></div>`,
     className: '', iconAnchor: [7,7]
   });
 
-  // Mark proyecto evaluado with first coord
-  if (comp[0]?.lat) {
-    L.marker([comp[0].lat, comp[0].lng], {icon: mainIcon})
-     .bindPopup(`<strong style="color:#1F3864">${d.meta.proyecto}</strong><br><small>${d.meta.direccion}</small>`)
+  // Main marker: proyecto_evaluado if has lat/lng, else first comp coord
+  let mainLat = null, mainLng = null, mainName = '', mainAddr = '';
+  if (d.proyecto_evaluado?.lat && d.proyecto_evaluado?.lng) {
+    mainLat  = d.proyecto_evaluado.lat;
+    mainLng  = d.proyecto_evaluado.lng;
+    mainName = d.proyecto_evaluado.nombre;
+    mainAddr = d.proyecto_evaluado.direccion || '';
+  } else if (allCoords.length) {
+    mainLat  = allCoords[0].lat;
+    mainLng  = allCoords[0].lng;
+    mainName = d.meta.proyecto;
+    mainAddr = d.meta.direccion || '';
+  }
+  if (mainLat) {
+    L.marker([mainLat, mainLng], {icon: mainIcon})
+     .bindPopup(`<strong style="color:#1F3864">${mainName}</strong><br><small>${mainAddr}</small>`)
      .addTo(map);
   }
 
-  // Mark competencia (unique coords)
+  // Competition markers (group by coord)
   const seen = new Set();
   comp.forEach(r => {
     if (!r.lat || !r.lng) return;
     const key = `${r.lat},${r.lng}`;
-    const isMain = key === `${comp[0].lat},${comp[0].lng}`;
-    if (isMain) return;
-    if (seen.has(key)) return;
+    const isMain = mainLat && key === `${mainLat},${mainLng}` && !d.proyecto_evaluado?.lat;
+    if (isMain || seen.has(key)) return;
     seen.add(key);
+
     const grupo = comp.filter(x => x.lat===r.lat && x.lng===r.lng);
-    const popup = grupo.map(x =>
-      `<div style="padding:3px 0;border-bottom:1px solid #eee;last:no-border">
+    const popup = grupo.map(x => {
+      const disp = x.disponibles != null ? `· ${x.disponibles} disp.` : '';
+      return `<div style="padding:4px 0;border-bottom:1px solid #eee">
         <strong>${x.proyecto}</strong><br>
-        <small style="color:#666">${x.estado} · UF ${fmtUF(x.precio_uf)}</small>
-      </div>`
-    ).join('');
+        <small style="color:#666">${x.estado} ${disp} · UF ${fmtUF(x.precio_lista_uf)}</small>
+      </div>`;
+    }).join('');
     L.marker([r.lat, r.lng], {icon: goldIcon})
      .bindPopup(`<div style="min-width:200px;font-size:13px">${popup}</div>`)
      .addTo(map);
   });
 
-  // Fit bounds
-  const allCoords = comp.filter(r=>r.lat&&r.lng).map(r=>[r.lat,r.lng]);
-  if (allCoords.length > 1) map.fitBounds(allCoords, {padding:[30,30]});
+  if (allCoords.length > 1) {
+    map.fitBounds(allCoords.map(r => [r.lat, r.lng]), {padding:[30,30]});
+  }
 }
 
-// ── S5: PONDERACIÓN ───────────────────────────────────────────────
-function renderPonderacion(rows) {
-  const tbody = document.getElementById('tbody-pond');
-  tbody.innerHTML = rows.map((r, i) => {
-    const dPos = r.delta >= 0;
-    const dStr = dPos ? `+${r.delta.toFixed(1)}%` : `${r.delta.toFixed(1)}%`;
-    return `
-    <tr class="${i%2===1?'even':''}">
-      <td><strong>${r.orientacion}</strong></td>
-      <td>${orientChip(r.codigo)}</td>
-      <td class="${dPos?'delta-pos':'delta-neg'}" style="text-align:center;font-size:.95rem">${dStr}</td>
-      <td style="color:#4b5563">${r.justificacion}</td>
-      <td style="color:var(--muted);font-size:.8rem">${r.aplica}</td>
-    </tr>`;
-  }).join('');
+// ── S: RESUMEN DE MERCADO ─────────────────────────────────────────
+function renderResumen(d) {
+  const rm = d.resumen_mercado;
+  const body = document.getElementById('body-resumen');
+
+  // KPI top row
+  const kpis = [];
+  if (rm.total_proyectos  != null) kpis.push({label:'Proyectos relevados',  val:rm.total_proyectos});
+  if (rm.total_disponibles!= null) kpis.push({label:'Unidades disponibles', val:rm.total_disponibles});
+  if (rm.rango_uf_m2_lista) kpis.push({label:'Rango UF/m² lista', val:`${rm.rango_uf_m2_lista.min}–${rm.rango_uf_m2_lista.max}`});
+  if (rm.rango_uf_m2_dcto)  kpis.push({label:'Rango UF/m² dcto',  val:`${rm.rango_uf_m2_dcto.min}–${rm.rango_uf_m2_dcto.max}`});
+
+  let html = `<div class="kpi-grid">${kpis.map(k => `
+    <div class="kpi-card">
+      <div class="kpi-label">${k.label}</div>
+      <div class="kpi-value">${k.val}</div>
+    </div>`).join('')}</div>`;
+
+  html += '<div class="resumen-grid">';
+
+  // Tabla por tipología
+  if (rm.promedio_por_tipologia_dcto) {
+    const tipRows = Object.entries(rm.promedio_por_tipologia_dcto);
+    html += `<div class="resumen-tipologias">
+      <table>
+        <thead><tr>
+          <th>Tipología</th><th>UF/m² mín.</th><th>UF/m² máx.</th><th>Promedio dcto</th><th>N° proyectos</th>
+        </tr></thead>
+        <tbody>${tipRows.map(([tip, v], i) => `
+          <tr class="${i%2?'even':''}">
+            <td><strong>${tip}</strong></td>
+            <td style="text-align:center;color:var(--muted)">${fmt(v.min)}</td>
+            <td style="text-align:center;color:var(--muted)">${fmt(v.max)}</td>
+            <td class="td-ufm2" style="text-align:center">${fmt(v.promedio)}</td>
+            <td style="text-align:center">${v.n_proyectos}</td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>`;
+  }
+
+  // Tabla por zona
+  if (rm.por_zona) {
+    const zonaRows = Object.entries(rm.por_zona);
+    html += `<div class="resumen-zona">
+      <table>
+        <thead><tr>
+          <th>Zona</th><th>Proyectos</th><th>Rango UF/m²</th><th>Disponibles</th>
+        </tr></thead>
+        <tbody>${zonaRows.map(([z, v], i) => `
+          <tr class="${i%2?'even':''}">
+            <td><strong>${capitalize(z)}</strong></td>
+            <td style="text-align:center">${v.proyectos}</td>
+            <td style="font-size:.82rem">${v.rango_uf_m2}</td>
+            <td style="text-align:center">${v.disponibles}</td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>`;
+  }
+
+  html += '</div>';
+
+  // Posicionamiento
+  if (rm.puqon_posicionamiento) {
+    const pos = rm.puqon_posicionamiento;
+    const comparisons = [];
+    if (pos.vs_promedio_1D) comparisons.push({label:'vs. promedio 1D', val:pos.vs_promedio_1D});
+    if (pos.vs_promedio_2D) comparisons.push({label:'vs. promedio 2D', val:pos.vs_promedio_2D});
+    if (pos.vs_promedio_3D) comparisons.push({label:'vs. promedio 3D', val:pos.vs_promedio_3D});
+    if (pos.vs_payllahue_1D) comparisons.push({label:'vs. Payllahue 1D', val:pos.vs_payllahue_1D});
+    if (pos.vs_andino_1D)   comparisons.push({label:'vs. Pucón Andino 1D', val:pos.vs_andino_1D});
+
+    html += `<div class="pos-card">
+      <div class="pos-card-title">Posicionamiento del proyecto evaluado</div>
+      <div class="pos-uf-highlight">${fmt(pos.uf_m2_propuesto)} <span style="font-size:1rem;font-weight:400;color:var(--muted)">UF/m² propuesto</span></div>
+      <div class="pos-comparisons">
+        ${comparisons.map(c => `
+          <div class="pos-comp-item">
+            <div class="pos-comp-label">${c.label}</div>
+            <div class="pos-comp-value ${c.val.includes('-')?'neg':''}">${c.val}</div>
+          </div>`).join('')}
+      </div>
+      ${pos.competidores_directos_zona?.length ? `
+        <div class="pos-directos">
+          <div class="pos-directos-label">Competidores directos en zona</div>
+          ${pos.competidores_directos_zona.map(c => `<div class="pos-directos-val">· ${c}</div>`).join('')}
+        </div>` : ''}
+    </div>`;
+  }
+
+  body.innerHTML = html;
 }
 
-// ── S6: NOTAS ─────────────────────────────────────────────────────
-function renderNotas(rows) {
-  document.getElementById('notas-grid').innerHTML = rows.map((r, i) => `
+// ── S: PONDERACIÓN ────────────────────────────────────────────────
+function renderPonderacion(d) {
+  const rows = d.ponderacion_orientacion;
+  const body = document.getElementById('body-ponderacion');
+  body.innerHTML = `<div class="table-wrap"><div class="table-scroll">
+    <table>
+      <thead><tr>
+        <th>Orientación</th><th>Código</th><th>Δ% vs medio</th><th>Justificación</th><th>Aplica a</th>
+      </tr></thead>
+      <tbody>${rows.map((r, i) => {
+        const dPos = r.delta >= 0;
+        const dStr = dPos ? `+${r.delta.toFixed(1)}%` : `${r.delta.toFixed(1)}%`;
+        return `<tr class="${i%2===1?'even':''}">
+          <td><strong>${r.orientacion}</strong></td>
+          <td>${orientChip(r.codigo)}</td>
+          <td class="${dPos?'delta-pos':'delta-neg'}" style="text-align:center;font-size:.95rem">${dStr}</td>
+          <td style="color:#4b5563">${r.justificacion}</td>
+          <td style="color:var(--muted);font-size:.8rem">${r.aplica}</td>
+        </tr>`;
+      }).join('')}</tbody>
+    </table>
+  </div></div>`;
+}
+
+// ── S: NOTAS ──────────────────────────────────────────────────────
+function renderNotas(d) {
+  const rows = d.notas;
+  const body = document.getElementById('body-notas');
+  body.innerHTML = `<div class="notas-grid">${rows.map((r, i) => `
     <div class="nota-item" style="background:${i%2===0?'white':'#fafaf9'}">
       <div class="nota-titulo">${r.titulo}</div>
       <div class="nota-texto">${r.texto}</div>
-    </div>
-  `).join('');
+    </div>`).join('')}</div>`;
 }
 
 // ── NAV SCROLL ────────────────────────────────────────────────────
-function setupNavScroll() {
-  const tabs = document.querySelectorAll('.nav-tab');
-  const sections = ['sec-competencia','sec-precios','sec-graficos','sec-mapa','sec-ponderacion','sec-notas'];
+function setupNavScroll(sections) {
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) {
         const id = e.target.id;
-        tabs.forEach(t => {
+        document.querySelectorAll('.nav-tab').forEach(t => {
           t.classList.toggle('active', t.getAttribute('href') === `#${id}`);
         });
       }
     });
   }, { rootMargin: '-30% 0px -60% 0px' });
-  sections.forEach(id => {
-    const el = document.getElementById(id);
+
+  sections.forEach(s => {
+    const el = document.getElementById(`sec-${s.key}`);
     if (el) observer.observe(el);
   });
 }

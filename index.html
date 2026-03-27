@@ -281,7 +281,7 @@
       <rect x="14" y="2" width="4" height="16" fill="white" rx="1"/>
     </svg>
   </div>
-  <div class="brand">Estudios de Mercado <span>Inmobiliario</span></div>
+  <div class="brand">RW <span>Consulting</span></div>
 </header>
 
 <main>
@@ -305,7 +305,10 @@
     </div>
 
     <div class="demo-badge">
-      ¿Primera vez? <a onclick="usarDemo()">Usar código de demo</a>
+      ¿Primera vez? Probar con:
+      <a onclick="usarEstudio('EST-2025-GC-8F3K')">Alessandri (Viña del Mar)</a>
+      &nbsp;·&nbsp;
+      <a onclick="usarEstudio('EST-2026-KI-4V7P')">PUQON (Pucón)</a>
     </div>
 
     <div class="hint">
@@ -319,7 +322,7 @@
 </main>
 
 <footer>
-  © 2025 Estudios de Mercado Inmobiliario · Todos los derechos reservados
+  © 2025–2026 RW Consulting · Estudios de Mercado Inmobiliario · Todos los derechos reservados
 </footer>
 
 <script>
@@ -330,8 +333,8 @@
   input.addEventListener('keydown', e => { if (e.key === 'Enter') acceder(); });
   input.addEventListener('input', () => err.classList.remove('show'));
 
-  function usarDemo() {
-    input.value = 'EST-2025-GC-8F3K';
+  function usarEstudio(codigo) {
+    input.value = codigo;
     input.focus();
   }
 
