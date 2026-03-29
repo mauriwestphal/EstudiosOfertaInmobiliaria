@@ -983,221 +983,6 @@ canvas { max-height: 260px; }
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-<!-- ══════════════════════════════════════════
-     3. JAVASCRIPT DEL CHAT
-     Pegar justo antes del cierre del </script>
-     existente, o en un nuevo <script> al final
-════════════════════════════════════════════ -->
-<script id="chat-script-insert">
-(function() {
-  // ── CONFIG ───────────────────────────────────────────────────────
-  // Reemplazar con tu URL real de Cloudflare Worker tras el deploy
-  const WORKER_URL = 'https://rw-consulting-chat.rw-consulting.workers.dev';
-
-  // ── ESTADO ───────────────────────────────────────────────────────
-  let chatOpen      = false;
-  let isLoading     = false;
-  let estudioData   = null;  // se llena cuando DATA esté disponible
-  let chatHistory   = [];    // [{role, content}]
-  let firstMessage  = true;
-
-  // ── ELEMENTOS ────────────────────────────────────────────────────
-  const launcher    = document.getElementById('chat-launcher');
-  const panel       = document.getElementById('chat-panel');
-  const closeBtn    = document.getElementById('chat-close-btn');
-  const messagesEl  = document.getElementById('chat-messages');
-  const inputEl     = document.getElementById('chat-input');
-  const sendBtn     = document.getElementById('chat-send-btn');
-  const badge       = document.getElementById('chat-badge');
-  const headerSub   = document.getElementById('chat-header-sub');
-  const suggestions = document.querySelectorAll('.chat-suggestion-btn');
-
-  // ── CONECTAR CON DATA del viewer ──────────────────────────────────
-  // El viewer define DATA una vez que carga el JSON. Esperamos a que esté.
-  function tryConnectData() {
-    if (typeof DATA !== 'undefined' && DATA !== null) {
-      estudioData = DATA;
-      headerSub.textContent = DATA.meta?.proyecto || 'Estudio cargado';
-    } else {
-      setTimeout(tryConnectData, 300);
-    }
-  }
-  tryConnectData();
-
-  // ── TOGGLE PANEL ─────────────────────────────────────────────────
-  function openChat() {
-    chatOpen = true;
-    panel.classList.remove('chat-hidden');
-    launcher.setAttribute('aria-expanded', 'true');
-    badge.style.display = 'none';
-    badge.textContent   = '';
-    // Mensaje de bienvenida solo la primera vez
-    if (chatHistory.length === 0) showWelcome();
-    setTimeout(() => inputEl.focus(), 120);
-  }
-
-  function closeChat() {
-    chatOpen = false;
-    panel.classList.add('chat-hidden');
-    launcher.setAttribute('aria-expanded', 'false');
-  }
-
-  launcher.addEventListener('click', () => chatOpen ? closeChat() : openChat());
-  closeBtn.addEventListener('click', closeChat);
-
-  // cerrar con Escape
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && chatOpen) closeChat();
-  });
-
-  // ── BIENVENIDA ───────────────────────────────────────────────────
-  function showWelcome() {
-    const nombre = estudioData?.meta?.proyecto || 'este estudio';
-    appendMsg('assistant',
-      `👋 Hola, soy el asistente IA de MW Consulting.\n\nPuedo responderte preguntas sobre **${nombre}**: precios, competencia, tipologías, zonas y más.\n\n¿En qué te ayudo?`
-    );
-  }
-
-  // ── SUGERENCIAS ───────────────────────────────────────────────────
-  suggestions.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const q = btn.dataset.q;
-      if (q && !isLoading) {
-        inputEl.value = q;
-        sendMessage();
-      }
-    });
-  });
-
-  // ── ENVIAR ───────────────────────────────────────────────────────
-  inputEl.addEventListener('keydown', e => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      sendMessage();
-    }
-  });
-  sendBtn.addEventListener('click', sendMessage);
-
-  // auto-resize textarea
-  inputEl.addEventListener('input', () => {
-    inputEl.style.height = 'auto';
-    inputEl.style.height = Math.min(inputEl.scrollHeight, 100) + 'px';
-  });
-
-  async function sendMessage() {
-    const text = inputEl.value.trim();
-    if (!text || isLoading) return;
-    if (!estudioData) {
-      appendMsg('assistant', '⏳ El estudio aún está cargando, espera un momento…');
-      return;
-    }
-
-    // Mostrar msg del usuario
-    appendMsg('user', text);
-    chatHistory.push({ role: 'user', content: text });
-    inputEl.value = '';
-    inputEl.style.height = 'auto';
-    setLoading(true);
-
-    // Typing indicator
-    const typingId = showTyping();
-
-    try {
-      const res = await fetch(WORKER_URL, {
-        method:  'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body:    JSON.stringify({
-          codigo:      (new URLSearchParams(location.search)).get('codigo') || '',
-          messages:    chatHistory,
-          estudioJson: estudioData,
-        }),
-      });
-
-      removeTyping(typingId);
-
-      if (!res.ok) {
-        const err = await res.json().catch(() => ({}));
-        throw new Error(err.error || `Error ${res.status}`);
-      }
-
-      const data     = await res.json();
-      const reply    = data.response || 'Sin respuesta.';
-
-      chatHistory.push({ role: 'assistant', content: reply });
-      appendMsg('assistant', reply);
-      firstMessage = false;
-
-      // Mostrar badge si el panel está cerrado
-      if (!chatOpen) {
-        badge.style.display = 'flex';
-        badge.textContent   = '1';
-      }
-
-    } catch (err) {
-      removeTyping(typingId);
-      appendMsg('assistant', `⚠️ Error al conectar con el asistente: ${err.message}\n\nVerifica que el Worker esté activo y el código de acceso sea válido.`);
-    }
-
-    setLoading(false);
-  }
-  // ── HELPERS DE UI ────────────────────────────────────────────────
-  function appendMsg(role, text) {
-    const now   = new Date().toLocaleTimeString('es-CL', {hour:'2-digit', minute:'2-digit'});
-    const msgEl = document.createElement('div');
-    msgEl.className = `chat-msg ${role}`;
-    msgEl.innerHTML = `
-      <div class="chat-bubble">${markdownToHtml(text)}</div>
-      <div class="chat-msg-time">${now}</div>`;
-    messagesEl.appendChild(msgEl);
-    messagesEl.scrollTop = messagesEl.scrollHeight;
-  }
-
-  function showTyping() {
-    const id  = 'typing-' + Date.now();
-    const el  = document.createElement('div');
-    el.id     = id;
-    el.className = 'chat-msg assistant';
-    el.innerHTML = `<div class="chat-typing"><span></span><span></span><span></span></div>`;
-    messagesEl.appendChild(el);
-    messagesEl.scrollTop = messagesEl.scrollHeight;
-    return id;
-  }
-
-  function removeTyping(id) {
-    const el = document.getElementById(id);
-    if (el) el.remove();
-  }
-
-  function setLoading(val) {
-    isLoading         = val;
-    sendBtn.disabled  = val;
-    inputEl.disabled  = val;
-  }
-
-  // Markdown mínimo → HTML
-  function markdownToHtml(text) {
-    return text
-      // escape HTML
-      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-      // **bold**
-      .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
-      // *italic*
-      .replace(/\*(.+?)\*/g,'<em>$1</em>')
-      // listas
-      .replace(/^[•\-\*]\s+(.+)$/gm,'<li>$1</li>')
-      .replace(/^(\d+)\.\s+(.+)$/gm,'<li>$1. $2</li>')
-      // wrap listas
-      .replace(/(<li>[\s\S]+?<\/li>)(?=\s*<li>|$)/g, (m) => `<ul>${m}</ul>`)
-      // párrafos (doble salto)
-      .replace(/\n\n/g,'</p><p>')
-      // salto simple
-      .replace(/\n/g,'<br>')
-      // wrap en párrafo
-      .replace(/^(.+)$/,'<p>$1</p>');
-  }
-
-})();
-</script>
 <script>
 // ── Helpers ────────────────────────────────────────────────────────
 const fmt   = n => (n != null) ? n.toLocaleString('es-CL', {minimumFractionDigits:0, maximumFractionDigits:1}) : '—';
@@ -2006,7 +1791,7 @@ function setupNavScroll(sections) {
       </svg>
     </div>
     <div class="chat-header-text">
-      <div class="chat-header-title">Asistente IA · MW Consulting</div>
+      <div class="chat-header-title">Asistente IA · RW Consulting</div>
       <div class="chat-header-sub" id="chat-header-sub">Cargando estudio…</div>
     </div>
     <button class="chat-close-btn" id="chat-close-btn" aria-label="Cerrar chat">
@@ -2047,5 +1832,221 @@ function setupNavScroll(sections) {
     Respuestas basadas en datos del estudio · No constituye asesoría de inversión
   </div>
 </div>
+<!-- ══════════════════════════════════════════
+     3. JAVASCRIPT DEL CHAT
+     Pegar justo antes del cierre del </script>
+     existente, o en un nuevo <script> al final
+════════════════════════════════════════════ -->
+<script id="chat-script-insert">
+(function() {
+  // ── CONFIG ───────────────────────────────────────────────────────
+  // Reemplazar con tu URL real de Cloudflare Worker tras el deploy
+  const WORKER_URL = 'https://rw-consulting-chat.rw-consulting.workers.dev';
+
+  // ── ESTADO ───────────────────────────────────────────────────────
+  let chatOpen      = false;
+  let isLoading     = false;
+  let estudioData   = null;  // se llena cuando DATA esté disponible
+  let chatHistory   = [];    // [{role, content}]
+  let firstMessage  = true;
+
+  // ── ELEMENTOS ────────────────────────────────────────────────────
+  const launcher    = document.getElementById('chat-launcher');
+  const panel       = document.getElementById('chat-panel');
+  const closeBtn    = document.getElementById('chat-close-btn');
+  const messagesEl  = document.getElementById('chat-messages');
+  const inputEl     = document.getElementById('chat-input');
+  const sendBtn     = document.getElementById('chat-send-btn');
+  const badge       = document.getElementById('chat-badge');
+  const headerSub   = document.getElementById('chat-header-sub');
+  const suggestions = document.querySelectorAll('.chat-suggestion-btn');
+
+  // ── CONECTAR CON DATA del viewer ──────────────────────────────────
+  // El viewer define DATA una vez que carga el JSON. Esperamos a que esté.
+  function tryConnectData() {
+    if (typeof DATA !== 'undefined' && DATA !== null) {
+      estudioData = DATA;
+      headerSub.textContent = DATA.meta?.proyecto || 'Estudio cargado';
+    } else {
+      setTimeout(tryConnectData, 300);
+    }
+  }
+  tryConnectData();
+
+  // ── TOGGLE PANEL ─────────────────────────────────────────────────
+  function openChat() {
+    chatOpen = true;
+    panel.classList.remove('chat-hidden');
+    launcher.setAttribute('aria-expanded', 'true');
+    badge.style.display = 'none';
+    badge.textContent   = '';
+    // Mensaje de bienvenida solo la primera vez
+    if (chatHistory.length === 0) showWelcome();
+    setTimeout(() => inputEl.focus(), 120);
+  }
+
+  function closeChat() {
+    chatOpen = false;
+    panel.classList.add('chat-hidden');
+    launcher.setAttribute('aria-expanded', 'false');
+  }
+
+  launcher.addEventListener('click', () => chatOpen ? closeChat() : openChat());
+  closeBtn.addEventListener('click', closeChat);
+
+  // cerrar con Escape
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && chatOpen) closeChat();
+  });
+
+  // ── BIENVENIDA ───────────────────────────────────────────────────
+  function showWelcome() {
+    const nombre = estudioData?.meta?.proyecto || 'este estudio';
+    appendMsg('assistant',
+      `👋 Hola, soy el asistente IA de RW Consulting.\n\nPuedo responderte preguntas sobre **${nombre}**: precios, competencia, tipologías, zonas y más.\n\n¿En qué te ayudo?`
+    );
+  }
+
+  // ── SUGERENCIAS ───────────────────────────────────────────────────
+  suggestions.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const q = btn.dataset.q;
+      if (q && !isLoading) {
+        inputEl.value = q;
+        sendMessage();
+      }
+    });
+  });
+
+  // ── ENVIAR ───────────────────────────────────────────────────────
+  inputEl.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  });
+  sendBtn.addEventListener('click', sendMessage);
+
+  // auto-resize textarea
+  inputEl.addEventListener('input', () => {
+    inputEl.style.height = 'auto';
+    inputEl.style.height = Math.min(inputEl.scrollHeight, 100) + 'px';
+  });
+
+  async function sendMessage() {
+    const text = inputEl.value.trim();
+    if (!text || isLoading) return;
+    if (!estudioData) {
+      appendMsg('assistant', '⏳ El estudio aún está cargando, espera un momento…');
+      return;
+    }
+
+    // Mostrar msg del usuario
+    appendMsg('user', text);
+    chatHistory.push({ role: 'user', content: text });
+    inputEl.value = '';
+    inputEl.style.height = 'auto';
+    setLoading(true);
+
+    // Typing indicator
+    const typingId = showTyping();
+
+    try {
+      const res = await fetch(WORKER_URL, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({
+          codigo:      (new URLSearchParams(location.search)).get('codigo') || '',
+          messages:    chatHistory,
+          estudioJson: estudioData,
+        }),
+      });
+
+      removeTyping(typingId);
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.error || `Error ${res.status}`);
+      }
+
+      const data     = await res.json();
+      const reply    = data.response || 'Sin respuesta.';
+
+      chatHistory.push({ role: 'assistant', content: reply });
+      appendMsg('assistant', reply);
+      firstMessage = false;
+
+      // Mostrar badge si el panel está cerrado
+      if (!chatOpen) {
+        badge.style.display = 'flex';
+        badge.textContent   = '1';
+      }
+
+    } catch (err) {
+      removeTyping(typingId);
+      appendMsg('assistant', `⚠️ Error al conectar con el asistente: ${err.message}\n\nVerifica que el Worker esté activo y el código de acceso sea válido.`);
+    }
+
+    setLoading(false);
+  }
+  // ── HELPERS DE UI ────────────────────────────────────────────────
+  function appendMsg(role, text) {
+    const now   = new Date().toLocaleTimeString('es-CL', {hour:'2-digit', minute:'2-digit'});
+    const msgEl = document.createElement('div');
+    msgEl.className = `chat-msg ${role}`;
+    msgEl.innerHTML = `
+      <div class="chat-bubble">${markdownToHtml(text)}</div>
+      <div class="chat-msg-time">${now}</div>`;
+    messagesEl.appendChild(msgEl);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  }
+
+  function showTyping() {
+    const id  = 'typing-' + Date.now();
+    const el  = document.createElement('div');
+    el.id     = id;
+    el.className = 'chat-msg assistant';
+    el.innerHTML = `<div class="chat-typing"><span></span><span></span><span></span></div>`;
+    messagesEl.appendChild(el);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+    return id;
+  }
+
+  function removeTyping(id) {
+    const el = document.getElementById(id);
+    if (el) el.remove();
+  }
+
+  function setLoading(val) {
+    isLoading         = val;
+    sendBtn.disabled  = val;
+    inputEl.disabled  = val;
+  }
+
+  // Markdown mínimo → HTML
+  function markdownToHtml(text) {
+    return text
+      // escape HTML
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+      // **bold**
+      .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+      // *italic*
+      .replace(/\*(.+?)\*/g,'<em>$1</em>')
+      // listas
+      .replace(/^[•\-\*]\s+(.+)$/gm,'<li>$1</li>')
+      .replace(/^(\d+)\.\s+(.+)$/gm,'<li>$1. $2</li>')
+      // wrap listas
+      .replace(/(<li>[\s\S]+?<\/li>)(?=\s*<li>|$)/g, (m) => `<ul>${m}</ul>`)
+      // párrafos (doble salto)
+      .replace(/\n\n/g,'</p><p>')
+      // salto simple
+      .replace(/\n/g,'<br>')
+      // wrap en párrafo
+      .replace(/^(.+)$/,'<p>$1</p>');
+  }
+
+})();
+</script>
+
 </body>
 </html>
