@@ -4,28 +4,43 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Estudios de Mercado Inmobiliario</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><rect width='20' height='20' rx='4' fill='%23C9A84C'/><rect x='2' y='10' width='4' height='8' fill='white' rx='1'/><rect x='8' y='6' width='4' height='12' fill='white' rx='1'/><rect x='14' y='2' width='4' height='16' fill='white' rx='1'/></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><rect width='20' height='20' rx='4' fill='%231D6A6A'/><rect x='2' y='10' width='4' height='8' fill='white' rx='1'/><rect x='8' y='6' width='4' height='12' fill='white' rx='1'/><rect x='14' y='2' width='4' height='16' fill='white' rx='1'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --navy:   #1F3864;
-    --navy2:  #162a4f;
-    --gold:   #C9A84C;
-    --gold-l: #F4E4B0;
-    --cream:  #FAF8F4;
-    --text:   #1a1a2e;
-    --muted:  #6b7280;
+    --teal:           #1D6A6A;
+    --teal-mid:       #177A6C;
+    --teal-light:     #E0F0EF;
+    --teal-dark:      #155A5A;
+    --warm:           #C49A3C;
+    --warm-light:     #FBF4E3;
+    --warm-dark:      #96741E;
+    --deep-ink:       #2E2E38;
+    --ink-mid:        #3A3A48;
+    --mist:           #F7F9F9;
+    --white:          #FFFFFF;
+    --border:         rgba(29, 106, 106, 0.15);
+    --border-solid:   #D8E8E7;
+    --shadow-sm:      0 1px 3px rgba(46, 46, 56, 0.08);
+    --shadow-md:      0 4px 12px rgba(46, 46, 56, 0.10);
+    --shadow-lg:      0 8px 24px rgba(46, 46, 56, 0.12);
+    --text-primary:   #2E2E38;
+    --text-secondary: #5A6B6B;
+    --text-muted:     #6A7B7B;
+    --text-on-dark:   #F7F9F9;
+    --text-on-teal:   #FFFFFF;
   }
 
   html, body { height: 100%; }
 
   body {
     font-family: 'DM Sans', sans-serif;
-    background: var(--cream);
-    color: var(--text);
+    background: var(--mist);
+    color: var(--text-primary);
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -37,8 +52,8 @@
     position: fixed;
     inset: 0;
     background-image:
-      linear-gradient(rgba(31,56,100,.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(31,56,100,.04) 1px, transparent 1px);
+      linear-gradient(rgba(29,106,106,.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(29,106,106,.04) 1px, transparent 1px);
     background-size: 48px 48px;
     pointer-events: none;
     z-index: 0;
@@ -48,17 +63,17 @@
   header {
     position: relative;
     z-index: 1;
-    background: var(--navy);
+    background: var(--deep-ink);
     padding: 18px 48px;
     display: flex;
     align-items: center;
     gap: 16px;
-    border-bottom: 3px solid var(--gold);
+    border-bottom: 3px solid var(--teal);
   }
 
   .logo-mark {
     width: 36px; height: 36px;
-    background: var(--gold);
+    background: var(--teal);
     border-radius: 6px;
     display: grid;
     place-items: center;
@@ -66,12 +81,12 @@
   .logo-mark svg { width: 20px; height: 20px; }
 
   .brand {
-    font-family: 'Playfair Display', serif;
+    font-family: 'DM Serif Display', serif;
     font-size: 1.1rem;
-    color: #fff;
+    color: var(--text-on-dark);
     letter-spacing: .02em;
   }
-  .brand span { color: var(--gold); }
+  .brand-dot { color: var(--teal-light); font-weight: 700; }
 
   /* ── main container ── */
   main {
@@ -85,10 +100,10 @@
   }
 
   .card {
-    background: #fff;
-    border: 1px solid rgba(31,56,100,.12);
-    border-radius: 16px;
-    box-shadow: 0 20px 60px rgba(31,56,100,.10), 0 2px 8px rgba(31,56,100,.06);
+    background: var(--white);
+    border: 1px solid var(--border-solid);
+    border-radius: 12px;
+    box-shadow: var(--shadow-lg);
     padding: 56px 52px 48px;
     width: 100%;
     max-width: 480px;
@@ -96,20 +111,20 @@
     overflow: hidden;
   }
 
-  /* gold corner accent */
+  /* teal corner accent */
   .card::before {
     content: '';
     position: absolute;
     top: 0; right: 0;
     width: 120px; height: 4px;
-    background: linear-gradient(90deg, transparent, var(--gold));
+    background: linear-gradient(90deg, transparent, var(--teal));
   }
   .card::after {
     content: '';
     position: absolute;
     top: 0; right: 0;
     width: 4px; height: 120px;
-    background: linear-gradient(180deg, var(--gold), transparent);
+    background: linear-gradient(180deg, var(--teal), transparent);
   }
 
   .eyebrow {
@@ -117,21 +132,21 @@
     font-weight: 500;
     letter-spacing: .14em;
     text-transform: uppercase;
-    color: var(--gold);
+    color: var(--teal);
     margin-bottom: 12px;
   }
 
   h1 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'DM Serif Display', serif;
     font-size: 2rem;
     line-height: 1.2;
-    color: var(--navy);
+    color: var(--deep-ink);
     margin-bottom: 10px;
   }
 
   .subtitle {
     font-size: .92rem;
-    color: var(--muted);
+    color: var(--text-muted);
     line-height: 1.6;
     margin-bottom: 40px;
   }
@@ -142,7 +157,7 @@
     font-weight: 500;
     letter-spacing: .06em;
     text-transform: uppercase;
-    color: var(--navy);
+    color: var(--deep-ink);
     margin-bottom: 8px;
   }
 
@@ -157,24 +172,24 @@
     font-family: 'DM Sans', sans-serif;
     font-size: 1rem;
     letter-spacing: .06em;
-    border: 1.5px solid rgba(31,56,100,.2);
+    border: 1px solid var(--border-solid);
     border-radius: 8px;
-    background: var(--cream);
-    color: var(--text);
+    background: var(--white);
+    color: var(--text-primary);
     outline: none;
     transition: border-color .2s, box-shadow .2s;
   }
-  input[type="text"]::placeholder { color: #bbb; letter-spacing: .06em; }
+  input[type="text"]::placeholder { color: var(--text-muted); letter-spacing: .06em; }
   input[type="text"]:focus {
-    border-color: var(--navy);
-    box-shadow: 0 0 0 3px rgba(31,56,100,.08);
+    border-color: var(--teal);
+    box-shadow: 0 0 0 3px rgba(29, 106, 106, 0.15);
   }
 
   button {
     width: 100%;
     padding: 15px;
-    background: var(--navy);
-    color: #fff;
+    background: var(--teal);
+    color: var(--text-on-teal);
     font-family: 'DM Sans', sans-serif;
     font-size: .95rem;
     font-weight: 500;
@@ -191,13 +206,13 @@
     position: absolute;
     bottom: 0; left: 0; right: 0;
     height: 3px;
-    background: var(--gold);
+    background: var(--teal-light);
     transform: scaleX(0);
     transition: transform .25s;
   }
-  button:hover { background: var(--navy2); }
+  button:hover { background: var(--teal-mid); }
   button:hover::after { transform: scaleX(1); }
-  button:active { transform: scale(.98); }
+  button:active { background: var(--teal-dark); transform: scale(.98); }
 
   .error-msg {
     display: none;
@@ -214,9 +229,9 @@
   .hint {
     margin-top: 28px;
     padding-top: 24px;
-    border-top: 1px solid rgba(31,56,100,.08);
+    border-top: 1px solid var(--border);
     font-size: .8rem;
-    color: var(--muted);
+    color: var(--text-muted);
     display: flex;
     align-items: flex-start;
     gap: 8px;
@@ -229,15 +244,15 @@
     margin-top: 16px;
     text-align: center;
     font-size: .78rem;
-    color: var(--muted);
+    color: var(--text-muted);
   }
   .demo-badge a {
-    color: var(--gold);
+    color: var(--teal);
     text-decoration: none;
     font-weight: 500;
     cursor: pointer;
   }
-  .demo-badge a:hover { text-decoration: underline; }
+  .demo-badge a:hover { color: var(--teal-mid); text-decoration: underline; }
 
   /* ── footer ── */
   footer {
@@ -246,8 +261,8 @@
     text-align: center;
     padding: 20px;
     font-size: .78rem;
-    color: var(--muted);
-    border-top: 1px solid rgba(31,56,100,.08);
+    color: var(--text-muted);
+    border-top: 1px solid var(--border);
   }
 
   /* loading spinner */
@@ -281,7 +296,7 @@
       <rect x="14" y="2" width="4" height="16" fill="white" rx="1"/>
     </svg>
   </div>
-  <div class="brand">RW <span>Consulting</span></div>
+  <div class="brand">MW Consulting<span class="brand-dot">.</span></div>
 </header>
 
 <main>
@@ -322,7 +337,7 @@
 </main>
 
 <footer>
-  © 2025–2026 RW Consulting · Estudios de Mercado Inmobiliario · Todos los derechos reservados
+  © 2025–2026 MW Consulting · Estudios de Mercado Inmobiliario · Todos los derechos reservados
 </footer>
 
 <script>
