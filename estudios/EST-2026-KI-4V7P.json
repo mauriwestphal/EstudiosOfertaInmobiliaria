@@ -2,11 +2,11 @@
   "meta": {
     "codigo": "EST-2026-KI-4V7P",
     "version_esquema": "2.0",
-    "proyecto": "PUQON Edificio",
+    "proyecto": "Edificio PUQON",
     "direccion": "Camino al Volcán, Pucón, Araucanía",
     "cliente": "Kant Inmobiliaria",
-    "autor": "MW Consulting",
-    "fecha": "2026-03-26",
+    "autor": "RW Consulting",
+    "fecha": "2026-03-30",
     "metodologia": {
       "fuente_precios": "Portales inmobiliarios (Portal Inmobiliario, MercadoLibre, webs oficiales)",
       "criterio_precio": "Precio de lista sin estacionamiento ni bodega",
@@ -17,7 +17,7 @@
     }
   },
   "proyecto_evaluado": {
-    "nombre": "PUQON Edificio",
+    "nombre": "Edificio PUQON",
     "desarrollador": "Kant Inmobiliaria + RVL Investment",
     "direccion": "Camino al Volcán, Pucón",
     "sector": "Camino al Volcán",
@@ -35,6 +35,8 @@
       "Hot Tubs",
       "Áreas verdes"
     ],
+    "lat": -39.287470161487455, 
+    "lng": -71.97838404536108,
     "estacionamientos": 132,
     "bodegas": 66,
     "mix_unidades": [

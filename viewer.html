@@ -7,7 +7,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><rect width='20' height='20' rx='4' fill='%231D6A6A'/><rect x='2' y='10' width='4' height='8' fill='white' rx='1'/><rect x='8' y='6' width='4' height='12' fill='white' rx='1'/><rect x='14' y='2' width='4' height='16' fill='white' rx='1'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -44,7 +44,7 @@
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Urbanist', sans-serif;
   background: var(--mist);
   color: var(--text-primary);
   font-size: 14px;
@@ -75,7 +75,7 @@ body {
 }
 .logo-mark svg { width: 18px; }
 .brand-name {
-  font-family: 'DM Serif Display', serif;
+  font-family: 'Urbanist', serif;
   font-size: 1rem;
   color: var(--text-on-dark);
 }
@@ -167,7 +167,7 @@ body {
   margin-bottom: 6px;
 }
 .hero h2 {
-  font-family: 'DM Serif Display', serif;
+  font-family: 'Urbanist', serif;
   font-size: 1.6rem;
   color: var(--text-on-dark);
   margin-bottom: 4px;
@@ -218,7 +218,7 @@ body {
   flex-shrink: 0;
 }
 .section-title {
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Urbanist', sans-serif;
   font-size: 1.1rem;
   font-weight: 700;
   color: var(--deep-ink);
@@ -325,7 +325,7 @@ body {
   border: 1.5px solid var(--border-solid);
   border-radius: 100px;
   background: var(--white);
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Urbanist', sans-serif;
   font-size: .78rem;
   font-weight: 500;
   color: var(--text-muted);
@@ -450,6 +450,54 @@ tr.hidden-row { display: none; }
 .chart-wrap { position: relative; height: 260px; }
 canvas { max-height: 260px; }
 .chart-full { grid-column: 1 / -1; }
+
+/* ══ CHART FILTER ═════════════════════════════════════════════════ */
+.chart-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+.chart-filter-btn {
+  padding: 5px 14px;
+  border-radius: 100px;
+  border: 1.5px solid var(--border-solid);
+  background: var(--white);
+  font-size: .78rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all .15s;
+  font-family: inherit;
+}
+.chart-filter-btn:hover { border-color: var(--teal); color: var(--teal); }
+.chart-filter-btn.active { background: var(--teal); border-color: var(--teal); color: #fff; }
+.chart-xfilter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  background: var(--teal-light);
+  border: 1px solid var(--border-solid);
+  border-radius: 8px;
+  margin-bottom: 14px;
+  font-size: .8rem;
+  color: var(--teal-dark);
+}
+.chart-xfilter-label { flex: 1; font-weight: 500; }
+.chart-xfilter-clear {
+  padding: 2px 10px;
+  border-radius: 100px;
+  border: 1.5px solid var(--teal);
+  background: transparent;
+  color: var(--teal);
+  cursor: pointer;
+  font-size: .78rem;
+  font-family: inherit;
+  transition: all .15s;
+}
+.chart-xfilter-clear:hover { background: var(--teal); color: #fff; }
+.chart-wrap canvas { cursor: pointer; }
 
 /* ══ MAP ══════════════════════════════════════════════════════════ */
 .map-card {
@@ -598,7 +646,7 @@ canvas { max-height: 260px; }
           <rect x="14" y="2" width="4" height="16" fill="white" rx="1"/>
         </svg>
       </div>
-      <div class="brand-name">MW Consulting<span class="brand-dot">.</span></div>
+      <div class="brand-name">RW Consulting<span class="brand-dot">.</span></div>
     </div>
     <div class="header-meta">
       <div class="code" id="hdr-code">Cargando…</div>
@@ -753,7 +801,7 @@ function renderHero(d) {
   if (m.pisos)        pills.push(`Pisos ${m.pisos}`);
   if (m.fecha)        pills.push(m.fecha);
   if (m.analista)     pills.push(m.analista);
-  else if (m.autor)   pills.push(m.autor);
+  //else if (m.autor)   pills.push(m.autor);
 
   document.getElementById('hero-pills').innerHTML = pills.map(p => `<span class="hero-pill">${p}</span>`).join('');
 }
@@ -999,152 +1047,196 @@ function renderPrecios(d) {
 
 // ── S: GRÁFICOS ───────────────────────────────────────────────────
 function renderGraficos(d) {
-  const TEAL = '#1D6A6A';
-  const WARM = '#C49A3C';
   const body = document.getElementById('body-graficos');
+  const hasPrecios = d.precios_base?.length;
+  const proyectos  = [...new Set(d.competencia.map(r => r.proyecto))];
 
-  const hasZona     = d.competencia?.some(r => r.zona != null);
-  const hasDcto     = d.competencia?.some(r => r.precio_dcto_uf != null);
-  const hasPrecios  = d.precios_base?.length;
-
-  // Build grid HTML
-  let html = `<div class="charts-grid">`;
-  html += `<div class="chart-card"><div class="chart-title">${hasPrecios ? 'Precio UF por combinación tipología + orientación' : 'Precio UF por distribución (competencia)'}</div><div class="chart-wrap"><canvas id="chart-1"></canvas></div></div>`;
-  html += `<div class="chart-card"><div class="chart-title">UF/m² comparativo — proyectos de competencia</div><div class="chart-wrap"><canvas id="chart-2"></canvas></div></div>`;
-  html += `</div>`;
-
-  if (hasZona) {
-    html += `<div class="chart-card chart-full" style="margin-top:0"><div class="chart-title">Distribución de stock disponible por zona</div><div class="chart-wrap" style="max-height:220px"><canvas id="chart-3"></canvas></div></div>`;
-  }
-
-  body.innerHTML = html;
-
-  // Chart 1
-  if (hasPrecios) {
-    const tipColors = {
-      '1D1B':'rgba(74,144,217,.75)', '2D1B':'rgba(230,168,23,.75)',
-      '2D2B':'rgba(76,175,80,.75)',  '2D2B M':'rgba(224,123,79,.75)',
-    };
-    new Chart(document.getElementById('chart-1'), {
-      type: 'bar',
-      data: {
-        labels: d.precios_base.map(r => r.codigo),
-        datasets: [{
-          label: 'Precio medio (UF)',
-          data: d.precios_base.map(r => r.precio_medio),
-          backgroundColor: d.precios_base.map(r => tipColors[r.distribucion] || TEAL),
-          borderRadius: 4, borderSkipped: false,
-        }]
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        plugins: { legend:{display:false}, tooltip:{callbacks:{label: ctx => `UF ${fmtUF(ctx.raw)}`}} },
-        scales: {
-          x: { ticks:{font:{size:9},maxRotation:45,color:'#555'}, grid:{display:false} },
-          y: { ticks:{font:{size:9},callback:v=>`UF ${fmtUF(v)}`,color:'#555'}, grid:{color:'rgba(0,0,0,.05)'} }
-        }
-      }
-    });
-  } else {
-    // Group by dorms+banos from competencia
-    const distMap = {};
-    d.competencia.forEach(r => {
-      const key = (r.dorms||'') + (r.banos||'');
-      if (!distMap[key]) distMap[key] = {lista:[], dcto:[]};
-      distMap[key].lista.push(r.precio_lista_uf);
-      if (r.precio_dcto_uf != null) distMap[key].dcto.push(r.precio_dcto_uf);
-    });
-    const labels = Object.keys(distMap);
-    const avgLista = labels.map(k => Math.round(distMap[k].lista.reduce((a,b)=>a+b,0)/distMap[k].lista.length));
-    const avgDcto  = labels.map(k => distMap[k].dcto.length ? Math.round(distMap[k].dcto.reduce((a,b)=>a+b,0)/distMap[k].dcto.length) : null);
-    const colors = ['rgba(74,144,217,.75)','rgba(230,168,23,.75)','rgba(76,175,80,.75)','rgba(224,123,79,.75)','rgba(156,100,196,.75)','rgba(224,85,85,.75)','rgba(80,180,180,.75)','rgba(200,130,80,.75)'];
-    const datasets = [{
-      label: 'Precio lista (UF)',
-      data: avgLista,
-      backgroundColor: hasDcto ? 'rgba(29,106,106,.75)' : labels.map((_,i)=>colors[i%colors.length]),
-      borderRadius: 4, borderSkipped: false,
-    }];
-    if (hasDcto) datasets.push({
-      label: 'Precio dcto (UF)',
-      data: avgDcto,
-      backgroundColor: 'rgba(196,154,60,.8)',
-      borderRadius: 4, borderSkipped: false,
-    });
-    new Chart(document.getElementById('chart-1'), {
-      type: 'bar',
-      data: { labels, datasets },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        plugins: {
-          legend: { display: hasDcto, position:'bottom', labels:{font:{size:10}} },
-          tooltip: { callbacks: { label: ctx => `UF ${fmtUF(ctx.raw)}` } }
-        },
-        scales: {
-          x: { ticks:{font:{size:9},color:'#555'}, grid:{display:false} },
-          y: { ticks:{font:{size:9},callback:v=>`UF ${fmtUF(v)}`,color:'#555'}, grid:{color:'rgba(0,0,0,.05)'} }
-        }
-      }
+  // Gradient: value-based opacity 0.18→1.0; with highlight: selected=1.0, others=0.15
+  function grad(vals, r, g, b, hiIdx = null) {
+    const min = Math.min(...vals), max = Math.max(...vals), range = max - min || 1;
+    return vals.map((v, i) => {
+      if (hiIdx !== null) return i === hiIdx ? `rgba(${r},${g},${b},1)` : `rgba(${r},${g},${b},0.15)`;
+      return `rgba(${r},${g},${b},${(0.18 + ((v - min) / range) * 0.82).toFixed(2)})`;
     });
   }
 
-  // Chart 2: UF/m² promedio por proyecto (horizontal bars)
-  const proyMap = {};
-  d.competencia.forEach(r => {
-    if (!proyMap[r.proyecto]) proyMap[r.proyecto] = [];
-    const val = r.uf_m2_dcto != null ? r.uf_m2_dcto : r.uf_m2_lista;
-    if (val != null) proyMap[r.proyecto].push(val);
-  });
-  const proyNombres = Object.keys(proyMap).map(k =>
-    k.length > 28 ? k.substring(0,26)+'…' : k
-  );
-  const proyVals = Object.values(proyMap).map(arr =>
-    Math.round(arr.reduce((a,b)=>a+b,0)/arr.length * 10)/10
-  );
+  let activeFilter = null; // { dim: 'tipo'|'zona'|'proyecto', value }
+  let currentComp  = d.competencia;
+  let charts       = {};
 
-  new Chart(document.getElementById('chart-2'), {
-    type: 'bar',
-    data: {
-      labels: proyNombres,
-      datasets: [{ label:'UF/m² promedio', data:proyVals, backgroundColor: proyVals.map(()=>WARM), borderRadius:4, borderSkipped:false }]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      indexAxis: 'y',
-      plugins: { legend:{display:false}, tooltip:{callbacks:{label:ctx=>`${fmt(ctx.raw)} UF/m²`}} },
-      scales: {
-        x: { ticks:{font:{size:9},color:'#555'}, grid:{color:'rgba(0,0,0,.05)'} },
-        y: { ticks:{font:{size:9},color:'#555'}, grid:{display:false} }
-      }
+  body.innerHTML = `
+    <div class="chart-filter">
+      <button class="chart-filter-btn active" data-proyecto="__all__">Todos</button>
+      ${proyectos.map(p => `<button class="chart-filter-btn" data-proyecto="${p.replace(/"/g,'&quot;')}">${p}</button>`).join('')}
+    </div>
+    <div class="chart-xfilter" id="chart-xfilter" style="display:none">
+      <span class="chart-xfilter-label" id="chart-xfilter-label"></span>
+      <button class="chart-xfilter-clear" id="chart-xfilter-clear">Limpiar ×</button>
+    </div>
+    <div class="charts-grid">
+      <div class="chart-card"><div class="chart-title">UF/m² por proyecto</div><div class="chart-wrap" id="wrap-chart-4"><canvas id="chart-4"></canvas></div></div>
+      <div class="chart-card"><div class="chart-title">${hasPrecios ? 'Precio lista por tipología + orientación' : 'Precio lista promedio por distribución'}</div><div class="chart-wrap"><canvas id="chart-1"></canvas></div></div>
+      <div class="chart-card"><div class="chart-title">UF/m² por zona</div><div class="chart-wrap"><canvas id="chart-2"></canvas></div></div>
+      <div class="chart-card"><div class="chart-title">Stock disponible por zona</div><div class="chart-wrap"><canvas id="chart-3"></canvas></div></div>
+    </div>`;
+
+  function applyFilter(comp) {
+    if (!activeFilter) return comp;
+    return comp.filter(r => {
+      if (activeFilter.dim === 'zona')     return r.zona === activeFilter.value;
+      if (activeFilter.dim === 'proyecto') return r.proyecto === activeFilter.value;
+      if (activeFilter.dim === 'tipo')     return `${r.dorms||''} ${r.banos||''}`.trim() === activeFilter.value;
+      return true;
+    });
+  }
+
+  function updateIndicator() {
+    const el  = document.getElementById('chart-xfilter');
+    const lbl = document.getElementById('chart-xfilter-label');
+    if (activeFilter) {
+      const dimLabel = { tipo:'Tipología', zona:'Zona', proyecto:'Proyecto' }[activeFilter.dim];
+      lbl.textContent = `${dimLabel}: ${activeFilter.value}`;
+      el.style.display = 'flex';
+    } else {
+      el.style.display = 'none';
     }
-  });
+  }
 
-  // Chart 3: zona donut (only if hasZona)
-  if (hasZona) {
-    const zonaDisp = {};
-    d.competencia.forEach(r => {
-      const z = r.zona || 'Sin zona';
-      if (!zonaDisp[z]) zonaDisp[z] = 0;
-      if (r.disponibles != null) zonaDisp[z] += r.disponibles;
-    });
-    const zonaLabels = Object.keys(zonaDisp).map(capitalize);
-    const zonaVals   = Object.values(zonaDisp);
-    const zonaColors = ['rgba(29,106,106,.8)','rgba(196,154,60,.8)','rgba(74,144,217,.8)','rgba(76,175,80,.8)','rgba(224,123,79,.8)'];
+  function setFilter(dim, value) {
+    activeFilter = (activeFilter && activeFilter.dim === dim && activeFilter.value === value)
+      ? null : { dim, value };
+    updateIndicator();
+    buildCharts(currentComp);
+  }
 
-    new Chart(document.getElementById('chart-3'), {
-      type: 'doughnut',
-      data: {
-        labels: zonaLabels,
-        datasets: [{ data:zonaVals, backgroundColor:zonaColors, borderWidth:2, borderColor:'#fff' }]
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        plugins: {
-          legend: { position:'right', labels:{font:{size:10},padding:12} },
-          tooltip: { callbacks: { label: ctx => `${ctx.label}: ${ctx.raw} disponibles` } }
+  function buildCharts(comp) {
+    Object.values(charts).forEach(c => c.destroy());
+    charts = {};
+
+    // Source chart (same dim as filter): use full comp + highlight selected bar
+    // Target charts (different dim):     use filtered comp
+    const src = activeFilter?.dim;
+    const fc  = applyFilter(comp);
+
+    // ── Chart 1: Precio lista por distribución — teal ─────────────
+    if (hasPrecios) {
+      const vals1 = d.precios_base.map(r => r.precio_medio);
+      charts.c1 = new Chart(document.getElementById('chart-1'), {
+        type: 'bar',
+        data: { labels: d.precios_base.map(r => r.codigo), datasets: [{ label:'Precio lista (UF)', data:vals1, backgroundColor:grad(vals1,29,106,106), borderRadius:4, borderSkipped:false }] },
+        options: { responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false}, tooltip:{callbacks:{label:ctx=>`UF ${fmtUF(ctx.raw)}`}} }, scales:{ x:{ticks:{font:{size:9},maxRotation:45,color:'#555'},grid:{display:false}}, y:{ticks:{font:{size:9},callback:v=>`UF ${fmtUF(v)}`,color:'#555'},grid:{color:'rgba(0,0,0,.05)'}} } }
+      });
+    } else {
+      const c1data  = (src && src !== 'tipo') ? fc : comp;
+      const distMap = {};
+      c1data.forEach(r => {
+        const key = `${r.dorms||''} ${r.banos||''}`.trim();
+        if (!distMap[key]) distMap[key] = [];
+        if (r.precio_lista_uf != null) distMap[key].push(r.precio_lista_uf);
+      });
+      const labels1 = Object.keys(distMap).filter(k => distMap[k].length);
+      const vals1   = labels1.map(k => Math.round(distMap[k].reduce((a,b)=>a+b,0)/distMap[k].length));
+      const hiIdx1  = src === 'tipo' ? labels1.indexOf(activeFilter.value) : null;
+      charts.c1 = new Chart(document.getElementById('chart-1'), {
+        type: 'bar',
+        data: { labels: labels1, datasets: [{ label:'Precio lista (UF)', data:vals1, backgroundColor:grad(vals1,29,106,106,hiIdx1), borderRadius:4, borderSkipped:false }] },
+        options: {
+          responsive:true, maintainAspectRatio:false,
+          onClick: (_, elems) => { if (elems.length) setFilter('tipo', labels1[elems[0].index]); },
+          plugins:{ legend:{display:false}, tooltip:{callbacks:{label:ctx=>`UF ${fmtUF(ctx.raw)}`}} },
+          scales:{ x:{ticks:{font:{size:9},color:'#555'},grid:{display:false}}, y:{ticks:{font:{size:9},callback:v=>`UF ${fmtUF(v)}`,color:'#555'},grid:{color:'rgba(0,0,0,.05)'}} }
         }
+      });
+    }
+
+    // ── Chart 2: UF/m² por zona — warm gold ──────────────────────
+    const c2data    = (src && src !== 'zona') ? fc : comp;
+    const zonaUFMap = {};
+    c2data.forEach(r => {
+      const z = r.zona || 'sin zona';
+      if (!zonaUFMap[z]) zonaUFMap[z] = [];
+      if (r.uf_m2_lista != null) zonaUFMap[z].push(r.uf_m2_lista);
+    });
+    const zonaUFKeys = Object.keys(zonaUFMap);
+    const vals2  = zonaUFKeys.map(k => zonaUFMap[k].length ? Math.round(zonaUFMap[k].reduce((a,b)=>a+b,0)/zonaUFMap[k].length*10)/10 : 0);
+    const hiIdx2 = src === 'zona' ? zonaUFKeys.indexOf(activeFilter.value) : null;
+    charts.c2 = new Chart(document.getElementById('chart-2'), {
+      type: 'bar',
+      data: { labels: zonaUFKeys.map(capitalize), datasets: [{ label:'UF/m² promedio', data:vals2, backgroundColor:grad(vals2,196,154,60,hiIdx2), borderRadius:4, borderSkipped:false }] },
+      options: {
+        responsive:true, maintainAspectRatio:false,
+        onClick: (_, elems) => { if (elems.length) setFilter('zona', zonaUFKeys[elems[0].index]); },
+        plugins:{ legend:{display:false}, tooltip:{callbacks:{label:ctx=>`${fmt(ctx.raw)} UF/m²`}} },
+        scales:{ x:{ticks:{font:{size:9},color:'#555'},grid:{display:false}}, y:{ticks:{font:{size:9},callback:v=>`${fmt(v)}`,color:'#555'},grid:{color:'rgba(0,0,0,.05)'}} }
+      }
+    });
+
+    // ── Chart 3: Stock disponible por zona — blue ─────────────────
+    const c3data      = (src && src !== 'zona') ? fc : comp;
+    const zonaDispMap = {};
+    const seenProy    = new Set();
+    c3data.forEach(r => {
+      const z   = r.zona || 'sin zona';
+      const key = r.proyecto + '|' + z;
+      if (!zonaDispMap[z]) zonaDispMap[z] = 0;
+      if (!seenProy.has(key)) { seenProy.add(key); if (r.disponibles != null) zonaDispMap[z] += r.disponibles; }
+    });
+    const zonaDispKeys = Object.keys(zonaDispMap);
+    const vals3  = zonaDispKeys.map(k => zonaDispMap[k]);
+    const hiIdx3 = src === 'zona' ? zonaDispKeys.indexOf(activeFilter.value) : null;
+    charts.c3 = new Chart(document.getElementById('chart-3'), {
+      type: 'bar',
+      data: { labels: zonaDispKeys.map(capitalize), datasets: [{ label:'Disponibles', data:vals3, backgroundColor:grad(vals3,74,144,217,hiIdx3), borderRadius:4, borderSkipped:false }] },
+      options: {
+        responsive:true, maintainAspectRatio:false,
+        onClick: (_, elems) => { if (elems.length) setFilter('zona', zonaDispKeys[elems[0].index]); },
+        plugins:{ legend:{display:false}, tooltip:{callbacks:{label:ctx=>`${ctx.raw} unidades`}} },
+        scales:{ x:{ticks:{font:{size:9},color:'#555'},grid:{display:false}}, y:{ticks:{font:{size:9},color:'#555'},grid:{color:'rgba(0,0,0,.05)'}} }
+      }
+    });
+
+    // ── Chart 4: UF/m² por proyecto — slate horizontal ────────────
+    const c4data    = (src && src !== 'proyecto') ? fc : comp;
+    const proyUFMap = {};
+    c4data.forEach(r => {
+      if (!proyUFMap[r.proyecto]) proyUFMap[r.proyecto] = [];
+      if (r.uf_m2_lista != null) proyUFMap[r.proyecto].push(r.uf_m2_lista);
+    });
+    const proyKeys = Object.keys(proyUFMap);
+    const vals4    = proyKeys.map(k => Math.round(proyUFMap[k].reduce((a,b)=>a+b,0)/proyUFMap[k].length*10)/10);
+    const labels4  = proyKeys.map(k => k.length > 26 ? k.substring(0,24)+'…' : k);
+    const hiIdx4   = src === 'proyecto' ? proyKeys.indexOf(activeFilter.value) : null;
+    document.getElementById('wrap-chart-4').innerHTML = '<canvas id="chart-4"></canvas>';
+    charts.c4 = new Chart(document.getElementById('chart-4'), {
+      type: 'bar',
+      data: { labels: labels4, datasets: [{ label:'UF/m²', data:vals4, backgroundColor:grad(vals4,46,46,56,hiIdx4), borderRadius:4, borderSkipped:false }] },
+      options: {
+        responsive:true, maintainAspectRatio:false,
+        indexAxis: 'y',
+        onClick: (_, elems) => { if (elems.length) setFilter('proyecto', proyKeys[elems[0].index]); },
+        plugins:{ legend:{display:false}, tooltip:{callbacks:{label:ctx=>`${fmt(ctx.raw)} UF/m²`}} },
+        scales:{ x:{ticks:{font:{size:9},color:'#555'},grid:{color:'rgba(0,0,0,.05)'}}, y:{ticks:{font:{size:9},color:'#555'},grid:{display:false}} }
       }
     });
   }
+
+  buildCharts(currentComp);
+
+  body.addEventListener('click', e => {
+    if (e.target.id === 'chart-xfilter-clear') { activeFilter = null; updateIndicator(); buildCharts(currentComp); }
+  });
+
+  body.querySelectorAll('.chart-filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      body.querySelectorAll('.chart-filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeFilter = null;
+      updateIndicator();
+      const proy = btn.dataset.proyecto;
+      currentComp = proy === '__all__' ? d.competencia : d.competencia.filter(r => r.proyecto === proy);
+      buildCharts(currentComp);
+    });
+  });
 }
 
 // ── S: MAPA ───────────────────────────────────────────────────────
@@ -1217,7 +1309,7 @@ function renderMapa(d) {
       const disp = x.disponibles != null ? `· ${x.disponibles} disp.` : '';
       return `<div style="padding:4px 0;border-bottom:1px solid #eee">
         <strong>${x.proyecto}</strong><br>
-        <small style="color:#666">${x.estado} ${disp} · UF ${fmtUF(x.precio_lista_uf)}</small>
+        <small style="color:#666">${[x.dorms != null ? x.dorms : null, x.banos != null ? x.banos : null].filter(Boolean).join('/')} ${disp} · UF ${fmtUF(x.precio_lista_uf)}</small>
       </div>`;
     }).join('');
     L.marker([r.lat, r.lng], {icon: warmIcon})
