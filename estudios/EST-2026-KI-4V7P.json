@@ -5,8 +5,8 @@
     "proyecto": "Edificio PUQON",
     "direccion": "Camino al Volcán, Pucón, Araucanía",
     "cliente": "Kant Inmobiliaria",
-    "autor": "RW Consulting",
-    "fecha": "2026-03-30",
+    "autor": "MW Consulting",
+    "fecha": "2026-03-29",
     "metodologia": {
       "fuente_precios": "Portales inmobiliarios (Portal Inmobiliario, MercadoLibre, webs oficiales)",
       "criterio_precio": "Precio de lista sin estacionamiento ni bodega",
@@ -35,15 +35,27 @@
       "Hot Tubs",
       "Áreas verdes"
     ],
-    "lat": -39.287470161487455, 
+    "lat": -39.287470161487455,
     "lng": -71.97838404536108,
     "estacionamientos": 132,
     "bodegas": 66,
     "mix_unidades": [
-      { "tipo": "1D+1B",   "cantidad": 24 },
-      { "tipo": "1.5D+2B", "cantidad": 32 },
-      { "tipo": "2D+2B",   "cantidad": 48 },
-      { "tipo": "3D+2B",   "cantidad": 28 }
+      {
+        "tipo": "1D+1B",
+        "cantidad": 24
+      },
+      {
+        "tipo": "1.5D+2B",
+        "cantidad": 32
+      },
+      {
+        "tipo": "2D+2B",
+        "cantidad": 48
+      },
+      {
+        "tipo": "3D+2B",
+        "cantidad": 28
+      }
     ]
   },
   "competencia": [
@@ -62,7 +74,14 @@
       "terraza": 14.64,
       "orientacion": null,
       "vista_principal": "Lago y Volcán",
-      "amenities": ["Hidromasajes azotea", "Vista panorámica", "Ascensor", "Est. subterráneos", "Piscina", "Quinchos"],
+      "amenities": [
+        "Hidromasajes azotea",
+        "Vista panorámica",
+        "Ascensor",
+        "Est. subterráneos",
+        "Piscina",
+        "Quinchos"
+      ],
       "disponibles": 6,
       "total_unidades": 35,
       "precio_lista_uf": 9827,
@@ -90,7 +109,14 @@
       "terraza": 10.8,
       "orientacion": null,
       "vista_principal": "Lago y Volcán",
-      "amenities": ["Hidromasajes azotea", "Vista panorámica", "Ascensor", "Est. subterráneos", "Piscina", "Quinchos"],
+      "amenities": [
+        "Hidromasajes azotea",
+        "Vista panorámica",
+        "Ascensor",
+        "Est. subterráneos",
+        "Piscina",
+        "Quinchos"
+      ],
       "disponibles": 6,
       "total_unidades": 35,
       "precio_lista_uf": 15553,
@@ -118,7 +144,9 @@
       "terraza": 5.6,
       "orientacion": null,
       "vista_principal": "Urbano",
-      "amenities": ["No detalladas"],
+      "amenities": [
+        "No detalladas"
+      ],
       "disponibles": 16,
       "total_unidades": null,
       "precio_lista_uf": 3356,
@@ -146,7 +174,9 @@
       "terraza": 21.33,
       "orientacion": null,
       "vista_principal": "Urbano",
-      "amenities": ["No detalladas"],
+      "amenities": [
+        "No detalladas"
+      ],
       "disponibles": 16,
       "total_unidades": null,
       "precio_lista_uf": 6433,
@@ -174,7 +204,11 @@
       "terraza": 10.8,
       "orientacion": null,
       "vista_principal": "Urbano / Bosque",
-      "amenities": ["1.100 m² áreas verdes", "Espacios comunitarios", "Ascensor"],
+      "amenities": [
+        "1.100 m² áreas verdes",
+        "Espacios comunitarios",
+        "Ascensor"
+      ],
       "disponibles": 23,
       "total_unidades": 38,
       "precio_lista_uf": 4848,
@@ -202,7 +236,11 @@
       "terraza": 16.3,
       "orientacion": null,
       "vista_principal": "Urbano / Bosque",
-      "amenities": ["1.100 m² áreas verdes", "Espacios comunitarios", "Ascensor"],
+      "amenities": [
+        "1.100 m² áreas verdes",
+        "Espacios comunitarios",
+        "Ascensor"
+      ],
       "disponibles": 23,
       "total_unidades": 38,
       "precio_lista_uf": 6924,
@@ -230,7 +268,11 @@
       "terraza": 13.1,
       "orientacion": null,
       "vista_principal": "Urbano / Bosque",
-      "amenities": ["1.100 m² áreas verdes", "Espacios comunitarios", "Ascensor"],
+      "amenities": [
+        "1.100 m² áreas verdes",
+        "Espacios comunitarios",
+        "Ascensor"
+      ],
       "disponibles": 23,
       "total_unidades": 38,
       "precio_lista_uf": 10088,
@@ -258,7 +300,15 @@
       "terraza": 7.98,
       "orientacion": null,
       "vista_principal": "Jardín interior / Bosque",
-      "amenities": ["Piscina", "Quinchos", "Conserjería 24h", "Ascensor", "Bicicletero", "Lavandería", "Sala multiuso"],
+      "amenities": [
+        "Piscina",
+        "Quinchos",
+        "Conserjería 24h",
+        "Ascensor",
+        "Bicicletero",
+        "Lavandería",
+        "Sala multiuso"
+      ],
       "disponibles": 5,
       "total_unidades": null,
       "precio_lista_uf": 3103,
@@ -286,7 +336,15 @@
       "terraza": 11.95,
       "orientacion": null,
       "vista_principal": "Jardín interior / Bosque",
-      "amenities": ["Piscina", "Quinchos", "Conserjería 24h", "Ascensor", "Bicicletero", "Lavandería", "Sala multiuso"],
+      "amenities": [
+        "Piscina",
+        "Quinchos",
+        "Conserjería 24h",
+        "Ascensor",
+        "Bicicletero",
+        "Lavandería",
+        "Sala multiuso"
+      ],
       "disponibles": 5,
       "total_unidades": null,
       "precio_lista_uf": 3824,
@@ -314,7 +372,15 @@
       "terraza": 13.53,
       "orientacion": null,
       "vista_principal": "Jardín interior / Bosque",
-      "amenities": ["Piscina", "Quinchos", "Conserjería 24h", "Ascensor", "Bicicletero", "Lavandería", "Sala multiuso"],
+      "amenities": [
+        "Piscina",
+        "Quinchos",
+        "Conserjería 24h",
+        "Ascensor",
+        "Bicicletero",
+        "Lavandería",
+        "Sala multiuso"
+      ],
       "disponibles": 5,
       "total_unidades": null,
       "precio_lista_uf": 4444,
@@ -342,7 +408,12 @@
       "terraza": 2.0,
       "orientacion": null,
       "vista_principal": "Bosque / Urbano",
-      "amenities": ["Termopanel", "Eficiencia energética", "Áreas verdes", "Piscina"],
+      "amenities": [
+        "Termopanel",
+        "Eficiencia energética",
+        "Áreas verdes",
+        "Piscina"
+      ],
       "disponibles": 63,
       "total_unidades": 140,
       "precio_lista_uf": 2430,
@@ -370,7 +441,12 @@
       "terraza": 2.0,
       "orientacion": null,
       "vista_principal": "Bosque / Urbano",
-      "amenities": ["Termopanel", "Eficiencia energética", "Áreas verdes", "Piscina"],
+      "amenities": [
+        "Termopanel",
+        "Eficiencia energética",
+        "Áreas verdes",
+        "Piscina"
+      ],
       "disponibles": 63,
       "total_unidades": 140,
       "precio_lista_uf": 3060,
@@ -398,7 +474,16 @@
       "terraza": 7.0,
       "orientacion": null,
       "vista_principal": "Bosque / Volcán",
-      "amenities": ["Piscina", "Club House", "Gimnasio", "Sauna", "Hot Tub", "Sala de juegos", "Salón Gourmet", "Quinchos"],
+      "amenities": [
+        "Piscina",
+        "Club House",
+        "Gimnasio",
+        "Sauna",
+        "Hot Tub",
+        "Sala de juegos",
+        "Salón Gourmet",
+        "Quinchos"
+      ],
       "disponibles": 14,
       "total_unidades": null,
       "precio_lista_uf": 2895,
@@ -426,7 +511,16 @@
       "terraza": 11.0,
       "orientacion": null,
       "vista_principal": "Bosque / Volcán",
-      "amenities": ["Piscina", "Club House", "Gimnasio", "Sauna", "Hot Tub", "Sala de juegos", "Salón Gourmet", "Quinchos"],
+      "amenities": [
+        "Piscina",
+        "Club House",
+        "Gimnasio",
+        "Sauna",
+        "Hot Tub",
+        "Sala de juegos",
+        "Salón Gourmet",
+        "Quinchos"
+      ],
       "disponibles": 14,
       "total_unidades": null,
       "precio_lista_uf": 3090,
@@ -454,7 +548,16 @@
       "terraza": 11.0,
       "orientacion": null,
       "vista_principal": "Bosque / Volcán",
-      "amenities": ["Piscina", "Club House", "Gimnasio", "Sauna", "Hot Tub", "Sala de juegos", "Salón Gourmet", "Quinchos"],
+      "amenities": [
+        "Piscina",
+        "Club House",
+        "Gimnasio",
+        "Sauna",
+        "Hot Tub",
+        "Sala de juegos",
+        "Salón Gourmet",
+        "Quinchos"
+      ],
       "disponibles": 14,
       "total_unidades": null,
       "precio_lista_uf": 4190,
@@ -482,7 +585,14 @@
       "terraza": 10.98,
       "orientacion": null,
       "vista_principal": "Bosque / Volcán",
-      "amenities": ["Piscina", "Quincho", "Gimnasio", "Cowork", "Multicancha", "Senderos"],
+      "amenities": [
+        "Piscina",
+        "Quincho",
+        "Gimnasio",
+        "Cowork",
+        "Multicancha",
+        "Senderos"
+      ],
       "disponibles": 4,
       "total_unidades": null,
       "precio_lista_uf": 3609,
@@ -510,7 +620,14 @@
       "terraza": 11.79,
       "orientacion": null,
       "vista_principal": "Bosque / Volcán",
-      "amenities": ["Piscina", "Quincho", "Gimnasio", "Cowork", "Multicancha", "Senderos"],
+      "amenities": [
+        "Piscina",
+        "Quincho",
+        "Gimnasio",
+        "Cowork",
+        "Multicancha",
+        "Senderos"
+      ],
       "disponibles": 4,
       "total_unidades": null,
       "precio_lista_uf": 5204,
@@ -538,7 +655,14 @@
       "terraza": 8.9,
       "orientacion": null,
       "vista_principal": "Bosque / Volcán",
-      "amenities": ["Piscina", "Quincho", "Gimnasio", "Cowork", "Multicancha", "Senderos"],
+      "amenities": [
+        "Piscina",
+        "Quincho",
+        "Gimnasio",
+        "Cowork",
+        "Multicancha",
+        "Senderos"
+      ],
       "disponibles": 4,
       "total_unidades": null,
       "precio_lista_uf": 6028,
@@ -566,7 +690,14 @@
       "terraza": 11.66,
       "orientacion": null,
       "vista_principal": "Bosque / Volcán",
-      "amenities": ["Piscina", "Quincho", "Gimnasio", "Cowork", "Multicancha", "Senderos"],
+      "amenities": [
+        "Piscina",
+        "Quincho",
+        "Gimnasio",
+        "Cowork",
+        "Multicancha",
+        "Senderos"
+      ],
       "disponibles": 4,
       "total_unidades": null,
       "precio_lista_uf": 7175,
@@ -594,7 +725,12 @@
       "terraza": 50.0,
       "orientacion": null,
       "vista_principal": "Lago",
-      "amenities": ["1ª línea lago", "Parrilla empotrada", "Jardín propio", "Vista panorámica lago"],
+      "amenities": [
+        "1ª línea lago",
+        "Parrilla empotrada",
+        "Jardín propio",
+        "Vista panorámica lago"
+      ],
       "disponibles": 10,
       "total_unidades": null,
       "precio_lista_uf": 17944,
@@ -622,7 +758,12 @@
       "terraza": 32.0,
       "orientacion": null,
       "vista_principal": "Lago",
-      "amenities": ["1ª línea lago", "Parrilla empotrada", "Jardín propio", "Vista panorámica lago"],
+      "amenities": [
+        "1ª línea lago",
+        "Parrilla empotrada",
+        "Jardín propio",
+        "Vista panorámica lago"
+      ],
       "disponibles": 10,
       "total_unidades": null,
       "precio_lista_uf": 17790,
@@ -650,7 +791,9 @@
       "terraza": 4.0,
       "orientacion": null,
       "vista_principal": "Bosque",
-      "amenities": ["No detalladas"],
+      "amenities": [
+        "No detalladas"
+      ],
       "disponibles": 16,
       "total_unidades": null,
       "precio_lista_uf": 4100,
@@ -678,7 +821,9 @@
       "terraza": 7.0,
       "orientacion": null,
       "vista_principal": "Bosque",
-      "amenities": ["No detalladas"],
+      "amenities": [
+        "No detalladas"
+      ],
       "disponibles": 16,
       "total_unidades": null,
       "precio_lista_uf": 4000,
@@ -706,7 +851,9 @@
       "terraza": 9.0,
       "orientacion": null,
       "vista_principal": "Bosque",
-      "amenities": ["No detalladas"],
+      "amenities": [
+        "No detalladas"
+      ],
       "disponibles": 16,
       "total_unidades": null,
       "precio_lista_uf": 5650,
@@ -734,7 +881,14 @@
       "terraza": 4.14,
       "orientacion": null,
       "vista_principal": "Lago y Volcán",
-      "amenities": ["Piscina", "Quincho", "Gimnasio", "Embarcadero", "Áreas verdes", "Seguridad 24h"],
+      "amenities": [
+        "Piscina",
+        "Quincho",
+        "Gimnasio",
+        "Embarcadero",
+        "Áreas verdes",
+        "Seguridad 24h"
+      ],
       "disponibles": 57,
       "total_unidades": 170,
       "precio_lista_uf": 3578,
@@ -762,7 +916,14 @@
       "terraza": 3.41,
       "orientacion": null,
       "vista_principal": "Lago y Volcán",
-      "amenities": ["Piscina", "Quincho", "Gimnasio", "Embarcadero", "Áreas verdes", "Seguridad 24h"],
+      "amenities": [
+        "Piscina",
+        "Quincho",
+        "Gimnasio",
+        "Embarcadero",
+        "Áreas verdes",
+        "Seguridad 24h"
+      ],
       "disponibles": 57,
       "total_unidades": 170,
       "precio_lista_uf": 5668,
@@ -790,7 +951,14 @@
       "terraza": 5.6,
       "orientacion": null,
       "vista_principal": "Lago y Volcán",
-      "amenities": ["Piscina", "Quincho", "Gimnasio", "Embarcadero", "Áreas verdes", "Seguridad 24h"],
+      "amenities": [
+        "Piscina",
+        "Quincho",
+        "Gimnasio",
+        "Embarcadero",
+        "Áreas verdes",
+        "Seguridad 24h"
+      ],
       "disponibles": 57,
       "total_unidades": 170,
       "precio_lista_uf": 6826,
@@ -818,7 +986,14 @@
       "terraza": 11.8,
       "orientacion": null,
       "vista_principal": "Lago y Volcán",
-      "amenities": ["Piscina", "Quincho", "Gimnasio", "Embarcadero", "Áreas verdes", "Seguridad 24h"],
+      "amenities": [
+        "Piscina",
+        "Quincho",
+        "Gimnasio",
+        "Embarcadero",
+        "Áreas verdes",
+        "Seguridad 24h"
+      ],
       "disponibles": 57,
       "total_unidades": 170,
       "precio_lista_uf": 11519,
@@ -846,7 +1021,13 @@
       "terraza": 10.18,
       "orientacion": null,
       "vista_principal": "Urbano / Lago+Volcán (pisos altos)",
-      "amenities": ["Terraza común azotea", "Coworking", "Sala lounge", "Bicicletero", "Ascensor"],
+      "amenities": [
+        "Terraza común azotea",
+        "Coworking",
+        "Sala lounge",
+        "Bicicletero",
+        "Ascensor"
+      ],
       "disponibles": 4,
       "total_unidades": null,
       "precio_lista_uf": 5490,
@@ -915,17 +1096,17 @@
         "rango_uf_m2": "76-143 UF/m²",
         "disponibles": 49
       },
-      "camino_volcan": {
+      "volcan": {
         "proyectos": 2,
         "rango_uf_m2": "76-101 UF/m²",
         "disponibles": 18
       },
-      "camino_internacional": {
+      "internacional": {
         "proyectos": 2,
         "rango_uf_m2": "53-84 UF/m²",
         "disponibles": 68
       },
-      "camino_villarrica": {
+      "villarrica": {
         "proyectos": 3,
         "rango_uf_m2": "87-143 UF/m²",
         "disponibles": 83
@@ -933,16 +1114,63 @@
     }
   },
   "ponderacion_orientacion": [
-    { "orientacion": "Norponiente", "codigo": "NO", "delta": 4.0,  "justificacion": "Vista despejada hacia Reñaca/mar. Asoleación tarde. Prima máxima en sector Gómez Carreño.", "aplica": "Todos los mix" },
-    { "orientacion": "Norte",       "codigo": "N",  "delta": 3.0,  "justificacion": "Asoleación constante todo el día. Sin vista directa al mar pero excelente luminosidad.", "aplica": "Todos los mix" },
-    { "orientacion": "Poniente",    "codigo": "P",  "delta": 2.0,  "justificacion": "Asoleación tarde + potencial vista puesta de sol. Relevante en pisos altos.", "aplica": "2D1B, 2D2B, 2D2B M" },
-    { "orientacion": "Surponiente", "codigo": "SP", "delta": -2.0, "justificacion": "Asoleación mañana/mediodía. Vista hacia Av. Alessandri. Precio ancla (desde).", "aplica": "1D1B, 2D1B, 2D2B" },
-    { "orientacion": "Sur",         "codigo": "S",  "delta": -3.0, "justificacion": "Menor asoleación directa. Sin vista destacada. Precio competitivo vs SP.", "aplica": "1D1B, 2D1B, 2D2B" }
+    {
+      "orientacion": "Norte / Nororiente",
+      "codigo": "N/NE",
+      "delta": 4.0,
+      "justificacion": "Máxima asoleación directa todo el día. En proyectos del Camino al Volcán entrega vistas despejadas hacia el Volcán Villarrica (cono nevado). Prima más valorada en la zona, especialmente para uso turístico/airbnb.",
+      "aplica": "Todos los mix"
+    },
+    {
+      "orientacion": "Oriente",
+      "codigo": "E",
+      "delta": 2.5,
+      "justificacion": "Asoleación matinal. En sector Camino al Volcán y Camino Villarrica puede capturar vista al volcán o al lago en pisos altos. Relevante para tipologías de mayor m² con terraza orientada.",
+      "aplica": "2D+2B, 3D+2B"
+    },
+    {
+      "orientacion": "Poniente",
+      "codigo": "P",
+      "delta": 1.5,
+      "justificacion": "Asoleación vespertina con vistas potenciales hacia el lago Villarrica desde el sector La Poza y Camino Villarrica. Menor relevancia en zona volcán donde el poniente orienta hacia la ciudad.",
+      "aplica": "1.5D+2B, 2D+2B"
+    },
+    {
+      "orientacion": "Sur / Suroriente",
+      "codigo": "S/SE",
+      "delta": -2.0,
+      "justificacion": "Menor asoleación directa. En zona turística como Pucón la luminosidad impacta directamente en la rentabilidad por arriendo. Precio ancla (desde) del proyecto.",
+      "aplica": "1D+1B, 1.5D+2B, 2D+2B"
+    }
   ],
   "notas": [
-    { "titulo": "Precios", "texto": "Precios validados contra portales web en marzo 2026" },
-    { "titulo": "Descuento", "texto": "Descuento 8% es estimación estándar — se ajusta con llamadas a salas de venta" },
-    { "titulo": "La Poza", "texto": "La Poza: superficies brutas inconsistentes, se usa solo útil + terraza" },
-    { "titulo": "Parque Payllahue", "texto": "Parque Payllahue: portal indica precios incluyen est+bod — pendiente confirmar" }
+    {
+      "titulo": "Precios",
+      "texto": "Precios validados contra portales web en marzo 2026"
+    },
+    {
+      "titulo": "Descuento",
+      "texto": "Descuento 8% es estimación estándar — se ajusta con llamadas a salas de venta"
+    },
+    {
+      "titulo": "Natura Pucón — precio 'desde'",
+      "texto": "El portal indica disponibilidad 'desde 3.629 UF'. Las tipologías registradas parten desde 4.848 UF (1D+1B). La diferencia (~1.200 UF) sugiere que el precio portal incluye unidades de menor metraje o tipología estudio no detalladas en la planilla Kant. Pendiente confirmar con sala de ventas."
+    },
+    {
+      "titulo": "La Poza",
+      "texto": "La Poza: superficies brutas inconsistentes, se usa solo útil + terraza"
+    },
+    {
+      "titulo": "Parque Payllahue",
+      "texto": "Parque Payllahue: portal indica precios incluyen est+bod — pendiente confirmar"
+    },
+    {
+      "titulo": "Ponderación orientación",
+      "texto": "Los deltas de orientación son estimaciones preliminares basadas en atributos de vista. Requieren validación con precios reales por piso/orientación una vez disponibles los listados completos de sala de ventas."
+    },
+    {
+      "titulo": "Natura Pucón — precio mínimo portal",
+      "texto": "El portal indica 'desde 3.629 UF', pero las tipologías registradas parten desde 4.848 UF (1D+1B). El precio 'desde' posiblemente corresponde a una tipología studio o 1D sin terraza no relevada en la planilla Kant. Pendiente confirmar con sala de ventas."
+    }
   ]
 }
