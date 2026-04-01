@@ -6,7 +6,7 @@
     "direccion": "Camino al Volcán, Pucón, Araucanía",
     "cliente": "Kant Inmobiliaria",
     "autor": "RW Consulting",
-    "fecha": "2026-03-29",
+    "fecha": "2026-03-30",
     "metodologia": {
       "fuente_precios": "Portales inmobiliarios (Portal Inmobiliario, MercadoLibre, webs oficiales)",
       "criterio_precio": "Precio de lista sin estacionamiento ni bodega",
@@ -21,13 +21,14 @@
     "desarrollador": "Kant Inmobiliaria + RVL Investment",
     "direccion": "Camino al Volcán, Pucón",
     "sector": "Camino al Volcán",
+    "vende": "Dosa Ltda.",
     "distancia_centro_m": 800,
     "pisos": 4,
     "total_unidades": 132,
     "superficie_vendible_m2": 7100,
     "superficie_promedio_m2": 54,
-    "precio_promedio_uf": 4383,
-    "uf_m2_neto_depto": 69.0,
+ 
+    "uf_m2_neto_depto": 81.5,
     "venta_neta_total_uf": 578508,
     "amenities": [
       "Piscina",
@@ -1079,16 +1080,16 @@
       }
     },
     "puqon_posicionamiento": {
-      "uf_m2_propuesto": 69.0,
-      "vs_promedio_1D": "-19%",
-      "vs_promedio_2D": "-22%",
-      "vs_promedio_3D": "-36%",
+      "uf_m2_propuesto": 81.5,
+      "vs_promedio_1D": "-4%",
+      "vs_promedio_2D": "-8%",
+      "vs_promedio_3D": "-24%",
       "competidores_directos_zona": [
         "Parque Payllahue (Camino Volcán Km 1)",
         "Pucón Andino (Camino Volcán 1500)"
       ],
-      "vs_payllahue_1D": "69 vs 75.8 = -9%",
-      "vs_andino_1D": "69 vs 82.6 = -16%"
+      "vs_payllahue_1D": "81.5 vs 75.8 = +8%",
+      "vs_andino_1D": "81.5 vs 82.7 = -1%"
     },
     "por_zona": {
       "centro": {

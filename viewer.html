@@ -37,7 +37,65 @@
   transform: scale(1.08);
   box-shadow: 0 6px 28px rgba(29,106,106,.55);
 }
-#chat-launcher svg { width: 24px; height: 24px; }
+#chat-launcher svg { width: 52px; height: 52px; }
+
+/* ── Anillo pulsante ───────────────────────────────── */
+#chat-launcher::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--teal);
+  animation: chat-ping 2.2s ease-out infinite;
+  z-index: -1;
+}
+@keyframes chat-ping {
+  0%   { transform: scale(1);   opacity: .55; }
+  70%  { transform: scale(1.7); opacity: 0;   }
+  100% { transform: scale(1.7); opacity: 0;   }
+}
+
+/* ── Callout flotante ──────────────────────────────── */
+#chat-callout {
+  position: fixed;
+  bottom: 90px;
+  right: 16px;
+  background: white;
+  border: 1px solid var(--border-solid);
+  border-radius: 12px;
+  padding: 10px 14px;
+  box-shadow: 0 4px 18px rgba(0,0,0,.13);
+  font-size: .82rem;
+  color: var(--text);
+  max-width: 210px;
+  line-height: 1.4;
+  z-index: 8998;
+  display: none;
+  animation: callout-in .3s ease;
+}
+#chat-callout::after {
+  content: '';
+  position: absolute;
+  bottom: -7px;
+  right: 28px;
+  width: 13px; height: 13px;
+  background: white;
+  border-right: 1px solid var(--border-solid);
+  border-bottom: 1px solid var(--border-solid);
+  transform: rotate(45deg);
+}
+#chat-callout-close {
+  position: absolute;
+  top: 5px; right: 8px;
+  background: none; border: none;
+  font-size: .9rem; cursor: pointer;
+  color: var(--text-light);
+  line-height: 1;
+}
+@keyframes callout-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0);   }
+}
 
 /* badge contador mensajes no leídos */
 #chat-badge {
@@ -299,8 +357,36 @@
 
 /* responsive */
 @media (max-width: 480px) {
-  #chat-panel { width: calc(100vw - 24px); right: 12px; bottom: 80px; }
-  #chat-launcher { right: 16px; bottom: 16px; }
+  #chat-panel { width: calc(100vw - 24px); left: 12px; right: 12px; bottom: 80px; }
+
+  /* pill centrado en mobile */
+  #chat-launcher {
+    right: unset;
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    border-radius: 28px;
+    padding: 0 16px 0 20px;
+    gap: 2px;
+    white-space: nowrap;
+  }
+  #chat-launcher:hover { transform: translateX(-50%) scale(1.04); }
+  #chat-launcher svg { display: none; }
+  #chat-launcher::after {
+    content: 'Consultar IA✦';
+    color: white;
+    font-size: .88rem;
+    font-weight: 700;
+    letter-spacing: .4px;
+  }
+  #chat-launcher::before { border-radius: 28px; }
+
+  #chat-callout {
+    right: 12px; left: 12px; max-width: unset;
+    bottom: calc(76px + env(safe-area-inset-bottom, 0px));
+  }
+ 
 }
 </style>
 <style> 
@@ -932,7 +1018,7 @@ canvas { max-height: 260px; }
 <!-- HEADER -->
 <header class="site-header">
   <div class="header-inner">
-    <div class="logo-wrap">
+    <a href="index.html" class="logo-wrap" style="text-decoration:none;">
       <div class="logo-mark">
         <svg viewBox="0 0 20 20" fill="none">
           <rect x="2" y="10" width="4" height="8" fill="white" rx="1"/>
@@ -941,7 +1027,7 @@ canvas { max-height: 260px; }
         </svg>
       </div>
       <div class="brand-name">RW Consulting<span class="brand-dot">.</span></div>
-    </div>
+    </a>
     <div class="header-meta">
       <div class="code" id="hdr-code">Cargando…</div>
       <div class="proyecto-name" id="hdr-proyecto">—</div>
@@ -966,7 +1052,7 @@ canvas { max-height: 260px; }
       <div class="hero-pills" id="hero-pills"></div>
     </div>
     <div class="hero-code">
-      <div class="lbl">Código de acceso</div>
+      <div class="lbl">Código de estudio</div>
       <div class="val" id="hero-code">—</div>
     </div>
   </div>
@@ -1185,6 +1271,7 @@ function renderProyecto(d) {
   if (p.pisos)                ubicRows.push(['Pisos', p.pisos]);
   if (p.estacionamientos)     ubicRows.push(['Estacionamientos', p.estacionamientos]);
   if (p.bodegas)              ubicRows.push(['Bodegas', p.bodegas]);
+  if (p.vende)                ubicRows.push(['Vende', p.vende]);
   if (ubicRows.length) {
     html += `<div class="detail-card">
       <div class="detail-card-title">Datos del proyecto</div>
@@ -1770,12 +1857,17 @@ function setupNavScroll(sections) {
 ════════════════════════════════════════════ -->
 
 <!-- Chat launcher -->
+<div id="chat-callout">
+  <button id="chat-callout-close" aria-label="Cerrar">×</button>
+  ¿Dudas sobre el estudio?<br><strong>Consultá a la IA ✦</strong>
+</div>
 <button id="chat-launcher" title="Consultar IA sobre este estudio" aria-label="Abrir asistente IA">
-  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M12 2C6.48 2 2 6.04 2 11c0 2.65 1.19 5.03 3.09 6.72L4 22l4.74-1.58A10.3 10.3 0 0 0 12 21c5.52 0 10-4.04 10-9S17.52 2 12 2Z" fill="white"/>
-    <circle cx="8.5"  cy="11" r="1.5" fill="#1D6A6A"/>
-    <circle cx="12"   cy="11" r="1.5" fill="#1D6A6A"/>
-    <circle cx="15.5" cy="11" r="1.5" fill="#1D6A6A"/>
+  <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- estrella 4 puntas (spark) -->
+    <path d="M37 9 L38.1 12.9 L42 14 L38.1 15.1 L37 19 L35.9 15.1 L32 14 L35.9 12.9 Z" fill="white" opacity=".9"/>
+    <!-- texto IA centrado en el botón -->
+    <text x="25" y="35" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif"
+          font-size="18" font-weight="800" letter-spacing="1.5" fill="white">IA</text>
   </svg>
   <div id="chat-badge"></div>
 </button>
@@ -1893,6 +1985,24 @@ function setupNavScroll(sections) {
 
   launcher.addEventListener('click', () => chatOpen ? closeChat() : openChat());
   closeBtn.addEventListener('click', closeChat);
+
+  // ── CALLOUT una sola vez por sesión ──────────────────────────────
+  const callout      = document.getElementById('chat-callout');
+  const calloutClose = document.getElementById('chat-callout-close');
+
+  function hideCallout() {
+    callout.style.display = 'none';
+    sessionStorage.setItem('chat-callout-seen', '1');
+  }
+
+  if (!sessionStorage.getItem('chat-callout-seen')) {
+    setTimeout(() => {
+      if (!chatOpen) callout.style.display = 'block';
+    }, 4000);
+  }
+
+  calloutClose.addEventListener('click', e => { e.stopPropagation(); hideCallout(); });
+  launcher.addEventListener('click', hideCallout);
 
   // cerrar con Escape
   document.addEventListener('keydown', e => {
