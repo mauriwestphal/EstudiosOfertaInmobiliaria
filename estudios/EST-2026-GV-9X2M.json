@@ -5,7 +5,7 @@
     "proyecto": "Condominio Barrio Vicuña",
     "direccion": "Heraclio Mena López 1616, Peñaflor, Región Metropolitana",
     "cliente": "Grupo Vías",
-    "autor": "MW Consulting",
+    "autor": "RW Consulting",
     "fecha": "2026-04-01",
     "metodologia": {
       "fuente_precios": "Portales inmobiliarios (Portal Inmobiliario, TocToc, Enlace Inmobiliario, webs oficiales de inmobiliarias)",
@@ -590,19 +590,12 @@
       "delta": -2.0,
       "justificacion": "Menor luminosidad natural, mayor necesidad de calefacción en invierno.",
       "aplica": "Modelo A y B"
-    },
-    {
-      "orientacion": "Sin definir / Pendiente",
-      "codigo": "null",
-      "delta": 0.0,
-      "justificacion": "Pendiente levantamiento en terreno.",
-      "aplica": "Todos los modelos"
     }
   ],
   "notas": [
     {
       "titulo": "Fuente y fecha de precios",
-      "texto": "Los precios de competencia fueron levantados desde Portal Inmobiliario, sitios web oficiales de inmobiliarias (Stanza, Convet, Pocuro, Aconcagua, GPR) y portales de financiamiento (Enlace Inmobiliario, TocToc) durante abril de 2026. Los precios corresponden a valores de lista publicados sin incluir estacionamiento ni bodega."
+      "texto": "Los precios de competencia fueron levantados desde Portal Inmobiliario, sitios web oficiales de inmobiliarias (Stanza, Convet, Pocuro, Aconcagua, GPR) y portales de financiamiento (Enlace Inmobiliario, TocToc) durante abril de 2026."
     },
     {
       "titulo": "Descuento aplicado",
