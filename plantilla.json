@@ -1,0 +1,152 @@
+{
+  "meta": {
+    "codigo": "EST-2026-KI-4V7P",
+    "version_esquema": "2.0",
+    "proyecto": "",
+    "direccion": "",
+    "cliente": "",
+    "autor": "RW Consulting",
+    "fecha": "2026-04-01",
+    "metodologia": {
+      "fuente_precios": "Portales inmobiliarios (Portal Inmobiliario, MercadoLibre, webs oficiales)",
+      "criterio_precio": "Precio de lista sin estacionamiento ni bodega",
+      "descuento_estimado": "8% sobre precio de lista (pendiente validación con salas de venta)",
+      "formula_ufm2": "Valor UF / (Superficie útil + Terraza / 2)",
+      "tipo_proyectos": "Solo proyectos nuevos (excluye usados/reventa)",
+      "orientaciones": "Pendiente levantamiento en terreno"
+    }
+  },
+  "proyecto_evaluado": {
+    "nombre": "",
+    "desarrollador": "",
+    "direccion": "",
+    "sector": "",
+    "vende": "",
+    "distancia_centro_m": null,
+    "pisos": null,
+    "total_unidades": null,
+    "superficie_vendible_m2": null,
+    "superficie_promedio_m2": null,
+    "uf_m2_neto_depto": null,
+    "venta_neta_total_uf": null,
+    "amenities": [],
+    "lat": null,
+    "lng": null,
+    "estacionamientos": null,
+    "bodegas": null,
+    "mix_unidades": [
+      {
+        "tipo": "",
+        "cantidad": null
+      }
+    ]
+  },
+  "competencia": [
+    {
+      "proyecto": "",
+      "direccion": "",
+      "inmobiliaria": "",
+      "zona": "",
+      "sector": "",
+      "distancia_centro_m": null,
+      "estado": "",
+      "pisos": null,
+      "dorms": "",
+      "banos": "",
+      "m2_util": null,
+      "terraza": null,
+      "orientacion": null,
+      "vista_principal": "",
+      "amenities": [],
+      "disponibles": null,
+      "total_unidades": null,
+      "precio_lista_uf": null,
+      "precio_dcto_uf": null,
+      "uf_m2_lista": null,
+      "uf_m2_dcto": null,
+      "estacionamiento_uf": null,
+      "bodega_uf": null,
+      "lat": null,
+      "lng": null,
+      "fuente": ""
+    }
+  ],
+  "resumen_mercado": {
+    "total_proyectos": null,
+    "total_disponibles": null,
+    "rango_uf_m2_lista": {
+      "min": null,
+      "max": null
+    },
+    "rango_uf_m2_dcto": {
+      "min": null,
+      "max": null
+    },
+    "promedio_por_tipologia_dcto": {
+      "1D": {
+        "min": null,
+        "max": null,
+        "promedio": null,
+        "n_proyectos": null
+      },
+      "1.5D": {
+        "min": null,
+        "max": null,
+        "promedio": null,
+        "n_proyectos": null
+      },
+      "2D": {
+        "min": null,
+        "max": null,
+        "promedio": null,
+        "n_proyectos": null
+      },
+      "3D": {
+        "min": null,
+        "max": null,
+        "promedio": null,
+        "n_proyectos": null
+      }
+    },
+    "puqon_posicionamiento": {
+      "uf_m2_propuesto": null,
+      "vs_promedio_1D": "",
+      "vs_promedio_2D": "",
+      "vs_promedio_3D": "",
+      "competidores_directos_zona": [],
+      "comentarios": ""
+    },
+    "por_zona": {}
+  },
+  "ponderacion_orientacion": [
+    {
+      "orientacion": "Norte / Nororiente",
+      "codigo": "N/NE",
+      "delta": null,
+      "justificacion": "",
+      "aplica": "Todos los mix"
+    },
+    {
+      "orientacion": "Oriente",
+      "codigo": "E",
+      "delta": null,
+      "justificacion": "",
+      "aplica": ""
+    },
+    {
+      "orientacion": "Poniente",
+      "codigo": "P",
+      "delta": null,
+      "justificacion": "",
+      "aplica": ""
+    },
+    {
+      "orientacion": "Sur / Suroriente",
+      "codigo": "S/SE",
+      "delta": null,
+      "justificacion": "",
+      "aplica": ""
+    }
+  ],
+  "notas": []
+}

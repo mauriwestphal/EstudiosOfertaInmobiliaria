@@ -1,0 +1,628 @@
+{
+  "meta": {
+    "codigo": "EST-2026-GV-9X2M",
+    "version_esquema": "2.0",
+    "proyecto": "Condominio Barrio Vicuña",
+    "direccion": "Heraclio Mena López 1616, Peñaflor, Región Metropolitana",
+    "cliente": "Grupo Vías",
+    "autor": "MW Consulting",
+    "fecha": "2026-04-01",
+    "metodologia": {
+      "fuente_precios": "Portales inmobiliarios (Portal Inmobiliario, TocToc, Enlace Inmobiliario, webs oficiales de inmobiliarias)",
+      "criterio_precio": "Precio de lista sin estacionamiento ni bodega",
+      "descuento_estimado": "8% sobre precio de lista en competencia (pendiente validación con salas de venta). Proyecto evaluado opera con descuento máximo 7% según planilla interna.",
+      "formula_ufm2": "Valor UF / Superficie útil (casas sin terraza separada)",
+      "tipo_proyectos": "Solo proyectos nuevos (excluye usados/reventa)",
+      "orientaciones": "No aplicable a nivel de proyecto — análisis de orientación por unidad pendiente levantamiento en terreno"
+    }
+  },
+  "proyecto_evaluado": {
+    "nombre": "Condominio Barrio Vicuña",
+    "desarrollador": "Grupo Vías",
+    "direccion": "Heraclio Mena López 1616, Peñaflor, RM",
+    "sector": "Av. Vicuña Mackenna / Centro Peñaflor",
+    "vende": "Grupo Vías",
+    "distancia_centro_m": 600,
+    "pisos": 2,
+    "total_unidades": 20,
+    "superficie_vendible_m2": 1425.0,
+    "superficie_promedio_m2": 71.25,
+    "precio_promedio_uf": 3897,
+    "uf_m2_neto_depto": 54.7,
+    "venta_neta_total_uf": 77940,
+    "amenities": [
+      "Cocina equipada (encimera, horno, campana)",
+      "Cubierta de granito en cocina",
+      "Muebles base y aéreos",
+      "Closets en dormitorios",
+      "Escalera fierro-madera",
+      "Piso gres esmaltado 1er piso",
+      "Piso fotolaminado 2do piso",
+      "Ventanas PVC",
+      "Pasajes cerrados independientes",
+      "Permiso de ampliación aprobado (10.53m2)",
+      "Strip center colindante",
+      "Acceso controlado por pasajes"
+    ],
+    "lat": -33.6064,
+    "lng": -70.8912,
+    "estacionamientos": null,
+    "bodegas": null,
+    "mix_unidades": [
+      {
+        "tipo": "3D+2B",
+        "cantidad": 9,
+        "subtipo": "Modelo A Aislada",
+        "m2_util": 72.31
+      },
+      {
+        "tipo": "3D+2B",
+        "cantidad": 11,
+        "subtipo": "Modelo B Pareada",
+        "m2_util": 70.58
+      }
+    ]
+  },
+  "competencia": [
+    {
+      "proyecto": "Condominio Portofino",
+      "direccion": "Toribio Larraín 2097, Malloco, Peñaflor, RM",
+      "inmobiliaria": "Stanza Inmobiliaria",
+      "zona": "malloco",
+      "sector": "Malloco / acceso autopista del Sol",
+      "distancia_centro_m": 3500,
+      "estado": "Entrega inmediata",
+      "pisos": 2,
+      "dorms": "3D",
+      "banos": "3B",
+      "m2_util": 94.0,
+      "terraza": null,
+      "orientacion": null,
+      "vista_principal": null,
+      "amenities": [
+        "Acceso controlado",
+        "Cocina equipada",
+        "Walk-in closet"
+      ],
+      "disponibles": 6,
+      "total_unidades": 16,
+      "precio_lista_uf": 4949,
+      "precio_dcto_uf": 4553,
+      "uf_m2_lista": 52.6,
+      "uf_m2_dcto": 48.4,
+      "estacionamiento_uf": null,
+      "bodega_uf": null,
+      "lat": -33.6043,
+      "lng": -70.9102,
+      "fuente": "Portal Inmobiliario / Stanza Inmobiliaria"
+    },
+    {
+      "proyecto": "Condominio Mallorca",
+      "direccion": "Avenida Central 310, Centro de Peñaflor, Peñaflor, RM",
+      "inmobiliaria": "Stanza Inmobiliaria",
+      "zona": "penaflor_centro",
+      "sector": "Centro Peñaflor",
+      "distancia_centro_m": 800,
+      "estado": "Pronta entrega",
+      "pisos": 2,
+      "dorms": "3D",
+      "banos": "2B",
+      "m2_util": 65.0,
+      "terraza": null,
+      "orientacion": null,
+      "vista_principal": null,
+      "amenities": [
+        "Acceso controlado",
+        "Cocina equipada",
+        "Logia"
+      ],
+      "disponibles": 12,
+      "total_unidades": 140,
+      "precio_lista_uf": 3249,
+      "precio_dcto_uf": 2989,
+      "uf_m2_lista": 50.0,
+      "uf_m2_dcto": 46.0,
+      "estacionamiento_uf": null,
+      "bodega_uf": null,
+      "lat": -33.6081,
+      "lng": -70.8893,
+      "fuente": "Portal Inmobiliario / Stanza Inmobiliaria"
+    },
+    {
+      "proyecto": "Condominio Mallorca",
+      "direccion": "Avenida Central 310, Centro de Peñaflor, Peñaflor, RM",
+      "inmobiliaria": "Stanza Inmobiliaria",
+      "zona": "penaflor_centro",
+      "sector": "Centro Peñaflor",
+      "distancia_centro_m": 800,
+      "estado": "Pronta entrega",
+      "pisos": 2,
+      "dorms": "3D",
+      "banos": "3B",
+      "m2_util": 84.0,
+      "terraza": null,
+      "orientacion": null,
+      "vista_principal": null,
+      "amenities": [
+        "Acceso controlado",
+        "Cocina equipada",
+        "Logia"
+      ],
+      "disponibles": 2,
+      "total_unidades": 140,
+      "precio_lista_uf": 3624,
+      "precio_dcto_uf": 3334,
+      "uf_m2_lista": 43.1,
+      "uf_m2_dcto": 39.7,
+      "estacionamiento_uf": null,
+      "bodega_uf": null,
+      "lat": -33.6081,
+      "lng": -70.8893,
+      "fuente": "Portal Inmobiliario / Stanza Inmobiliaria"
+    },
+    {
+      "proyecto": "Condominio Los Nogales II",
+      "direccion": "Av. Santa Leonor 600, Padre Hurtado, RM",
+      "inmobiliaria": "Pocuro",
+      "zona": "padre_hurtado",
+      "sector": "El Trébol / acceso Autopista del Sol",
+      "distancia_centro_m": 2500,
+      "estado": "Pronta entrega",
+      "pisos": 2,
+      "dorms": "3D",
+      "banos": "2B",
+      "m2_util": 65.0,
+      "terraza": null,
+      "orientacion": null,
+      "vista_principal": null,
+      "amenities": [
+        "Acceso controlado",
+        "CCTV",
+        "Cocina equipada",
+        "Ventanas PVC termopanel",
+        "Shower door"
+      ],
+      "disponibles": 10,
+      "total_unidades": null,
+      "precio_lista_uf": 3490,
+      "precio_dcto_uf": 3211,
+      "uf_m2_lista": 53.7,
+      "uf_m2_dcto": 49.4,
+      "estacionamiento_uf": null,
+      "bodega_uf": null,
+      "lat": -33.6133,
+      "lng": -70.8642,
+      "fuente": "Portal Inmobiliario / Enlace Inmobiliario / Pocuro"
+    },
+    {
+      "proyecto": "Condominio Los Nogales II",
+      "direccion": "Av. Santa Leonor 600, Padre Hurtado, RM",
+      "inmobiliaria": "Pocuro",
+      "zona": "padre_hurtado",
+      "sector": "El Trébol / acceso Autopista del Sol",
+      "distancia_centro_m": 2500,
+      "estado": "Pronta entrega",
+      "pisos": 2,
+      "dorms": "3D",
+      "banos": "3B",
+      "m2_util": 88.0,
+      "terraza": null,
+      "orientacion": null,
+      "vista_principal": null,
+      "amenities": [
+        "Acceso controlado",
+        "CCTV",
+        "Cocina equipada",
+        "Ventanas PVC termopanel",
+        "Shower door"
+      ],
+      "disponibles": null,
+      "total_unidades": null,
+      "precio_lista_uf": 4800,
+      "precio_dcto_uf": 4416,
+      "uf_m2_lista": 54.5,
+      "uf_m2_dcto": 50.2,
+      "estacionamiento_uf": null,
+      "bodega_uf": null,
+      "lat": -33.6133,
+      "lng": -70.8642,
+      "fuente": "Portal Inmobiliario / Enlace Inmobiliario / Pocuro"
+    },
+    {
+      "proyecto": "Condominio Plaza Nos",
+      "direccion": "Av. Portales 3264, Nos, San Bernardo, RM",
+      "inmobiliaria": "GPR Inmobiliaria",
+      "zona": "san_bernardo_nos",
+      "sector": "Nos / Mall Plaza Sur",
+      "distancia_centro_m": 4500,
+      "estado": "Entrega inmediata",
+      "pisos": 2,
+      "dorms": "3D",
+      "banos": "2B",
+      "m2_util": 56.0,
+      "terraza": null,
+      "orientacion": null,
+      "vista_principal": null,
+      "amenities": [
+        "Acceso controlado",
+        "Zona deportiva",
+        "Cocina equipada",
+        "Ventanas PVC"
+      ],
+      "disponibles": 10,
+      "total_unidades": null,
+      "precio_lista_uf": 3560,
+      "precio_dcto_uf": 3275,
+      "uf_m2_lista": 63.6,
+      "uf_m2_dcto": 58.5,
+      "estacionamiento_uf": null,
+      "bodega_uf": null,
+      "lat": -33.6692,
+      "lng": -70.6831,
+      "fuente": "Portal Inmobiliario / GPR Inmobiliaria"
+    },
+    {
+      "proyecto": "Condominio Los Nogales",
+      "direccion": "Cam. Nos Los Morros 876, Nos, San Bernardo, RM",
+      "inmobiliaria": "Inmobiliaria Aconcagua",
+      "zona": "san_bernardo_nos",
+      "sector": "Nos / Los Morros",
+      "distancia_centro_m": 5500,
+      "estado": "Entrega inmediata",
+      "pisos": 2,
+      "dorms": "3D",
+      "banos": "3B",
+      "m2_util": 70.36,
+      "terraza": null,
+      "orientacion": null,
+      "vista_principal": null,
+      "amenities": [
+        "Acceso controlado",
+        "Cocina equipada",
+        "Áreas verdes"
+      ],
+      "disponibles": 46,
+      "total_unidades": null,
+      "precio_lista_uf": 3790,
+      "precio_dcto_uf": 3487,
+      "uf_m2_lista": 53.9,
+      "uf_m2_dcto": 49.6,
+      "estacionamiento_uf": null,
+      "bodega_uf": null,
+      "lat": -33.6789,
+      "lng": -70.6712,
+      "fuente": "Portal Inmobiliario / Enlace Inmobiliario / Aconcagua"
+    },
+    {
+      "proyecto": "Viñas del Maipo",
+      "direccion": "Rosario 301, Isla de Maipo, RM",
+      "inmobiliaria": "No identificada",
+      "zona": "isla_de_maipo",
+      "sector": "Centro Isla de Maipo",
+      "distancia_centro_m": 500,
+      "estado": "Entrega inmediata",
+      "pisos": 2,
+      "dorms": "3D",
+      "banos": "2B",
+      "m2_util": 60.0,
+      "terraza": null,
+      "orientacion": null,
+      "vista_principal": null,
+      "amenities": [
+        "No detalladas"
+      ],
+      "disponibles": 5,
+      "total_unidades": null,
+      "precio_lista_uf": 3490,
+      "precio_dcto_uf": 3211,
+      "uf_m2_lista": 58.2,
+      "uf_m2_dcto": 53.5,
+      "estacionamiento_uf": null,
+      "bodega_uf": null,
+      "lat": -33.7581,
+      "lng": -70.8948,
+      "fuente": "Portal Inmobiliario (datos limitados, precio estimado desde mercado local)"
+    },
+    {
+      "proyecto": "Convet Barrio Trebulco",
+      "direccion": "Fernando Ochagavía 2220, Centro de Talagante, Talagante, RM",
+      "inmobiliaria": "Convet",
+      "zona": "talagante",
+      "sector": "Centro Talagante",
+      "distancia_centro_m": 400,
+      "estado": "Entrega inmediata",
+      "pisos": 1,
+      "dorms": "3D",
+      "banos": "2B",
+      "m2_util": 58.0,
+      "terraza": null,
+      "orientacion": null,
+      "vista_principal": null,
+      "amenities": [
+        "Áreas verdes 3.400m2",
+        "Juegos infantiles",
+        "Cocina equipada",
+        "Ventanas termopanel PVC"
+      ],
+      "disponibles": null,
+      "total_unidades": null,
+      "precio_lista_uf": 2506,
+      "precio_dcto_uf": 2306,
+      "uf_m2_lista": 43.2,
+      "uf_m2_dcto": 39.8,
+      "estacionamiento_uf": null,
+      "bodega_uf": null,
+      "lat": -33.6645,
+      "lng": -70.9281,
+      "fuente": "Portal Inmobiliario / Convet / Toctoc"
+    },
+    {
+      "proyecto": "Convet Barrio Trebulco",
+      "direccion": "Fernando Ochagavía 2220, Centro de Talagante, Talagante, RM",
+      "inmobiliaria": "Convet",
+      "zona": "talagante",
+      "sector": "Centro Talagante",
+      "distancia_centro_m": 400,
+      "estado": "Entrega inmediata",
+      "pisos": 2,
+      "dorms": "3D",
+      "banos": "2B",
+      "m2_util": 72.0,
+      "terraza": null,
+      "orientacion": null,
+      "vista_principal": null,
+      "amenities": [
+        "Áreas verdes 3.400m2",
+        "Juegos infantiles",
+        "Cocina equipada",
+        "Ventanas termopanel PVC",
+        "Bow window"
+      ],
+      "disponibles": null,
+      "total_unidades": null,
+      "precio_lista_uf": 3550,
+      "precio_dcto_uf": 3266,
+      "uf_m2_lista": 49.3,
+      "uf_m2_dcto": 45.4,
+      "estacionamiento_uf": null,
+      "bodega_uf": null,
+      "lat": -33.6645,
+      "lng": -70.9281,
+      "fuente": "Portal Inmobiliario / Convet / referencia secundaria"
+    },
+    {
+      "proyecto": "Laguna Townhouse",
+      "direccion": "Av. Santa Herminia 291, Laguna del Sol, Padre Hurtado, RM",
+      "inmobiliaria": "CP Index / Manquehue",
+      "zona": "padre_hurtado_laguna",
+      "sector": "Laguna del Sol",
+      "distancia_centro_m": 8000,
+      "estado": "Entrega inmediata",
+      "pisos": 2,
+      "dorms": "3D",
+      "banos": "3B",
+      "m2_util": 75.0,
+      "terraza": null,
+      "orientacion": null,
+      "vista_principal": "Laguna navegable",
+      "amenities": [
+        "Laguna navegable",
+        "Multicanchas",
+        "Acceso controlado",
+        "Cocina equipada"
+      ],
+      "disponibles": 33,
+      "total_unidades": null,
+      "precio_lista_uf": 3681,
+      "precio_dcto_uf": 3387,
+      "uf_m2_lista": 49.1,
+      "uf_m2_dcto": 45.2,
+      "estacionamiento_uf": null,
+      "bodega_uf": null,
+      "lat": -33.6089,
+      "lng": -70.8417,
+      "fuente": "Portal Inmobiliario / Enlace Metropolitano"
+    },
+    {
+      "proyecto": "Llanos de Nos",
+      "direccion": "Lo Cañas - Alto Macul, La Florida, RM",
+      "inmobiliaria": "No identificada",
+      "zona": "la_florida",
+      "sector": "Lo Cañas / Alto Macul",
+      "distancia_centro_m": 12000,
+      "estado": "Entrega inmediata",
+      "pisos": 2,
+      "dorms": "3D",
+      "banos": "2B",
+      "m2_util": 80.0,
+      "terraza": null,
+      "orientacion": null,
+      "vista_principal": null,
+      "amenities": [
+        "No detalladas"
+      ],
+      "disponibles": null,
+      "total_unidades": null,
+      "precio_lista_uf": 5500,
+      "precio_dcto_uf": 5060,
+      "uf_m2_lista": 68.8,
+      "uf_m2_dcto": 63.2,
+      "estacionamiento_uf": null,
+      "bodega_uf": null,
+      "lat": -33.5789,
+      "lng": -70.5501,
+      "fuente": "Portal Inmobiliario (datos limitados, precio estimado desde mercado local La Florida)"
+    },
+    {
+      "proyecto": "Santa Bárbara",
+      "direccion": "San Bernardo, RM",
+      "inmobiliaria": "No identificada",
+      "zona": "san_bernardo",
+      "sector": "San Bernardo",
+      "distancia_centro_m": 3000,
+      "estado": "Entrega inmediata",
+      "pisos": 2,
+      "dorms": "3D",
+      "banos": "2B",
+      "m2_util": 70.0,
+      "terraza": null,
+      "orientacion": null,
+      "vista_principal": null,
+      "amenities": [
+        "No detalladas"
+      ],
+      "disponibles": null,
+      "total_unidades": null,
+      "precio_lista_uf": 3950,
+      "precio_dcto_uf": 3634,
+      "uf_m2_lista": 56.4,
+      "uf_m2_dcto": 51.9,
+      "estacionamiento_uf": null,
+      "bodega_uf": null,
+      "lat": -33.6901,
+      "lng": -70.6952,
+      "fuente": "Portal Inmobiliario (datos parciales)"
+    }
+  ],
+  "resumen_mercado": {
+    "total_proyectos": 10,
+    "total_disponibles": 122,
+    "rango_uf_m2_lista": {
+      "min": 43.1,
+      "max": 68.8
+    },
+    "rango_uf_m2_dcto": {
+      "min": 39.7,
+      "max": 63.2
+    },
+    "promedio_por_tipologia_dcto": {
+      "3D": {
+        "min": 39.7,
+        "max": 63.2,
+        "promedio": 49.3,
+        "n_proyectos": 13
+      }
+    },
+    "vicuna_posicionamiento": {
+      "uf_m2_propuesto": 54.7,
+      "vs_promedio_3D": "11%",
+      "competidores_directos_zona": [
+        "Condominio Portofino (Malloco)",
+        "Condominio Mallorca (Centro Peñaflor)"
+      ],
+      "vs_portofino_3D": "55 vs 48 UF/m² = 13%",
+      "vs_mallorca_terra_3D": "55 vs 46 UF/m² = 19%",
+      "comentarios": "Condominio Vicuña compite directamente con Portofino y Mallorca en Peñaflor. Su precio de lista se posiciona por encima de Mallorca (menor m2) y bajo Portofino (mayor m2 y terminaciones premium). El precio base ofrece margen de descuento hasta 7% según planilla interna, coherente con el mercado."
+    },
+    "por_zona": {
+      "malloco": {
+        "proyectos": 1,
+        "rango_uf_m2": "48.4-48.4 UF/m²",
+        "disponibles": 6
+      },
+      "penaflor_centro": {
+        "proyectos": 1,
+        "rango_uf_m2": "39.7-46.0 UF/m²",
+        "disponibles": 12
+      },
+      "padre_hurtado": {
+        "proyectos": 1,
+        "rango_uf_m2": "49.4-50.2 UF/m²",
+        "disponibles": 10
+      },
+      "san_bernardo_nos": {
+        "proyectos": 2,
+        "rango_uf_m2": "49.6-58.5 UF/m²",
+        "disponibles": 56
+      },
+      "isla_de_maipo": {
+        "proyectos": 1,
+        "rango_uf_m2": "53.5-53.5 UF/m²",
+        "disponibles": 5
+      },
+      "talagante": {
+        "proyectos": 1,
+        "rango_uf_m2": "39.8-45.4 UF/m²",
+        "disponibles": 0
+      },
+      "padre_hurtado_laguna": {
+        "proyectos": 1,
+        "rango_uf_m2": "45.2-45.2 UF/m²",
+        "disponibles": 33
+      },
+      "la_florida": {
+        "proyectos": 1,
+        "rango_uf_m2": "63.2-63.2 UF/m²",
+        "disponibles": 0
+      },
+      "san_bernardo": {
+        "proyectos": 1,
+        "rango_uf_m2": "51.9-51.9 UF/m²",
+        "disponibles": 0
+      }
+    }
+  },
+  "ponderacion_orientacion": [
+    {
+      "orientacion": "Norte / Nororiente",
+      "codigo": "N/NE",
+      "delta": 3.0,
+      "justificacion": "Mayor luminosidad natural en dormitorios y living, reduce consumo de calefacción.",
+      "aplica": "Todos los modelos"
+    },
+    {
+      "orientacion": "Oriente",
+      "codigo": "E",
+      "delta": 1.5,
+      "justificacion": "Sol de mañana en dormitorios, valorado en clima templado del sector.",
+      "aplica": "Modelo A y B"
+    },
+    {
+      "orientacion": "Poniente",
+      "codigo": "P",
+      "delta": 0.5,
+      "justificacion": "Sol de tarde, requiere protección solar adicional en verano.",
+      "aplica": "Modelo A y B"
+    },
+    {
+      "orientacion": "Sur / Suroriente",
+      "codigo": "S/SE",
+      "delta": -2.0,
+      "justificacion": "Menor luminosidad natural, mayor necesidad de calefacción en invierno.",
+      "aplica": "Modelo A y B"
+    },
+    {
+      "orientacion": "Sin definir / Pendiente",
+      "codigo": "null",
+      "delta": 0.0,
+      "justificacion": "Pendiente levantamiento en terreno.",
+      "aplica": "Todos los modelos"
+    }
+  ],
+  "notas": [
+    {
+      "titulo": "Fuente y fecha de precios",
+      "texto": "Los precios de competencia fueron levantados desde Portal Inmobiliario, sitios web oficiales de inmobiliarias (Stanza, Convet, Pocuro, Aconcagua, GPR) y portales de financiamiento (Enlace Inmobiliario, TocToc) durante abril de 2026. Los precios corresponden a valores de lista publicados sin incluir estacionamiento ni bodega."
+    },
+    {
+      "titulo": "Descuento aplicado",
+      "texto": "Se aplica un descuento del 8% sobre precio de lista para calcular precio_dcto_uf en los proyectos de competencia, pendiente validación directa con salas de venta. El proyecto evaluado (Condominio Vicuña) opera con un descuento máximo del 7% sobre precio de lista según planilla interna entregada por el cliente."
+    },
+    {
+      "titulo": "Dato pendiente: m2 exactos de terreno por unidad en competencia",
+      "texto": "Las superficies de terreno por casa no fueron publicadas en detalle para todos los proyectos competidores. Las casas en condominio incluyen terreno privado de dimensiones variables; este factor no está capturado en el UF/m2 útil y puede afectar la comparabilidad directa con proyectos de terrenos amplios."
+    },
+    {
+      "titulo": "Proyectos con datos limitados",
+      "texto": "Los proyectos Viñas del Maipo (Isla de Maipo), Llanos de Nos (La Florida) y Santa Bárbara (San Bernardo) presentaron información incompleta en portales públicos al momento del levantamiento. Los precios y superficies son estimaciones referenciales basadas en proyectos similares de la misma zona. Se recomienda validar directamente con salas de venta antes de usar como referencia de posicionamiento."
+    },
+    {
+      "titulo": "Radio geográfico amplio de la muestra",
+      "texto": "La lista de proyectos cubre un radio amplio (Peñaflor, Padre Hurtado, San Bernardo, Talagante, Isla de Maipo, La Florida), lo que refleja el mercado de casas en condominio del Gran Santiago sur-poniente. Los proyectos más comparables directamente con Condominio Vicuña son Portofino y Mallorca (también en Peñaflor), y en segundo nivel Los Nogales II (Padre Hurtado) y Barrio Trebulco (Talagante), por similitud de tipología y rango de precio."
+    },
+    {
+      "titulo": "Validar descuento con sala de ventas",
+      "texto": "El descuento del 8% aplicado a la competencia es supuesto estándar de metodología. Se recomienda confirmar con llamada directa a salas de venta de Stanza (Portofino/Mallorca), Pocuro (Los Nogales II) y Aconcagua (Los Nogales San Bernardo) antes de la entrega del estudio al cliente."
+    }
+  ]
+}
