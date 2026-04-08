@@ -111,18 +111,18 @@
     flex-direction: column;
     height: 600px;
     max-height: 80vh;
+    position: relative;
   }
 
   .chat-header {
     background: var(--teal);
     color: var(--text-on-teal);
-    padding: 20px 24px;
-    border-bottom: 1px solid var(--teal-dark);
+    padding: 24px 32px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .chat-header h1 {
     font-size: 1.4rem;
-    font-weight: 700;
     margin-bottom: 4px;
   }
 
@@ -131,212 +131,119 @@
     opacity: 0.9;
   }
 
+  /* ── progress bar ── */
+  .progress-bar {
+    height: 3px;
+    background: var(--border-solid);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--teal);
+    border-radius: 2px;
+    transition: width .3s ease;
+    width: 0%;
+  }
+
+  /* ── chat messages ── */
   .chat-messages {
     flex: 1;
+    padding: 24px 32px;
     overflow-y: auto;
-    padding: 24px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
   }
 
   .message {
-    max-width: 85%;
-    padding: 16px 20px;
-    border-radius: 20px;
-    line-height: 1.5;
-    position: relative;
-    animation: fadeIn 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    max-width: 80%;
+    animation: slideIn .2s ease both;
   }
 
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
 
-  .message-agent {
-    background: var(--teal-light);
-    color: var(--deep-ink);
+  .user-message {
+    align-self: flex-end;
+    align-items: flex-end;
+  }
+
+  .assistant-message {
     align-self: flex-start;
-    border-bottom-left-radius: 4px;
+    align-items: flex-start;
   }
 
-  .message-user {
+  .chat-bubble {
+    padding: 12px 16px;
+    border-radius: 16px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    word-wrap: break-word;
+    max-width: 100%;
+  }
+
+  .user-message .chat-bubble {
     background: var(--teal);
     color: var(--text-on-teal);
-    align-self: flex-end;
     border-bottom-right-radius: 4px;
   }
 
-  .message-typing {
-    display: flex;
-    gap: 6px;
-    align-items: center;
-    padding: 16px 20px;
-    background: var(--teal-light);
-    border-radius: 20px;
-    border-bottom-left-radius: 4px;
-    align-self: flex-start;
-    width: fit-content;
-  }
-
-  .typing-dot {
-    width: 8px;
-    height: 8px;
-    background: var(--teal);
-    border-radius: 50%;
-    animation: typing 1.4s infinite ease-in-out;
-  }
-
-  .typing-dot:nth-child(1) { animation-delay: -0.32s; }
-  .typing-dot:nth-child(2) { animation-delay: -0.16s; }
-
-  @keyframes typing {
-    0%, 80%, 100% { transform: scale(0.8); opacity: 0.5; }
-    40% { transform: scale(1); opacity: 1; }
-  }
-
-  /* ── options ── */
-  .options-container {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-top: 16px;
-  }
-
-  .option-button {
-    background: var(--white);
-    border: 2px solid var(--border-solid);
-    border-radius: 12px;
-    padding: 16px 20px;
-    text-align: left;
-    font-family: 'Urbanist', sans-serif;
-    font-size: 1rem;
+  .assistant-message .chat-bubble {
+    background: var(--mist);
+    border: 1px solid var(--border-solid);
     color: var(--text-primary);
-    cursor: pointer;
-    transition: all 0.2s ease;
+    border-bottom-left-radius: 4px;
   }
 
-  .option-button:hover {
-    border-color: var(--teal);
-    background: var(--teal-light);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-sm);
-  }
-
-  .option-button:active {
-    transform: translateY(0);
-  }
-
-  /* Summary container */
-  .summary-container {
-    background: var(--warm-light);
-    border: 1px solid var(--warm);
-    border-radius: 12px;
-    padding: 20px;
-    margin-top: 10px;
-  }
-
-  .summary-container h3 {
-    color: var(--deep-ink);
-    margin-bottom: 15px;
-    font-size: 1.2rem;
-    border-bottom: 2px solid var(--teal);
-    padding-bottom: 8px;
-  }
-
-  .summary-content {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-
-  .summary-field {
+  /* ── suggestion chips ── */
+  .suggestions-container {
+    padding: 12px 20px;
+    border-top: 1px solid var(--border-solid);
     display: flex;
     flex-wrap: wrap;
-    gap: 5px;
-    padding: 8px 0;
-    border-bottom: 1px solid var(--warm);
+    gap: 8px;
   }
 
-  .summary-field:last-child {
-    border-bottom: none;
-  }
-
-  .summary-field strong {
-    color: var(--deep-ink);
-    min-width: 180px;
-  }
-
-  .summary-field span {
-    color: var(--ink);
-    flex: 1;
-  }
-
-  .generate-button {
-    background: var(--teal);
-    color: var(--text-on-teal);
-    border: none;
-    padding: 14px 28px;
-    border-radius: 12px;
-    font-size: 1rem;
-    font-weight: 600;
+  .suggestion-chip {
+    display: inline-block;
+    padding: 8px 16px;
+    border: 1.5px solid var(--teal);
+    border-radius: 100px;
+    color: var(--teal);
+    background: var(--white);
     cursor: pointer;
-    transition: all 0.2s ease;
-    width: 100%;
-    margin-top: 10px;
+    font-size: 0.85rem;
+    transition: all .15s;
   }
 
-  .generate-button:hover {
-    background: var(--teal-dark);
-    transform: translateY(-2px);
+  .suggestion-chip:hover {
+    background: var(--teal);
+    color: white;
   }
 
-  .generate-button:disabled {
-    background: var(--ink-light);
-    cursor: not-allowed;
-    transform: none;
-  }
-
-  .success-message,
-  .error-message {
-    background: var(--warm-light);
-    border: 1px solid var(--warm);
-    border-radius: 12px;
-    padding: 20px;
-    margin-top: 10px;
-  }
-
-  .success-message h3 {
-    color: var(--teal-dark);
-    margin-bottom: 10px;
-  }
-
-  .error-message h3 {
-    color: #dc2626;
-    margin-bottom: 10px;
-  }
-
-  .info-text {
-    font-size: 0.9rem;
-    color: var(--ink);
-    margin-top: 10px;
-    font-style: italic;
-  }
-
-  /* Loading indicator */
+  /* ── typing indicator ── */
   .loading-indicator {
-    background: var(--warm-light);
-    border-top: 1px solid var(--border-solid);
-    padding: 20px 24px;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: var(--mist);
+    border: 1px solid var(--border-solid);
+    border-radius: 16px;
+    border-bottom-left-radius: 4px;
+    width: fit-content;
+    margin: 0 32px 16px;
   }
 
   .typing-dots {
-    display: inline-flex;
+    display: flex;
     gap: 4px;
-    margin-bottom: 8px;
   }
 
   .typing-dots span {
@@ -344,22 +251,39 @@
     height: 8px;
     background: var(--teal);
     border-radius: 50%;
-    animation: typing 1.4s infinite ease-in-out;
+    opacity: 0.4;
+    animation: typingDot 1.2s infinite;
   }
 
-  .typing-dots span:nth-child(1) { animation-delay: -0.32s; }
-  .typing-dots span:nth-child(2) { animation-delay: -0.16s; }
+  .typing-dots span:nth-child(2) {
+    animation-delay: 0.2s;
+  }
 
-  @keyframes typing {
-    0%, 80%, 100% { transform: scale(0); }
-    40% { transform: scale(1); }
+  .typing-dots span:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+
+  @keyframes typingDot {
+    0%, 80%, 100% {
+      opacity: 0.4;
+      transform: scale(1);
+    }
+    40% {
+      opacity: 1;
+      transform: scale(1.3);
+    }
+  }
+
+  .loading-indicator p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
   }
 
   /* ── input area ── */
   .chat-input-area {
     border-top: 1px solid var(--border-solid);
-    padding: 20px 24px;
-    background: var(--mist);
+    padding: 20px 32px;
+    background: var(--white);
   }
 
   .input-wrapper {
@@ -369,21 +293,19 @@
 
   .chat-input {
     flex: 1;
-    padding: 16px 20px;
-    border: 2px solid var(--border-solid);
+    padding: 12px 16px;
+    border: 1px solid var(--border-solid);
     border-radius: 12px;
     font-family: 'Urbanist', sans-serif;
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: var(--text-primary);
-    background: var(--white);
+    background: var(--mist);
     resize: none;
-    min-height: 56px;
-    max-height: 120px;
-    line-height: 1.5;
+    outline: none;
+    transition: border-color 0.2s ease;
   }
 
   .chat-input:focus {
-    outline: none;
     border-color: var(--teal);
     box-shadow: 0 0 0 3px rgba(29, 106, 106, 0.1);
   }
@@ -393,9 +315,9 @@
     color: var(--text-on-teal);
     border: none;
     border-radius: 12px;
-    padding: 0 24px;
+    padding: 12px 24px;
     font-family: 'Urbanist', sans-serif;
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 500;
     cursor: pointer;
     transition: background 0.2s ease;
@@ -411,80 +333,36 @@
     cursor: not-allowed;
   }
 
-  /* ── summary view ── */
-  .summary-container {
-    background: var(--warm-light);
-    border: 2px solid var(--warm);
-    border-radius: 16px;
-    padding: 24px;
-    margin-top: 20px;
-  }
-
-  .summary-container h3 {
-    color: var(--warm-dark);
-    margin-bottom: 16px;
-    font-size: 1.2rem;
-  }
-
-  .summary-item {
-    margin-bottom: 12px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid rgba(196, 154, 60, 0.2);
-  }
-
-  .summary-item:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-    padding-bottom: 0;
-  }
-
-  .summary-label {
-    font-weight: 500;
-    color: var(--warm-dark);
-    display: block;
-    margin-bottom: 4px;
-  }
-
-  .summary-value {
-    color: var(--deep-ink);
-  }
-
-  .summary-actions {
-    display: flex;
-    gap: 12px;
-    margin-top: 24px;
-  }
-
-  .action-button {
-    flex: 1;
+  /* ── generate button ── */
+  .generate-button {
+    width: 100%;
     padding: 16px;
+    background: var(--warm);
+    color: var(--warm-dark);
+    border: none;
     border-radius: 12px;
     font-family: 'Urbanist', sans-serif;
     font-size: 1rem;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
-    border: none;
-    transition: all 0.2s ease;
+    transition: background 0.2s ease;
+    margin-top: 16px;
   }
 
-  .action-confirm {
-    background: var(--teal);
-    color: var(--text-on-teal);
+  .generate-button:hover {
+    background: var(--warm-dark);
+    color: white;
   }
 
-  .action-confirm:hover {
-    background: var(--teal-dark);
+  .generate-button:disabled {
+    background: var(--text-muted);
+    cursor: not-allowed;
   }
 
-  .action-edit {
-    background: var(--white);
-    color: var(--text-primary);
-    border: 2px solid var(--border-solid);
-  }
-
-  .action-edit:hover {
-    border-color: var(--teal);
-    background: var(--teal-light);
+  /* ── focus visible para accesibilidad ── */
+  :focus-visible {
+    outline: 2px solid var(--teal);
+    outline-offset: 2px;
   }
 
   /* ── status messages ── */
@@ -555,27 +433,14 @@
       padding: 16px;
     }
 
-    .summary-actions {
-      flex-direction: column;
+    .suggestions-container {
+      padding: 10px 16px;
     }
-  }
 
-  /* Chips de sugerencia */
-  .suggestion-chip {
-    display: inline-block;
-    padding: 6px 14px;
-    border: 1.5px solid var(--teal);
-    border-radius: 100px;
-    color: var(--teal);
-    background: var(--white);
-    cursor: pointer;
-    font-size: .82rem;
-    margin: 4px;
-    transition: all .15s;
-  }
-  .suggestion-chip:hover {
-    background: var(--teal);
-    color: white;
+    .suggestion-chip {
+      padding: 6px 12px;
+      font-size: 0.8rem;
+    }
   }
 
   /* ── utility ── */
@@ -604,8 +469,8 @@
       </div>
 
       <!-- Barra de progreso -->
-      <div class="progress-wrap" style="background: var(--border-solid); height: 4px; width: 100%;">
-        <div class="progress-fill" id="progress-fill" style="height: 100%; background: var(--teal); width: 0%; transition: width .4s ease;"></div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progress-fill"></div>
       </div>
 
       <div class="chat-messages" id="chat-container">
@@ -613,7 +478,7 @@
       </div>
 
       <!-- Contenedor de sugerencias -->
-      <div class="suggestions-container" id="suggestions-container" style="display: none; padding: 12px 20px; border-top: 1px solid var(--border-solid);"></div>
+      <div class="suggestions-container" id="suggestions-container" style="display: none;"></div>
 
       <div class="loading-indicator" id="loading-indicator" style="display: none;">
         <div class="typing-dots">
@@ -630,7 +495,7 @@
           <button class="send-button" id="send-button">Enviar</button>
         </div>
         <!-- Botón de generar estudio (oculto inicialmente) -->
-        <button class="generate-button" id="generate-button" style="display: none; margin-top: 16px;">Generar estudio</button>
+        <button class="generate-button hidden" id="generate-button">Generar estudio</button>
       </div>
     </div>
 

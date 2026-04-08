@@ -201,30 +201,7 @@ async function generateStudy() {
     const result = await response.json();
     
     if (result.success) {
-      // Mostrar éxito
-      const successDiv = document.createElement('div');
-      successDiv.className = 'success-message';
-      
-      const successTitle = document.createElement('h3');
-      successTitle.textContent = '✅ Estudio generado correctamente';
-      successDiv.appendChild(successTitle);
-      
-      const successText = document.createElement('p');
-      successText.textContent = `Tu estudio ha sido generado con el código: ${result.codigo}`;
-      successDiv.appendChild(successText);
-      
-      const infoText = document.createElement('p');
-      infoText.className = 'info-text';
-      infoText.textContent = 'El estudio está pendiente de revisión. Te contactaremos por email cuando esté listo.';
-      successDiv.appendChild(infoText);
-      
-      // Agregar al chat
-      const messageDiv = document.createElement('div');
-      messageDiv.className = 'message assistant-message';
-      messageDiv.appendChild(successDiv);
-      chatContainer.appendChild(messageDiv);
-      scrollToBottom();
-      
+      showSuccessMessage(result.codigo);
       // Remover botón de generar
       generateButton.remove();
     } else {
@@ -233,30 +210,72 @@ async function generateStudy() {
     
   } catch (error) {
     console.error('Error generating study:', error);
-    
-    // Mostrar error
-    const errorDiv = document.createElement('div');
-    errorDiv.className = 'error-message';
-    
-    const errorTitle = document.createElement('h3');
-    errorTitle.textContent = '❌ Error al generar el estudio';
-    errorDiv.appendChild(errorTitle);
-    
-    const errorText = document.createElement('p');
-    errorText.textContent = 'Hubo un error al generar tu estudio. Por favor, intenta de nuevo o contacta a soporte.';
-    errorDiv.appendChild(errorText);
-    
-    // Agregar al chat
-    const messageDiv = document.createElement('div');
-    messageDiv.className = 'message assistant-message';
-    messageDiv.appendChild(errorDiv);
-    chatContainer.appendChild(messageDiv);
-    scrollToBottom();
-    
+    showErrorMessage();
     // Rehabilitar botón
     generateButton.disabled = false;
     generateButton.textContent = 'Generar estudio';
   }
+}
+
+function showSuccessMessage(codigo) {
+  // Mostrar éxito
+  const successDiv = document.createElement('div');
+  successDiv.className = 'message assistant-message';
+  
+  const bubble = document.createElement('div');
+  bubble.className = 'chat-bubble';
+  
+  const successTitle = document.createElement('h3');
+  successTitle.textContent = '✅ Estudio generado correctamente';
+  successTitle.style.marginBottom = '8px';
+  successTitle.style.color = 'var(--teal)';
+  bubble.appendChild(successTitle);
+  
+  const successText = document.createElement('p');
+  successText.textContent = `Tu estudio ha sido generado con el código: ${codigo}`;
+  successText.style.marginBottom = '8px';
+  successText.style.fontWeight = '500';
+  bubble.appendChild(successText);
+  
+  const infoText = document.createElement('p');
+  infoText.textContent = 'El estudio está pendiente de revisión. Te contactaremos por email cuando esté listo.';
+  infoText.style.fontSize = '0.85rem';
+  infoText.style.color = 'var(--text-secondary)';
+  bubble.appendChild(infoText);
+  
+  successDiv.appendChild(bubble);
+  chatContainer.appendChild(successDiv);
+  scrollToBottom();
+}
+
+function showErrorMessage() {
+  // Mostrar error
+  const errorDiv = document.createElement('div');
+  errorDiv.className = 'message assistant-message';
+  
+  const bubble = document.createElement('div');
+  bubble.className = 'chat-bubble';
+  
+  const errorTitle = document.createElement('h3');
+  errorTitle.textContent = '❌ Error al generar el estudio';
+  errorTitle.style.marginBottom = '8px';
+  errorTitle.style.color = 'var(--warm-dark)';
+  bubble.appendChild(errorTitle);
+  
+  const errorText = document.createElement('p');
+  errorText.textContent = 'Hubo un error al generar tu estudio. Por favor, intenta de nuevo o contacta a soporte.';
+  errorText.style.marginBottom = '8px';
+  bubble.appendChild(errorText);
+  
+  const contactText = document.createElement('p');
+  contactText.textContent = 'Si el problema persiste, contáctanos en contacto@rwconsulting.cl';
+  contactText.style.fontSize = '0.85rem';
+  contactText.style.color = 'var(--text-secondary)';
+  bubble.appendChild(contactText);
+  
+  errorDiv.appendChild(bubble);
+  chatContainer.appendChild(errorDiv);
+  scrollToBottom();
 }
 
 // ── UI Helpers ───────────────────────────────────────────────────
@@ -312,7 +331,7 @@ function clearSuggestions() {
 function showGenerateButton() {
   if (!generateButton) return;
   
-  generateButton.style.display = 'block';
+  generateButton.classList.remove('hidden');
   
   // Agregar mensaje del asistente
   addMessage('assistant', '¡Perfecto! Ya tengo toda la información necesaria. Puedes generar tu estudio ahora.');
