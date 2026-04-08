@@ -1,373 +1,364 @@
+// RW Consulting — Formulario conversacional inteligente
+// Usa IA para analizar respuestas y determinar qué información falta
+
 // State management
 const state = {
-  currentStep: 0,
-  studyType: null,
-  collectedData: {},
-  isTyping: false
+  messages: [
+    { role: 'assistant', content: 'Hola, soy el asistente de RW Consulting. ¿Qué tipo de estudio necesitas?' }
+  ],
+  currentData: {
+    tipo: null,
+    datos: {}
+  },
+  isTyping: false,
+  isComplete: false
 };
 
-// Conversation flow definition
-const conversationFlow = [
-  // Step 0: Welcome and study type selection
-  {
-    type: 'agent',
-    content: 'Hola, soy el asistente de RW Consulting. ¿Qué tipo de estudio necesitas?',
-    options: [
-      { text: 'Tengo un proyecto por construir y quiero saber cómo posicionar precios', value: 'tipo1' },
-      { text: 'Tengo un proyecto activo y quiero compararlo con el mercado', value: 'tipo2' }
-    ]
-  },
-  // Step 1: Project name (both types)
-  {
-    type: 'agent',
-    content: 'Perfecto. ¿Cuál es el nombre del proyecto?',
-    field: 'nombre_proyecto'
-  },
-  // Step 2: Address or sector
-  {
-    type: 'agent',
-    content: '¿En qué dirección o sector se emplazará el proyecto?',
-    field: 'direccion'
-  },
-  // Step 3: Real estate company/developer
-  {
-    type: 'agent',
-    content: '¿Nombre de la inmobiliaria o desarrollador?',
-    field: 'inmobiliaria'
-  },
-  // Step 4: Typologies (Tipo 1) or Price list (Tipo 2)
-  {
-    type: 'conditional',
-    condition: (state) => state.studyType === 'tipo1',
-    content: 'Describe las tipologías planificadas (ej: "30 departamentos 2D+2B de 55m2 y 20 de 1D+1B de 38m2")',
-    field: 'tipologias'
-  },
-  {
-    type: 'conditional',
-    condition: (state) => state.studyType === 'tipo2',
-    content: 'Describe la lista de precios actual (distribución, orientación, m2 útil, terraza, precio en UF)',
-    field: 'precios_propios'
-  },
-  // Step 5: Amenities
-  {
-    type: 'agent',
-    content: '¿Qué amenities incluirá el proyecto?',
-    field: 'amenities'
-  },
-  // Step 6: Competition
-  {
-    type: 'agent',
-    content: '¿Qué proyectos de la competencia quieres comparar? (nombres, sectores)',
-    field: 'competencia'
-  },
-  // Step 7: Contact name
-  {
-    type: 'agent',
-    content: '¿Tu nombre completo?',
-    field: 'contacto_nombre'
-  },
-  // Step 8: Contact email
-  {
-    type: 'agent',
-    content: '¿Tu email?',
-    field: 'contacto_email',
-    validation: (value) => {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      return emailRegex.test(value) || 'Por favor ingresa un email válido';
+// DOM elements
+const chatContainer = document.getElementById('chat-container');
+const userInput = document.getElementById('user-input');
+const sendButton = document.getElementById('send-button');
+const loadingIndicator = document.getElementById('loading-indicator');
+
+// Initialize chat
+function initChat() {
+  renderMessages();
+  userInput.focus();
+  
+  // Event listeners
+  sendButton.addEventListener('click', handleUserMessage);
+  userInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleUserMessage();
     }
-  },
-  // Step 9: Summary and confirmation
-  {
-    type: 'summary',
-    content: 'Revisa los datos recopilados:'
+  });
+}
+
+// Render all messages
+function renderMessages() {
+  chatContainer.innerHTML = '';
+  
+  state.messages.forEach((msg, index) => {
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `message ${msg.role}-message`;
+    
+    const contentDiv = document.createElement('div');
+    contentDiv.className = 'message-content';
+    contentDiv.textContent = msg.content;
+    
+    messageDiv.appendChild(contentDiv);
+    
+    // Add options for assistant messages with options
+    if (msg.role === 'assistant' && msg.options) {
+      const optionsDiv = document.createElement('div');
+      optionsDiv.className = 'message-options';
+      
+      msg.options.forEach(option => {
+        const button = document.createElement('button');
+        button.className = 'option-button';
+        button.textContent = option.text;
+        button.addEventListener('click', () => {
+          handleOptionSelection(option.value);
+        });
+        optionsDiv.appendChild(button);
+      });
+      
+      messageDiv.appendChild(optionsDiv);
+    }
+    
+    chatContainer.appendChild(messageDiv);
+  });
+  
+  // Scroll to bottom
+  chatContainer.scrollTop = chatContainer.scrollHeight;
+}
+
+// Handle user message
+async function handleUserMessage() {
+  const userMessage = userInput.value.trim();
+  if (!userMessage || state.isTyping || state.isComplete) return;
+  
+  // Add user message to state
+  state.messages.push({ role: 'user', content: userMessage });
+  renderMessages();
+  
+  // Clear input
+  userInput.value = '';
+  
+  // Show typing indicator
+  state.isTyping = true;
+  loadingIndicator.style.display = 'block';
+  
+  try {
+    // Send to AI for analysis
+    const response = await analyzeConversation(userMessage);
+    
+    // Process AI response
+    if (response.success) {
+      // Update current data with extracted data
+      if (response.extracted_data) {
+        Object.assign(state.currentData.datos, response.extracted_data);
+      }
+      
+      // Add AI response to messages
+      state.messages.push({ 
+        role: 'assistant', 
+        content: response.next_question 
+      });
+      
+      // Check if conversation is complete
+      if (response.is_complete) {
+        state.isComplete = true;
+        // Show summary and generate button
+        showSummaryAndGenerate();
+      }
+    } else {
+      // Handle error
+      state.messages.push({ 
+        role: 'assistant', 
+        content: 'Lo siento, hubo un error al procesar tu mensaje. Por favor, intenta de nuevo.' 
+      });
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    state.messages.push({ 
+      role: 'assistant', 
+      content: 'Lo siento, hubo un error de conexión. Por favor, intenta de nuevo.' 
+    });
+  } finally {
+    // Hide typing indicator
+    state.isTyping = false;
+    loadingIndicator.style.display = 'none';
+    renderMessages();
   }
+}
+
+// Handle option selection (for study type)
+async function handleOptionSelection(value) {
+  if (value === 'tipo1' || value === 'tipo2') {
+    state.currentData.tipo = value;
+    
+    // Add user selection to messages
+    state.messages.push({ 
+      role: 'user', 
+      content: value === 'tipo1' 
+        ? 'Tengo un proyecto por construir y quiero saber cómo posicionar precios' 
+        : 'Tengo un proyecto activo y quiero compararlo con el mercado' 
+    });
+    
+    // Analyze conversation with the new context
+    state.isTyping = true;
+    loadingIndicator.style.display = 'block';
+    
+    try {
+      const response = await analyzeConversation('');
+      
+      if (response.success) {
+        state.messages.push({ 
+          role: 'assistant', 
+          content: response.next_question 
+        });
+      }
+    } catch (error) {
+      state.messages.push({ 
+        role: 'assistant', 
+        content: 'Por favor, cuéntame más sobre tu proyecto.' 
+      });
+    } finally {
+      state.isTyping = false;
+      loadingIndicator.style.display = 'none';
+      renderMessages();
+    }
+  }
+}
+
+// Analyze conversation with AI
+async function analyzeConversation(userMessage) {
+  // Prepare messages for analysis (last 5 messages for context)
+  const recentMessages = [...state.messages];
+  if (userMessage) {
+    recentMessages.push({ role: 'user', content: userMessage });
+  }
+  
+  const response = await fetch('https://rw-intake.rw-consulting.workers.dev/analyze', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      messages: recentMessages.slice(-5), // Last 5 messages for context
+      currentData: state.currentData
+    })
+  });
+  
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+  
+  return await response.json();
+}
+
+// Show summary and generate button
+function showSummaryAndGenerate() {
+  const summaryDiv = document.createElement('div');
+  summaryDiv.className = 'summary-container';
+  
+  const summaryTitle = document.createElement('h3');
+  summaryTitle.textContent = 'Resumen del estudio';
+  summaryDiv.appendChild(summaryTitle);
+  
+  const summaryContent = document.createElement('div');
+  summaryContent.className = 'summary-content';
+  
+  // Add summary of collected data
+  const fields = [
+    { key: 'nombre_proyecto', label: 'Nombre del proyecto:' },
+    { key: 'direccion', label: 'Dirección/Sector:' },
+    { key: 'inmobiliaria', label: 'Inmobiliaria/Desarrollador:' },
+    { key: 'tipologias', label: 'Tipologías:' },
+    { key: 'amenities', label: 'Amenities:' },
+    { key: 'competencia', label: 'Competencia:' },
+    { key: 'contacto_nombre', label: 'Tu nombre:' },
+    { key: 'contacto_email', label: 'Tu email:' }
+  ];
+  
+  fields.forEach(field => {
+    if (state.currentData.datos[field.key]) {
+      const fieldDiv = document.createElement('div');
+      fieldDiv.className = 'summary-field';
+      
+      const label = document.createElement('strong');
+      label.textContent = field.label;
+      
+      const value = document.createElement('span');
+      value.textContent = state.currentData.datos[field.key];
+      
+      fieldDiv.appendChild(label);
+      fieldDiv.appendChild(document.createTextNode(' '));
+      fieldDiv.appendChild(value);
+      summaryContent.appendChild(fieldDiv);
+    }
+  });
+  
+  summaryDiv.appendChild(summaryContent);
+  
+  // Add generate button
+  const generateButton = document.createElement('button');
+  generateButton.id = 'generate-button';
+  generateButton.className = 'generate-button';
+  generateButton.textContent = 'Generar estudio';
+  generateButton.addEventListener('click', generateStudy);
+  
+  summaryDiv.appendChild(generateButton);
+  
+  // Add to chat
+  const messageDiv = document.createElement('div');
+  messageDiv.className = 'message assistant-message';
+  messageDiv.appendChild(summaryDiv);
+  
+  chatContainer.appendChild(messageDiv);
+  chatContainer.scrollTop = chatContainer.scrollHeight;
+}
+
+// Generate study
+async function generateStudy() {
+  const generateButton = document.getElementById('generate-button');
+  if (!generateButton) return;
+  
+  // Disable button and show loading
+  generateButton.disabled = true;
+  generateButton.textContent = 'Generando...';
+  
+  // Add required fields if missing
+  if (!state.currentData.datos.contacto_nombre) {
+    state.currentData.datos.contacto_nombre = 'Cliente';
+  }
+  
+  if (!state.currentData.datos.contacto_email) {
+    state.currentData.datos.contacto_email = 'cliente@ejemplo.cl';
+  }
+  
+  try {
+    const response = await fetch('https://rw-intake.rw-consulting.workers.dev/generate', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(state.currentData)
+    });
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
+    const result = await response.json();
+    
+    if (result.success) {
+      // Show success message
+      const successDiv = document.createElement('div');
+      successDiv.className = 'success-message';
+      
+      const successTitle = document.createElement('h3');
+      successTitle.textContent = '✅ Estudio generado correctamente';
+      successDiv.appendChild(successTitle);
+      
+      const successText = document.createElement('p');
+      successText.textContent = `Tu estudio ha sido generado con el código: ${result.codigo}`;
+      successDiv.appendChild(successText);
+      
+      const infoText = document.createElement('p');
+      infoText.className = 'info-text';
+      infoText.textContent = 'El estudio está pendiente de revisión. Te contactaremos por email cuando esté listo.';
+      successDiv.appendChild(infoText);
+      
+      // Add to chat
+      const messageDiv = document.createElement('div');
+      messageDiv.className = 'message assistant-message';
+      messageDiv.appendChild(successDiv);
+      
+      chatContainer.appendChild(messageDiv);
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+      
+      // Remove generate button
+      generateButton.remove();
+    } else {
+      throw new Error(result.error || 'Error desconocido');
+    }
+  } catch (error) {
+    console.error('Error generating study:', error);
+    
+    // Show error message
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'error-message';
+    
+    const errorTitle = document.createElement('h3');
+    errorTitle.textContent = '❌ Error al generar el estudio';
+    errorDiv.appendChild(errorTitle);
+    
+    const errorText = document.createElement('p');
+    errorText.textContent = 'Hubo un error al generar tu estudio. Por favor, intenta de nuevo o contacta a soporte.';
+    errorDiv.appendChild(errorText);
+    
+    // Add to chat
+    const messageDiv = document.createElement('div');
+    messageDiv.className = 'message assistant-message';
+    messageDiv.appendChild(errorDiv);
+    
+    chatContainer.appendChild(messageDiv);
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+    
+    // Re-enable button
+    generateButton.disabled = false;
+    generateButton.textContent = 'Generar estudio';
+  }
+}
+
+// Add initial options to first message
+state.messages[0].options = [
+  { text: 'Tengo un proyecto por construir y quiero saber cómo posicionar precios', value: 'tipo1' },
+  { text: 'Tengo un proyecto activo y quiero compararlo con el mercado', value: 'tipo2' }
 ];
 
-// DOM elements
-const chatMessages = document.getElementById('chatMessages');
-const chatInput = document.getElementById('chatInput');
-const sendButton = document.getElementById('sendButton');
-const statusMessage = document.getElementById('statusMessage');
-const chatContainer = document.querySelector('.chat-container');
-
-// Initialize conversation
-function initConversation() {
-  state.currentStep = 0;
-  state.studyType = null;
-  state.collectedData = {};
-  chatMessages.innerHTML = '';
-  statusMessage.classList.add('hidden');
-  chatContainer.classList.remove('hidden');
-  showNextStep();
-}
-
-// Show next step in conversation
-function showNextStep() {
-  const step = conversationFlow[state.currentStep];
-  
-  if (step.type === 'conditional') {
-    if (!step.condition(state)) {
-      state.currentStep++;
-      showNextStep();
-      return;
-    }
-  }
-
-  if (step.type === 'summary') {
-    showSummary();
-    return;
-  }
-
-  showTypingIndicator(() => {
-    addMessage('agent', step.content);
-    
-    if (step.options) {
-      showOptions(step.options);
-    } else {
-      enableInput();
-    }
-  });
-}
-
-// Show typing indicator
-function showTypingIndicator(callback) {
-  state.isTyping = true;
-  const typingDiv = document.createElement('div');
-  typingDiv.className = 'message-typing';
-  typingDiv.innerHTML = `
-    <div class="typing-dot"></div>
-    <div class="typing-dot"></div>
-    <div class="typing-dot"></div>
-  `;
-  chatMessages.appendChild(typingDiv);
-  chatMessages.scrollTop = chatMessages.scrollHeight;
-
-  setTimeout(() => {
-    chatMessages.removeChild(typingDiv);
-    state.isTyping = false;
-    callback();
-  }, 1000);
-}
-
-// Add message to chat
-function addMessage(sender, content) {
-  const messageDiv = document.createElement('div');
-  messageDiv.className = `message message-${sender}`;
-  messageDiv.textContent = content;
-  chatMessages.appendChild(messageDiv);
-  chatMessages.scrollTop = chatMessages.scrollHeight;
-}
-
-// Show option buttons
-function showOptions(options) {
-  const optionsContainer = document.createElement('div');
-  optionsContainer.className = 'options-container';
-  
-  options.forEach(option => {
-    const button = document.createElement('button');
-    button.className = 'option-button';
-    button.textContent = option.text;
-    button.onclick = () => handleOptionSelect(option.value);
-    optionsContainer.appendChild(button);
-  });
-  
-  chatMessages.appendChild(optionsContainer);
-  chatMessages.scrollTop = chatMessages.scrollHeight;
-}
-
-// Handle option selection
-function handleOptionSelect(value) {
-  if (state.currentStep === 0) {
-    state.studyType = value;
-  }
-  
-  const step = conversationFlow[state.currentStep];
-  if (step.field) {
-    state.collectedData[step.field] = value;
-  }
-  
-  addMessage('user', getOptionText(value));
-  removeOptions();
-  state.currentStep++;
-  showNextStep();
-}
-
-// Get option text for display
-function getOptionText(value) {
-  const step = conversationFlow[state.currentStep];
-  if (!step.options) return value;
-  
-  const option = step.options.find(opt => opt.value === value);
-  return option ? option.text : value;
-}
-
-// Remove option buttons
-function removeOptions() {
-  const optionsContainer = chatMessages.querySelector('.options-container');
-  if (optionsContainer) {
-    chatMessages.removeChild(optionsContainer);
-  }
-}
-
-// Enable text input
-function enableInput() {
-  chatInput.disabled = false;
-  sendButton.disabled = false;
-  chatInput.focus();
-}
-
-// Disable text input
-function disableInput() {
-  chatInput.disabled = true;
-  sendButton.disabled = true;
-}
-
-// Handle send button click
-function handleSend() {
-  const value = chatInput.value.trim();
-  if (!value || state.isTyping) return;
-
-  const step = conversationFlow[state.currentStep];
-  
-  // Validation
-  if (step.validation) {
-    const validationResult = step.validation(value);
-    if (typeof validationResult === 'string') {
-      showTypingIndicator(() => {
-        addMessage('agent', validationResult);
-      });
-      return;
-    }
-  }
-
-  // Store data
-  if (step.field) {
-    state.collectedData[step.field] = value;
-  }
-
-  // Add user message
-  addMessage('user', value);
-  chatInput.value = '';
-  disableInput();
-
-  // Move to next step
-  state.currentStep++;
-  
-  if (state.currentStep < conversationFlow.length) {
-    showNextStep();
-  }
-}
-
-// Show summary of collected data
-function showSummary() {
-  showTypingIndicator(() => {
-    addMessage('agent', conversationFlow[state.currentStep].content);
-    
-    const summaryDiv = document.createElement('div');
-    summaryDiv.className = 'summary-container';
-    
-    let summaryHTML = '<h3>Resumen del estudio</h3>';
-    
-    const fieldLabels = {
-      nombre_proyecto: 'Nombre del proyecto',
-      direccion: 'Dirección/Sector',
-      inmobiliaria: 'Inmobiliaria/Desarrollador',
-      tipologias: 'Tipologías',
-      precios_propios: 'Lista de precios',
-      amenities: 'Amenities',
-      competencia: 'Competencia a comparar',
-      contacto_nombre: 'Nombre de contacto',
-      contacto_email: 'Email de contacto'
-    };
-    
-    Object.keys(fieldLabels).forEach(field => {
-      if (state.collectedData[field]) {
-        summaryHTML += `
-          <div class="summary-item">
-            <span class="summary-label">${fieldLabels[field]}:</span>
-            <span class="summary-value">${state.collectedData[field]}</span>
-          </div>
-        `;
-      }
-    });
-    
-    summaryHTML += `
-      <div class="summary-actions">
-        <button class="action-button action-confirm" id="confirmButton">Confirmar y enviar</button>
-        <button class="action-button action-edit" id="editButton">Editar datos</button>
-      </div>
-    `;
-    
-    summaryDiv.innerHTML = summaryHTML;
-    chatMessages.appendChild(summaryDiv);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-    
-    // Add event listeners for summary buttons
-    document.getElementById('confirmButton').onclick = submitStudy;
-    document.getElementById('editButton').onclick = () => {
-      chatMessages.removeChild(summaryDiv);
-      state.currentStep = 0;
-      initConversation();
-    };
-  });
-}
-
-// Submit study to intake-worker
-async function submitStudy() {
-  showTypingIndicator(() => {
-    addMessage('agent', 'Enviando solicitud...');
-    
-    // Prepare data for API
-    const studyData = {
-      tipo: state.studyType,
-      datos: state.collectedData
-    };
-    
-    // Call the intake-worker
-    fetch('https://rw-intake.rw-consulting.workers.dev/generate', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(studyData)
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`HTTP error ${response.status}`);
-      }
-      return response.json();
-    })
-    .then(data => {
-      if (data.success) {
-        chatContainer.classList.add('hidden');
-        statusMessage.classList.remove('hidden');
-      } else {
-        addMessage('agent', 'Hubo un error al generar el estudio. Por favor intenta nuevamente.');
-        console.error('Worker error:', data);
-      }
-    })
-    .catch(error => {
-      console.error('Fetch error:', error);
-      addMessage('agent', 'El servicio está en mantenimiento. Por favor contacta a Mauricio directamente.');
-    });
-  });
-}
-
-// Event listeners
-sendButton.addEventListener('click', handleSend);
-
-chatInput.addEventListener('keypress', (e) => {
-  if (e.key === 'Enter' && !e.shiftKey) {
-    e.preventDefault();
-    handleSend();
-  }
-});
-
-chatInput.addEventListener('input', () => {
-  sendButton.disabled = chatInput.value.trim() === '' || state.isTyping;
-  
-  // Auto-resize textarea
-  chatInput.style.height = 'auto';
-  chatInput.style.height = Math.min(chatInput.scrollHeight, 120) + 'px';
-});
-
-// Start conversation
-initConversation();
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', initChat);
