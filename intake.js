@@ -323,30 +323,31 @@ async function submitStudy() {
       datos: state.collectedData
     };
     
-    // For now, simulate API call
-    setTimeout(() => {
-      chatContainer.classList.add('hidden');
-      statusMessage.classList.remove('hidden');
-      
-      // In production, this would call the intake-worker
-      // fetch('https://rw-intake.rw-consulting.workers.dev/generate', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(studyData)
-      // })
-      // .then(response => response.json())
-      // .then(data => {
-      //   if (data.success) {
-      //     chatContainer.classList.add('hidden');
-      //     statusMessage.classList.remove('hidden');
-      //   } else {
-      //     addMessage('agent', 'Hubo un error al enviar la solicitud. Por favor intenta nuevamente.');
-      //   }
-      // })
-      // .catch(error => {
-      //   addMessage('agent', 'El servicio está en mantenimiento. Por favor contacta a Mauricio directamente.');
-      // });
-    }, 1500);
+    // Call the intake-worker
+    fetch('https://rw-intake.rw-consulting.workers.dev/generate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(studyData)
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      if (data.success) {
+        chatContainer.classList.add('hidden');
+        statusMessage.classList.remove('hidden');
+      } else {
+        addMessage('agent', 'Hubo un error al generar el estudio. Por favor intenta nuevamente.');
+        console.error('Worker error:', data);
+      }
+    })
+    .catch(error => {
+      console.error('Fetch error:', error);
+      addMessage('agent', 'El servicio está en mantenimiento. Por favor contacta a Mauricio directamente.');
+    });
   });
 }
 
