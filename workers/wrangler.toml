@@ -2,12 +2,7 @@ name = "rw-intake"
 main = "intake-worker.js"
 compatibility_date = "2024-11-20"
 
-kv_namespaces = [
-  { binding = "ESTUDIOS_KV", id = "4c9a0fa665f04c0b8f8956ce18cc0a08", preview_id = "6530e7c7dc904e2c802f888c46597666" }
-]
-
-[env.production]
-vars = { ENVIRONMENT = "production" }
-
-[env.preview]
-vars = { ENVIRONMENT = "preview" }
+[[kv_namespaces]]
+binding = "ESTUDIOS_KV"
+id = "4c9a0fa665f04c0b8f8956ce18cc0a08"
+preview_id = "6530e7c7dc904e2c802f888c46597666"
