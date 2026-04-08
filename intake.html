@@ -560,6 +560,24 @@
     }
   }
 
+  /* Chips de sugerencia */
+  .suggestion-chip {
+    display: inline-block;
+    padding: 6px 14px;
+    border: 1.5px solid var(--teal);
+    border-radius: 100px;
+    color: var(--teal);
+    background: var(--white);
+    cursor: pointer;
+    font-size: .82rem;
+    margin: 4px;
+    transition: all .15s;
+  }
+  .suggestion-chip:hover {
+    background: var(--teal);
+    color: white;
+  }
+
   /* ── utility ── */
   .hidden {
     display: none !important;
@@ -585,9 +603,17 @@
         <p>Te guiaré paso a paso para generar tu estudio personalizado</p>
       </div>
 
+      <!-- Barra de progreso -->
+      <div class="progress-wrap" style="background: var(--border-solid); height: 4px; width: 100%;">
+        <div class="progress-fill" id="progress-fill" style="height: 100%; background: var(--teal); width: 0%; transition: width .4s ease;"></div>
+      </div>
+
       <div class="chat-messages" id="chat-container">
         <!-- Messages will be inserted here by JavaScript -->
       </div>
+
+      <!-- Contenedor de sugerencias -->
+      <div class="suggestions-container" id="suggestions-container" style="display: none; padding: 12px 20px; border-top: 1px solid var(--border-solid);"></div>
 
       <div class="loading-indicator" id="loading-indicator" style="display: none;">
         <div class="typing-dots">
@@ -603,6 +629,8 @@
           <textarea class="chat-input" id="user-input" placeholder="Escribe tu respuesta aquí..." rows="1"></textarea>
           <button class="send-button" id="send-button">Enviar</button>
         </div>
+        <!-- Botón de generar estudio (oculto inicialmente) -->
+        <button class="generate-button" id="generate-button" style="display: none; margin-top: 16px;">Generar estudio</button>
       </div>
     </div>
 
