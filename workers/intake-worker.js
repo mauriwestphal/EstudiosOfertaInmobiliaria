@@ -234,8 +234,17 @@ Genera el JSON completo del estudio basándote en los datos proporcionados.`;
 export default {
   async fetch(request, env) {
     // CORS headers
+    const origin = request.headers.get('Origin');
+    const allowedOrigins = [
+      'https://rwconsulting.cl',
+      'http://localhost:8000',
+      'http://localhost:8080',
+      'http://127.0.0.1:8000',
+      'http://127.0.0.1:8080'
+    ];
+    
     const corsHeaders = {
-      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Origin': allowedOrigins.includes(origin) ? origin : 'https://rwconsulting.cl',
       'Access-Control-Allow-Methods': 'POST, OPTIONS',
       'Access-Control-Allow-Headers': 'Content-Type',
       'Access-Control-Max-Age': '86400',
@@ -302,7 +311,8 @@ export default {
 
         if (!claudeResponse.ok) {
           const errorText = await claudeResponse.text();
-          console.error('Claude API error:', errorText);
+          // Log error for debugging (remove in production if sensitive)
+          // console.error('Claude API error:', errorText);
           throw new Error(`Claude API error: ${claudeResponse.status}`);
         }
 
@@ -319,8 +329,9 @@ export default {
           }
           estudioJson = JSON.parse(jsonMatch[0]);
         } catch (parseError) {
-          console.error('Failed to parse Claude response:', parseError);
-          console.error('Raw response:', jsonGenerado);
+          // Log error for debugging (remove in production if sensitive)
+          // console.error('Failed to parse Claude response:', parseError);
+          // console.error('Raw response:', jsonGenerado);
           
           // Try to fix common JSON issues
           try {
@@ -376,7 +387,8 @@ export default {
         });
 
       } catch (error) {
-        console.error('Error processing request:', error);
+        // Log error for debugging (remove in production if sensitive)
+        // console.error('Error processing request:', error);
         
         return new Response(JSON.stringify({
           success: false,

@@ -10,7 +10,14 @@
  * CORS: ajusta ALLOWED_ORIGIN a tu dominio de producción
  */
 
-const ALLOWED_ORIGIN = '*'; // En producción: 'https://rwconsulting.cl'
+const ALLOWED_ORIGIN = 'https://rwconsulting.cl'; // En producción
+const ALLOWED_ORIGINS = [
+  'https://rwconsulting.cl',
+  'http://localhost:8000',
+  'http://localhost:8080',
+  'http://127.0.0.1:8000',
+  'http://127.0.0.1:8080'
+];
 const MODEL          = 'claude-sonnet-4-20250514';
 const MAX_TOKENS     = 1024;
 
@@ -32,11 +39,15 @@ DISCLAIMER (incluye en primera respuesta de cada sesión):
 
 export default {
   async fetch(request, env) {
+    // Determine allowed origin
+    const origin = request.headers.get('Origin');
+    const allowedOrigin = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGIN;
+    
     // CORS preflight
     if (request.method === 'OPTIONS') {
       return new Response(null, {
         headers: {
-          'Access-Control-Allow-Origin':  ALLOWED_ORIGIN,
+          'Access-Control-Allow-Origin':  allowedOrigin,
           'Access-Control-Allow-Methods': 'POST, OPTIONS',
           'Access-Control-Allow-Headers': 'Content-Type',
           'Access-Control-Max-Age':       '86400',
@@ -52,7 +63,7 @@ export default {
     try {
       body = await request.json();
     } catch {
-      return errorResponse('Invalid JSON body', 400);
+      return errorResponse('Invalid JSON body', 400, origin);
     }
 
     const { codigo, messages, estudioJson } = body;
@@ -62,19 +73,19 @@ export default {
     try {
       validCodes = JSON.parse(env.VALID_CODES || '[]');
     } catch {
-      return errorResponse('Worker misconfigured', 500);
+      return errorResponse('Worker misconfigured', 500, origin);
     }
 
     if (!codigo || !validCodes.includes(codigo)) {
-      return errorResponse('Código de acceso no válido', 403);
+      return errorResponse('Código de acceso no válido', 403, origin);
     }
 
     // ── Validar payload ───────────────────────────────────────────
     if (!Array.isArray(messages) || messages.length === 0) {
-      return errorResponse('messages requerido', 400);
+      return errorResponse('messages requerido', 400, origin);
     }
     if (!estudioJson || typeof estudioJson !== 'object') {
-      return errorResponse('estudioJson requerido', 400);
+      return errorResponse('estudioJson requerido', 400, origin);
     }
 
     // ── Construir prompt de sistema con contexto del estudio ──────
@@ -103,12 +114,12 @@ ${JSON.stringify(estudioJson, null, 2)}
         }),
       });
     } catch (err) {
-      return errorResponse('Error contacting Anthropic API', 502);
+      return errorResponse('Error contacting Anthropic API', 502, origin);
     }
 
     if (!anthropicRes.ok) {
       const errText = await anthropicRes.text();
-      return errorResponse(`Anthropic error: ${errText}`, anthropicRes.status);
+      return errorResponse(`Anthropic error: ${errText}`, anthropicRes.status, origin);
     }
 
     const data = await anthropicRes.json();
@@ -117,18 +128,19 @@ ${JSON.stringify(estudioJson, null, 2)}
     return new Response(JSON.stringify({ response: text }), {
       headers: {
         'Content-Type':                'application/json',
-        'Access-Control-Allow-Origin': ALLOWED_ORIGIN,
+        'Access-Control-Allow-Origin': allowedOrigin,
       }
     });
   }
 };
 
-function errorResponse(msg, status = 400) {
+function errorResponse(msg, status = 400, origin) {
+  const allowedOrigin = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGIN;
   return new Response(JSON.stringify({ error: msg }), {
     status,
     headers: {
       'Content-Type':                'application/json',
-      'Access-Control-Allow-Origin': ALLOWED_ORIGIN,
+      'Access-Control-Allow-Origin': allowedOrigin,
     }
   });
 }
