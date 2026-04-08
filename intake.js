@@ -22,6 +22,18 @@ const loadingIndicator = document.getElementById('loading-indicator');
 
 // Initialize chat
 function initChat() {
+  // Verify DOM elements exist
+  if (!chatContainer || !userInput || !sendButton || !loadingIndicator) {
+    console.error('Missing DOM elements:', {
+      chatContainer,
+      userInput,
+      sendButton,
+      loadingIndicator
+    });
+    showError('Error al cargar la interfaz. Por favor, recarga la página.');
+    return;
+  }
+  
   renderMessages();
   userInput.focus();
   
@@ -33,6 +45,40 @@ function initChat() {
       handleUserMessage();
     }
   });
+}
+
+// Show error message
+function showError(message) {
+  const errorDiv = document.createElement('div');
+  errorDiv.className = 'error-message';
+  errorDiv.style.padding = '20px';
+  errorDiv.style.margin = '20px';
+  errorDiv.style.background = '#fee';
+  errorDiv.style.border = '1px solid #f99';
+  errorDiv.style.borderRadius = '8px';
+  errorDiv.style.color = '#900';
+  
+  const errorTitle = document.createElement('h3');
+  errorTitle.textContent = '❌ Error';
+  errorDiv.appendChild(errorTitle);
+  
+  const errorText = document.createElement('p');
+  errorText.textContent = message;
+  errorDiv.appendChild(errorText);
+  
+  const reloadButton = document.createElement('button');
+  reloadButton.textContent = 'Recargar página';
+  reloadButton.style.marginTop = '10px';
+  reloadButton.style.padding = '8px 16px';
+  reloadButton.style.background = '#900';
+  reloadButton.style.color = 'white';
+  reloadButton.style.border = 'none';
+  reloadButton.style.borderRadius = '4px';
+  reloadButton.style.cursor = 'pointer';
+  reloadButton.addEventListener('click', () => location.reload());
+  errorDiv.appendChild(reloadButton);
+  
+  document.body.appendChild(errorDiv);
 }
 
 // Render all messages
