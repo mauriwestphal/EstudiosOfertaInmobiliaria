@@ -5,7 +5,7 @@
     "proyecto": "Edificio EntreMares",
     "direccion": "Av. Borgoño / Costa de Montemar, Concón, Región de Valparaíso",
     "cliente": "Inmobiliaria e Inversiones Costa de Montemar",
-    "autor": "MW Consulting",
+    "autor": "RW Consulting",
     "fecha": "2026-04-08",
     "metodologia": {
       "fuente_precios": "Portales inmobiliarios (Portal Inmobiliario, Enlace Inmobiliario, TocToc, webs oficiales de inmobiliarias), planilla interna de precios del proyecto",
@@ -41,14 +41,23 @@
       "Conserjería",
       "Acceso controlado"
     ],
-    "lat": -32.9235,
-    "lng": -71.5330,
+    "lat": -32.9198,
+    "lng": -71.4962,
     "estacionamientos": null,
     "bodegas": null,
     "mix_unidades": [
-      { "tipo": "1D+1B", "cantidad": 38 },
-      { "tipo": "2D+2B", "cantidad": 114 },
-      { "tipo": "3D+2B", "cantidad": 38 }
+      {
+        "tipo": "1D+1B",
+        "cantidad": 38
+      },
+      {
+        "tipo": "2D+2B",
+        "cantidad": 114
+      },
+      {
+        "tipo": "3D+2B",
+        "cantidad": 38
+      }
     ]
   },
   "competencia": [
@@ -67,7 +76,16 @@
       "terraza": 7.0,
       "orientacion": null,
       "vista_principal": null,
-      "amenities": ["Piscina", "Rooftop piso 27", "Cancha de pádel", "Sala co-work", "Quinchos", "Gimnasio", "Pet zone", "Sala de videojuegos"],
+      "amenities": [
+        "Piscina",
+        "Rooftop piso 27",
+        "Cancha de pádel",
+        "Sala co-work",
+        "Quinchos",
+        "Gimnasio",
+        "Pet zone",
+        "Sala de videojuegos"
+      ],
       "disponibles": 81,
       "total_unidades": 206,
       "precio_lista_uf": 3607,
@@ -76,8 +94,8 @@
       "uf_m2_dcto": 71.8,
       "estacionamiento_uf": null,
       "bodega_uf": null,
-      "lat": -32.9228,
-      "lng": -71.5318,
+      "lat": -32.9205,
+      "lng": -71.4955,
       "fuente": "Portal Inmobiliario / Enlace Inmobiliario"
     },
     {
@@ -95,7 +113,16 @@
       "terraza": 9.0,
       "orientacion": null,
       "vista_principal": null,
-      "amenities": ["Piscina", "Rooftop piso 27", "Cancha de pádel", "Sala co-work", "Quinchos", "Gimnasio", "Pet zone", "Sala de videojuegos"],
+      "amenities": [
+        "Piscina",
+        "Rooftop piso 27",
+        "Cancha de pádel",
+        "Sala co-work",
+        "Quinchos",
+        "Gimnasio",
+        "Pet zone",
+        "Sala de videojuegos"
+      ],
       "disponibles": null,
       "total_unidades": 206,
       "precio_lista_uf": 4800,
@@ -104,8 +131,8 @@
       "uf_m2_dcto": 73.6,
       "estacionamiento_uf": null,
       "bodega_uf": null,
-      "lat": -32.9228,
-      "lng": -71.5318,
+      "lat": -32.9205,
+      "lng": -71.4955,
       "fuente": "Portal Inmobiliario / Enlace Inmobiliario — tipología estimada desde rango publicado 32-61 m²"
     },
     {
@@ -123,7 +150,13 @@
       "terraza": 8.0,
       "orientacion": null,
       "vista_principal": null,
-      "amenities": ["Piscina exterior", "Piscina temperada", "Gimnasio", "Quinchos", "Terraza azotea con vista al mar"],
+      "amenities": [
+        "Piscina exterior",
+        "Piscina temperada",
+        "Gimnasio",
+        "Quinchos",
+        "Terraza azotea con vista al mar"
+      ],
       "disponibles": 5,
       "total_unidades": null,
       "precio_lista_uf": 3548,
@@ -132,8 +165,8 @@
       "uf_m2_dcto": 61.4,
       "estacionamiento_uf": null,
       "bodega_uf": null,
-      "lat": -32.9240,
-      "lng": -71.5325,
+      "lat": -32.921,
+      "lng": -71.495,
       "fuente": "Enlace Inmobiliario / Portal Inmobiliario"
     },
     {
@@ -151,7 +184,13 @@
       "terraza": 13.0,
       "orientacion": null,
       "vista_principal": null,
-      "amenities": ["Piscina exterior", "Piscina temperada", "Gimnasio", "Quinchos", "Terraza azotea con vista al mar"],
+      "amenities": [
+        "Piscina exterior",
+        "Piscina temperada",
+        "Gimnasio",
+        "Quinchos",
+        "Terraza azotea con vista al mar"
+      ],
       "disponibles": null,
       "total_unidades": null,
       "precio_lista_uf": 5521,
@@ -160,8 +199,8 @@
       "uf_m2_dcto": 73.0,
       "estacionamiento_uf": null,
       "bodega_uf": null,
-      "lat": -32.9240,
-      "lng": -71.5325,
+      "lat": -32.921,
+      "lng": -71.495,
       "fuente": "TocToc / Enlace Inmobiliario"
     },
     {
@@ -179,7 +218,11 @@
       "terraza": 10.0,
       "orientacion": null,
       "vista_principal": null,
-      "amenities": ["Piscina", "Pet zone", "Áreas verdes"],
+      "amenities": [
+        "Piscina",
+        "Pet zone",
+        "Áreas verdes"
+      ],
       "disponibles": null,
       "total_unidades": null,
       "precio_lista_uf": 4000,
@@ -188,8 +231,8 @@
       "uf_m2_dcto": 61.3,
       "estacionamiento_uf": null,
       "bodega_uf": null,
-      "lat": -32.9232,
-      "lng": -71.5322,
+      "lat": -32.9198,
+      "lng": -71.496,
       "fuente": "Enlace Inmobiliario / Enlace Valparaíso — rango 4.000-4.675 UF; precio mínimo usado"
     },
     {
@@ -207,7 +250,9 @@
       "terraza": 18.0,
       "orientacion": null,
       "vista_principal": "Mar",
-      "amenities": ["No detalladas"],
+      "amenities": [
+        "No detalladas"
+      ],
       "disponibles": 51,
       "total_unidades": null,
       "precio_lista_uf": 8901,
@@ -216,8 +261,8 @@
       "uf_m2_dcto": 91.8,
       "estacionamiento_uf": null,
       "bodega_uf": null,
-      "lat": -32.9195,
-      "lng": -71.5310,
+      "lat": -32.9175,
+      "lng": -71.493,
       "fuente": "Portal Inmobiliario — rango 2-3D desde 8.901 UF; tipología 2D estimada"
     },
     {
@@ -235,7 +280,9 @@
       "terraza": 28.0,
       "orientacion": null,
       "vista_principal": "Mar",
-      "amenities": ["No detalladas"],
+      "amenities": [
+        "No detalladas"
+      ],
       "disponibles": null,
       "total_unidades": null,
       "precio_lista_uf": 12500,
@@ -244,8 +291,8 @@
       "uf_m2_dcto": 88.9,
       "estacionamiento_uf": null,
       "bodega_uf": null,
-      "lat": -32.9195,
-      "lng": -71.5310,
+      "lat": -32.9175,
+      "lng": -71.493,
       "fuente": "Portal Inmobiliario — rango publicado 62-143 m²; tipología 3D estimada desde máximo del rango"
     },
     {
@@ -263,7 +310,9 @@
       "terraza": 6.0,
       "orientacion": null,
       "vista_principal": null,
-      "amenities": ["No detalladas"],
+      "amenities": [
+        "No detalladas"
+      ],
       "disponibles": 155,
       "total_unidades": null,
       "precio_lista_uf": 3722,
@@ -272,8 +321,8 @@
       "uf_m2_dcto": 87.8,
       "estacionamiento_uf": null,
       "bodega_uf": null,
-      "lat": -32.9238,
-      "lng": -71.5328,
+      "lat": -32.9195,
+      "lng": -71.4965,
       "fuente": "Portal Inmobiliario — rango 35-81 m², desde 3.709-3.722 UF; precio máximo publicado usado como referencia"
     },
     {
@@ -291,7 +340,9 @@
       "terraza": 10.0,
       "orientacion": null,
       "vista_principal": null,
-      "amenities": ["No detalladas"],
+      "amenities": [
+        "No detalladas"
+      ],
       "disponibles": null,
       "total_unidades": null,
       "precio_lista_uf": 5200,
@@ -300,8 +351,8 @@
       "uf_m2_dcto": 75.9,
       "estacionamiento_uf": null,
       "bodega_uf": null,
-      "lat": -32.9238,
-      "lng": -71.5328,
+      "lat": -32.9195,
+      "lng": -71.4965,
       "fuente": "Portal Inmobiliario — tipología 2D estimada desde rango publicado 35-81 m²"
     },
     {
@@ -319,7 +370,17 @@
       "terraza": 8.0,
       "orientacion": null,
       "vista_principal": null,
-      "amenities": ["Piscina exterior", "Gimnasio", "Kids zone", "Sala cowork", "Lavandería", "Sala de cine", "Sauna", "Bicicleteros", "Quincho panorámico"],
+      "amenities": [
+        "Piscina exterior",
+        "Gimnasio",
+        "Kids zone",
+        "Sala cowork",
+        "Lavandería",
+        "Sala de cine",
+        "Sauna",
+        "Bicicleteros",
+        "Quincho panorámico"
+      ],
       "disponibles": 25,
       "total_unidades": 133,
       "precio_lista_uf": 4238,
@@ -328,8 +389,8 @@
       "uf_m2_dcto": 73.1,
       "estacionamiento_uf": null,
       "bodega_uf": null,
-      "lat": -32.9378,
-      "lng": -71.5420,
+      "lat": -32.9372,
+      "lng": -71.5225,
       "fuente": "Inmobiliaria Aconcagua / Enlace Inmobiliario"
     },
     {
@@ -347,7 +408,17 @@
       "terraza": 10.0,
       "orientacion": null,
       "vista_principal": null,
-      "amenities": ["Piscina exterior", "Gimnasio", "Kids zone", "Sala cowork", "Lavandería", "Sala de cine", "Sauna", "Bicicleteros", "Quincho panorámico"],
+      "amenities": [
+        "Piscina exterior",
+        "Gimnasio",
+        "Kids zone",
+        "Sala cowork",
+        "Lavandería",
+        "Sala de cine",
+        "Sauna",
+        "Bicicleteros",
+        "Quincho panorámico"
+      ],
       "disponibles": null,
       "total_unidades": 133,
       "precio_lista_uf": 5800,
@@ -356,8 +427,8 @@
       "uf_m2_dcto": 73.9,
       "estacionamiento_uf": null,
       "bodega_uf": null,
-      "lat": -32.9378,
-      "lng": -71.5420,
+      "lat": -32.9372,
+      "lng": -71.5225,
       "fuente": "Inmobiliaria Aconcagua (modelo 2B 66.63 m²) — precio estimado desde rango 3.800-7.550 UF"
     },
     {
@@ -375,7 +446,16 @@
       "terraza": 12.0,
       "orientacion": null,
       "vista_principal": null,
-      "amenities": ["Piscina lounge", "Creativity center", "Fit & health zone", "Bike parking", "Adventure zone", "2 BBQ zone panorámicos", "Gourmet lounge", "Hall doble altura"],
+      "amenities": [
+        "Piscina lounge",
+        "Creativity center",
+        "Fit & health zone",
+        "Bike parking",
+        "Adventure zone",
+        "2 BBQ zone panorámicos",
+        "Gourmet lounge",
+        "Hall doble altura"
+      ],
       "disponibles": 7,
       "total_unidades": null,
       "precio_lista_uf": 4989,
@@ -384,8 +464,8 @@
       "uf_m2_dcto": 65.8,
       "estacionamiento_uf": null,
       "bodega_uf": null,
-      "lat": -32.9382,
-      "lng": -71.5435,
+      "lat": -32.9385,
+      "lng": -71.524,
       "fuente": "Lambert Broker / Enlace Inmobiliario / Portal Inmobiliario"
     },
     {
@@ -403,7 +483,16 @@
       "terraza": 15.0,
       "orientacion": null,
       "vista_principal": null,
-      "amenities": ["Piscina lounge", "Creativity center", "Fit & health zone", "Bike parking", "Adventure zone", "2 BBQ zone panorámicos", "Gourmet lounge", "Hall doble altura"],
+      "amenities": [
+        "Piscina lounge",
+        "Creativity center",
+        "Fit & health zone",
+        "Bike parking",
+        "Adventure zone",
+        "2 BBQ zone panorámicos",
+        "Gourmet lounge",
+        "Hall doble altura"
+      ],
       "disponibles": null,
       "total_unidades": null,
       "precio_lista_uf": 9116,
@@ -412,8 +501,8 @@
       "uf_m2_dcto": 87.5,
       "estacionamiento_uf": null,
       "bodega_uf": null,
-      "lat": -32.9382,
-      "lng": -71.5435,
+      "lat": -32.9385,
+      "lng": -71.524,
       "fuente": "Lambert Broker — desde UF 9.116 para 3D+2B"
     },
     {
@@ -431,7 +520,11 @@
       "terraza": 6.0,
       "orientacion": null,
       "vista_principal": null,
-      "amenities": ["Piscina", "Quinchos panorámicos", "Sala lounge exterior"],
+      "amenities": [
+        "Piscina",
+        "Quinchos panorámicos",
+        "Sala lounge exterior"
+      ],
       "disponibles": 89,
       "total_unidades": 188,
       "precio_lista_uf": 2491,
@@ -440,8 +533,8 @@
       "uf_m2_dcto": 59.0,
       "estacionamiento_uf": null,
       "bodega_uf": null,
-      "lat": -32.9150,
-      "lng": -71.5280,
+      "lat": -32.9158,
+      "lng": -71.487,
       "fuente": "Inmobiliaria Aconcagua / Enlace Inmobiliario"
     },
     {
@@ -459,7 +552,11 @@
       "terraza": 7.5,
       "orientacion": null,
       "vista_principal": null,
-      "amenities": ["Piscina", "Quinchos panorámicos", "Sala lounge exterior"],
+      "amenities": [
+        "Piscina",
+        "Quinchos panorámicos",
+        "Sala lounge exterior"
+      ],
       "disponibles": null,
       "total_unidades": 188,
       "precio_lista_uf": 3483,
@@ -468,8 +565,8 @@
       "uf_m2_dcto": 64.5,
       "estacionamiento_uf": null,
       "bodega_uf": null,
-      "lat": -32.9150,
-      "lng": -71.5280,
+      "lat": -32.9158,
+      "lng": -71.487,
       "fuente": "Inmobiliaria Aconcagua — modelo 2A1 desde UF 3.483, modelo 2A2 desde UF 3.921"
     },
     {
@@ -487,7 +584,12 @@
       "terraza": 7.0,
       "orientacion": null,
       "vista_principal": null,
-      "amenities": ["Departamentos", "Oficinas", "Locales comerciales", "Boulevard"],
+      "amenities": [
+        "Departamentos",
+        "Oficinas",
+        "Locales comerciales",
+        "Boulevard"
+      ],
       "disponibles": 59,
       "total_unidades": null,
       "precio_lista_uf": 3004,
@@ -496,8 +598,8 @@
       "uf_m2_dcto": 72.2,
       "estacionamiento_uf": null,
       "bodega_uf": null,
-      "lat": -32.9410,
-      "lng": -71.5462,
+      "lat": -32.9405,
+      "lng": -71.531,
       "fuente": "Enlace Valparaíso / TocToc — desde UF 3.004 para 1D/1B 35.34 m²"
     },
     {
@@ -515,7 +617,12 @@
       "terraza": 10.0,
       "orientacion": null,
       "vista_principal": null,
-      "amenities": ["Departamentos", "Oficinas", "Locales comerciales", "Boulevard"],
+      "amenities": [
+        "Departamentos",
+        "Oficinas",
+        "Locales comerciales",
+        "Boulevard"
+      ],
       "disponibles": null,
       "total_unidades": null,
       "precio_lista_uf": 4500,
@@ -524,8 +631,8 @@
       "uf_m2_dcto": 65.7,
       "estacionamiento_uf": null,
       "bodega_uf": null,
-      "lat": -32.9410,
-      "lng": -71.5462,
+      "lat": -32.9405,
+      "lng": -71.531,
       "fuente": "Enlace Valparaíso — rango publicado 29-104 m²; tipología 2D estimada"
     }
   ],
