@@ -405,23 +405,50 @@ async function approveStudy(studyId) {
   }
   
   try {
-    // In production, this would call the publish-worker
-    // For now, simulate approval
-    study.estado = 'aprobado';
+    // Call publish-worker
+    const response = await fetch('https://rw-publish.rw-consulting.workers.dev/publish', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${state.adminSecret}`
+      },
+      body: JSON.stringify({
+        estudio_id: study.id,
+        codigo: study.codigo,
+        json: study.json,
+        email_cliente: study.contacto_email,
+        cliente_nombre: study.cliente,
+        proyecto_nombre: study.proyecto
+      })
+    });
     
-    // Update UI
-    updateStats();
-    renderStudiesTable();
-    
-    if (state.currentStudy) {
-      closeModal();
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || `HTTP ${response.status}`);
     }
     
-    alert(`Estudio ${study.codigo} aprobado correctamente.`);
+    const result = await response.json();
+    
+    if (result.success) {
+      // Update study status
+      study.estado = 'aprobado';
+      
+      // Update UI
+      updateStats();
+      renderStudiesTable();
+      
+      if (state.currentStudy) {
+        closeModal();
+      }
+      
+      alert(`Estudio ${study.codigo} aprobado y publicado correctamente.\n\nEmail enviado: ${result.email_sent ? 'Sí' : 'No'}\nCommit: ${result.github?.commit_url || 'N/A'}`);
+    } else {
+      throw new Error(result.error || 'Error desconocido');
+    }
     
   } catch (error) {
     console.error('Error approving study:', error);
-    alert('Error al aprobar el estudio. Intenta nuevamente.');
+    alert(`Error al aprobar el estudio: ${error.message}\n\nEl estudio no se publicó. Intenta nuevamente.`);
   }
 }
 
