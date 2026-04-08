@@ -177,6 +177,31 @@ Datos recopilados: ${JSON.stringify(datos, null, 2)}`;
 // ── Helpers ───────────────────────────────────────────────────────
 
 async function callClaude(prompt, systemPrompt, env) {
+  // Debug: verificar que env.ANTHROPIC_API_KEY existe
+  console.log('Environment keys:', Object.keys(env));
+  console.log('ANTHROPIC_API_KEY exists:', 'ANTHROPIC_API_KEY' in env);
+  
+  // TEMPORAL: Simular respuesta de Claude para testing
+  // TODO: Reemplazar con llamada real a API cuando el secret funcione
+  return JSON.stringify({
+    next_question: '¿Cuál es el nombre de tu proyecto?',
+    suggestions: [
+      'Puedes escribir el nombre directamente',
+      'Pegar un link del proyecto si ya existe online',
+      'Describir el proyecto brevemente'
+    ],
+    extracted_data: {},
+    missing_fields: ['nombre_proyecto', 'direccion', 'inmobiliaria'],
+    is_complete: false,
+    progress_pct: 20
+  });
+  
+  /*
+  // Código real (comentado temporalmente)
+  if (!env.ANTHROPIC_API_KEY) {
+    throw new Error('ANTHROPIC_API_KEY is not defined in environment');
+  }
+  
   const response = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
     headers: {
@@ -199,6 +224,7 @@ async function callClaude(prompt, systemPrompt, env) {
 
   const data = await response.json();
   return data.content?.find(b => b.type === 'text')?.text || '';
+  */
 }
 
 function extractJSON(text) {
