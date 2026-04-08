@@ -1,231 +1,109 @@
-// RW Consulting — Formulario conversacional inteligente
-// Usa IA para analizar respuestas y determinar qué información falta
+/**
+ * RW Consulting — Intake Conversacional (reconstrucción completa)
+ * Interfaz de chat inteligente para recopilación de datos de estudios inmobiliarios
+ */
 
-// State management
+// ── Estado global ─────────────────────────────────────────────────
+
 const state = {
-  messages: [
-    { role: 'assistant', content: 'Hola, soy el asistente de RW Consulting. ¿Qué tipo de estudio necesitas?' }
-  ],
-  currentData: {
+  messages: [],           // historial de conversación [{role, content}]
+  currentData: {          // datos recopilados hasta ahora
     tipo: null,
     datos: {}
   },
-  isTyping: false,
-  isComplete: false
+  missingFields: [],      // campos que faltan según IA
+  progressPct: 0,         // progreso de recopilación
+  isComplete: false,      // si ya se recopiló toda la info
+  isLoading: false        // si está procesando una respuesta
 };
 
-// DOM elements
-const chatContainer = document.getElementById('chat-container');
-const userInput = document.getElementById('user-input');
-const sendButton = document.getElementById('send-button');
-const loadingIndicator = document.getElementById('loading-indicator');
+// ── Elementos DOM ─────────────────────────────────────────────────
 
-// Initialize chat
-function initChat() {
-  // Verify DOM elements exist
-  if (!chatContainer || !userInput || !sendButton || !loadingIndicator) {
-    console.error('Missing DOM elements:', {
-      chatContainer,
-      userInput,
-      sendButton,
-      loadingIndicator
-    });
-    showError('Error al cargar la interfaz. Por favor, recarga la página.');
+let chatContainer, userInput, sendButton, progressFill, suggestionsContainer, generateButton;
+
+// ── Inicialización ────────────────────────────────────────────────
+
+function init() {
+  // Obtener elementos DOM
+  chatContainer = document.getElementById('chat-container');
+  userInput = document.getElementById('user-input');
+  sendButton = document.getElementById('send-button');
+  progressFill = document.getElementById('progress-fill');
+  suggestionsContainer = document.getElementById('suggestions-container');
+  generateButton = document.getElementById('generate-button');
+
+  // Verificar que todos los elementos existen
+  if (!chatContainer || !userInput || !sendButton) {
+    console.error('Missing required DOM elements');
     return;
   }
-  
-  renderMessages();
-  userInput.focus();
-  
-  // Event listeners
-  sendButton.addEventListener('click', handleUserMessage);
+
+  // Configurar event listeners
+  sendButton.addEventListener('click', sendMessage);
   userInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
-      handleUserMessage();
+      sendMessage();
     }
   });
-}
 
-// Show error message
-function showError(message) {
-  const errorDiv = document.createElement('div');
-  errorDiv.className = 'error-message';
-  errorDiv.style.padding = '20px';
-  errorDiv.style.margin = '20px';
-  errorDiv.style.background = '#fee';
-  errorDiv.style.border = '1px solid #f99';
-  errorDiv.style.borderRadius = '8px';
-  errorDiv.style.color = '#900';
-  
-  const errorTitle = document.createElement('h3');
-  errorTitle.textContent = '❌ Error';
-  errorDiv.appendChild(errorTitle);
-  
-  const errorText = document.createElement('p');
-  errorText.textContent = message;
-  errorDiv.appendChild(errorText);
-  
-  const reloadButton = document.createElement('button');
-  reloadButton.textContent = 'Recargar página';
-  reloadButton.style.marginTop = '10px';
-  reloadButton.style.padding = '8px 16px';
-  reloadButton.style.background = '#900';
-  reloadButton.style.color = 'white';
-  reloadButton.style.border = 'none';
-  reloadButton.style.borderRadius = '4px';
-  reloadButton.style.cursor = 'pointer';
-  reloadButton.addEventListener('click', () => location.reload());
-  errorDiv.appendChild(reloadButton);
-  
-  document.body.appendChild(errorDiv);
-}
-
-// Render all messages
-function renderMessages() {
-  chatContainer.innerHTML = '';
-  
-  state.messages.forEach((msg, index) => {
-    const messageDiv = document.createElement('div');
-    messageDiv.className = `message ${msg.role}-message`;
-    
-    const contentDiv = document.createElement('div');
-    contentDiv.className = 'message-content';
-    contentDiv.textContent = msg.content;
-    
-    messageDiv.appendChild(contentDiv);
-    
-    // Add options for assistant messages with options
-    if (msg.role === 'assistant' && msg.options) {
-      const optionsDiv = document.createElement('div');
-      optionsDiv.className = 'message-options';
-      
-      msg.options.forEach(option => {
-        const button = document.createElement('button');
-        button.className = 'option-button';
-        button.textContent = option.text;
-        button.addEventListener('click', () => {
-          handleOptionSelection(option.value);
-        });
-        optionsDiv.appendChild(button);
-      });
-      
-      messageDiv.appendChild(optionsDiv);
-    }
-    
-    chatContainer.appendChild(messageDiv);
-  });
-  
-  // Scroll to bottom
-  chatContainer.scrollTop = chatContainer.scrollHeight;
-}
-
-// Handle user message
-async function handleUserMessage() {
-  const userMessage = userInput.value.trim();
-  if (!userMessage || state.isTyping || state.isComplete) return;
-  
-  // Add user message to state
-  state.messages.push({ role: 'user', content: userMessage });
-  renderMessages();
-  
-  // Clear input
-  userInput.value = '';
-  
-  // Show typing indicator
-  state.isTyping = true;
-  loadingIndicator.style.display = 'block';
-  
-  try {
-    // Send to AI for analysis
-    const response = await analyzeConversation(userMessage);
-    
-    // Process AI response
-    if (response.success) {
-      // Update current data with extracted data
-      if (response.extracted_data) {
-        Object.assign(state.currentData.datos, response.extracted_data);
-      }
-      
-      // Add AI response to messages
-      state.messages.push({ 
-        role: 'assistant', 
-        content: response.next_question 
-      });
-      
-      // Check if conversation is complete
-      if (response.is_complete) {
-        state.isComplete = true;
-        // Show summary and generate button
-        showSummaryAndGenerate();
-      }
-    } else {
-      // Handle error
-      state.messages.push({ 
-        role: 'assistant', 
-        content: 'Lo siento, hubo un error al procesar tu mensaje. Por favor, intenta de nuevo.' 
-      });
-    }
-  } catch (error) {
-    console.error('Error:', error);
-    state.messages.push({ 
-      role: 'assistant', 
-      content: 'Lo siento, hubo un error de conexión. Por favor, intenta de nuevo.' 
-    });
-  } finally {
-    // Hide typing indicator
-    state.isTyping = false;
-    loadingIndicator.style.display = 'none';
-    renderMessages();
+  if (generateButton) {
+    generateButton.addEventListener('click', generateStudy);
   }
+
+  // Iniciar conversación
+  startConversation();
 }
 
-// Handle option selection (for study type)
-async function handleOptionSelection(value) {
-  if (value === 'tipo1' || value === 'tipo2') {
-    state.currentData.tipo = value;
-    
-    // Add user selection to messages
-    state.messages.push({ 
-      role: 'user', 
-      content: value === 'tipo1' 
-        ? 'Tengo un proyecto por construir y quiero saber cómo posicionar precios' 
-        : 'Tengo un proyecto activo y quiero compararlo con el mercado' 
-    });
-    
-    // Analyze conversation with the new context
-    state.isTyping = true;
-    loadingIndicator.style.display = 'block';
-    
-    try {
-      const response = await analyzeConversation('');
-      
-      if (response.success) {
-        state.messages.push({ 
-          role: 'assistant', 
-          content: response.next_question 
-        });
-      }
-    } catch (error) {
-      state.messages.push({ 
-        role: 'assistant', 
-        content: 'Por favor, cuéntame más sobre tu proyecto.' 
-      });
-    } finally {
-      state.isTyping = false;
-      loadingIndicator.style.display = 'none';
-      renderMessages();
-    }
-  }
+// ── Flujo de conversación ────────────────────────────────────────
+
+function startConversation() {
+  // Mensaje de bienvenida
+  addMessage('assistant', 'Hola, soy el asistente de RW Consulting. ¿Qué tipo de estudio necesitas?');
+  
+  // Botones de tipo de estudio
+  const buttonContainer = document.createElement('div');
+  buttonContainer.className = 'suggestions-container';
+  buttonContainer.style.marginTop = '12px';
+  
+  const tipo1Button = createSuggestionChip('Tengo un proyecto por construir y quiero saber cómo posicionar precios');
+  const tipo2Button = createSuggestionChip('Tengo un proyecto activo y quiero compararlo con el mercado');
+  
+  tipo1Button.addEventListener('click', () => selectStudyType('tipo1'));
+  tipo2Button.addEventListener('click', () => selectStudyType('tipo2'));
+  
+  buttonContainer.appendChild(tipo1Button);
+  buttonContainer.appendChild(tipo2Button);
+  
+  // Agregar al chat
+  const messageDiv = document.createElement('div');
+  messageDiv.className = 'message assistant-message';
+  messageDiv.appendChild(buttonContainer);
+  chatContainer.appendChild(messageDiv);
+  scrollToBottom();
 }
 
-// Analyze conversation with AI
-async function analyzeConversation(userMessage) {
-  // Prepare messages for analysis (last 5 messages for context)
-  const recentMessages = [...state.messages];
-  if (userMessage) {
-    recentMessages.push({ role: 'user', content: userMessage });
-  }
+function selectStudyType(tipo) {
+  state.currentData.tipo = tipo;
+  
+  // Agregar mensaje del usuario
+  const userMsg = tipo === 'tipo1' 
+    ? 'Tengo un proyecto por construir y quiero saber cómo posicionar precios'
+    : 'Tengo un proyecto activo y quiero compararlo con el mercado';
+  
+  addMessage('user', userMsg);
+  
+  // Enviar al análisis IA
+  analyzeConversation();
+}
+
+// ── Análisis con IA ──────────────────────────────────────────────
+
+async function analyzeConversation() {
+  if (state.isLoading) return;
+  
+  state.isLoading = true;
+  showLoading(true);
   
   try {
     const response = await fetch('https://rw-intake.rw-consulting.workers.dev/analyze', {
@@ -234,7 +112,7 @@ async function analyzeConversation(userMessage) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        messages: recentMessages.slice(-5), // Last 5 messages for context
+        messages: state.messages,
         currentData: state.currentData
       })
     });
@@ -243,131 +121,69 @@ async function analyzeConversation(userMessage) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     
-    return await response.json();
-  } catch (error) {
-    // Fallback to simulation mode if worker is not available
-    console.warn('Worker not available, using simulation mode:', error.message);
-    return simulateAnalysis(recentMessages, state.currentData);
-  }
-}
-
-// Simulate AI analysis when worker is not available
-function simulateAnalysis(messages, currentData) {
-  const lastMessage = messages[messages.length - 1]?.content || '';
-  
-  // Simple logic to simulate AI responses
-  if (!currentData.tipo) {
-    return {
-      success: true,
-      analysis: 'Usuario inició conversación',
-      missing_info: ['tipo_estudio'],
-      next_question: '¿Qué tipo de estudio necesitas? (1) Proyecto por construir o (2) Proyecto activo',
-      is_complete: false,
-      extracted_data: {}
-    };
-  }
-  
-  if (!currentData.datos.nombre_proyecto) {
-    return {
-      success: true,
-      analysis: 'Usuario seleccionó tipo de estudio',
-      missing_info: ['nombre_proyecto', 'direccion', 'inmobiliaria'],
-      next_question: '¿Cuál es el nombre del proyecto?',
-      is_complete: false,
-      extracted_data: {}
-    };
-  }
-  
-  // Continue with other fields...
-  return {
-    success: true,
-    analysis: 'Continuando con recopilación de datos',
-    missing_info: ['información_adicional'],
-    next_question: 'Por favor, proporciona más detalles sobre tu proyecto.',
-    is_complete: false,
-    extracted_data: {}
-  };
-}
-
-// Show summary and generate button
-function showSummaryAndGenerate() {
-  const summaryDiv = document.createElement('div');
-  summaryDiv.className = 'summary-container';
-  
-  const summaryTitle = document.createElement('h3');
-  summaryTitle.textContent = 'Resumen del estudio';
-  summaryDiv.appendChild(summaryTitle);
-  
-  const summaryContent = document.createElement('div');
-  summaryContent.className = 'summary-content';
-  
-  // Add summary of collected data
-  const fields = [
-    { key: 'nombre_proyecto', label: 'Nombre del proyecto:' },
-    { key: 'direccion', label: 'Dirección/Sector:' },
-    { key: 'inmobiliaria', label: 'Inmobiliaria/Desarrollador:' },
-    { key: 'tipologias', label: 'Tipologías:' },
-    { key: 'amenities', label: 'Amenities:' },
-    { key: 'competencia', label: 'Competencia:' },
-    { key: 'contacto_nombre', label: 'Tu nombre:' },
-    { key: 'contacto_email', label: 'Tu email:' }
-  ];
-  
-  fields.forEach(field => {
-    if (state.currentData.datos[field.key]) {
-      const fieldDiv = document.createElement('div');
-      fieldDiv.className = 'summary-field';
+    const result = await response.json();
+    
+    if (result.success) {
+      // Actualizar estado con datos extraídos
+      if (result.extracted_data && Object.keys(result.extracted_data).length > 0) {
+        state.currentData.datos = { ...state.currentData.datos, ...result.extracted_data };
+      }
       
-      const label = document.createElement('strong');
-      label.textContent = field.label;
+      // Actualizar progreso
+      state.progressPct = result.progress_pct || 0;
+      state.missingFields = result.missing_fields || [];
+      state.isComplete = result.is_complete || false;
       
-      const value = document.createElement('span');
-      value.textContent = state.currentData.datos[field.key];
+      // Actualizar UI
+      updateProgressBar();
       
-      fieldDiv.appendChild(label);
-      fieldDiv.appendChild(document.createTextNode(' '));
-      fieldDiv.appendChild(value);
-      summaryContent.appendChild(fieldDiv);
+      // Mostrar respuesta del asistente
+      addMessage('assistant', result.next_question);
+      
+      // Mostrar sugerencias
+      showSuggestions(result.suggestions || []);
+      
+      // Si está completo, mostrar botón de generar
+      if (state.isComplete) {
+        showGenerateButton();
+      }
+    } else {
+      throw new Error(result.error || 'Unknown error');
     }
-  });
-  
-  summaryDiv.appendChild(summaryContent);
-  
-  // Add generate button
-  const generateButton = document.createElement('button');
-  generateButton.id = 'generate-button';
-  generateButton.className = 'generate-button';
-  generateButton.textContent = 'Generar estudio';
-  generateButton.addEventListener('click', generateStudy);
-  
-  summaryDiv.appendChild(generateButton);
-  
-  // Add to chat
-  const messageDiv = document.createElement('div');
-  messageDiv.className = 'message assistant-message';
-  messageDiv.appendChild(summaryDiv);
-  
-  chatContainer.appendChild(messageDiv);
-  chatContainer.scrollTop = chatContainer.scrollHeight;
+    
+  } catch (error) {
+    console.error('Error analyzing conversation:', error);
+    addMessage('assistant', 'Lo siento, hubo un error al procesar tu respuesta. Por favor, intenta de nuevo.');
+  } finally {
+    state.isLoading = false;
+    showLoading(false);
+  }
 }
 
-// Generate study
+// ── Envío de mensajes ────────────────────────────────────────────
+
+function sendMessage() {
+  const message = userInput.value.trim();
+  if (!message || state.isLoading) return;
+  
+  // Agregar mensaje del usuario
+  addMessage('user', message);
+  userInput.value = '';
+  
+  // Limpiar sugerencias
+  clearSuggestions();
+  
+  // Enviar al análisis IA
+  analyzeConversation();
+}
+
+// ── Generación de estudio ────────────────────────────────────────
+
 async function generateStudy() {
-  const generateButton = document.getElementById('generate-button');
   if (!generateButton) return;
   
-  // Disable button and show loading
   generateButton.disabled = true;
   generateButton.textContent = 'Generando...';
-  
-  // Add required fields if missing
-  if (!state.currentData.datos.contacto_nombre) {
-    state.currentData.datos.contacto_nombre = 'Cliente';
-  }
-  
-  if (!state.currentData.datos.contacto_email) {
-    state.currentData.datos.contacto_email = 'cliente@ejemplo.cl';
-  }
   
   try {
     const response = await fetch('https://rw-intake.rw-consulting.workers.dev/generate', {
@@ -385,7 +201,7 @@ async function generateStudy() {
     const result = await response.json();
     
     if (result.success) {
-      // Show success message
+      // Mostrar éxito
       const successDiv = document.createElement('div');
       successDiv.className = 'success-message';
       
@@ -402,60 +218,137 @@ async function generateStudy() {
       infoText.textContent = 'El estudio está pendiente de revisión. Te contactaremos por email cuando esté listo.';
       successDiv.appendChild(infoText);
       
-      // Add to chat
+      // Agregar al chat
       const messageDiv = document.createElement('div');
       messageDiv.className = 'message assistant-message';
       messageDiv.appendChild(successDiv);
-      
       chatContainer.appendChild(messageDiv);
-      chatContainer.scrollTop = chatContainer.scrollHeight;
+      scrollToBottom();
       
-      // Remove generate button
+      // Remover botón de generar
       generateButton.remove();
     } else {
-      throw new Error(result.error || 'Error desconocido');
+      throw new Error(result.error || 'Unknown error');
     }
+    
   } catch (error) {
     console.error('Error generating study:', error);
     
-    // Fallback to simulation mode
-    console.warn('Worker not available, using simulation mode for generation');
+    // Mostrar error
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'error-message';
     
-    // Show success message with simulated data
-    const successDiv = document.createElement('div');
-    successDiv.className = 'success-message';
+    const errorTitle = document.createElement('h3');
+    errorTitle.textContent = '❌ Error al generar el estudio';
+    errorDiv.appendChild(errorTitle);
     
-    const successTitle = document.createElement('h3');
-    successTitle.textContent = '✅ Estudio generado correctamente (modo simulación)';
-    successDiv.appendChild(successTitle);
+    const errorText = document.createElement('p');
+    errorText.textContent = 'Hubo un error al generar tu estudio. Por favor, intenta de nuevo o contacta a soporte.';
+    errorDiv.appendChild(errorText);
     
-    const successText = document.createElement('p');
-    successText.textContent = 'Tu estudio ha sido generado con el código: EST-2026-TEST-1234 (modo simulación)';
-    successDiv.appendChild(successText);
-    
-    const infoText = document.createElement('p');
-    infoText.className = 'info-text';
-    infoText.textContent = 'El estudio está pendiente de revisión. En producción, esto generaría un estudio real.';
-    successDiv.appendChild(infoText);
-    
-    // Add to chat
+    // Agregar al chat
     const messageDiv = document.createElement('div');
     messageDiv.className = 'message assistant-message';
-    messageDiv.appendChild(successDiv);
-    
+    messageDiv.appendChild(errorDiv);
     chatContainer.appendChild(messageDiv);
-    chatContainer.scrollTop = chatContainer.scrollHeight;
+    scrollToBottom();
     
-    // Remove generate button
-    generateButton.remove();
+    // Rehabilitar botón
+    generateButton.disabled = false;
+    generateButton.textContent = 'Generar estudio';
   }
 }
 
-// Add initial options to first message
-state.messages[0].options = [
-  { text: 'Tengo un proyecto por construir y quiero saber cómo posicionar precios', value: 'tipo1' },
-  { text: 'Tengo un proyecto activo y quiero compararlo con el mercado', value: 'tipo2' }
-];
+// ── UI Helpers ───────────────────────────────────────────────────
 
-// Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', initChat);
+function addMessage(role, content) {
+  const messageDiv = document.createElement('div');
+  messageDiv.className = `message ${role}-message`;
+  
+  const bubble = document.createElement('div');
+  bubble.className = 'chat-bubble';
+  bubble.textContent = content;
+  
+  messageDiv.appendChild(bubble);
+  chatContainer.appendChild(messageDiv);
+  
+  // Guardar en historial
+  state.messages.push({ role, content });
+  
+  scrollToBottom();
+}
+
+function createSuggestionChip(text) {
+  const chip = document.createElement('div');
+  chip.className = 'suggestion-chip';
+  chip.textContent = text;
+  return chip;
+}
+
+function showSuggestions(suggestions) {
+  clearSuggestions();
+  
+  if (!suggestionsContainer || suggestions.length === 0) return;
+  
+  suggestions.forEach(suggestion => {
+    const chip = createSuggestionChip(suggestion);
+    chip.addEventListener('click', () => {
+      userInput.value = suggestion;
+      sendMessage();
+    });
+    suggestionsContainer.appendChild(chip);
+  });
+  
+  suggestionsContainer.style.display = 'block';
+}
+
+function clearSuggestions() {
+  if (suggestionsContainer) {
+    suggestionsContainer.innerHTML = '';
+    suggestionsContainer.style.display = 'none';
+  }
+}
+
+function showGenerateButton() {
+  if (!generateButton) return;
+  
+  generateButton.style.display = 'block';
+  
+  // Agregar mensaje del asistente
+  addMessage('assistant', '¡Perfecto! Ya tengo toda la información necesaria. Puedes generar tu estudio ahora.');
+}
+
+function updateProgressBar() {
+  if (progressFill) {
+    progressFill.style.width = `${state.progressPct}%`;
+  }
+}
+
+function showLoading(show) {
+  const loadingIndicator = document.getElementById('loading-indicator');
+  if (loadingIndicator) {
+    loadingIndicator.style.display = show ? 'flex' : 'none';
+  }
+  
+  if (sendButton) {
+    sendButton.disabled = show;
+  }
+  
+  if (userInput) {
+    userInput.disabled = show;
+  }
+}
+
+function scrollToBottom() {
+  setTimeout(() => {
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+  }, 100);
+}
+
+// ── Inicializar cuando el DOM esté listo ──────────────────────────
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
