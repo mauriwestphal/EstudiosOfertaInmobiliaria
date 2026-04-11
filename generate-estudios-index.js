@@ -27,11 +27,11 @@ function generarIndice() {
         const estudio = JSON.parse(content);
         
         estudios.push({
-          codigo: estudio.codigo || path.basename(file, '.json'),
-          fecha_creacion: estudio.fecha_creacion || estudio.metadata?.fecha_creacion || null,
-          tipo: estudio.tipo || null,
-          proyecto: estudio.proyecto?.nombre || null,
-          inmobiliaria: estudio.cliente?.nombre || null
+          codigo: estudio.meta?.codigo || path.basename(file, '.json'),
+          fecha_creacion: estudio.meta?.fecha || null,
+          proyecto: estudio.meta?.proyecto || null,
+          inmobiliaria: estudio.meta?.cliente || estudio.meta?.inmobiliaria || null,
+          direccion: estudio.meta?.direccion || null,
         });
       } catch (error) {
         console.warn(`Error procesando ${file}:`, error.message);

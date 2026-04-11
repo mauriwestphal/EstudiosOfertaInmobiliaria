@@ -253,13 +253,6 @@
     display: block;
   }
 
-  .estudios-title {
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--deep-ink);
-    margin-bottom: 16px;
-  }
-
   .estudio-item {
     display: flex;
     align-items: center;
@@ -279,40 +272,120 @@
     box-shadow: var(--shadow-sm);
   }
 
-  .estudio-info {
-    flex: 1;
+  /* welcome banner */
+  .welcome-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 18px;
+    background: var(--teal-light);
+    border: 1px solid var(--border-solid);
+    border-radius: 8px;
+    margin-bottom: 20px;
   }
-
-  .estudio-codigo {
-    font-weight: 600;
-    color: var(--teal);
-    font-size: 0.95rem;
-    margin-bottom: 4px;
+  .welcome-greeting {
+    font-size: .92rem;
+    color: var(--deep-ink);
+    margin-bottom: 2px;
   }
-
-  .estudio-fecha {
-    font-size: 0.8rem;
+  .welcome-greeting strong { font-weight: 700; }
+  .welcome-empresa {
+    font-size: .78rem;
     color: var(--text-muted);
   }
-
-  .estudio-action {
-    margin-left: 16px;
+  .welcome-badge {
+    flex-shrink: 0;
+    padding: 4px 11px;
+    background: var(--teal);
+    color: #fff;
+    border-radius: 20px;
+    font-size: .75rem;
+    font-weight: 600;
+    white-space: nowrap;
   }
 
+  /* study card fields */
+  .estudio-info {
+    flex: 1;
+    min-width: 0;
+  }
+  .estudio-proyecto {
+    font-weight: 700;
+    font-size: .95rem;
+    color: var(--deep-ink);
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+  .estudio-meta-row {
+    font-size: .75rem;
+    font-weight: 600;
+    color: var(--teal);
+    letter-spacing: .02em;
+    margin-bottom: 4px;
+  }
+  .estudio-inmobiliaria {
+    font-size: .82rem;
+    color: var(--text-secondary);
+    margin-bottom: 2px;
+  }
+  .estudio-direccion {
+    font-size: .76rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* action buttons */
+  .estudio-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-left: 16px;
+    flex-shrink: 0;
+    min-width: 110px;
+  }
   .btn-ver {
-    padding: 8px 16px;
+    padding: 8px 14px;
     background: var(--teal);
     color: var(--text-on-teal);
     border: none;
     border-radius: 6px;
-    font-size: 0.85rem;
+    font-size: .84rem;
     font-weight: 500;
     cursor: pointer;
     transition: background .2s;
+    width: 100%;
   }
+  .btn-ver:hover { background: var(--teal-dark); }
 
-  .btn-ver:hover {
-    background: var(--teal-dark);
+  .btn-copy {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 7px 10px;
+    background: transparent;
+    color: var(--teal);
+    border: 1px solid var(--border-solid);
+    border-radius: 6px;
+    font-family: 'Urbanist', sans-serif;
+    font-size: .82rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all .2s;
+    width: 100%;
+    white-space: nowrap;
+  }
+  .btn-copy:hover {
+    background: var(--teal-light);
+    border-color: var(--teal);
+  }
+  .btn-copy.copied {
+    background: #ecfdf5;
+    border-color: #6ee7b7;
+    color: #059669;
   }
 
   .no-estudios {
@@ -357,14 +430,13 @@
       flex-direction: column;
       align-items: flex-start;
     }
-    .estudio-action {
+    .estudio-actions {
+      flex-direction: row;
       margin-left: 0;
       margin-top: 12px;
       width: 100%;
     }
-    .btn-ver {
-      width: 100%;
-    }
+    .btn-ver, .btn-copy { flex: 1; }
   }
 </style>
 </head>
@@ -414,7 +486,13 @@
     </div>
 
     <div class="estudios-container" id="estudios-container">
-      <h3 class="estudios-title" id="estudios-title">Tus estudios</h3>
+      <div class="welcome-banner">
+        <div class="welcome-info">
+          <div class="welcome-greeting">Bienvenido/a, <strong id="welcome-nombre"></strong></div>
+          <div id="welcome-empresa" class="welcome-empresa"></div>
+        </div>
+        <div id="welcome-count" class="welcome-badge"></div>
+      </div>
       <div id="estudios-list"></div>
       <a href="#" class="back-link" onclick="volverAlLogin()">← Ingresar otro correo</a>
     </div>
@@ -432,7 +510,6 @@
   const loginSection = document.getElementById('login-section');
   const estudiosContainer = document.getElementById('estudios-container');
   const estudiosList = document.getElementById('estudios-list');
-  const estudiosTitle = document.getElementById('estudios-title');
 
   emailInput.addEventListener('input', () => errorMsg.classList.remove('show'));
 
@@ -525,9 +602,28 @@
     }
   }
 
+  function formatearFecha(fecha) {
+    if (!fecha) return null;
+    const match = fecha.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    if (match) {
+      const [, year, month, day] = match;
+      const meses = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+      return `${parseInt(day)} ${meses[parseInt(month)-1]} ${year}`;
+    }
+    return fecha;
+  }
+
   function mostrarEstudiosCliente(cliente, estudios) {
     btnAcceder.classList.remove('loading');
-    
+
+    // Bienvenida
+    document.getElementById('welcome-nombre').textContent = cliente.nombre || cliente.email;
+    const empresaEl = document.getElementById('welcome-empresa');
+    empresaEl.textContent = cliente.empresa || '';
+    empresaEl.style.display = cliente.empresa ? '' : 'none';
+    document.getElementById('welcome-count').textContent =
+      `${estudios.length} ${estudios.length === 1 ? 'estudio' : 'estudios'}`;
+
     if (estudios.length === 0) {
       estudiosList.innerHTML = `
         <div class="no-estudios">
@@ -536,30 +632,66 @@
         </div>
       `;
     } else {
-      estudiosTitle.textContent = `Tus estudios (${estudios.length})`;
-      
-      const estudiosHTML = estudios.map(estudio => `
-        <div class="estudio-item">
-          <div class="estudio-info">
-            <div class="estudio-codigo">${estudio.codigo}</div>
-            <div class="estudio-fecha">${estudio.fecha_creacion || 'Fecha no disponible'}</div>
+      const estudiosHTML = estudios.map(estudio => {
+        const fecha = formatearFecha(estudio.fecha_creacion);
+        const metaRow = [estudio.codigo, fecha].filter(Boolean).join(' · ');
+        return `
+          <div class="estudio-item">
+            <div class="estudio-info">
+              ${estudio.proyecto ? `<div class="estudio-proyecto">${estudio.proyecto}</div>` : ''}
+              <div class="estudio-meta-row">${metaRow}</div>
+              ${estudio.inmobiliaria ? `<div class="estudio-inmobiliaria">${estudio.inmobiliaria}</div>` : ''}
+              ${estudio.direccion ? `<div class="estudio-direccion">${estudio.direccion}</div>` : ''}
+            </div>
+            <div class="estudio-actions">
+              <button class="btn-ver" type="button" data-codigo="${estudio.codigo}">Ver estudio</button>
+              <button class="btn-copy" type="button" data-codigo="${estudio.codigo}" title="Copiar link">
+                <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+                  <rect x="4.5" y="4.5" width="7" height="7" rx="1.2" stroke="currentColor" stroke-width="1.2"/>
+                  <path d="M8.5 4.5V2.8A1.3 1.3 0 0 0 7.2 1.5H2.8A1.3 1.3 0 0 0 1.5 2.8v4.4A1.3 1.3 0 0 0 2.8 8.5H4.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                </svg>
+                <span class="btn-copy-label">Copiar link</span>
+              </button>
+            </div>
           </div>
-          <div class="estudio-action">
-            <button class="btn-ver" type="button" data-codigo="${estudio.codigo}">Ver estudio</button>
-          </div>
-        </div>
-      `).join('');
-
+        `;
+      }).join('');
       estudiosList.innerHTML = estudiosHTML;
-
-      estudiosList.querySelectorAll('.btn-ver').forEach(btn => {
-        btn.addEventListener('click', () => verEstudio(btn.dataset.codigo));
-      });
     }
-    
-    // Mostrar sección de estudios
+
+    estudiosList.querySelectorAll('.btn-ver').forEach(btn => {
+      btn.addEventListener('click', () => verEstudio(btn.dataset.codigo));
+    });
+    estudiosList.querySelectorAll('.btn-copy').forEach(btn => {
+      btn.addEventListener('click', () => copiarLink(btn.dataset.codigo, btn));
+    });
+
     loginSection.style.display = 'none';
     estudiosContainer.classList.add('show');
+  }
+
+  async function copiarLink(codigo, btn) {
+    const url = new URL(`viewer.html?codigo=${codigo}`, window.location.href).href;
+    try {
+      await navigator.clipboard.writeText(url);
+    } catch(e) {
+      const input = document.createElement('input');
+      input.value = url;
+      document.body.appendChild(input);
+      input.select();
+      document.execCommand('copy');
+      document.body.removeChild(input);
+    }
+    const label = btn.querySelector('.btn-copy-label');
+    const icon = btn.querySelector('svg');
+    btn.classList.add('copied');
+    label.textContent = '¡Copiado!';
+    icon.style.display = 'none';
+    setTimeout(() => {
+      btn.classList.remove('copied');
+      label.textContent = 'Copiar link';
+      icon.style.display = '';
+    }, 2000);
   }
 
   function verEstudio(codigo) {
