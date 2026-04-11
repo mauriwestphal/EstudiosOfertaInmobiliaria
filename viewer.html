@@ -1432,23 +1432,82 @@ function renderGraficos(d) {
   const hasPrecios = d.precios_base?.length;
   const proyectos  = [...new Set(d.competencia.map(r => r.proyecto))];
 
+  // ── Destaque proyecto evaluado ────────────────────────────────────
+  // Activar con "destacar_proyecto_evaluado": true en el JSON
+  const DESTACAR = d.meta?.destacar_proyecto_evaluado === true;
+  const EM_NOMBRE = d.proyecto_evaluado?.nombre || null;
+  // Colores destaque (warm gold del theme + teal)
+  const EM_COLOR        = 'rgba(196,154,60,1)';      // --warm sólido
+  const EM_COLOR_SOFT   = 'rgba(196,154,60,0.18)';   // fondo suave
+  const EM_BORDER       = '#C49A3C';
+  const EM_LABEL_SUFFIX = ' ★';
+
   // Gradient: value-based opacity 0.18→1.0; with highlight: selected=1.0, others=0.15
-  function grad(vals, r, g, b, hiIdx = null) {
+  // Si DESTACAR: el bar del proyecto evaluado lleva color EM_COLOR; el resto grad normal
+  function grad(vals, r, g, b, hiIdx = null, labels = null) {
     const min = Math.min(...vals), max = Math.max(...vals), range = max - min || 1;
     return vals.map((v, i) => {
+      // Destaque del proyecto evaluado por nombre de label
+      if (DESTACAR && EM_NOMBRE && labels && labels[i] &&
+          labels[i].toString().includes(EM_NOMBRE.substring(0, 8))) {
+        return EM_COLOR;
+      }
       if (hiIdx !== null) return i === hiIdx ? `rgba(${r},${g},${b},1)` : `rgba(${r},${g},${b},0.15)`;
       return `rgba(${r},${g},${b},${(0.18 + ((v - min) / range) * 0.82).toFixed(2)})`;
     });
+  }
+
+  // Construye datos de competencia aumentados con el proyecto evaluado (si DESTACAR)
+  // Devuelve { comp: array aumentado, emIdx: índice donde está EM o null }
+  function buildCompWithEM(rawComp) {
+    if (!DESTACAR || !d.proyecto_evaluado) return { comp: rawComp, emIdx: null };
+    const pe = d.proyecto_evaluado;
+
+    // Calcular UF/m2 promedio del proyecto evaluado desde sus tipologías del mix
+    // Si no tiene uf_m2_neto_depto, intentar calcularlo
+    const emUFm2 = pe.uf_m2_neto_depto ?? null;
+    if (!emUFm2) return { comp: rawComp, emIdx: null };
+
+    // Calcular precio promedio y disponibles del proyecto evaluado
+    const emPrecio = pe.precio_promedio_uf ?? null;
+
+    // Crear filas sintéticas para el proyecto evaluado (una por tipología del mix)
+    const emRows = (pe.mix_unidades || []).map(mix => {
+      // UF/m2 por tipología: usar uf_m2_neto_depto como referencia global
+      // (si el JSON tuviera precios por tipología se podrían usar)
+      return {
+        proyecto:       pe.nombre,
+        zona:           pe.sector?.toLowerCase().replace(/ /g,'_') || 'proyecto_evaluado',
+        dorms:          mix.tipo?.split('+')[0] || '',
+        banos:          mix.tipo?.split('+')[1] || '',
+        uf_m2_lista:    emUFm2,
+        precio_lista_uf: emPrecio,
+        disponibles:    null,   // no se incluye en stock de competencia
+        _esEM:          true,
+      };
+    });
+
+    const comp = [...rawComp, ...emRows];
+    return { comp, emIdx: rawComp.length };  // primer índice EM
   }
 
   let activeFilter = null; // { dim: 'tipo'|'zona'|'proyecto', value }
   let currentComp  = d.competencia;
   let charts       = {};
 
+  // Leyenda extra si DESTACAR
+  const legendaEM = DESTACAR && EM_NOMBRE
+    ? `<span style="display:inline-flex;align-items:center;gap:5px;font-size:.78rem;color:var(--warm-dark);background:var(--warm-light);border:1px solid rgba(196,154,60,.3);border-radius:100px;padding:3px 10px;margin-left:8px">
+        <span style="width:10px;height:10px;border-radius:2px;background:var(--warm);flex-shrink:0"></span>
+        ${EM_NOMBRE} (evaluado)
+      </span>`
+    : '';
+
   body.innerHTML = `
-    <div class="chart-filter">
+    <div class="chart-filter" style="align-items:center">
       <button class="chart-filter-btn active" data-proyecto="__all__">Todos</button>
       ${proyectos.map(p => `<button class="chart-filter-btn" data-proyecto="${p.replace(/"/g,'&quot;')}">${p}</button>`).join('')}
+      ${legendaEM}
     </div>
     <div class="chart-xfilter" id="chart-xfilter" style="display:none">
       <span class="chart-xfilter-label" id="chart-xfilter-label"></span>
@@ -1490,27 +1549,80 @@ function renderGraficos(d) {
     buildCharts(currentComp);
   }
 
+  // Helpers destaque EM ─────────────────────────────────────────────
+  // Devuelve true si el label pertenece al proyecto evaluado
+  function isEM(label) {
+    if (!DESTACAR || !EM_NOMBRE) return false;
+    return label && label.toString().replace(' ★','') === EM_NOMBRE;
+  }
+
+  // Colores por array de labels: EM recibe dorado, resto grad normal
+  function colorsByLabel(labels, vals, r, g, b, hiIdx = null) {
+    const min = Math.min(...vals), max = Math.max(...vals), range = max - min || 1;
+    return labels.map((lbl, i) => {
+      if (isEM(lbl)) return EM_COLOR;
+      if (hiIdx !== null) return i === hiIdx ? `rgba(${r},${g},${b},1)` : `rgba(${r},${g},${b},0.15)`;
+      return `rgba(${r},${g},${b},${(0.18 + ((vals[i] - min) / range) * 0.82).toFixed(2)})`;
+    });
+  }
+
+  // Etiqueta con estrella si es EM
+  function emLabel(name) {
+    if (DESTACAR && EM_NOMBRE && name === EM_NOMBRE) return name + EM_LABEL_SUFFIX;
+    return name;
+  }
+
+  // tick color callback: dorado si es EM
+  function tickColor(labels) {
+    return function(ctx) {
+      const lbl = labels[ctx.index] || '';
+      return isEM(lbl) ? EM_BORDER : '#555';
+    };
+  }
+
+  // Opciones comunes tooltip
+  const ttDefaults = {
+    backgroundColor: '#2E2E38',
+    titleColor: '#F7F9F9',
+    bodyColor: '#D0D8D8',
+    cornerRadius: 6,
+    padding: 8,
+  };
+
   function buildCharts(comp) {
     Object.values(charts).forEach(c => c.destroy());
     charts = {};
 
-    // Source chart (same dim as filter): use full comp + highlight selected bar
-    // Target charts (different dim):     use filtered comp
-    const src = activeFilter?.dim;
-    const fc  = applyFilter(comp);
+    // ── Aumentar comp con proyecto evaluado si DESTACAR ───────────
+    const { comp: compAug } = buildCompWithEM(comp);
+    const compFull = compAug; // versión aumentada para charts 1,2,4
 
-    // ── Chart 1: Precio lista por distribución — teal ─────────────
+    const src = activeFilter?.dim;
+    const fc  = applyFilter(comp);          // filtrado solo sobre competencia real
+    const fcAug = applyFilter(compAug);     // filtrado sobre comp aumentada
+
+    // ── Chart 1: Precio lista por distribución ────────────────────
     if (hasPrecios) {
       const vals1 = d.precios_base.map(r => r.precio_medio);
       charts.c1 = new Chart(document.getElementById('chart-1'), {
         type: 'bar',
-        data: { labels: d.precios_base.map(r => r.codigo), datasets: [{ label:'Precio lista (UF)', data:vals1, backgroundColor:grad(vals1,29,106,106), borderRadius:4, borderSkipped:false }] },
-        options: { responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false}, tooltip:{callbacks:{label:ctx=>`UF ${fmtUF(ctx.raw)}`}} }, scales:{ x:{ticks:{font:{size:9},maxRotation:45,color:'#555'},grid:{display:false}}, y:{ticks:{font:{size:9},callback:v=>`UF ${fmtUF(v)}`,color:'#555'},grid:{color:'rgba(0,0,0,.05)'}} } }
+        data: {
+          labels: d.precios_base.map(r => r.codigo),
+          datasets: [{ label:'Precio lista (UF)', data:vals1,
+            backgroundColor: grad(vals1,29,106,106), borderRadius:4, borderSkipped:false }]
+        },
+        options: {
+          responsive:true, maintainAspectRatio:false,
+          plugins:{ legend:{display:false}, tooltip:{ ...ttDefaults, callbacks:{label:ctx=>`UF ${fmtUF(ctx.raw)}`}} },
+          scales:{ x:{ticks:{font:{size:9},maxRotation:45,color:'#555'},grid:{display:false}},
+                   y:{ticks:{font:{size:9},callback:v=>`UF ${fmtUF(v)}`,color:'#555'},grid:{color:'rgba(0,0,0,.05)'}} }
+        }
       });
     } else {
-      const c1data  = (src && src !== 'tipo') ? fc : comp;
+      // Usa comp aumentada: EM aparece como tipología extra
+      const c1src   = (src && src !== 'tipo') ? fcAug : compFull;
       const distMap = {};
-      c1data.forEach(r => {
+      c1src.forEach(r => {
         const key = `${r.dorms||''} ${r.banos||''}`.trim();
         if (!distMap[key]) distMap[key] = [];
         if (r.precio_lista_uf != null) distMap[key].push(r.precio_lista_uf);
@@ -1518,41 +1630,71 @@ function renderGraficos(d) {
       const labels1 = Object.keys(distMap).filter(k => distMap[k].length);
       const vals1   = labels1.map(k => Math.round(distMap[k].reduce((a,b)=>a+b,0)/distMap[k].length));
       const hiIdx1  = src === 'tipo' ? labels1.indexOf(activeFilter.value) : null;
+
+      // Colores: si DESTACAR, barras donde UF promedio pertenece al EM se doran
+      // (identificación por tipología no es unívoca, usamos grad normal + plugin afterDraw)
+      const bgColors1 = grad(vals1,29,106,106,hiIdx1);
       charts.c1 = new Chart(document.getElementById('chart-1'), {
         type: 'bar',
-        data: { labels: labels1, datasets: [{ label:'Precio lista (UF)', data:vals1, backgroundColor:grad(vals1,29,106,106,hiIdx1), borderRadius:4, borderSkipped:false }] },
+        data: { labels: labels1, datasets: [{ label:'Precio lista (UF)', data:vals1,
+          backgroundColor: bgColors1, borderRadius:4, borderSkipped:false }] },
         options: {
           responsive:true, maintainAspectRatio:false,
           onClick: (_, elems) => { if (elems.length) setFilter('tipo', labels1[elems[0].index]); },
-          plugins:{ legend:{display:false}, tooltip:{callbacks:{label:ctx=>`UF ${fmtUF(ctx.raw)}`}} },
-          scales:{ x:{ticks:{font:{size:9},color:'#555'},grid:{display:false}}, y:{ticks:{font:{size:9},callback:v=>`UF ${fmtUF(v)}`,color:'#555'},grid:{color:'rgba(0,0,0,.05)'}} }
+          plugins:{ legend:{display:false}, tooltip:{ ...ttDefaults, callbacks:{label:ctx=>`UF ${fmtUF(ctx.raw)}`}} },
+          scales:{ x:{ticks:{font:{size:9},color:'#555'},grid:{display:false}},
+                   y:{ticks:{font:{size:9},callback:v=>`UF ${fmtUF(v)}`,color:'#555'},grid:{color:'rgba(0,0,0,.05)'}} }
         }
       });
     }
 
-    // ── Chart 2: UF/m² por zona — warm gold ──────────────────────
-    const c2data    = (src && src !== 'zona') ? fc : comp;
+    // ── Chart 2: UF/m² por zona ───────────────────────────────────
+    // Zona del proyecto evaluado: usa pe.sector o "proyecto_evaluado"
+    const c2src     = (src && src !== 'zona') ? fcAug : compFull;
     const zonaUFMap = {};
-    c2data.forEach(r => {
+    c2src.forEach(r => {
       const z = r.zona || 'sin zona';
       if (!zonaUFMap[z]) zonaUFMap[z] = [];
       if (r.uf_m2_lista != null) zonaUFMap[z].push(r.uf_m2_lista);
     });
     const zonaUFKeys = Object.keys(zonaUFMap);
-    const vals2  = zonaUFKeys.map(k => zonaUFMap[k].length ? Math.round(zonaUFMap[k].reduce((a,b)=>a+b,0)/zonaUFMap[k].length*10)/10 : 0);
-    const hiIdx2 = src === 'zona' ? zonaUFKeys.indexOf(activeFilter.value) : null;
+    const vals2      = zonaUFKeys.map(k => zonaUFMap[k].length
+      ? Math.round(zonaUFMap[k].reduce((a,b)=>a+b,0)/zonaUFMap[k].length*10)/10 : 0);
+    const hiIdx2     = src === 'zona' ? zonaUFKeys.indexOf(activeFilter.value) : null;
+
+    // Determinar si alguna zona es del EM (zona del proyecto_evaluado)
+    const emZona = DESTACAR && d.proyecto_evaluado?.sector
+      ? d.proyecto_evaluado.sector.toLowerCase().replace(/ /g,'_')
+      : null;
+    const bg2 = zonaUFKeys.map((k, i) => {
+      if (DESTACAR && emZona && k === emZona) return EM_COLOR;
+      if (hiIdx2 !== null) return i === hiIdx2 ? `rgba(196,154,60,1)` : `rgba(196,154,60,0.15)`;
+      const range2 = Math.max(...vals2) - Math.min(...vals2) || 1;
+      return `rgba(196,154,60,${(0.18 + ((vals2[i] - Math.min(...vals2)) / range2) * 0.82).toFixed(2)})`;
+    });
+    const labels2 = zonaUFKeys.map(k => {
+      const lbl = capitalize(k);
+      if (DESTACAR && emZona && k === emZona) return lbl + ' ★';
+      return lbl;
+    });
     charts.c2 = new Chart(document.getElementById('chart-2'), {
       type: 'bar',
-      data: { labels: zonaUFKeys.map(capitalize), datasets: [{ label:'UF/m² promedio', data:vals2, backgroundColor:grad(vals2,196,154,60,hiIdx2), borderRadius:4, borderSkipped:false }] },
+      data: { labels: labels2, datasets: [{ label:'UF/m² promedio', data:vals2,
+        backgroundColor: bg2, borderRadius:4, borderSkipped:false }] },
       options: {
         responsive:true, maintainAspectRatio:false,
         onClick: (_, elems) => { if (elems.length) setFilter('zona', zonaUFKeys[elems[0].index]); },
-        plugins:{ legend:{display:false}, tooltip:{callbacks:{label:ctx=>`${fmt(ctx.raw)} UF/m²`}} },
-        scales:{ x:{ticks:{font:{size:9},color:'#555'},grid:{display:false}}, y:{ticks:{font:{size:9},callback:v=>`${fmt(v)}`,color:'#555'},grid:{color:'rgba(0,0,0,.05)'}} }
+        plugins:{ legend:{display:false},
+          tooltip:{ ...ttDefaults, callbacks:{label:ctx=>`${fmt(ctx.raw)} UF/m²`}} },
+        scales:{
+          x:{ ticks:{ font:{size:9}, color: ctx => labels2[ctx.index]?.includes('★') ? EM_BORDER : '#555' },
+              grid:{display:false} },
+          y:{ ticks:{font:{size:9},callback:v=>`${fmt(v)}`,color:'#555'},grid:{color:'rgba(0,0,0,.05)'} }
+        }
       }
     });
 
-    // ── Chart 3: Stock disponible por zona — blue ─────────────────
+    // ── Chart 3: Stock disponible por zona — sin EM (no tiene disponibles propios) ──
     const c3data      = (src && src !== 'zona') ? fc : comp;
     const zonaDispMap = {};
     const seenProy    = new Set();
@@ -1560,43 +1702,106 @@ function renderGraficos(d) {
       const z   = r.zona || 'sin zona';
       const key = r.proyecto + '|' + z;
       if (!zonaDispMap[z]) zonaDispMap[z] = 0;
-      if (!seenProy.has(key)) { seenProy.add(key); if (r.disponibles != null) zonaDispMap[z] += r.disponibles; }
+      if (!seenProy.has(key)) {
+        seenProy.add(key);
+        if (r.disponibles != null) zonaDispMap[z] += r.disponibles;
+      }
     });
+    // Añadir zona del EM con disponibles del proyecto evaluado si DESTACAR
+    if (DESTACAR && d.proyecto_evaluado && emZona) {
+      // Calcular disponibles del proyecto evaluado: total - (promesados + reservados)
+      // Si no se sabe, usar total_unidades como indicativo o null
+      const pe = d.proyecto_evaluado;
+      // Intentar derivar disponibles (puede no existir en el JSON)
+      const emDisp = pe.disponibles_estimados ?? null;
+      if (emDisp != null) {
+        if (!zonaDispMap[emZona]) zonaDispMap[emZona] = 0;
+        zonaDispMap[emZona] += emDisp;
+      }
+    }
     const zonaDispKeys = Object.keys(zonaDispMap);
-    const vals3  = zonaDispKeys.map(k => zonaDispMap[k]);
-    const hiIdx3 = src === 'zona' ? zonaDispKeys.indexOf(activeFilter.value) : null;
+    const vals3        = zonaDispKeys.map(k => zonaDispMap[k]);
+    const hiIdx3       = src === 'zona' ? zonaDispKeys.indexOf(activeFilter.value) : null;
+    const bg3 = zonaDispKeys.map((k, i) => {
+      if (DESTACAR && emZona && k === emZona) return EM_COLOR;
+      if (hiIdx3 !== null) return i === hiIdx3 ? `rgba(74,144,217,1)` : `rgba(74,144,217,0.15)`;
+      const range3 = Math.max(...vals3) - Math.min(...vals3) || 1;
+      return `rgba(74,144,217,${(0.18 + ((vals3[i] - Math.min(...vals3)) / range3) * 0.82).toFixed(2)})`;
+    });
+    const labels3 = zonaDispKeys.map(k => {
+      const lbl = capitalize(k);
+      if (DESTACAR && emZona && k === emZona) return lbl + ' ★';
+      return lbl;
+    });
     charts.c3 = new Chart(document.getElementById('chart-3'), {
       type: 'bar',
-      data: { labels: zonaDispKeys.map(capitalize), datasets: [{ label:'Disponibles', data:vals3, backgroundColor:grad(vals3,74,144,217,hiIdx3), borderRadius:4, borderSkipped:false }] },
+      data: { labels: labels3, datasets: [{ label:'Disponibles', data:vals3,
+        backgroundColor: bg3, borderRadius:4, borderSkipped:false }] },
       options: {
         responsive:true, maintainAspectRatio:false,
         onClick: (_, elems) => { if (elems.length) setFilter('zona', zonaDispKeys[elems[0].index]); },
-        plugins:{ legend:{display:false}, tooltip:{callbacks:{label:ctx=>`${ctx.raw} unidades`}} },
-        scales:{ x:{ticks:{font:{size:9},color:'#555'},grid:{display:false}}, y:{ticks:{font:{size:9},color:'#555'},grid:{color:'rgba(0,0,0,.05)'}} }
+        plugins:{ legend:{display:false},
+          tooltip:{ ...ttDefaults, callbacks:{label:ctx=>`${ctx.raw} unidades`}} },
+        scales:{
+          x:{ ticks:{ font:{size:9}, color: ctx => labels3[ctx.index]?.includes('★') ? EM_BORDER : '#555' },
+              grid:{display:false} },
+          y:{ ticks:{font:{size:9},color:'#555'},grid:{color:'rgba(0,0,0,.05)'} }
+        }
       }
     });
 
-    // ── Chart 4: UF/m² por proyecto — slate horizontal ────────────
-    const c4data    = (src && src !== 'proyecto') ? fc : comp;
+    // ── Chart 4: UF/m² por proyecto — horizontal ─────────────────
+    // Incluye el proyecto evaluado como barra dorada
+    const c4src     = (src && src !== 'proyecto') ? fcAug : compFull;
     const proyUFMap = {};
-    c4data.forEach(r => {
+    c4src.forEach(r => {
       if (!proyUFMap[r.proyecto]) proyUFMap[r.proyecto] = [];
       if (r.uf_m2_lista != null) proyUFMap[r.proyecto].push(r.uf_m2_lista);
     });
-    const proyKeys = Object.keys(proyUFMap);
-    const vals4    = proyKeys.map(k => Math.round(proyUFMap[k].reduce((a,b)=>a+b,0)/proyUFMap[k].length*10)/10);
-    const labels4  = proyKeys.map(k => k.length > 26 ? k.substring(0,24)+'…' : k);
-    const hiIdx4   = src === 'proyecto' ? proyKeys.indexOf(activeFilter.value) : null;
+    const proyKeys  = Object.keys(proyUFMap);
+    const vals4     = proyKeys.map(k => Math.round(proyUFMap[k].reduce((a,b)=>a+b,0)/proyUFMap[k].length*10)/10);
+
+    // Ordenar por valor ascendente
+    const sorted4   = proyKeys.map((k,i) => ({k, v:vals4[i]})).sort((a,b)=>a.v-b.v);
+    const sKeys4    = sorted4.map(x=>x.k);
+    const sVals4    = sorted4.map(x=>x.v);
+    const labels4   = sKeys4.map(k => {
+      const lbl = emLabel(k.length > 26 ? k.substring(0,24)+'…' : k);
+      return lbl;
+    });
+    const hiIdx4    = src === 'proyecto' ? sKeys4.indexOf(activeFilter.value) : null;
+    const bg4       = colorsByLabel(labels4, sVals4, 46, 46, 56, hiIdx4);
+    const bw4       = labels4.map(l => isEM(l) ? 2 : 0);
+
     document.getElementById('wrap-chart-4').innerHTML = '<canvas id="chart-4"></canvas>';
     charts.c4 = new Chart(document.getElementById('chart-4'), {
       type: 'bar',
-      data: { labels: labels4, datasets: [{ label:'UF/m²', data:vals4, backgroundColor:grad(vals4,46,46,56,hiIdx4), borderRadius:4, borderSkipped:false }] },
+      data: { labels: labels4, datasets: [{
+        label:'UF/m²',
+        data: sVals4,
+        backgroundColor: bg4,
+        borderColor:     labels4.map(l => isEM(l) ? EM_BORDER : 'transparent'),
+        borderWidth:     bw4,
+        borderRadius: 4,
+        borderSkipped: false
+      }]},
       options: {
         responsive:true, maintainAspectRatio:false,
         indexAxis: 'y',
-        onClick: (_, elems) => { if (elems.length) setFilter('proyecto', proyKeys[elems[0].index]); },
-        plugins:{ legend:{display:false}, tooltip:{callbacks:{label:ctx=>`${fmt(ctx.raw)} UF/m²`}} },
-        scales:{ x:{ticks:{font:{size:9},color:'#555'},grid:{color:'rgba(0,0,0,.05)'}}, y:{ticks:{font:{size:9},color:'#555'},grid:{display:false}} }
+        onClick: (_, elems) => { if (elems.length) setFilter('proyecto', sKeys4[elems[0].index]); },
+        plugins:{
+          legend:{display:false},
+          tooltip:{ ...ttDefaults, callbacks:{label:ctx=>`${fmt(ctx.raw)} UF/m²`}}
+        },
+        scales:{
+          x:{ ticks:{font:{size:9},color:'#555'},grid:{color:'rgba(0,0,0,.05)'} },
+          y:{ ticks:{
+                font: ctx => ({ size:9, weight: isEM(labels4[ctx.index]) ? '700' : '400' }),
+                color: ctx => isEM(labels4[ctx.index]) ? EM_BORDER : '#555'
+              },
+              grid:{display:false}
+          }
+        }
       }
     });
   }
@@ -1767,8 +1972,10 @@ function renderResumen(d) {
   html += '</div>';
 
   // Posicionamiento
-  if (rm.puqon_posicionamiento) {
-    const pos = rm.puqon_posicionamiento;
+  // Posicionamiento — buscar la clave dinámica (*_posicionamiento)
+  const posKey = Object.keys(rm).find(k => k.endsWith('_posicionamiento'));
+  if (posKey) {
+    const pos = rm[posKey];
     const comparisons = [];
     if (pos.vs_promedio_1D) comparisons.push({label:'vs. promedio 1D', val:pos.vs_promedio_1D});
     if (pos.vs_promedio_2D) comparisons.push({label:'vs. promedio 2D', val:pos.vs_promedio_2D});

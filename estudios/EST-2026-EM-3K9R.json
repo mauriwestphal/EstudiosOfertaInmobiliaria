@@ -14,7 +14,8 @@
       "formula_ufm2": "Valor UF / (Superficie útil + Terraza / 2)",
       "tipo_proyectos": "Solo proyectos nuevos (excluye usados/reventa)",
       "orientaciones": "Pendiente levantamiento en terreno"
-    }
+    },
+    "destacar_proyecto_evaluado": true
   },
   "proyecto_evaluado": {
     "nombre": "Edificio EntreMares",
