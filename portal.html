@@ -545,12 +545,16 @@
             <div class="estudio-fecha">${estudio.fecha_creacion || 'Fecha no disponible'}</div>
           </div>
           <div class="estudio-action">
-            <button class="btn-ver" onclick="verEstudio('${estudio.codigo}')">Ver estudio</button>
+            <button class="btn-ver" type="button" data-codigo="${estudio.codigo}">Ver estudio</button>
           </div>
         </div>
       `).join('');
-      
+
       estudiosList.innerHTML = estudiosHTML;
+
+      estudiosList.querySelectorAll('.btn-ver').forEach(btn => {
+        btn.addEventListener('click', () => verEstudio(btn.dataset.codigo));
+      });
     }
     
     // Mostrar sección de estudios
@@ -559,8 +563,7 @@
   }
 
   function verEstudio(codigo) {
-    // Guardar en sessionStorage y redirigir
-    sessionStorage.setItem('estudio_codigo', codigo);
+    try { sessionStorage.setItem('estudio_codigo', codigo); } catch(e) {}
     window.location.href = `viewer.html?codigo=${codigo}`;
   }
 
@@ -628,3 +631,6 @@
   window.accederPorEmail = accederPorEmail;
   window.verEstudio = verEstudio;
   window.volverAlLogin = volverAlLogin;
+</script>
+</body>
+</html>
