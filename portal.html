@@ -393,7 +393,7 @@
         <input type="email" id="email" placeholder="tu@empresa.cl" autocomplete="email">
       </div>
 
-      <button id="btn-acceder" onclick="accederPorEmail()">
+      <button id="btn-acceder">
         <span class="btn-text">Acceder a mis estudios</span>
         <div class="spinner"></div>
       </button>
@@ -434,7 +434,6 @@
   const estudiosList = document.getElementById('estudios-list');
   const estudiosTitle = document.getElementById('estudios-title');
 
-  emailInput.addEventListener('keydown', e => { if (e.key === 'Enter') accederPorEmail(); });
   emailInput.addEventListener('input', () => errorMsg.classList.remove('show'));
 
   async function accederPorEmail() {
@@ -609,4 +608,23 @@
     if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
       cargarEstudiosDemo();
     }
+    
+    // Agregar event listener al botón
+    const btnAcceder = document.getElementById('btn-acceder');
+    if (btnAcceder) {
+      btnAcceder.addEventListener('click', accederPorEmail);
+    }
+    
+    // Agregar event listener al input para Enter
+    const emailInput = document.getElementById('email');
+    if (emailInput) {
+      emailInput.addEventListener('keydown', e => { 
+        if (e.key === 'Enter') accederPorEmail(); 
+      });
+    }
   });
+
+  // Hacer las funciones disponibles globalmente
+  window.accederPorEmail = accederPorEmail;
+  window.verEstudio = verEstudio;
+  window.volverAlLogin = volverAlLogin;
