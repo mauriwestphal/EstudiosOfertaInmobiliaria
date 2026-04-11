@@ -1,0 +1,19 @@
+{
+  "clientes": [
+    {
+      "email": "jrotter@dosa.cl",
+      "nombre": "Javier Rotter",
+      "empresa": "Dosa Inmobiliaria",
+      "estudios": [
+        "EST-2025-GC-8F3K",
+        "EST-2026-EM-3K9R",
+        "EST-2026-GV-9X2M",
+        "EST-2026-KI-4V7P",
+        "EST-2026-VK-5R2N"
+      ],
+      "fecha_registro": "2026-04-11",
+      "puede_ver_todos": true,
+      "excluir": ["DEMO-2026-IG-5G2W"]
+    }
+  ]
+}

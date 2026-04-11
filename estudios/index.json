@@ -1,0 +1,48 @@
+{
+  "generado": "2026-04-11T15:57:37.435Z",
+  "total": 6,
+  "estudios": [
+    {
+      "codigo": "DEMO-2026-IG-5G2W",
+      "fecha_creacion": null,
+      "tipo": null,
+      "proyecto": null,
+      "inmobiliaria": null
+    },
+    {
+      "codigo": "EST-2025-GC-8F3K",
+      "fecha_creacion": null,
+      "tipo": null,
+      "proyecto": null,
+      "inmobiliaria": null
+    },
+    {
+      "codigo": "EST-2026-EM-3K9R",
+      "fecha_creacion": null,
+      "tipo": null,
+      "proyecto": null,
+      "inmobiliaria": null
+    },
+    {
+      "codigo": "EST-2026-GV-9X2M",
+      "fecha_creacion": null,
+      "tipo": null,
+      "proyecto": null,
+      "inmobiliaria": null
+    },
+    {
+      "codigo": "EST-2026-KI-4V7P",
+      "fecha_creacion": null,
+      "tipo": null,
+      "proyecto": null,
+      "inmobiliaria": null
+    },
+    {
+      "codigo": "EST-2026-VK-5R2N",
+      "fecha_creacion": null,
+      "tipo": null,
+      "proyecto": null,
+      "inmobiliaria": null
+    }
+  ]
+}

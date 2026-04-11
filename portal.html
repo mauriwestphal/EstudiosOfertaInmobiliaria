@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal Cliente — RW Consulting</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><rect width='20' height='20' rx='4' fill='%231D6A6A'/><rect x='2' y='10' width='4' height='8' fill='white' rx='1'/><rect x='8' y='6' width='4' height='12' fill='white' rx='1'/><rect x='14' y='2' width='4' height='16' fill='white' rx='1'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --teal:           #1D6A6A;
+    --teal-mid:       #177A6C;
+    --teal-light:     #E0F0EF;
+    --teal-dark:      #155A5A;
+    --warm:           #C49A3C;
+    --warm-light:     #FBF4E3;
+    --warm-dark:      #96741E;
+    --deep-ink:       #2E2E38;
+    --ink-mid:        #3A3A48;
+    --mist:           #F7F9F9;
+    --white:          #FFFFFF;
+    --border:         rgba(29, 106, 106, 0.15);
+    --border-solid:   #D8E8E7;
+    --shadow-sm:      0 1px 3px rgba(46, 46, 56, 0.08);
+    --shadow-md:      0 4px 12px rgba(46, 46, 56, 0.10);
+    --shadow-lg:      0 8px 24px rgba(46, 46, 56, 0.12);
+    --text-primary:   #2E2E38;
+    --text-secondary: #5A6B6B;
+    --text-muted:     #6A7B7B;
+    --text-on-dark:   #F7F9F9;
+    --text-on-teal:   #FFFFFF;
+  }
+
+  html, body { height: 100%; }
+
+  body {
+    font-family: 'Urbanist', sans-serif;
+    background: var(--mist);
+    color: var(--text-primary);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  /* ── decorative grid bg ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(29,106,106,.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(29,106,106,.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── header strip ── */
+  header {
+    position: relative;
+    z-index: 1;
+    background: var(--deep-ink);
+    padding: 18px 48px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-bottom: 3px solid var(--teal);
+  }
+
+  .logo-mark {
+    width: 36px; height: 36px;
+    background: var(--teal);
+    border-radius: 6px;
+    display: grid;
+    place-items: center;
+  }
+  .logo-mark svg { width: 20px; height: 20px; }
+
+  .brand {
+    font-family: 'Urbanist', serif;
+    font-size: 1.1rem;
+    color: var(--text-on-dark);
+    letter-spacing: .02em;
+  }
+  .brand-dot { color: var(--teal-light); font-weight: 700; }
+
+  /* ── main container ── */
+  main {
+    flex: 1;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 24px;
+  }
+
+  .card {
+    background: var(--white);
+    border: 1px solid var(--border-solid);
+    border-radius: 12px;
+    box-shadow: var(--shadow-lg);
+    padding: 56px 52px 48px;
+    width: 100%;
+    max-width: 480px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* teal corner accent */
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 120px; height: 4px;
+    background: linear-gradient(90deg, transparent, var(--teal));
+  }
+  .card::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 4px; height: 120px;
+    background: linear-gradient(180deg, var(--teal), transparent);
+  }
+
+  .eyebrow {
+    font-size: .72rem;
+    font-weight: 500;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 12px;
+  }
+
+  h1 {
+    font-family: 'Urbanist', serif;
+    font-size: 2rem;
+    line-height: 1.2;
+    color: var(--deep-ink);
+    margin-bottom: 10px;
+  }
+
+  .subtitle {
+    font-size: .92rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 40px;
+  }
+
+  label {
+    display: block;
+    font-size: .8rem;
+    font-weight: 500;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--deep-ink);
+    margin-bottom: 8px;
+  }
+
+  .input-wrap {
+    position: relative;
+    margin-bottom: 16px;
+  }
+
+  input[type="email"] {
+    width: 100%;
+    padding: 14px 18px;
+    font-family: 'Urbanist', sans-serif;
+    font-size: 1rem;
+    letter-spacing: .06em;
+    border: 1px solid var(--border-solid);
+    border-radius: 8px;
+    background: var(--white);
+    color: var(--text-primary);
+    outline: none;
+    transition: border-color .2s, box-shadow .2s;
+  }
+  input[type="email"]::placeholder { color: var(--text-muted); letter-spacing: .06em; }
+  input[type="email"]:focus {
+    border-color: var(--teal);
+    box-shadow: 0 0 0 3px rgba(29, 106, 106, 0.15);
+  }
+
+  button {
+    width: 100%;
+    padding: 15px;
+    background: var(--teal);
+    color: var(--text-on-teal);
+    font-family: 'Urbanist', sans-serif;
+    font-size: .95rem;
+    font-weight: 500;
+    letter-spacing: .04em;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background .2s, transform .1s;
+    position: relative;
+    overflow: hidden;
+  }
+  button::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--teal-light);
+    transform: scaleX(0);
+    transition: transform .25s;
+  }
+  button:hover { background: var(--teal-mid); }
+  button:hover::after { transform: scaleX(1); }
+  button:active { background: var(--teal-dark); transform: scale(.98); }
+
+  .error-msg {
+    display: none;
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: #fff3f3;
+    border: 1px solid #fca5a5;
+    border-radius: 6px;
+    font-size: .85rem;
+    color: #b91c1c;
+  }
+  .error-msg.show { display: block; }
+
+  /* estudios list */
+  .estudios-container {
+    display: none;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  .estudios-container.show {
+    display: block;
+  }
+
+  .estudios-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--deep-ink);
+    margin-bottom: 16px;
+  }
+
+  .estudio-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    background: var(--mist);
+    border: 1px solid var(--border-solid);
+    border-radius: 8px;
+    margin-bottom: 10px;
+    transition: all .2s;
+  }
+
+  .estudio-item:hover {
+    background: var(--teal-light);
+    border-color: var(--teal);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .estudio-info {
+    flex: 1;
+  }
+
+  .estudio-codigo {
+    font-weight: 600;
+    color: var(--teal);
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+  }
+
+  .estudio-fecha {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .estudio-action {
+    margin-left: 16px;
+  }
+
+  .btn-ver {
+    padding: 8px 16px;
+    background: var(--teal);
+    color: var(--text-on-teal);
+    border: none;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background .2s;
+  }
+
+  .btn-ver:hover {
+    background: var(--teal-dark);
+  }
+
+  .no-estudios {
+    text-align: center;
+    padding: 32px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+
+  .back-link {
+    display: block;
+    margin-top: 24px;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--teal);
+    text-decoration: none;
+  }
+
+  .back-link:hover {
+    text-decoration: underline;
+  }
+
+  /* loading spinner */
+  .spinner {
+    display: none;
+    width: 18px; height: 18px;
+    border: 2px solid rgba(255,255,255,.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin .7s linear infinite;
+    margin: 0 auto;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  button.loading .btn-text { display: none; }
+  button.loading .spinner { display: block; }
+
+  @media (max-width: 520px) {
+    .card { padding: 36px 24px 32px; }
+    h1 { font-size: 1.6rem; }
+    header { padding: 14px 20px; }
+    .estudio-item {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .estudio-action {
+      margin-left: 0;
+      margin-top: 12px;
+      width: 100%;
+    }
+    .btn-ver {
+      width: 100%;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-mark">
+    <svg viewBox="0 0 20 20" fill="none">
+      <rect x="2" y="10" width="4" height="8" fill="white" rx="1"/>
+      <rect x="8" y="6"  width="4" height="12" fill="white" rx="1"/>
+      <rect x="14" y="2" width="4" height="16" fill="white" rx="1"/>
+    </svg>
+  </div>
+  <div class="brand">RW Consulting<span class="brand-dot">.</span></div>
+</header>
+
+<main>
+  <div class="card">
+    <div class="eyebrow">Portal Cliente</div>
+    <h1>Acceso a tus estudios</h1>
+    <p class="subtitle">Ingresa tu correo electrónico para ver todos los estudios de mercado asignados a tu cuenta.</p>
+
+    <div id="login-section">
+      <label for="email">Correo electrónico</label>
+      <div class="input-wrap">
+        <input type="email" id="email" placeholder="tu@empresa.cl" autocomplete="email">
+      </div>
+
+      <button id="btn-acceder" onclick="accederPorEmail()">
+        <span class="btn-text">Acceder a mis estudios</span>
+        <div class="spinner"></div>
+      </button>
+
+      <div class="error-msg" id="error-msg">
+        Correo no registrado. Verifica tu dirección o contacta a tu analista.
+      </div>
+
+      <div class="hint">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <circle cx="7" cy="7" r="6" stroke="#9ca3af" stroke-width="1.2"/>
+          <path d="M7 6.5v4M7 4.5v.5" stroke="#9ca3af" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+        Solo clientes registrados pueden acceder. Si no tienes cuenta, solicita un estudio primero.
+      </div>
+
+      <a href="index.html" class="back-link">← Volver al acceso por código</a>
+    </div>
+
+    <div class="estudios-container" id="estudios-container">
+      <h3 class="estudios-title" id="estudios-title">Tus estudios</h3>
+      <div id="estudios-list"></div>
+      <a href="#" class="back-link" onclick="volverAlLogin()">← Ingresar otro correo</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  © 2025–2026 RW Consulting · Estudios de Mercado Inmobiliario · Todos los derechos reservados
+</footer>
+
+<script>
+  const emailInput = document.getElementById('email');
+  const btnAcceder = document.getElementById('btn-acceder');
+  const errorMsg = document.getElementById('error-msg');
+  const loginSection = document.getElementById('login-section');
+  const estudiosContainer = document.getElementById('estudios-container');
+  const estudiosList = document.getElementById('estudios-list');
+  const estudiosTitle = document.getElementById('estudios-title');
+
+  emailInput.addEventListener('keydown', e => { if (e.key === 'Enter') accederPorEmail(); });
+  emailInput.addEventListener('input', () => errorMsg.classList.remove('show'));
+
+  async function accederPorEmail() {
+    const email = emailInput.value.trim().toLowerCase();
+    if (!email) { emailInput.focus(); return; }
+
+    btnAcceder.classList.add('loading');
+    errorMsg.classList.remove('show');
+
+    try {
+      // Cargar clientes.json
+      const response = await fetch('clientes.json');
+      if (!response.ok) throw new Error('No se pudo cargar clientes');
+      
+      const data = await response.json();
+      const cliente = data.clientes.find(c => c.email.toLowerCase() === email);
+      
+      if (!cliente) {
+        throw new Error('Cliente no encontrado');
+      }
+
+      // Obtener todos los estudios disponibles desde index.json
+      const todosEstudios = await obtenerTodosEstudios();
+      
+      if (todosEstudios.length === 0) {
+        // Si no hay índice, usar estudios asignados al cliente
+        const estudiosAsignados = cliente.estudios || [];
+        const estudiosConInfo = estudiosAsignados.map(codigo => ({
+          codigo,
+          fecha_creacion: null
+        }));
+        mostrarEstudiosCliente(cliente, estudiosConInfo);
+        return;
+      }
+      
+      // Filtrar estudios según permisos del cliente
+      let estudiosParaMostrar = [];
+      
+      if (cliente.puede_ver_todos) {
+        // Ver todos excepto los excluidos
+        estudiosParaMostrar = todosEstudios.filter(estudio => 
+          !cliente.excluir?.includes(estudio.codigo)
+        );
+      } else {
+        // Solo ver estudios asignados
+        estudiosParaMostrar = todosEstudios.filter(estudio => 
+          cliente.estudios.includes(estudio.codigo)
+        );
+      }
+
+      mostrarEstudiosCliente(cliente, estudiosParaMostrar);
+
+    } catch (error) {
+      console.error('Error:', error);
+      btnAcceder.classList.remove('loading');
+      errorMsg.classList.add('show');
+      emailInput.select();
+    }
+  }
+
+  async function obtenerTodosEstudios() {
+    try {
+      // Obtener índice de estudios
+      const response = await fetch('estudios/index.json');
+      if (!response.ok) {
+        throw new Error('No se pudo cargar el índice de estudios');
+      }
+      
+      const data = await response.json();
+      return data.estudios || [];
+    } catch (error) {
+      console.error('Error obteniendo estudios:', error);
+      return [];
+    }
+  }
+
+  function mostrarEstudiosCliente(cliente, estudios) {
+    btnAcceder.classList.remove('loading');
+    
+    if (estudios.length === 0) {
+      estudiosList.innerHTML = `
+        <div class="no-estudios">
+          <p>No tienes estudios asignados aún.</p>
+          <p>Contacta a tu analista para solicitar un estudio.</p>
+        </div>
+      `;
+    } else {
+      estudiosTitle.textContent = `Tus estudios (${estudios.length})`;
+      
+      const estudiosHTML = estudios.map(estudio => `
+        <div class="estudio-item">
+          <div class="estudio-info">
+            <div class="estudio-codigo">${estudio.codigo}</div>
+            <div class="estudio-fecha">${estudio.fecha_creacion || 'Fecha no disponible'}</div>
+          </div>
+          <div class="estudio-action">
+            <button class="btn-ver" onclick="verEstudio('${estudio.codigo}')">Ver estudio</button>
+          </div>
+        </div>
+      `).join('');
+      
+      estudiosList.innerHTML = estudiosHTML;
+    }
+    
+    // Mostrar sección de estudios
+    loginSection.style.display = 'none';
+    estudiosContainer.classList.add('show');
+  }
+
+  function verEstudio(codigo) {
+    // Guardar en sessionStorage y redirigir
+    sessionStorage.setItem('estudio_codigo', codigo);
+    window.location.href = `viewer.html?codigo=${codigo}`;
+  }
+
+  function volverAlLogin() {
+    estudiosContainer.classList.remove('show');
+    loginSection.style.display = 'block';
+    emailInput.focus();
+  }
+
+  // Cargar estudios demo para desarrollo
+  async function cargarEstudiosDemo() {
+    try {
+      const response = await fetch('estudios/');
+      if (!response.ok) return;
+      
+      // En desarrollo, podemos intentar cargar algunos estudios conocidos
+      const estudiosConocidos = [
+        { codigo: 'EST-2026-EM-3K9R', fecha_creacion: '2026-04-10' },
+        { codigo: 'EST-2026-KI-4V7P', fecha_creacion: '2026-04-05' },
+        { codigo: 'EST-2026-GV-9X2M', fecha_creacion: '2026-04-03' }
+      ];
+      
+      // Verificar cuáles existen
+      const estudiosExistentes = [];
+      for (const estudio of estudiosConocidos) {
+        try {
+          const res = await fetch(`estudios/${estudio.codigo}.json`);
+          if (res.ok) {
+            estudiosExistentes.push(estudio);
+          }
+        } catch (e) {
+          // Ignorar errores
+        }
+      }
+      
+      return estudiosExistentes;
+    } catch (error) {
+      return [];
+    }
+  }
+
+  // Inicializar
+  document.addEventListener('DOMContentLoaded', () => {
+    // Pre-cargar estudios para desarrollo
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      cargarEstudiosDemo();
+    }
+  });

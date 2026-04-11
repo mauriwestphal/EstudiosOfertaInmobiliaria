@@ -254,6 +254,40 @@
   }
   .demo-badge a:hover { color: var(--teal-mid); text-decoration: underline; }
 
+  /* portal option */
+  .portal-option {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+  }
+
+  .portal-option p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+
+  .portal-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background: var(--warm-light);
+    color: var(--warm-dark);
+    border: 1px solid var(--warm);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .portal-link:hover {
+    background: var(--warm);
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(196, 154, 60, 0.2);
+  }
+
   /* ── footer ── */
   footer {
     position: relative;
@@ -322,6 +356,11 @@
     <div class="demo-badge">
       ¿Primera vez? Probar con:
       <a onclick="usarEstudio('DEMO-2026-IG-5G2W')">Estudio de oferta demo</a>
+    </div>
+
+    <div class="portal-option">
+      <p>¿Eres cliente registrado?</p>
+      <a href="portal.html" class="portal-link">Acceder por correo electrónico →</a>
     </div>
 
     <div class="hint">
