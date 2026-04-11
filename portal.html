@@ -226,6 +226,21 @@
   }
   .error-msg.show { display: block; }
 
+  /* hint */
+  .hint {
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    font-family: 'Urbanist', sans-serif;
+    font-size: .8rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    line-height: 1.6;
+  }
+  .hint svg { flex-shrink: 0; margin-top: 2px; }
+
   /* estudios list */
   .estudios-container {
     display: none;
@@ -430,21 +445,30 @@
     errorMsg.classList.remove('show');
 
     try {
+      console.log('Intentando acceder con email:', email);
+      
       // Cargar clientes.json
       const response = await fetch('clientes.json');
       if (!response.ok) throw new Error('No se pudo cargar clientes');
       
       const data = await response.json();
+      console.log('Clientes cargados:', data.clientes.length);
+      
       const cliente = data.clientes.find(c => c.email.toLowerCase() === email);
       
       if (!cliente) {
+        console.log('Cliente no encontrado para email:', email);
         throw new Error('Cliente no encontrado');
       }
 
+      console.log('Cliente encontrado:', cliente.nombre);
+      
       // Obtener todos los estudios disponibles desde index.json
       const todosEstudios = await obtenerTodosEstudios();
+      console.log('Estudios obtenidos:', todosEstudios.length);
       
       if (todosEstudios.length === 0) {
+        console.log('No hay índice de estudios, usando estudios asignados');
         // Si no hay índice, usar estudios asignados al cliente
         const estudiosAsignados = cliente.estudios || [];
         const estudiosConInfo = estudiosAsignados.map(codigo => ({
@@ -459,17 +483,23 @@
       let estudiosParaMostrar = [];
       
       if (cliente.puede_ver_todos) {
+        console.log('Cliente puede ver todos los estudios');
         // Ver todos excepto los excluidos
-        estudiosParaMostrar = todosEstudios.filter(estudio => 
-          !cliente.excluir?.includes(estudio.codigo)
-        );
+        estudiosParaMostrar = todosEstudios.filter(estudio => {
+          const excluido = cliente.excluir?.includes(estudio.codigo);
+          if (excluido) console.log('Excluyendo estudio:', estudio.codigo);
+          return !excluido;
+        });
       } else {
+        console.log('Cliente solo puede ver estudios asignados');
         // Solo ver estudios asignados
-        estudiosParaMostrar = todosEstudios.filter(estudio => 
-          cliente.estudios.includes(estudio.codigo)
-        );
+        estudiosParaMostrar = todosEstudios.filter(estudio => {
+          const asignado = cliente.estudios.includes(estudio.codigo);
+          return asignado;
+        });
       }
 
+      console.log('Estudios para mostrar:', estudiosParaMostrar.length);
       mostrarEstudiosCliente(cliente, estudiosParaMostrar);
 
     } catch (error) {
