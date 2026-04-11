@@ -9,7 +9,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const estudiosDir = path.join(__dirname, 'estudios');
+const estudiosDir = path.join(__dirname, '..', 'data', 'estudios');
 const outputFile = path.join(estudiosDir, 'index.json');
 
 function generarIndice() {

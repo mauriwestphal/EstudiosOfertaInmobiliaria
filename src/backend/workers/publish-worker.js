@@ -146,7 +146,7 @@ export default {
 // Push JSON file to GitHub
 async function pushToGitHub(codigo, jsonData, env) {
   const fileName = `${codigo}.json`;
-  const filePath = `estudios/${fileName}`;
+  const filePath = `data/estudios/${fileName}`;
   
   // Get current file SHA (if exists)
   let currentSha = null;

@@ -1,5 +1,5 @@
 name = "rw-publish"
-main = "publish-worker.js"
+main = "workers/publish-worker.js"
 compatibility_date = "2024-11-20"
 
 [env.production]

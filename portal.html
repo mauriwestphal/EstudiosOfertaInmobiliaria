@@ -524,7 +524,7 @@
       console.log('Intentando acceder con email:', email);
       
       // Cargar clientes.json
-      const response = await fetch('clientes.json');
+      const response = await fetch('data/clientes.json');
       if (!response.ok) throw new Error('No se pudo cargar clientes');
       
       const data = await response.json();
@@ -589,7 +589,7 @@
   async function obtenerTodosEstudios() {
     try {
       // Obtener índice de estudios
-      const response = await fetch('estudios/index.json');
+      const response = await fetch('data/estudios/index.json');
       if (!response.ok) {
         throw new Error('No se pudo cargar el índice de estudios');
       }
@@ -722,7 +722,7 @@
       const estudiosExistentes = [];
       for (const estudio of estudiosConocidos) {
         try {
-          const res = await fetch(`estudios/${estudio.codigo}.json`);
+          const res = await fetch(`data/estudios/${estudio.codigo}.json`);
           if (res.ok) {
             estudiosExistentes.push(estudio);
           }

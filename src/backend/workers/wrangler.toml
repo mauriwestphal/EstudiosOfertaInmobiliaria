@@ -1,5 +1,5 @@
 name = "rw-intake"
-main = "intake-worker.js"
+main = "workers/intake-worker.js"
 compatibility_date = "2024-11-20"
 
 [[kv_namespaces]]

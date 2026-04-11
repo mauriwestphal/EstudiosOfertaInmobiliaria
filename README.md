@@ -1,124 +1,198 @@
-# Estudios de Mercado Inmobiliario — Web Viewer
+# RW Consulting — Estudios de Oferta Inmobiliaria
 
-Plataforma estática para publicar estudios de mercado inmobiliario como páginas web accesibles con código.
+> Sistema automatizado para generación, revisión y publicación de estudios de mercado inmobiliario
 
-## Estructura
+**URL producción:** https://rwconsulting.cl
 
-```
-/
-├── index.html              ← Landing: ingreso de código
-├── viewer.html             ← Visualizador del estudio
-├── estudios/
-│   ├── EST-2025-GC-8F3K.json   ← Demo (Av. Alessandri)
-│   └── [CODIGO].json           ← Un JSON por estudio
-└── README.md
-```
+---
 
-## Cómo agregar un nuevo estudio
-
-1. Genera el JSON con Claude usando el prompt maestro.
-2. Guárdalo en `/estudios/[CODIGO].json` donde `CODIGO` sigue el formato `EST-AAAA-XX-XXXX`.
-3. Haz commit y push al repositorio.
-4. Entrega el código al cliente — podrá acceder en: `https://[usuario].github.io/[repo]/?codigo=[CODIGO]`
-
-## Formato del código de acceso
+## 🏗️ ESTRUCTURA DEL REPOSITORIO
 
 ```
-EST-AAAA-XX-XXXX
- |    |   |   |
- |    |   |   └─ 4 caracteres aleatorios (mayúsculas + números)
- |    |   └───── Iniciales sector (ej. GC = Gómez Carreño)
- |    └────────── Año
- └─────────────── Prefijo fijo
+EstudiosOfertaInmobiliaria/
+├── 📁 public/                      # GitHub Pages (raíz del repo)
+│   ├── index.html                  # Landing page - acceso por código
+│   ├── portal.html                 # Portal clientes - acceso por email
+│   ├── viewer.html                 # Visualizador de estudios
+│   ├── intake.html                 # Formulario conversacional IA
+│   ├── admin.html                  # Consola de administración
+│   └── 📁 js/                      # JavaScript frontend
+│       ├── admin.js
+│       ├── intake.js
+│       └── viewer.js
+│
+├── 📁 data/                        # Datos del sistema
+│   ├── 📁 estudios/                # Estudios JSON (v2.0)
+│   │   ├── DEMO-2026-IG-5G2W.json
+│   │   ├── EST-2025-GC-8F3K.json
+│   │   └── index.json              # Índice generado automáticamente
+│   ├── clientes.json               # Configuración de acceso por email
+│   └── plantilla.json              # Plantilla vacía v2.0
+│
+├── 📁 src/                         # Código fuente y lógica
+│   ├── 📁 backend/                 # Cloudflare Workers
+│   │   ├── workers/
+│   │   │   ├── intake-worker.js    # Generación de estudios via Claude
+│   │   │   ├── publish-worker.js   # Publicación + email
+│   │   │   └── chat-worker.js      # Chat conversacional
+│   │   ├── config/                 # Configuración Workers
+│   │   └── scripts/                # Scripts de backend
+│   │
+│   └── 📁 docs/                    # Documentación interna
+│       ├── playbook-estudio-ia.md  # Reglas para generación de estudios
+│       ├── SCHEMA.md               # Esquema JSON v2.0
+│       └── CLOUDFLARE_SETUP.md     # Guía de configuración
+│
+├── 📁 scripts/                     # Scripts de utilidad
+│   ├── generate-estudios-index.js  # Genera índice de estudios
+│   ├── deploy-intake.ps1           # Deploy Workers
+│   └── test-e2e.sh                 # Tests end-to-end
+│
+├── 📁 config/                      # Configuraciones
+│   ├── .env.example                # Variables de entorno
+│   └── CNAME                       # Dominio personalizado
+│
+├── .gitignore
+├── .gitattributes
+├── README.md                       # Este archivo
+├── TESTING.md                      # Guía de testing
+└── wrangler.toml                   # Configuración principal Workers
 ```
 
-Ejemplos: `EST-2025-GC-8F3K`, `EST-2025-RN-2A9X`, `EST-2025-VD-KP4M`
+---
 
-## Despliegue en GitHub Pages
+## 🚀 FLUJO DEL SISTEMA
 
-1. Crear repositorio en GitHub (puede ser público o privado con Pages).
-2. Ir a **Settings → Pages → Source: Deploy from branch → main → / (root)**.
-3. El sitio quedará en: `https://[usuario].github.io/[repositorio]/`
+### 1. **Solicitud de estudio** (Cliente)
+- Accede a `intake.html` (formulario conversacional)
+- Responde preguntas guiadas por IA
+- Sistema genera JSON v2.0 via `intake-worker.js`
+- Estudio guardado en KV con estado `pendiente_revision`
 
-## Stack técnico
+### 2. **Revisión** (Administrador)
+- Accede a `admin.html?admin_secret=...`
+- Ve estudios pendientes en dashboard
+- Revisa contenido en modal detallado
+- Aprueba o rechaza
 
-- HTML + CSS + JS vanilla (sin Node, sin build)
-- [Chart.js](https://www.chartjs.org/) vía CDN — gráficos
-- [Leaflet.js](https://leafletjs.com/) vía CDN — mapa
-- Tiles: CartoDB Light (sin API key necesaria)
-- Hosting: GitHub Pages (gratuito)
+### 3. **Publicación** (Automático)
+- Al aprobar: `publish-worker.js` se ejecuta
+- Push del JSON al repositorio GitHub
+- Email automático al cliente via Resend
+- Estudio disponible en `viewer.html`
 
-## Esquema JSON del estudio
+### 4. **Acceso del cliente**
+- **Por código**: `index.html` → `viewer.html?codigo=XXX`
+- **Por email**: `portal.html` → lista de estudios asignados
 
-```json
-{
-  "meta": {
-    "codigo":      "EST-2025-GC-8F3K",
-    "proyecto":    "Nombre del proyecto",
-    "direccion":   "Dirección completa",
-    "inmobiliaria":"Nombre inmobiliaria",
-    "unidades":    252,
-    "pisos":       "2 al 15",
-    "fecha":       "Marzo 2025",
-    "analista":    "Nombre analista o empresa"
-  },
-  "competencia": [
-    {
-      "proyecto":    "Nombre proyecto competidor",
-      "direccion":   "Dirección",
-      "inmobiliaria":"Inmobiliaria",
-      "estado":      "Entrega inmediata | Pronta entrega | Venta en verde | Venta en blanco",
-      "pisos":       26,
-      "dorms":       "2D",
-      "banos":       "2B",
-      "m2_util":     46.0,
-      "terraza":     5.5,
-      "orientacion": "N / NO / P / S",
-      "precio_uf":   2803,
-      "uf_m2":       60.9,
-      "lat":         -33.025,
-      "lng":         -71.513,
-      "fuente":      "fuente.cl"
-    }
-  ],
-  "precios_base": [
-    {
-      "distribucion":  "2D2B",
-      "orientacion":   "NO",
-      "codigo":        "2D2B NO",
-      "m2":            43.21,
-      "uf_m2_min":     73.8,
-      "uf_m2_medio":   75.9,
-      "uf_m2_max":     78.1,
-      "precio_min":    3189,
-      "precio_medio":  3280,
-      "precio_max":    3374,
-      "base_modelo":   75.9
-    }
-  ],
-  "ponderacion_orientacion": [
-    {
-      "orientacion": "Norponiente",
-      "codigo":      "NO",
-      "delta":       4.0,
-      "justificacion": "Vista al mar, asoleación tarde.",
-      "aplica":      "Todos los mix"
-    }
-  ],
-  "notas": [
-    {
-      "titulo": "Alcance del estudio",
-      "texto":  "Solo proyectos nuevos..."
-    }
-  ]
-}
+---
+
+## 🔧 CONFIGURACIÓN
+
+### Secrets Cloudflare (requeridos):
+```bash
+# intake-worker
+wrangler secret put ANTHROPIC_API_KEY --name rw-intake
+wrangler secret put ADMIN_SECRET --name rw-intake
+
+# publish-worker  
+wrangler secret put GITHUB_TOKEN --name rw-publish
+wrangler secret put ADMIN_SECRET --name rw-publish
+wrangler secret put RESEND_API_KEY --name rw-publish
+wrangler secret put EMAIL_FROM --name rw-publish
 ```
 
-## Seguridad
+### Variables de entorno:
+```bash
+GITHUB_OWNER=mauriwestphal
+GITHUB_REPO=EstudiosOfertaInmobiliaria
+```
 
-El acceso es por **oscuridad de URL**: el código de acceso es simplemente el nombre del archivo JSON. No hay autenticación real. Es adecuado para:
-- Estudios no altamente confidenciales
-- Clientes B2B de confianza
-- Flujos donde el analista controla quién recibe el código
+### URLs Workers deployados:
+- **Intake**: `https://rw-intake.rw-consulting.workers.dev`
+- **Publish**: `https://rw-publish.rw-consulting.workers.dev`
+- **Chat**: `https://rw-consulting-chat.rw-consulting.workers.dev`
 
-Si se requiere mayor seguridad en el futuro, migrar a Netlify + Netlify Identity (sin backend propio).
+---
+
+## 📁 GESTIÓN DE DATOS
+
+### Estudios JSON (v2.0)
+- Ubicación: `data/estudios/`
+- Esquema: ver `src/docs/SCHEMA.md`
+- Índice: `data/estudios/index.json` (generado automáticamente)
+
+### Generar índice:
+```bash
+node scripts/generate-estudios-index.js
+```
+
+### Clientes por email
+- Configuración: `data/clientes.json`
+- Permisos: `puede_ver_todos` + `excluir`
+- Ejemplo cliente: `jrotter@dosa.cl` (ve todos excepto demo)
+
+---
+
+## 🛠️ DESARROLLO
+
+### Servidor local:
+```bash
+python -m http.server 8000
+# Abrir http://localhost:8000/
+```
+
+### Deploy Workers:
+```bash
+# Desde src/backend/workers/
+wrangler deploy intake-worker.js --name rw-intake
+wrangler deploy publish-worker.js --name rw-publish
+```
+
+### Testing:
+- Ver `TESTING.md` para guía completa
+- End-to-end: `./scripts/test-e2e.sh`
+
+---
+
+## 🔐 SEGURIDAD
+
+### Autenticación:
+- **Admin**: Query param `?admin_secret=...`
+- **Clientes**: Email en `data/clientes.json`
+- **Workers**: Secrets Cloudflare + CORS restringido
+
+### CORS configurado:
+- Producción: `https://rwconsulting.cl`
+- Desarrollo: `localhost:8000`, `127.0.0.1:8000`
+
+---
+
+## 📈 ESTADO ACTUAL
+
+### ✅ COMPLETADO
+- [x] Sprint 1: Workers + Frontend básico
+- [x] Sistema conversacional IA
+- [x] Portal de acceso por email
+- [x] Reestructuración del repositorio
+- [x] Deploy a producción (GitHub Pages)
+
+### 🚧 PENDIENTE
+- [ ] Configurar Resend para emails
+- [ ] Agregar más clientes a `clientes.json`
+- [ ] Monitoreo y logs
+- [ ] Backup automático de estudios
+
+---
+
+## 📞 CONTACTO
+
+**Mauricio Westphal**  
+RW Consulting — Estudios de Mercado Inmobiliario  
+GitHub: [@mauriwestphal](https://github.com/mauriwestphal)  
+Producción: https://rwconsulting.cl
+
+---
+
+*Última actualización: 2026-04-11*  
+*Estructura v2.0 — Reorganización completa*
