@@ -355,7 +355,7 @@
 
     <div class="demo-badge">
       ¿Primera vez? Probar con:
-      <a onclick="usarEstudio('DEMO-2026-IG-5G2W')">Estudio de oferta demo</a>
+      <a onclick="usarEstudio('EST-2026-BC-7FQK')">Estudio de oferta demo</a>
     </div>
 
     <div class="portal-option">
@@ -398,7 +398,7 @@
     err.classList.remove('show');
 
     // Intenta cargar el JSON del estudio
-    fetch(`estudios/${codigo}.json`)
+    fetch(`data/estudios/${codigo}.json`)
       .then(res => {
         if (!res.ok) throw new Error('not found');
         return res.json();

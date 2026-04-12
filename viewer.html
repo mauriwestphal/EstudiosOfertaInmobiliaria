@@ -1115,6 +1115,11 @@ const codigo = params.get('codigo') || '';
 let DATA = null;
 try { DATA = JSON.parse(sessionStorage.getItem('estudio')); } catch(e) {}
 
+// Si no hay DATA pero hay codigo en sessionStorage, usarlo
+if (!DATA && !codigo) {
+  try { codigo = sessionStorage.getItem('estudio_codigo'); } catch(e) {}
+}
+
 if (!DATA && codigo) {
   fetch(`data/estudios/${codigo}.json`)
     .then(r => r.ok ? r.json() : Promise.reject())
