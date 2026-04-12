@@ -1110,21 +1110,42 @@ function tipoClass(dist) {
 
 // ── Load data ────────────────────────────────────────────────────
 const params = new URLSearchParams(location.search);
-const codigo = params.get('codigo') || '';
+let codigo = params.get('codigo') || '';
+console.log('🔍 Código de URL:', codigo);
+// Ignorar parámetro _ usado para cache busting
+if (codigo.includes('&_=')) {
+  codigo = codigo.split('&_=')[0];
+  console.log('🔍 Código después de limpiar cache busting:', codigo);
+}
 
 let DATA = null;
 try { DATA = JSON.parse(sessionStorage.getItem('estudio')); } catch(e) {}
+console.log('🔍 DATA de sessionStorage:', DATA ? 'presente' : 'ausente');
 
 // Si no hay DATA pero hay codigo en sessionStorage, usarlo
 if (!DATA && !codigo) {
-  try { codigo = sessionStorage.getItem('estudio_codigo'); } catch(e) {}
+  try { 
+    const storedCodigo = sessionStorage.getItem('estudio_codigo');
+    console.log('🔍 Código en sessionStorage:', storedCodigo);
+    if (storedCodigo) codigo = storedCodigo;
+  } catch(e) {}
 }
+console.log('🔍 Código final a usar:', codigo);
 
 if (!DATA && codigo) {
+  console.log('🔍 Fetching:', `data/estudios/${codigo}.json`);
   fetch(`data/estudios/${codigo}.json`)
-    .then(r => r.ok ? r.json() : Promise.reject())
-    .then(renderAll)
-    .catch(() => {
+    .then(r => {
+      console.log('🔍 Fetch response status:', r.status, r.statusText);
+      return r.ok ? r.json() : Promise.reject();
+    })
+    .then(data => {
+      console.log('🔍 Data loaded successfully:', data.meta ? data.meta.codigo : 'no meta');
+      console.log('🔍 Proyecto:', data.meta ? data.meta.proyecto : 'no proyecto');
+      renderAll(data);
+    })
+    .catch((error) => {
+      console.error('🔍 Fetch error:', error);
       document.body.innerHTML = '<div style="padding:60px;text-align:center;font-family:sans-serif"><h2>Código no válido o sesión expirada.</h2><br><a href="index.html">← Volver</a></div>';
     });
 } else if (DATA) {

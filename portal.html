@@ -706,7 +706,9 @@
 
   function verEstudio(codigo) {
     try { sessionStorage.setItem('estudio_codigo', codigo); } catch(e) {}
-    window.location.href = `viewer.html?codigo=${codigo}`;
+    // Agregar timestamp para evitar cache
+    const timestamp = new Date().getTime();
+    window.location.href = `viewer.html?codigo=${codigo}&_=${timestamp}`;
   }
 
   function volverAlLogin() {
