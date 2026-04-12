@@ -3,7 +3,7 @@
     {
       "email": "jrotter@dosa.cl",
       "nombre": "Jorge Rotter",
-      "empresa": "Dosa Inmobiliaria",
+      "empresa": "Dosa",
       "estudios": [
         "EST-2025-GC-8F3K",
         "EST-2026-EM-3K9R",
@@ -13,7 +13,7 @@
       ],
       "fecha_registro": "2026-04-11",
       "puede_ver_todos": true,
-      "excluir": ["EST-2026-BC-7FQK"]
+      "excluir": ["DEMO-2026-BC-7FQK"]
     }
   ]
 }
