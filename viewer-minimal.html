@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Viewer Minimal</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    .data { background: #f5f5f5; padding: 15px; border-radius: 5px; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h1>Viewer Minimal</h1>
+  <div id="output">Cargando...</div>
+  
+  <script>
+    // Obtener código de la URL
+    const params = new URLSearchParams(window.location.search);
+    let codigo = params.get('codigo') || '';
+    
+    console.log('Código de URL:', codigo);
+    
+    if (!codigo) {
+      document.getElementById('output').innerHTML = '<p style="color: red;">No hay código en la URL</p>';
+      return;
+    }
+    
+    // Cargar el JSON
+    fetch(`data/estudios/${codigo}.json`)
+      .then(response => {
+        console.log('Status:', response.status, response.statusText);
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('Datos cargados:', data.meta);
+        
+        const output = document.getElementById('output');
+        output.innerHTML = `
+          <h2>${data.meta?.proyecto || 'Sin proyecto'}</h2>
+          <div class="data">
+            <p><strong>Código:</strong> ${data.meta?.codigo || 'N/A'}</p>
+            <p><strong>Proyecto:</strong> ${data.meta?.proyecto || 'N/A'}</p>
+            <p><strong>Inmobiliaria:</strong> ${data.meta?.inmobiliaria || 'N/A'}</p>
+            <p><strong>Dirección:</strong> ${data.meta?.direccion || 'N/A'}</p>
+            <p><strong>Fecha:</strong> ${data.meta?.fecha || 'N/A'}</p>
+          </div>
+          <p><small>Si esto muestra el proyecto correcto, el problema está en viewer.html original.</small></p>
+        `;
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        document.getElementById('output').innerHTML = `
+          <p style="color: red;">Error al cargar el estudio: ${error.message}</p>
+          <p>Verifica que el archivo <code>data/estudios/${codigo}.json</code> exista.</p>
+        `;
+      });
+  </script>
+</body>
+</html>
