@@ -698,9 +698,9 @@ body {
 .ubicacion-label { font-size: .72rem; color: var(--text-muted); width: 120px; flex-shrink: 0; }
 .ubicacion-val { font-size: .85rem; font-weight: 500; color: var(--text-primary); }
 
-/* ══ ZONA FILTERS ════════════════════════════════════════════════ */
-.zona-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
-.zona-btn {
+/* ══ FILTERS (ZONA Y TIPO) ═══════════════════════════════════════ */
+.zona-filters, .tipo-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.zona-btn, .tipo-btn {
   padding: 5px 14px;
   border: 1.5px solid var(--border-solid);
   border-radius: 100px;
@@ -712,8 +712,8 @@ body {
   cursor: pointer;
   transition: all .15s;
 }
-.zona-btn:hover { border-color: var(--teal); color: var(--teal); }
-.zona-btn.active { background: var(--teal); color: var(--text-on-teal); border-color: var(--teal); }
+.zona-btn:hover, .tipo-btn:hover { border-color: var(--teal); color: var(--teal); }
+.zona-btn.active, .tipo-btn.active { background: var(--teal); color: var(--text-on-teal); border-color: var(--teal); }
 
 /* ══ TABLES ══════════════════════════════════════════════════════ */
 .table-wrap {
@@ -1324,13 +1324,29 @@ function renderCompetencia(d) {
   const hasOrient    = rows.some(r => r.orientacion  != null);
   const hasEstac     = rows.some(r => r.estacionamiento_uf != null);
   const hasBodega    = rows.some(r => r.bodega_uf    != null);
+  const hasTipoProp  = rows.some(r => r.tipo_propiedad != null);
+
+  // Tipo filter buttons (casas vs departamentos)
+  let tipoFilterHtml = '';
+  let tipos = [];
+  if (hasTipoProp) {
+    tipos = [...new Set(rows.map(r => r.tipo_propiedad).filter(Boolean))].sort();
+    const casaCount = rows.filter(r => r.tipo_propiedad === 'casa').length;
+    const deptoCount = rows.filter(r => r.tipo_propiedad === 'departamento').length;
+    
+    tipoFilterHtml = `<div class="tipo-filters" style="margin-bottom: 12px;">
+      <button class="tipo-btn active" onclick="filtrarTipo('todos',this)">Todos (${rows.length})</button>
+      <button class="tipo-btn" onclick="filtrarTipo('casa',this)">🏠 Casas (${casaCount})</button>
+      <button class="tipo-btn" onclick="filtrarTipo('departamento',this)">🏢 Departamentos (${deptoCount})</button>
+    </div>`;
+  }
 
   // Zona filter buttons
-  let filterHtml = '';
+  let zonaFilterHtml = '';
   let zonas = [];
   if (hasZona) {
     zonas = [...new Set(rows.map(r => r.zona).filter(Boolean))].sort();
-    filterHtml = `<div class="zona-filters">
+    zonaFilterHtml = `<div class="zona-filters">
       <button class="zona-btn active" onclick="filtrarZona('todos',this)">Todos (${rows.length})</button>
       ${zonas.map(z => {
         const count = rows.filter(r => r.zona === z).length;
@@ -1340,7 +1356,7 @@ function renderCompetencia(d) {
   }
 
   // Table header
-  const headers = ['Proyecto / Tipología','Dirección','Inmobiliaria','Estado','Pisos','D/B','m² útil','Terraza'];
+  const headers = ['Proyecto / Tipología','Tipo','Dirección','Inmobiliaria','Estado','Pisos','D/B','m² útil','Terraza'];
   if (hasOrient)    headers.push('Orientación');
   if (hasZona)      headers.push('Zona');
   if (hasVista)     headers.push('Vista');
@@ -1357,8 +1373,12 @@ function renderCompetencia(d) {
 
   // Table rows
   const bodyHtml = rows.map((r, i) => {
+    const tipoIcon = r.tipo_propiedad === 'casa' ? '🏠' : r.tipo_propiedad === 'departamento' ? '🏢' : '';
+    const tipoText = r.tipo_propiedad === 'casa' ? 'Casa' : r.tipo_propiedad === 'departamento' ? 'Depto' : '—';
+    
     const cells = [
       `<td><strong>${r.proyecto}</strong></td>`,
+      `<td style="text-align:center;font-size:.9rem" title="${tipoText}">${tipoIcon}</td>`,
       `<td style="color:var(--text-muted);font-size:.78rem">${r.direccion||'—'}</td>`,
       `<td>${r.inmobiliaria||'—'}</td>`,
       `<td>${estadoBadge(r.estado)}</td>`,
@@ -1379,11 +1399,12 @@ function renderCompetencia(d) {
     if (hasBodega) cells.push(`<td style="text-align:center;font-size:.8rem">${r.bodega_uf != null ? fmtUF(r.bodega_uf) : '—'}</td>`);
     cells.push(`<td style="font-size:.75rem;color:var(--text-muted)">${r.fuente||'—'}</td>`);
 
-    return `<tr class="${i%2===1?'even':''}" data-zona="${r.zona||''}">${cells.join('')}</tr>`;
+    return `<tr class="${i%2===1?'even':''}" data-zona="${r.zona||''}" data-tipo="${r.tipo_propiedad||''}">${cells.join('')}</tr>`;
   }).join('');
 
   body.innerHTML = `
-    ${filterHtml}
+    ${tipoFilterHtml}
+    ${zonaFilterHtml}
     <div class="table-wrap">
       <div class="table-scroll">
         <table id="tabla-competencia">
@@ -1392,6 +1413,18 @@ function renderCompetencia(d) {
         </table>
       </div>
     </div>`;
+}
+
+function filtrarTipo(tipo, btn) {
+  document.querySelectorAll('.tipo-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('#tabla-competencia tbody tr').forEach(tr => {
+    if (tipo === 'todos' || tr.dataset.tipo === tipo) {
+      tr.classList.remove('hidden-row');
+    } else {
+      tr.classList.add('hidden-row');
+    }
+  });
 }
 
 function filtrarZona(zona, btn) {
