@@ -1,6 +1,6 @@
 {
-  "generado": "2026-04-12T17:19:17.402Z",
-  "total": 6,
+  "generado": "2026-04-14T17:14:05.115Z",
+  "total": 8,
   "estudios": [
     {
       "codigo": "EST-2026-VK-5R2N",
@@ -43,6 +43,24 @@
       "proyecto": "Edificio Alessandri",
       "inmobiliaria": "Alborada",
       "direccion": "Av. Alessandri 3201, Gómez Carreño, Viña del Mar"
+    },
+    {
+      "codigo": "EST-2026-VK-CASA",
+      "fecha_creacion": "2026-04-11",
+      "proyecto": "Proyecto Peñablanca - CASAS",
+      "inmobiliaria": "Inmobiliaria VK",
+      "direccion": "Fundo El Rincón, Peñablanca, Villa Alemana, Región de Valparaíso",
+      "tipo": "casas",
+      "separado_de": "EST-2026-VK-5R2N"
+    },
+    {
+      "codigo": "EST-2026-VK-DEPT",
+      "fecha_creacion": "2026-04-11",
+      "proyecto": "Proyecto Peñablanca - DEPTOS",
+      "inmobiliaria": "Inmobiliaria VK",
+      "direccion": "Fundo El Rincón, Peñablanca, Villa Alemana, Región de Valparaíso",
+      "tipo": "departamentos",
+      "separado_de": "EST-2026-VK-5R2N"
     }
   ]
 }

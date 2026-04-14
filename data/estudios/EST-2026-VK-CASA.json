@@ -1,8 +1,8 @@
 {
   "meta": {
-    "codigo": "EST-2026-VK-5R2N",
+    "codigo": "EST-2026-VK-CASA",
     "version_esquema": "2.0",
-    "proyecto": "Proyecto Peñablanca",
+    "proyecto": "Proyecto Peñablanca - CASAS",
     "direccion": "Fundo El Rincón, Peñablanca, Villa Alemana, Región de Valparaíso",
     "cliente": "Inmobiliaria VK",
     "autor": "RW Consulting",
@@ -16,10 +16,8 @@
       "tipo_proyectos": "Solo proyectos nuevos (excluye usados/reventa)",
       "orientaciones": "Pendiente levantamiento en terreno"
     },
-    "estado": "separado",
-    "nota_separacion": "Este estudio fue separado en dos estudios específicos: EST-2026-VK-CASA (casas) y EST-2026-VK-DEPT (departamentos). Consulte los estudios separados para análisis específico por tipo de propiedad."
+    "nota_separacion": "Separado del estudio original EST-2026-VK-5R2N para análisis específico de casas"
   },
-
   "proyecto_evaluado": {
     "nombre": "Proyecto Peñablanca",
     "desarrollador": "Inmobiliaria VK",
@@ -38,11 +36,10 @@
     "lng": -71.336451,
     "estacionamientos": null,
     "bodegas": null,
-    "mix_unidades": []
+    "mix_unidades": [],
+    "tipo": "casas"
   },
-
   "competencia": [
-
     {
       "proyecto": "Puerta del Sol",
       "direccion": "Av. Curauma Sur 1364, Curauma, Valparaíso",
@@ -59,7 +56,10 @@
       "terraza": null,
       "orientacion": null,
       "vista_principal": null,
-      "amenities": ["Áreas verdes", "Acceso controlado"],
+      "amenities": [
+        "Áreas verdes",
+        "Acceso controlado"
+      ],
       "disponibles": null,
       "total_unidades": null,
       "precio_lista_uf": 2710,
@@ -89,7 +89,10 @@
       "terraza": null,
       "orientacion": null,
       "vista_principal": null,
-      "amenities": ["Áreas verdes", "Acceso controlado"],
+      "amenities": [
+        "Áreas verdes",
+        "Acceso controlado"
+      ],
       "disponibles": null,
       "total_unidades": null,
       "precio_lista_uf": 3200,
@@ -119,7 +122,10 @@
       "terraza": null,
       "orientacion": null,
       "vista_principal": null,
-      "amenities": ["Áreas verdes", "Acceso controlado"],
+      "amenities": [
+        "Áreas verdes",
+        "Acceso controlado"
+      ],
       "disponibles": null,
       "total_unidades": null,
       "precio_lista_uf": 3700,
@@ -133,7 +139,6 @@
       "fuente": "Portal Inmobiliario, Trovit",
       "notas": "Casa modelo C aislada. Precio de referencia extraído de avisos Trovit (~UF 3.700). Pendiente validación sala de venta."
     },
-
     {
       "proyecto": "Bosques de San Pablo II",
       "direccion": "Sendero Los Eucaliptus, Placilla, Curauma, Valparaíso",
@@ -150,21 +155,23 @@
       "terraza": null,
       "orientacion": null,
       "vista_principal": null,
-      "amenities": ["Áreas verdes", "Acceso controlado"],
+      "amenities": [
+        "Áreas verdes",
+        "Acceso controlado"
+      ],
       "disponibles": null,
       "total_unidades": 10,
       "precio_lista_uf": 4709,
       "precio_dcto_uf": 4332,
-      "uf_m2_lista": 58.0,
+      "uf_m2_lista": 58,
       "uf_m2_dcto": 53.3,
       "estacionamiento_uf": null,
       "bodega_uf": null,
-      "lat": -33.1720,
-      "lng": -71.5540,
+      "lat": -33.172,
+      "lng": -71.554,
       "fuente": "Portal Inmobiliario, Inmobiliaria Aconcagua",
       "notas": "Condominio de solo 10 casas. Modelo Santa Sofía 81,23 m². Precio desde UF 4.709 publicado en iaconcagua.com. Pendiente validación sala de venta."
     },
-
     {
       "proyecto": "Brisas de Curauma (Terrazas de Curauma II)",
       "direccion": "Av. Las Tablas 678, Curauma, Valparaíso",
@@ -177,11 +184,16 @@
       "pisos": 2,
       "dorms": "3D",
       "banos": "3B",
-      "m2_util": 97.0,
+      "m2_util": 97,
       "terraza": null,
       "orientacion": null,
       "vista_principal": null,
-      "amenities": ["Áreas verdes", "Acceso controlado", "Estacionamiento de visitas", "Aislación térmica EIFS"],
+      "amenities": [
+        "Áreas verdes",
+        "Acceso controlado",
+        "Estacionamiento de visitas",
+        "Aislación térmica EIFS"
+      ],
       "disponibles": 9,
       "total_unidades": 109,
       "precio_lista_uf": 4550,
@@ -191,7 +203,7 @@
       "estacionamiento_uf": null,
       "bodega_uf": null,
       "lat": -33.1582,
-      "lng": -71.5650,
+      "lng": -71.565,
       "fuente": "Enlace Inmobiliario, Portal Inmobiliario",
       "notas": "Modelo Torcaza 97m². Proyecto en etapa 9 de la zona. Precio desde UF 4.550 para modelo Torcaza. Modelo Cormorán 125m² desde UF 5.530. Pendiente validación sala de venta."
     },
@@ -207,11 +219,16 @@
       "pisos": 3,
       "dorms": "3D",
       "banos": "3B",
-      "m2_util": 125.0,
+      "m2_util": 125,
       "terraza": null,
       "orientacion": null,
       "vista_principal": null,
-      "amenities": ["Áreas verdes", "Acceso controlado", "Estacionamiento de visitas", "Aislación térmica EIFS"],
+      "amenities": [
+        "Áreas verdes",
+        "Acceso controlado",
+        "Estacionamiento de visitas",
+        "Aislación térmica EIFS"
+      ],
       "disponibles": null,
       "total_unidades": null,
       "precio_lista_uf": 5530,
@@ -221,11 +238,10 @@
       "estacionamiento_uf": null,
       "bodega_uf": null,
       "lat": -33.1582,
-      "lng": -71.5650,
+      "lng": -71.565,
       "fuente": "Enlace Inmobiliario, Portal Inmobiliario",
       "notas": "Modelo Cormorán 125m², ampliable a tercer piso. Precio hasta UF 5.530. Pendiente validación sala de venta."
     },
-
     {
       "proyecto": "Raíces de Peñablanca",
       "direccion": "Los Boldos 351, Peñablanca, Villa Alemana",
@@ -242,7 +258,15 @@
       "terraza": null,
       "orientacion": null,
       "vista_principal": null,
-      "amenities": ["Club house", "Piscina adultos y niños", "Multicancha", "Canil", "Gimnasio interior y exterior", "Áreas verdes", "Circuito de trote"],
+      "amenities": [
+        "Club house",
+        "Piscina adultos y niños",
+        "Multicancha",
+        "Canil",
+        "Gimnasio interior y exterior",
+        "Áreas verdes",
+        "Circuito de trote"
+      ],
       "disponibles": 60,
       "total_unidades": 121,
       "precio_lista_uf": 5404,
@@ -251,12 +275,11 @@
       "uf_m2_dcto": 51.6,
       "estacionamiento_uf": null,
       "bodega_uf": null,
-      "lat": -33.0610,
-      "lng": -71.3450,
+      "lat": -33.061,
+      "lng": -71.345,
       "fuente": "Portal Inmobiliario, raicespenablanca.cl, Enlace Inmobiliario",
       "notas": "Condominio de 121 casas mediterráneas de 96,4m². Precio publicado en Portal Inmobiliario: UF 5.404. Rango en Enlace: UF 5.458–7.175 (posible variación por etapa). Inmobiliaria no identificada en web, opera con dominio propio raicespenablanca.cl. Pendiente validación sala de venta."
     },
-
     {
       "proyecto": "Raíces de Quilpué",
       "direccion": "Almirante Gerken 2877, Los Pinos, Quilpué",
@@ -269,11 +292,18 @@
       "pisos": 2,
       "dorms": "3D",
       "banos": "3B",
-      "m2_util": 87.0,
+      "m2_util": 87,
       "terraza": null,
       "orientacion": null,
       "vista_principal": null,
-      "amenities": ["Quincho con parrilla", "Cámaras de seguridad", "Estacionamientos de visita", "Cerco eléctrico", "Hot tub (opcional)", "Huerto"],
+      "amenities": [
+        "Quincho con parrilla",
+        "Cámaras de seguridad",
+        "Estacionamientos de visita",
+        "Cerco eléctrico",
+        "Hot tub (opcional)",
+        "Huerto"
+      ],
       "disponibles": 3,
       "total_unidades": 57,
       "precio_lista_uf": 5100,
@@ -283,7 +313,7 @@
       "estacionamiento_uf": null,
       "bodega_uf": null,
       "lat": -33.0456,
-      "lng": -71.4580,
+      "lng": -71.458,
       "fuente": "Portal Inmobiliario, raicesquilpue.cl",
       "notas": "3 tipologías (Naranjo, Limonero, Granada) entre 87–92m². Precio desde UF 5.100 en Portal Inmobiliario. Página web del proyecto indica desde UF 5.560. Solo 3 unidades disponibles. Pendiente validación sala de venta."
     },
@@ -299,11 +329,18 @@
       "pisos": 2,
       "dorms": "3D",
       "banos": "3B",
-      "m2_util": 92.0,
+      "m2_util": 92,
       "terraza": null,
       "orientacion": null,
       "vista_principal": null,
-      "amenities": ["Quincho con parrilla", "Cámaras de seguridad", "Estacionamientos de visita", "Cerco eléctrico", "Hot tub (opcional)", "Huerto"],
+      "amenities": [
+        "Quincho con parrilla",
+        "Cámaras de seguridad",
+        "Estacionamientos de visita",
+        "Cerco eléctrico",
+        "Hot tub (opcional)",
+        "Huerto"
+      ],
       "disponibles": null,
       "total_unidades": null,
       "precio_lista_uf": 5630,
@@ -313,11 +350,10 @@
       "estacionamiento_uf": null,
       "bodega_uf": null,
       "lat": -33.0456,
-      "lng": -71.4580,
+      "lng": -71.458,
       "fuente": "Portal Inmobiliario, raicesquilpue.cl",
       "notas": "Modelo mayor (92m²). Precio hasta UF 5.630 según Enlace Inmobiliario. Pendiente validación sala de venta."
     },
-
     {
       "proyecto": "Vive Quilpué",
       "direccion": "Quilpué, sector Troncal",
@@ -334,21 +370,26 @@
       "terraza": null,
       "orientacion": null,
       "vista_principal": null,
-      "amenities": ["Hormigón armado ambos pisos", "Termopanel", "Cocina equipada", "Estar familiar", "Suite principal con walk-in closet"],
+      "amenities": [
+        "Hormigón armado ambos pisos",
+        "Termopanel",
+        "Cocina equipada",
+        "Estar familiar",
+        "Suite principal con walk-in closet"
+      ],
       "disponibles": null,
       "total_unidades": 30,
       "precio_lista_uf": 5200,
       "precio_dcto_uf": 4784,
-      "uf_m2_lista": 63.0,
-      "uf_m2_dcto": 58.0,
+      "uf_m2_lista": 63,
+      "uf_m2_dcto": 58,
       "estacionamiento_uf": null,
       "bodega_uf": null,
-      "lat": -33.0480,
-      "lng": -71.4520,
+      "lat": -33.048,
+      "lng": -71.452,
       "fuente": "Portal Inmobiliario, vivequilpue.cl",
       "notas": "Condominio de 30 casas aisladas. Precio UF 5.200 publicado en Portal Inmobiliario. Inmobiliaria no identificada, opera con dominio propio vivequilpue.cl. Pendiente validación sala de venta."
     },
-
     {
       "proyecto": "Alto Los Robles IV",
       "direccion": "Calle Mirador 498 esq. Madrid, Villa Alemana",
@@ -361,11 +402,16 @@
       "pisos": 2,
       "dorms": "3D",
       "banos": "2B",
-      "m2_util": 90.0,
+      "m2_util": 90,
       "terraza": null,
       "orientacion": null,
       "vista_principal": null,
-      "amenities": ["Piscina", "Conserjería 24/7", "Áreas verdes", "Barrio consolidado"],
+      "amenities": [
+        "Piscina",
+        "Conserjería 24/7",
+        "Áreas verdes",
+        "Barrio consolidado"
+      ],
       "disponibles": 29,
       "total_unidades": 105,
       "precio_lista_uf": 4900,
@@ -374,8 +420,8 @@
       "uf_m2_dcto": 50.1,
       "estacionamiento_uf": null,
       "bodega_uf": null,
-      "lat": -32.9870,
-      "lng": -71.3750,
+      "lat": -32.987,
+      "lng": -71.375,
       "fuente": "Enlace Inmobiliario, Pabellon.cl, ivesa.cl",
       "notas": "Modelo Nogal 90m² 3D+2B desde UF 4.900. Megaproyecto Mirador del Valle. Pendiente validación sala de venta."
     },
@@ -391,11 +437,16 @@
       "pisos": 2,
       "dorms": "4D",
       "banos": "3B",
-      "m2_util": 106.0,
+      "m2_util": 106,
       "terraza": null,
       "orientacion": null,
       "vista_principal": null,
-      "amenities": ["Piscina", "Conserjería 24/7", "Áreas verdes", "Barrio consolidado"],
+      "amenities": [
+        "Piscina",
+        "Conserjería 24/7",
+        "Áreas verdes",
+        "Barrio consolidado"
+      ],
       "disponibles": null,
       "total_unidades": null,
       "precio_lista_uf": 5800,
@@ -404,12 +455,11 @@
       "uf_m2_dcto": 50.3,
       "estacionamiento_uf": null,
       "bodega_uf": null,
-      "lat": -32.9870,
-      "lng": -71.3750,
+      "lat": -32.987,
+      "lng": -71.375,
       "fuente": "Enlace Inmobiliario, Pabellon.cl, ivesa.cl",
       "notas": "Modelo Roble 106m² 4D+3B desde UF 5.800. Pendiente validación sala de venta."
     },
-
     {
       "proyecto": "Condominio El Alba",
       "direccion": "El Álamo, Villa Alemana, Palmilla",
@@ -422,11 +472,15 @@
       "pisos": 2,
       "dorms": "3D",
       "banos": "2B",
-      "m2_util": 58.0,
+      "m2_util": 58,
       "terraza": null,
       "orientacion": null,
       "vista_principal": null,
-      "amenities": ["Acceso controlado", "Cocina equipada con granito", "Piso flotante en dormitorios"],
+      "amenities": [
+        "Acceso controlado",
+        "Cocina equipada con granito",
+        "Piso flotante en dormitorios"
+      ],
       "disponibles": 27,
       "total_unidades": 62,
       "precio_lista_uf": 3046,
@@ -435,12 +489,11 @@
       "uf_m2_dcto": 48.3,
       "estacionamiento_uf": null,
       "bodega_uf": null,
-      "lat": -32.9960,
-      "lng": -71.3680,
+      "lat": -32.996,
+      "lng": -71.368,
       "fuente": "Portal Inmobiliario, predomina.cl, ivmc.cl",
       "notas": "Condominio de 62 casas de 58m². Precio desde UF 3.046. Proyecto más económico del mercado de casas. Pendiente validación sala de venta."
     },
-
     {
       "proyecto": "Condominio Aire Campestre",
       "direccion": "O'Higgins 70, San Francisco de Limache",
@@ -457,7 +510,16 @@
       "terraza": null,
       "orientacion": null,
       "vista_principal": null,
-      "amenities": ["Acceso controlado", "Citofonía", "Sistema de seguridad", "Urbanización subterránea", "Reciclaje", "Bicicleteros", "Jardín posterior ~135m²", "Domótica primer piso"],
+      "amenities": [
+        "Acceso controlado",
+        "Citofonía",
+        "Sistema de seguridad",
+        "Urbanización subterránea",
+        "Reciclaje",
+        "Bicicleteros",
+        "Jardín posterior ~135m²",
+        "Domótica primer piso"
+      ],
       "disponibles": null,
       "total_unidades": null,
       "precio_lista_uf": 5011,
@@ -466,322 +528,78 @@
       "uf_m2_dcto": 53.6,
       "estacionamiento_uf": null,
       "bodega_uf": null,
-      "lat": -33.0020,
-      "lng": -71.1040,
+      "lat": -33.002,
+      "lng": -71.104,
       "fuente": "Portal Inmobiliario, md2.cl, Enlace Inmobiliario",
       "notas": "Terrenos entre 264–289m². Precio desde UF 5.011 hasta UF 5.462. Limache es la zona más alejada del proyecto evaluado. Pendiente validación sala de venta."
-    },
-
-    {
-      "proyecto": "San Pablo de Curauma Edificios II",
-      "direccion": "Av. Lomas de la Luz s/n, Curauma, Valparaíso",
-      "inmobiliaria": "Inmobiliaria Aconcagua",
-      "zona": "curauma",
-      "sector": "Curauma / Laguna La Luz",
-      "distancia_centro_m": 20000,
-      "estado": "Venta en verde",
-      "tipo_propiedad": "departamento",
-      "pisos": null,
-      "dorms": "2D",
-      "banos": "1B",
-      "m2_util": 47.05,
-      "terraza": null,
-      "orientacion": null,
-      "vista_principal": null,
-      "amenities": ["Club House", "Áreas verdes", "Bicicleteros", "Zona de juegos"],
-      "disponibles": 126,
-      "total_unidades": null,
-      "precio_lista_uf": 2495,
-      "precio_dcto_uf": 2295,
-      "uf_m2_lista": 53.0,
-      "uf_m2_dcto": 48.8,
-      "estacionamiento_uf": null,
-      "bodega_uf": null,
-      "lat": -33.1648,
-      "lng": -71.5530,
-      "fuente": "Enlace Inmobiliario, iaconcagua.com",
-      "notas": "7 modelos de departamentos 2D y 3D. Precio desde UF 2.495 (2D/1B, 47m²). Estacionamientos y bodegas se revisan en sala de venta. Pendiente validación."
-    },
-    {
-      "proyecto": "San Pablo de Curauma Edificios II",
-      "direccion": "Av. Lomas de la Luz s/n, Curauma, Valparaíso",
-      "inmobiliaria": "Inmobiliaria Aconcagua",
-      "zona": "curauma",
-      "sector": "Curauma / Laguna La Luz",
-      "distancia_centro_m": 20000,
-      "estado": "Venta en verde",
-      "tipo_propiedad": "departamento",
-      "pisos": null,
-      "dorms": "2D",
-      "banos": "2B",
-      "m2_util": 48.36,
-      "terraza": 3.56,
-      "orientacion": null,
-      "vista_principal": null,
-      "amenities": ["Club House", "Áreas verdes", "Bicicleteros", "Zona de juegos"],
-      "disponibles": 63,
-      "total_unidades": null,
-      "precio_lista_uf": 2391,
-      "precio_dcto_uf": 2200,
-      "uf_m2_lista": 47.5,
-      "uf_m2_dcto": 43.7,
-      "estacionamiento_uf": null,
-      "bodega_uf": null,
-      "lat": -33.1648,
-      "lng": -71.5530,
-      "fuente": "Enlace Inmobiliario, iaconcagua.com",
-      "notas": "Modelo 2D/2B 48,36m² + terraza 3,56m². Precio desde UF 2.391 publicado en iaconcagua.com. Pendiente validación."
-    },
-
-    {
-      "proyecto": "Condominio Espacio Las Tablas Curauma",
-      "direccion": "Av. Las Lomas 410, Curauma, Valparaíso",
-      "inmobiliaria": "Umbrales",
-      "zona": "curauma",
-      "sector": "Curauma / Las Tablas",
-      "distancia_centro_m": 20000,
-      "estado": "Venta en verde",
-      "tipo_propiedad": "departamento",
-      "pisos": 7,
-      "dorms": "1D",
-      "banos": "1B",
-      "m2_util": 38.0,
-      "terraza": null,
-      "orientacion": null,
-      "vista_principal": null,
-      "amenities": ["Club House", "Áreas verdes", "Circuito de caminata", "Bicicleteros", "Jardín mascotas", "Acceso controlado"],
-      "disponibles": null,
-      "total_unidades": null,
-      "precio_lista_uf": 2449,
-      "precio_dcto_uf": 2253,
-      "uf_m2_lista": 64.4,
-      "uf_m2_dcto": 59.3,
-      "estacionamiento_uf": null,
-      "bodega_uf": null,
-      "lat": -33.1572,
-      "lng": -71.5617,
-      "fuente": "Portal Inmobiliario, iumbrales.cl",
-      "notas": "Terreno de más de 2 hectáreas. Edificios de solo 7 pisos. Departamentos de 38–60m². Precio desde UF 2.449 (1D). Pendiente validación sala de venta."
-    },
-    {
-      "proyecto": "Condominio Espacio Las Tablas Curauma",
-      "direccion": "Av. Las Lomas 410, Curauma, Valparaíso",
-      "inmobiliaria": "Umbrales",
-      "zona": "curauma",
-      "sector": "Curauma / Las Tablas",
-      "distancia_centro_m": 20000,
-      "estado": "Venta en verde",
-      "tipo_propiedad": "departamento",
-      "pisos": 7,
-      "dorms": "2D",
-      "banos": "1B",
-      "m2_util": 50.0,
-      "terraza": null,
-      "orientacion": null,
-      "vista_principal": null,
-      "amenities": ["Club House", "Áreas verdes", "Circuito de caminata", "Bicicleteros", "Jardín mascotas", "Acceso controlado"],
-      "disponibles": null,
-      "total_unidades": null,
-      "precio_lista_uf": 2900,
-      "precio_dcto_uf": 2668,
-      "uf_m2_lista": 58.0,
-      "uf_m2_dcto": 53.4,
-      "estacionamiento_uf": null,
-      "bodega_uf": null,
-      "lat": -33.1572,
-      "lng": -71.5617,
-      "fuente": "Portal Inmobiliario, iumbrales.cl",
-      "notas": "Modelo 2D estimado para superficies de hasta 50m². Precio estimado. Pendiente validación sala de venta."
-    },
-
-    {
-      "proyecto": "Alturas de Curauma",
-      "direccion": "Av. Colina Verde, Curauma, Valparaíso",
-      "inmobiliaria": "Galilea",
-      "zona": "curauma",
-      "sector": "Curauma Norte",
-      "distancia_centro_m": 19500,
-      "estado": "Venta en verde",
-      "tipo_propiedad": "departamento",
-      "pisos": 7,
-      "dorms": "2D",
-      "banos": "1B",
-      "m2_util": 51.0,
-      "terraza": null,
-      "orientacion": null,
-      "vista_principal": null,
-      "amenities": ["Acceso controlado", "Bicicleteros", "Estacionamiento privado y de visitas"],
-      "disponibles": 20,
-      "total_unidades": null,
-      "precio_lista_uf": 1900,
-      "precio_dcto_uf": 1748,
-      "uf_m2_lista": 37.3,
-      "uf_m2_dcto": 34.3,
-      "estacionamiento_uf": null,
-      "bodega_uf": null,
-      "lat": -33.1560,
-      "lng": -71.5640,
-      "fuente": "Enlace Inmobiliario, galilea.cl",
-      "notas": "8vo condominio de departamentos en la zona con respaldo Galilea. Tipo A: 61m² 3D; Tipo B: 51m² 2D. Precio desde UF 1.900 incluye estacionamiento y bodega. Proyecto acogido a Subsidio DS01. Pendiente validación."
-    },
-    {
-      "proyecto": "Alturas de Curauma",
-      "direccion": "Av. Colina Verde, Curauma, Valparaíso",
-      "inmobiliaria": "Galilea",
-      "zona": "curauma",
-      "sector": "Curauma Norte",
-      "distancia_centro_m": 19500,
-      "estado": "Venta en verde",
-      "tipo_propiedad": "departamento",
-      "pisos": 7,
-      "dorms": "3D",
-      "banos": "1B",
-      "m2_util": 61.0,
-      "terraza": null,
-      "orientacion": null,
-      "vista_principal": null,
-      "amenities": ["Acceso controlado", "Bicicleteros", "Estacionamiento privado y de visitas"],
-      "disponibles": null,
-      "total_unidades": null,
-      "precio_lista_uf": 2245,
-      "precio_dcto_uf": 2065,
-      "uf_m2_lista": 36.8,
-      "uf_m2_dcto": 33.9,
-      "estacionamiento_uf": null,
-      "bodega_uf": null,
-      "lat": -33.1560,
-      "lng": -71.5640,
-      "fuente": "Enlace Inmobiliario, galilea.cl",
-      "notas": "Tipo A: 61m² balcón incluido, 3D. Precio hasta UF 2.245. Incluye estacionamiento y bodega. Acogido a Subsidio DS01. Pendiente validación."
-    },
-
-    {
-      "proyecto": "Condominio Altos del Parque",
-      "direccion": "Av. Surcos de Agua s/n, Curauma, Valparaíso",
-      "inmobiliaria": "Inmobiliaria Rio Cochrane",
-      "zona": "curauma",
-      "sector": "Curauma / Tranque La Luz",
-      "distancia_centro_m": 21000,
-      "estado": "Venta en verde",
-      "tipo_propiedad": "departamento",
-      "pisos": 4,
-      "dorms": "2D",
-      "banos": "1B",
-      "m2_util": null,
-      "terraza": null,
-      "orientacion": null,
-      "vista_principal": null,
-      "amenities": ["Acceso controlado", "Áreas verdes", "Juegos infantiles", "Estacionamientos cubiertos", "Local comercial", "Iluminación fotovoltaica", "Aislación térmica exterior (EIFS)"],
-      "disponibles": null,
-      "total_unidades": 192,
-      "precio_lista_uf": 2400,
-      "precio_dcto_uf": null,
-      "uf_m2_lista": null,
-      "uf_m2_dcto": null,
-      "estacionamiento_uf": null,
-      "bodega_uf": null,
-      "lat": -33.1680,
-      "lng": -71.5500,
-      "fuente": "riocochrane.cl, usatusubsidio.cl, Portal Inmobiliario",
-      "notas": "Etapa I: 12 edificios de 4 pisos, 192 departamentos 2D y 3D. Acogido a Subsidio DS19 (valor hasta UF 2.400). Precio publicado UF 2.400. Superficies útiles no publicadas aún. Pendiente validación sala de venta."
-    },
-    {
-      "proyecto": "Condominio Altos del Parque",
-      "direccion": "Av. Surcos de Agua s/n, Curauma, Valparaíso",
-      "inmobiliaria": "Inmobiliaria Rio Cochrane",
-      "zona": "curauma",
-      "sector": "Curauma / Tranque La Luz",
-      "distancia_centro_m": 21000,
-      "estado": "Venta en verde",
-      "tipo_propiedad": "departamento",
-      "pisos": 4,
-      "dorms": "3D",
-      "banos": "2B",
-      "m2_util": null,
-      "terraza": null,
-      "orientacion": null,
-      "vista_principal": null,
-      "amenities": ["Acceso controlado", "Áreas verdes", "Juegos infantiles", "Estacionamientos cubiertos", "Local comercial", "Iluminación fotovoltaica", "Aislación térmica exterior (EIFS)"],
-      "disponibles": null,
-      "total_unidades": null,
-      "precio_lista_uf": 2400,
-      "precio_dcto_uf": null,
-      "uf_m2_lista": null,
-      "uf_m2_dcto": null,
-      "estacionamiento_uf": null,
-      "bodega_uf": null,
-      "lat": -33.1680,
-      "lng": -71.5500,
-      "fuente": "riocochrane.cl, usatusubsidio.cl",
-      "notas": "Modelo 3D también disponible. Precio máximo DS19: UF 2.400. Superficies no publicadas. Pendiente validación sala de venta."
     }
   ],
-
   "resumen_mercado": {
     "total_proyectos": 10,
     "total_disponibles_casas": 99,
     "total_disponibles_deptos": 209,
-    "rango_uf_m2_lista_casas": { "min": 44.2, "max": 63.0 },
-    "rango_uf_m2_lista_deptos": { "min": 37.3, "max": 64.4 },
-    "rango_uf_m2_dcto_casas": { "min": 40.7, "max": 58.0 },
-    "rango_uf_m2_dcto_deptos": { "min": 33.9, "max": 59.3 },
+    "rango_uf_m2_lista_casas": {
+      "min": 44.2,
+      "max": 63
+    },
+    "rango_uf_m2_lista_deptos": {
+      "min": 37.3,
+      "max": 64.4
+    },
+    "rango_uf_m2_dcto_casas": {
+      "min": 40.7,
+      "max": 58
+    },
+    "rango_uf_m2_dcto_deptos": {
+      "min": 33.9,
+      "max": 59.3
+    },
     "promedio_por_tipologia_casas": {
       "3D_pequena": {
         "rango_m2": "56–73m²",
         "min": 43.9,
         "max": 53.9,
         "promedio": 48.2,
-        "referencia_proyectos": ["Puerta del Sol", "Condominio El Alba"],
+        "referencia_proyectos": [
+          "Puerta del Sol",
+          "Condominio El Alba"
+        ],
         "n_proyectos": 2
       },
       "3D_mediana": {
         "rango_m2": "82–97m²",
         "min": 40.7,
-        "max": 58.0,
+        "max": 58,
         "promedio": 50.4,
-        "referencia_proyectos": ["Brisas de Curauma (Torcaza)", "Raíces de Peñablanca", "Raíces de Quilpué", "Vive Quilpué", "Alto Los Robles IV Nogal", "Aire Campestre"],
+        "referencia_proyectos": [
+          "Brisas de Curauma (Torcaza)",
+          "Raíces de Peñablanca",
+          "Raíces de Quilpué",
+          "Vive Quilpué",
+          "Alto Los Robles IV Nogal",
+          "Aire Campestre"
+        ],
         "n_proyectos": 6
       },
       "3D_grande": {
         "rango_m2": "106–125m²",
         "min": 40.7,
         "max": 53.3,
-        "promedio": 47.0,
-        "referencia_proyectos": ["Brisas de Curauma (Cormorán)", "Alto Los Robles IV Roble"],
+        "promedio": 47,
+        "referencia_proyectos": [
+          "Brisas de Curauma (Cormorán)",
+          "Alto Los Robles IV Roble"
+        ],
         "n_proyectos": 2
-      }
-    },
-    "promedio_por_tipologia_deptos": {
-      "1D": {
-        "rango_m2": "38m²",
-        "min": 59.3,
-        "max": 64.4,
-        "promedio": 61.9,
-        "n_proyectos": 1
       },
-      "2D": {
-        "rango_m2": "47–51m²",
-        "min": 34.3,
-        "max": 53.0,
-        "promedio": 43.6,
-        "n_proyectos": 3
-      },
-      "3D": {
-        "rango_m2": "61m²",
-        "min": 33.9,
-        "max": 33.9,
-        "promedio": 33.9,
-        "n_proyectos": 1
-      }
+      "nota": "Promedios calculados solo sobre proyectos de casas"
     },
     "por_zona": {
       "curauma": {
         "proyectos": 5,
-        "tipo": "casas + departamentos",
+        "tipo": "casas",
         "rango_uf_m2_casas": "40.7–58.0 UF/m² (dcto)",
-        "rango_uf_m2_deptos": "33.9–59.3 UF/m² (dcto)",
-        "disponibles_casas": 9,
-        "disponibles_deptos": 209
+        "disponibles_casas": 9
       },
       "penablanca": {
         "proyectos": 1,
@@ -808,17 +626,45 @@
         "disponibles_casas": null
       }
     },
-    "observaciones": "El proyecto Peñablanca VK no tiene definición de tipologías ni precios aún, por lo que no se calculan deltas de posicionamiento. Esta sección deberá actualizarse una vez el cliente defina programa y precios objetivo. La competencia más directa geográficamente es Raíces de Peñablanca (mismo sector, 121 casas, UF 5.404 desde). El mercado de casas en la zona presenta un rango amplio: desde UF 2.710 (Curauma económico) hasta UF 5.800 (Villa Alemana premium). Segmento de departamentos disponible solo en Curauma, entre UF 1.900 y UF 2.495."
+    "observaciones": "Análisis específico de mercado de casas en el sector Peñablanca y zonas aledañas. Separado del estudio original que incluía también departamentos."
   },
-
   "ponderacion_orientacion": [
-    { "orientacion": "Norte / Nororiente", "codigo": "N/NE", "delta": 4.0, "justificacion": "Mayor soleamiento y luminosidad todo el año en Chile central. Prima habitual en proyectos residenciales del Gran Valparaíso.", "aplica": "Todos los mix" },
-    { "orientacion": "Oriente", "codigo": "E", "delta": 2.5, "justificacion": "Soleamiento matutino valorado especialmente en casas con jardín. Sin penalización por calor vespertino.", "aplica": "3D+2B, 4D+3B" },
-    { "orientacion": "Poniente", "codigo": "P", "delta": 1.5, "justificacion": "Soleamiento vespertino. Puede generar mayor calor interior en verano pero es valorado en temporadas frías de la zona.", "aplica": "Todos los mix" },
-    { "orientacion": "Sur / Suroriente", "codigo": "S/SE", "delta": -2.0, "justificacion": "Menor soleamiento directo. Descuento habitual en proyectos de la V Región.", "aplica": "Todos los mix" },
-    { "orientacion": "Sin definir / Pendiente", "codigo": "null", "delta": 0.0, "justificacion": "Pendiente levantamiento en terreno.", "aplica": "Todos los mix" }
+    {
+      "orientacion": "Norte / Nororiente",
+      "codigo": "N/NE",
+      "delta": 4,
+      "justificacion": "Mayor soleamiento y luminosidad todo el año en Chile central. Prima habitual en proyectos residenciales del Gran Valparaíso.",
+      "aplica": "Todos los mix"
+    },
+    {
+      "orientacion": "Oriente",
+      "codigo": "E",
+      "delta": 2.5,
+      "justificacion": "Soleamiento matutino valorado especialmente en casas con jardín. Sin penalización por calor vespertino.",
+      "aplica": "3D+2B, 4D+3B"
+    },
+    {
+      "orientacion": "Poniente",
+      "codigo": "P",
+      "delta": 1.5,
+      "justificacion": "Soleamiento vespertino. Puede generar mayor calor interior en verano pero es valorado en temporadas frías de la zona.",
+      "aplica": "Todos los mix"
+    },
+    {
+      "orientacion": "Sur / Suroriente",
+      "codigo": "S/SE",
+      "delta": -2,
+      "justificacion": "Menor soleamiento directo. Descuento habitual en proyectos de la V Región.",
+      "aplica": "Todos los mix"
+    },
+    {
+      "orientacion": "Sin definir / Pendiente",
+      "codigo": "null",
+      "delta": 0,
+      "justificacion": "Pendiente levantamiento en terreno.",
+      "aplica": "Todos los mix"
+    }
   ],
-
   "notas": [
     {
       "titulo": "Fuente y fecha de precios",
