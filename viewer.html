@@ -1362,9 +1362,9 @@ function renderCompetencia(d) {
   if (hasVista)     headers.push('Vista');
   if (hasDisp)      headers.push('Disponibles');
   headers.push('Precio lista');
-  if (hasPrecioDcto) headers.push('Precio dcto');
+  // if (hasPrecioDcto) headers.push('Precio dcto');
   headers.push('UF/m² lista');
-  if (hasUfDcto)    headers.push('UF/m² dcto');
+  // if (hasUfDcto)    headers.push('UF/m² dcto');
   if (hasEstac)     headers.push('Est. UF');
   if (hasBodega)    headers.push('Bod. UF');
   headers.push('Fuente');
@@ -1392,9 +1392,9 @@ function renderCompetencia(d) {
     if (hasVista)  cells.push(`<td style="font-size:.78rem">${r.vista_principal||'—'}</td>`);
     if (hasDisp)   cells.push(`<td style="text-align:center">${r.disponibles != null ? r.disponibles : '—'}</td>`);
     cells.push(`<td class="td-price">${fmtUF(r.precio_lista_uf)}</td>`);
-    if (hasPrecioDcto) cells.push(`<td class="td-price-dcto">${r.precio_dcto_uf != null ? fmtUF(r.precio_dcto_uf) : '—'}</td>`);
+    // if (hasPrecioDcto) cells.push(`<td class="td-price-dcto">${r.precio_dcto_uf != null ? fmtUF(r.precio_dcto_uf) : '—'}</td>`);
     cells.push(`<td class="td-ufm2">${fmt(r.uf_m2_lista)}</td>`);
-    if (hasUfDcto) cells.push(`<td class="td-ufm2" style="color:#3b5ea6">${r.uf_m2_dcto != null ? fmt(r.uf_m2_dcto) : '—'}</td>`);
+    // if (hasUfDcto) cells.push(`<td class="td-ufm2" style="color:#3b5ea6">${r.uf_m2_dcto != null ? fmt(r.uf_m2_dcto) : '—'}</td>`);
     if (hasEstac)  cells.push(`<td style="text-align:center;font-size:.8rem">${r.estacionamiento_uf != null ? fmtUF(r.estacionamiento_uf) : '—'}</td>`);
     if (hasBodega) cells.push(`<td style="text-align:center;font-size:.8rem">${r.bodega_uf != null ? fmtUF(r.bodega_uf) : '—'}</td>`);
     cells.push(`<td style="font-size:.75rem;color:var(--text-muted)">${r.fuente||'—'}</td>`);
