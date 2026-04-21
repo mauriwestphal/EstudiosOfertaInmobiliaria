@@ -123,9 +123,9 @@
       "pisos": 12,
       "dorms": "3D",
       "banos": "2B",
-      "m2_util": 72.0,
-      "terraza": 10.0,
-      "orientacion": null,
+      "m2_util": 82.29,
+      "terraza": 6.37,
+      "orientacion": "NO",
       "vista_principal": null,
       "amenities": [
         "Lounge bar panorámico",
@@ -138,15 +138,15 @@
       ],
       "disponibles": null,
       "total_unidades": 58,
-      "precio_lista_uf": 7218,
-      "precio_dcto_uf": 6641,
-      "uf_m2_lista": 94.4,
-      "uf_m2_dcto": 86.8,
+      "precio_lista_uf": 7574,
+      "precio_dcto_uf": 6968,
+      "uf_m2_lista": 88.6,
+      "uf_m2_dcto": 81.5,
       "estacionamiento_uf": 400,
       "bodega_uf": 70,
       "lat": -33.0372,
       "lng": -71.5445,
-      "fuente": "vistafuturo.info — desde UF 7.218 (3D). m² estimados desde rango publicado. Pendiente validación sala de ventas."
+      "fuente": "Portal Inmobiliario — unidad 201 confirmada: 3D+2B, 82.29m² útil + 6.37m² terraza, UF 7.574. Inmobiliaria Vista Futuro."
     },
     {
       "proyecto": "2 Norte 1230",
@@ -159,9 +159,9 @@
       "pisos": null,
       "dorms": "1D",
       "banos": "1B",
-      "m2_util": 41.81,
-      "terraza": null,
-      "orientacion": null,
+      "m2_util": 35.95,
+      "terraza": 3.87,
+      "orientacion": "O",
       "vista_principal": null,
       "amenities": [
         "Zona Lounge",
@@ -176,15 +176,15 @@
       ],
       "disponibles": 29,
       "total_unidades": null,
-      "precio_lista_uf": 2583,
-      "precio_dcto_uf": 2376,
-      "uf_m2_lista": 61.8,
-      "uf_m2_dcto": 56.8,
+      "precio_lista_uf": 4722,
+      "precio_dcto_uf": 4344,
+      "uf_m2_lista": 124.6,
+      "uf_m2_dcto": 114.7,
       "estacionamiento_uf": null,
       "bodega_uf": null,
       "lat": -33.0355,
       "lng": -71.5422,
-      "fuente": "enlaceinmobiliario.cl / planinversion.cl — 1D+1B 41.81m², desde UF 2.583 (entrega inmediata). Venta en verde desde UF 2.108."
+      "fuente": "Portal Inmobiliario — unidades B608 (UF 4.758) y B701 (UF 4.722) confirmadas: 1D+1B ~35-36m² útil + ~4m² terraza. Precio desde UF 4.722. El 'desde UF 3.341' publicado en portales agregadores corresponde a precio de lanzamiento ya agotado."
     },
     {
       "proyecto": "2 Norte 1230",
@@ -197,9 +197,9 @@
       "pisos": null,
       "dorms": "2D",
       "banos": "2B",
-      "m2_util": 53.5,
-      "terraza": null,
-      "orientacion": null,
+      "m2_util": 53.37,
+      "terraza": 7.02,
+      "orientacion": "P",
       "vista_principal": null,
       "amenities": [
         "Zona Lounge",
@@ -214,15 +214,53 @@
       ],
       "disponibles": null,
       "total_unidades": null,
-      "precio_lista_uf": 3341,
-      "precio_dcto_uf": 3073,
-      "uf_m2_lista": 62.4,
-      "uf_m2_dcto": 57.4,
+      "precio_lista_uf": 6833,
+      "precio_dcto_uf": 6286,
+      "uf_m2_lista": 120.1,
+      "uf_m2_dcto": 110.5,
       "estacionamiento_uf": null,
       "bodega_uf": null,
       "lat": -33.0355,
       "lng": -71.5422,
-      "fuente": "Portal Inmobiliario — desde UF 3.341. Sup. útil 53.47-54.05m² según ficha enlace."
+      "fuente": "Portal Inmobiliario — unidad A1003 confirmada: 2D+2B, 53.37m² útil + 7.02m² terraza, UF 6.833. Unidad A306 (55.83m²+10.09t, UF 7.145) también confirmada. Excluida unidad B306 (terraza 34.71m² atípica)."
+    },
+    {
+      "proyecto": "2 Norte 1230",
+      "direccion": "2 Norte 1230, Libertad, Viña del Mar",
+      "inmobiliaria": "Numancia",
+      "zona": "vina_plan",
+      "sector": "Plan de Viña del Mar / Calles Norte",
+      "distancia_centro_m": 900,
+      "estado": "Entrega inmediata",
+      "pisos": null,
+      "dorms": "3D",
+      "banos": "2B",
+      "m2_util": 60.11,
+      "terraza": 10.75,
+      "orientacion": "NO",
+      "vista_principal": null,
+      "amenities": [
+        "Zona Lounge",
+        "Workcenter",
+        "E-corner",
+        "BBQ bar & grill",
+        "Sector fitness exterior",
+        "Pet zone",
+        "Lavandería",
+        "Piscina",
+        "Bike station"
+      ],
+      "disponibles": null,
+      "total_unidades": null,
+      "precio_lista_uf": 7865,
+      "precio_dcto_uf": 7236,
+      "uf_m2_lista": 120.1,
+      "uf_m2_dcto": 110.5,
+      "estacionamiento_uf": null,
+      "bodega_uf": null,
+      "lat": -33.0355,
+      "lng": -71.5422,
+      "fuente": "Portal Inmobiliario — unidad B802 confirmada: 3D+2B, 60.11m² útil + 10.75m² terraza, UF 7.865. Inmobiliaria Numancia."
     },
     {
       "proyecto": "Cromático",
@@ -233,11 +271,11 @@
       "distancia_centro_m": 1800,
       "estado": "Venta en blanco",
       "pisos": null,
-      "dorms": "1D",
+      "dorms": "E",
       "banos": "1B",
-      "m2_util": 35.0,
-      "terraza": 5.0,
-      "orientacion": null,
+      "m2_util": 28.08,
+      "terraza": 0,
+      "orientacion": "S",
       "vista_principal": null,
       "amenities": [
         "Salón gourmet",
@@ -249,15 +287,15 @@
       ],
       "disponibles": 135,
       "total_unidades": null,
-      "precio_lista_uf": 2256,
-      "precio_dcto_uf": 2075,
-      "uf_m2_lista": 59.4,
-      "uf_m2_dcto": 54.6,
+      "precio_lista_uf": 2378,
+      "precio_dcto_uf": 2188,
+      "uf_m2_lista": 84.7,
+      "uf_m2_dcto": 77.9,
       "estacionamiento_uf": null,
       "bodega_uf": null,
       "lat": -33.0482,
       "lng": -71.5512,
-      "fuente": "Portal Inmobiliario — desde UF 2.256. Hasta 10% OFF en 11 unidades. Rango 28-75m². Tipología 1D estimada."
+      "fuente": "Portal Inmobiliario — unidad 702 confirmada: estudio 0D+1B, 28.08m² útil sin terraza, UF 2.378. No hay tipología 1D publicada en portal."
     },
     {
       "proyecto": "Cromático",
@@ -284,15 +322,15 @@
       ],
       "disponibles": null,
       "total_unidades": null,
-      "precio_lista_uf": 3500,
-      "precio_dcto_uf": 3220,
-      "uf_m2_lista": 61.9,
-      "uf_m2_dcto": 56.9,
+      "precio_lista_uf": 4500,
+      "precio_dcto_uf": 4140,
+      "uf_m2_lista": 80.4,
+      "uf_m2_dcto": 73.9,
       "estacionamiento_uf": null,
       "bodega_uf": null,
       "lat": -33.0482,
       "lng": -71.5512,
-      "fuente": "Portal Inmobiliario — tipología 2D estimada. Precio estimado desde mercado del sector. Pendiente validación."
+      "fuente": "Portal Inmobiliario — tipología 2D estimada desde rango 28-75m². Precio ajustado al mercado real del sector (2 Norte 1230 y Entrelomas 5 operan a 117-126 UF/m²). Pendiente validación sala de ventas TREI."
     },
     {
       "proyecto": "Vista Urbana",
@@ -326,7 +364,7 @@
       "bodega_uf": null,
       "lat": -33.0518,
       "lng": -71.5478,
-      "fuente": "vistaurbana.cl — Depto 101A: 2D+2B, 57.15m² útil + 27.04m² terraza. UF 3.747. Orientación norte confirmada."
+      "fuente": "vistaurbana.cl — Depto 101A confirmado: 2D+2B, 57.15m² útil + 27.04m² terraza, UF 3.747. UF/m² ponderado (52.5) distorsionado por terraza excepcional. UF/m² sobre útil neto = 65.6 UF/m²."
     },
     {
       "proyecto": "Vista Urbana",
@@ -408,9 +446,9 @@
       "pisos": null,
       "dorms": "2D",
       "banos": "2B",
-      "m2_util": 68.0,
-      "terraza": 12.0,
-      "orientacion": null,
+      "m2_util": 58.75,
+      "terraza": 10.17,
+      "orientacion": "SP",
       "vista_principal": "Mar / Bahía de Viña",
       "amenities": [
         "Sala de yoga",
@@ -422,15 +460,15 @@
       ],
       "disponibles": null,
       "total_unidades": null,
-      "precio_lista_uf": 5200,
-      "precio_dcto_uf": 4784,
-      "uf_m2_lista": 69.3,
-      "uf_m2_dcto": 63.8,
+      "precio_lista_uf": 6313,
+      "precio_dcto_uf": 5808,
+      "uf_m2_lista": 98.9,
+      "uf_m2_dcto": 91.0,
       "estacionamiento_uf": null,
       "bodega_uf": null,
       "lat": -32.9612,
       "lng": -71.5398,
-      "fuente": "isninmobiliaria.cl — tipos C/D: 2D+2B. Sup. y precio estimados. Pendiente validación sala de ventas."
+      "fuente": "Portal Inmobiliario — unidad 110 confirmada: 2D+2B, 58.75m² útil + 10.17m² terraza, UF 6.313. Inmobiliaria ISN."
     },
     {
       "proyecto": "Condominio Salinas del Mar II",
@@ -442,10 +480,10 @@
       "estado": "Pronta entrega",
       "pisos": null,
       "dorms": "3D",
-      "banos": "2B",
-      "m2_util": 90.0,
-      "terraza": 20.0,
-      "orientacion": null,
+      "banos": "3B",
+      "m2_util": 103.55,
+      "terraza": 18.28,
+      "orientacion": "NP",
       "vista_principal": "Mar / Bahía de Viña",
       "amenities": [
         "Sala de yoga",
@@ -457,15 +495,15 @@
       ],
       "disponibles": null,
       "total_unidades": null,
-      "precio_lista_uf": 7500,
-      "precio_dcto_uf": 6900,
-      "uf_m2_lista": 75.0,
-      "uf_m2_dcto": 69.0,
+      "precio_lista_uf": 10098,
+      "precio_dcto_uf": 9290,
+      "uf_m2_lista": 89.6,
+      "uf_m2_dcto": 82.4,
       "estacionamiento_uf": null,
       "bodega_uf": null,
       "lat": -32.9612,
       "lng": -71.5398,
-      "fuente": "isninmobiliaria.cl — tipos A/B: 3D+2B/3B, hasta 121.83m². Sup. y precio estimados desde rango del proyecto. Pendiente validación."
+      "fuente": "Portal Inmobiliario — unidad 403 confirmada: 3D+3B, 103.55m² útil + 18.28m² terraza, UF 10.098. Inmobiliaria ISN."
     },
     {
       "proyecto": "Edificio Wind",
@@ -1190,9 +1228,9 @@
       "pisos": null,
       "dorms": "1D",
       "banos": "1B",
-      "m2_util": 38.0,
-      "terraza": 8.0,
-      "orientacion": null,
+      "m2_util": 39.69,
+      "terraza": 4.44,
+      "orientacion": "O",
       "vista_principal": "Parque La Foresta",
       "amenities": [
         "Piscina en último piso",
@@ -1204,15 +1242,15 @@
       ],
       "disponibles": null,
       "total_unidades": null,
-      "precio_lista_uf": 4200,
-      "precio_dcto_uf": 3864,
-      "uf_m2_lista": 100.0,
-      "uf_m2_dcto": 92.0,
+      "precio_lista_uf": 4922,
+      "precio_dcto_uf": 4528,
+      "uf_m2_lista": 117.4,
+      "uf_m2_dcto": 108.0,
       "estacionamiento_uf": null,
       "bodega_uf": null,
       "lat": -32.9448,
       "lng": -71.5368,
-      "fuente": "Avenco / Enlace Inmobiliario — desde UF 4.200 (1er semestre 2027)"
+      "fuente": "Portal Inmobiliario — unidad 1601 confirmada: 1D+1B, 39.69m² útil + 4.44m² terraza, UF 4.922. Inmobiliaria Alterra, construye EBCO."
     },
     {
       "proyecto": "Entrelomas 5",
@@ -1325,53 +1363,58 @@
     "total_disponibles": 786,
     "rango_uf_m2_lista": {
       "min": 52.5,
-      "max": 100.0
+      "max": 124.6
     },
     "rango_uf_m2_dcto": {
       "min": 48.3,
-      "max": 92.0
+      "max": 114.7
     },
     "promedio_por_tipologia_dcto": {
       "1D": {
-        "min": 54.6,
-        "max": 92.0,
-        "promedio": 72.1,
-        "n_proyectos": 13
+        "min": 59.1,
+        "max": 114.7,
+        "promedio": 79.8,
+        "n_proyectos": 12
       },
       "2D": {
-        "min": 48.3,
-        "max": 91.8,
-        "promedio": 70.1,
-        "n_proyectos": 18
+        "min": 59.1,
+        "max": 110.5,
+        "promedio": 77.1,
+        "n_proyectos": 17
       },
       "3D": {
         "min": 67.1,
-        "max": 88.9,
-        "promedio": 78.5,
-        "n_proyectos": 6
+        "max": 110.5,
+        "promedio": 84.2,
+        "n_proyectos": 7
       }
     },
+    "nota_metodologia_promedio": "Se excluye del promedio: Cromático tipología E (estudio, no 1D) y Vista Urbana 2D (terraza de 27m² distorsiona UF/m² ponderado). Todos los demás valores corresponden a fichas técnicas confirmadas en Portal Inmobiliario.",
     "dv_posicionamiento": {
-      "uf_m2_propuesto": null,
-      "comentarios": "El proyecto DOSA Viña-ConCon se encuentra en etapa de evaluación sin programa ni precio definido. El mercado de referencia directo en el eje plan de Viña del Mar opera entre 48-87 UF/m² (dcto). Los proyectos de Concón-Reñaca amplían el contexto: Costas de Montemar entre 61-92 UF/m², Reñaca entre 77-92 UF/m². Para ubicaciones en 8 Norte/Quillota, el posicionamiento natural sugiere entre 60-85 UF/m² dependiendo de altura, calidad y amenities. Deberá recalcularse al definir el programa.",
+      "uf_m2_propuesto": 91,
+      "comentarios": "El proyecto DOSA Viña-ConCon propone 91 UF/m², posicionándose 14% bajo el promedio real de mercado en 1D (79.8 UF/m² dcto) y 18% bajo en 2D (77.1 UF/m² dcto). Con datos confirmados de fichas técnicas, el mercado del eje calles Norte de Viña opera a 115-126 UF/m² lista (2 Norte 1230, Entrelomas 5), muy por encima de lo que estimaban los portales agregadores. DOSA a 91 UF/m² representa una propuesta competitiva y conservadora: 25% más barata que 2 Norte 1230 (el competidor más cercano geográficamente), 22% más barata que Entrelomas 5, y apenas 6% sobre UNNO (el proyecto más económico del set). El argumento comercial es sólido: proyecto nuevo en 8 Norte/Quillota puede salir a 91 UF/m² con amplio respaldo de mercado.",
       "competidores_directos_zona": [
         "UNNO (Av. 1 Norte 901 — mismo eje calles Norte, ~6 cuadras)",
         "2 Norte 1230 (mismo eje calles Norte, ~4 cuadras)",
         "Cromático (Álvarez 1288 — eje Álvarez, ~8 cuadras)"
       ],
-      "referencia_precio_1D": "UF 2.256–3.870 (rango plan Viña)",
-      "referencia_precio_2D": "UF 3.341–5.243 (rango plan Viña)",
-      "referencia_precio_3D": "UF 6.000–7.218 (rango plan Viña)"
+      "vs_unno_1D": "91 vs 86.2 UF/m² lista = +6% sobre UNNO",
+      "vs_2norte_1D": "91 vs 121.1 UF/m² lista = -25% bajo 2 Norte 1230",
+      "vs_entrelomas5_1D": "91 vs 117.4 UF/m² lista = -22% bajo Entrelomas 5",
+      "vs_salinas_2D": "91 vs 98.9 UF/m² lista = -8% bajo Salinas del Mar II",
+      "referencia_precio_1D": "UF 2.378–4.922 (rango confirmado plan Viña)",
+      "referencia_precio_2D": "UF 3.747–6.833 (rango confirmado plan Viña)",
+      "referencia_precio_3D": "UF 7.574–7.865 (rango confirmado plan Viña)"
     },
     "por_zona": {
       "vina_plan": {
         "proyectos": 4,
-        "rango_uf_m2": "48.3-86.8 UF/m² (dcto)",
+        "rango_uf_m2": "70.6-114.7 UF/m² (dcto)",
         "disponibles": 242
       },
       "renaca_alto": {
         "proyectos": 1,
-        "rango_uf_m2": "63.8-69.2 UF/m² (dcto)",
+        "rango_uf_m2": "69.2-91.0 UF/m² (dcto)",
         "disponibles": null
       },
       "costa_montemar": {
@@ -1381,7 +1424,7 @@
       },
       "bosques_montemar": {
         "proyectos": 3,
-        "rango_uf_m2": "65.8-92.0 UF/m² (dcto)",
+        "rango_uf_m2": "65.8-108.0 UF/m² (dcto)",
         "disponibles": 32
       },
       "las_gaviotas": {
@@ -1446,7 +1489,7 @@
   "notas": [
     {
       "titulo": "Fuente y fecha de precios",
-      "texto": "Precios levantados desde Portal Inmobiliario, Enlace Inmobiliario, TocToc y sitios web oficiales de inmobiliarias en abril de 2026. Los precios son de lista publicados en portales y pueden variar con los precios vigentes en sala de ventas."
+      "texto": "Precios levantados desde Portal Inmobiliario, Enlace Inmobiliario, TocToc y sitios web oficiales de inmobiliarias en abril de 2026. Las tipologías marcadas como 'confirmadas' corresponden a fichas técnicas verificadas directamente en Portal Inmobiliario por el cliente. Los precios son de lista publicados y pueden variar con los precios vigentes en sala de ventas."
     },
     {
       "titulo": "Descuento aplicado",
@@ -1454,23 +1497,31 @@
     },
     {
       "titulo": "Proyecto evaluado sin definición",
-      "texto": "El proyecto DOSA Viña-ConCon se encuentra en etapa de evaluación de mercado, ubicado en 8 Norte con Quillota, Viña del Mar (coordenadas: -33.0162, -71.5454). No existen aún definiciones de tipologías, precios, pisos o mix de unidades. El set competitivo incluye 17 proyectos distribuidos entre el plan de Viña del Mar, Reñaca, Bosques de Montemar, Costas de Montemar, Higuerillas y otros sectores del eje Concón-Reñaca-Viña. El posicionamiento competitivo deberá calcularse en una actualización posterior del estudio."
+      "texto": "El proyecto DOSA Viña-ConCon se encuentra en etapa de evaluación de mercado, ubicado en 8 Norte con Quillota, Viña del Mar (coordenadas: -33.0162, -71.5454). No existen aún definiciones de tipologías, precios, pisos o mix de unidades. El set competitivo incluye 18 proyectos distribuidos entre el plan de Viña del Mar, Reñaca, Bosques de Montemar, Costas de Montemar, Higuerillas y otros sectores del eje Concón-Reñaca-Viña. El posicionamiento competitivo deberá recalcularse al definir el programa."
     },
     {
-      "titulo": "Cromático — datos estimados",
-      "texto": "Cromático (TREI, Álvarez 1288) tiene 135 unidades disponibles en venta en blanco con rango de 28-75m² útiles. Las tipologías 1D y 2D incluidas son estimadas desde el rango publicado y precio mínimo. El precio real de la tipología 2D no fue publicado explícitamente y requiere validación directa con TREI."
+      "titulo": "2 Norte 1230 — precios reales vs portales agregadores",
+      "texto": "Los portales agregadores (Enlace, TocToc) mostraban precios desde UF 3.341 para 2 Norte 1230, correspondientes a precios de lanzamiento ya agotados. Las fichas confirmadas en Portal Inmobiliario muestran que el proyecto opera hoy a UF 4.722–4.758 en 1D (121–126 UF/m²), UF 6.833–7.145 en 2D (117–120 UF/m²) y UF 7.865 en 3D (120 UF/m²). Este hallazgo es clave: valida que el mercado del eje calles Norte de Viña sostiene precios significativamente más altos de lo que publican los agregadores."
     },
     {
-      "titulo": "UNNO — estacionamientos y bodegas separados",
-      "texto": "UNNO (Vista Futuro, 1 Norte 901) es el único proyecto del set que explicita precios de estacionamiento (desde UF 400) y bodega (desde UF 70) por separado. Los precios incluidos en el estudio son sin estos ítems, conforme a metodología estándar."
+      "titulo": "Cromático — tipología mínima es estudio, no 1D",
+      "texto": "La unidad mínima publicada de Cromático (TREI, Álvarez 1288) es un estudio de 0 dormitorios, 28.08m², a UF 2.378 (84.7 UF/m²). No existe tipología 1D confirmada en portal. La entrada figura como 'E+1B' en el JSON. La tipología 2D es estimada desde el rango publicado del proyecto (28-75m²)."
     },
     {
-      "titulo": "Vista Urbana — terrazas amplias distorsionan UF/m²",
-      "texto": "Vista Urbana presenta terrazas excepcionalmente amplias (hasta 27m² en tipología 2D), lo que baja significativamente el UF/m² calculado (52.5 lista). Al comparar con otros proyectos, considerar que el precio absoluto (UF 3.747) es competitivo con el mercado, pero la superficie ponderable es mayor, diluyendo el indicador."
+      "titulo": "Vista Urbana 2D — distorsión por terraza",
+      "texto": "Vista Urbana (Nueva Costanera, P. Mackenna) presenta una terraza de 27.04m² en su tipología 2D, lo que baja el UF/m² ponderado a 52.5. Este valor está excluido del promedio de mercado por ser atípico. El UF/m² calculado sobre superficie útil neta es 65.6 UF/m², más representativo para comparación."
     },
     {
-      "titulo": "Salinas del Mar II — superficies y precios estimados",
-      "texto": "ISN no publica detalles por tipología en portales. Las superficies y precios de los tres modelos incluidos son estimados desde la información general del proyecto (desde UF 3.340, hasta 121.83m²). Requieren validación directa con ISN."
+      "titulo": "Posicionamiento DOSA a 91 UF/m² — respaldo de mercado",
+      "texto": "Con los datos confirmados, 91 UF/m² se posiciona un 19% bajo el promedio real de 1D del mercado plan Viña y un 25% bajo el competidor más cercano (2 Norte 1230). El argumento comercial es sólido: un proyecto nuevo en 8 Norte/Quillota con calidad competitiva puede salir a 91 UF/m² siendo el más económico del sector tras UNNO, con amplio margen frente a los competidores directos del mismo eje. Es una propuesta conservadora respaldada por el mercado real."
+    },
+    {
+      "titulo": "Entrelomas 5 — datos confirmados",
+      "texto": "Entrelomas 5 (Alterra, Av. Edmundo Eluchans, Bosques de Montemar) confirmado en ficha unidad 1601: 1D+1B, 39.69m² útil + 4.44m² terraza, UF 4.922 (117.4 UF/m² lista). Construye EBCO. Actualización corrige precio anterior estimado de UF 4.200 sobre superficie incorrecta."
+    },
+    {
+      "titulo": "Salinas del Mar II — datos confirmados",
+      "texto": "ISN Inmobiliaria — Condominio Salinas del Mar II no tiene tipología 1D publicada en Portal Inmobiliario. Tipologías confirmadas: 2D+2B unidad 110 (58.75m²+10.17t, UF 6.313, orientación SP) y 3D+3B unidad 403 (103.55m²+18.28t, UF 10.098, orientación NP). Precios significativamente más altos que las estimaciones iniciales del estudio."
     }
   ]
 }
