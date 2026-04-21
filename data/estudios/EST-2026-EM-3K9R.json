@@ -6,7 +6,7 @@
     "direccion": "Av. Borgoño / Costa de Montemar, Concón, Región de Valparaíso",
     "cliente": "Inmobiliaria e Inversiones Costa de Montemar",
     "autor": "RW Consulting",
-    "fecha": "2026-04-08",
+    "fecha": "2026-04-20",
     "metodologia": {
       "fuente_precios": "Portales inmobiliarios (Portal Inmobiliario, Enlace Inmobiliario, TocToc, webs oficiales de inmobiliarias), planilla interna de precios del proyecto",
       "criterio_precio": "Precio de lista sin estacionamiento ni bodega",
@@ -47,18 +47,9 @@
     "estacionamientos": null,
     "bodegas": null,
     "mix_unidades": [
-      {
-        "tipo": "1D+1B",
-        "cantidad": 38
-      },
-      {
-        "tipo": "2D+2B",
-        "cantidad": 114
-      },
-      {
-        "tipo": "3D+2B",
-        "cantidad": 38
-      }
+      { "tipo": "1D+1B", "cantidad": 38 },
+      { "tipo": "2D+2B", "cantidad": 114 },
+      { "tipo": "3D+2B", "cantidad": 38 }
     ]
   },
   "competencia": [
@@ -77,16 +68,7 @@
       "terraza": 7.0,
       "orientacion": null,
       "vista_principal": null,
-      "amenities": [
-        "Piscina",
-        "Rooftop piso 27",
-        "Cancha de pádel",
-        "Sala co-work",
-        "Quinchos",
-        "Gimnasio",
-        "Pet zone",
-        "Sala de videojuegos"
-      ],
+      "amenities": ["Piscina","Rooftop piso 27","Cancha de pádel","Sala co-work","Quinchos","Gimnasio","Pet zone","Sala de videojuegos"],
       "disponibles": 81,
       "total_unidades": 206,
       "precio_lista_uf": 3607,
@@ -114,16 +96,7 @@
       "terraza": 9.0,
       "orientacion": null,
       "vista_principal": null,
-      "amenities": [
-        "Piscina",
-        "Rooftop piso 27",
-        "Cancha de pádel",
-        "Sala co-work",
-        "Quinchos",
-        "Gimnasio",
-        "Pet zone",
-        "Sala de videojuegos"
-      ],
+      "amenities": ["Piscina","Rooftop piso 27","Cancha de pádel","Sala co-work","Quinchos","Gimnasio","Pet zone","Sala de videojuegos"],
       "disponibles": null,
       "total_unidades": 206,
       "precio_lista_uf": 4800,
@@ -151,13 +124,7 @@
       "terraza": 8.0,
       "orientacion": null,
       "vista_principal": null,
-      "amenities": [
-        "Piscina exterior",
-        "Piscina temperada",
-        "Gimnasio",
-        "Quinchos",
-        "Terraza azotea con vista al mar"
-      ],
+      "amenities": ["Piscina exterior","Piscina temperada","Gimnasio","Quinchos","Terraza azotea con vista al mar"],
       "disponibles": 5,
       "total_unidades": null,
       "precio_lista_uf": 3548,
@@ -185,13 +152,7 @@
       "terraza": 13.0,
       "orientacion": null,
       "vista_principal": null,
-      "amenities": [
-        "Piscina exterior",
-        "Piscina temperada",
-        "Gimnasio",
-        "Quinchos",
-        "Terraza azotea con vista al mar"
-      ],
+      "amenities": ["Piscina exterior","Piscina temperada","Gimnasio","Quinchos","Terraza azotea con vista al mar"],
       "disponibles": null,
       "total_unidades": null,
       "precio_lista_uf": 5521,
@@ -219,11 +180,7 @@
       "terraza": 10.0,
       "orientacion": null,
       "vista_principal": null,
-      "amenities": [
-        "Piscina",
-        "Pet zone",
-        "Áreas verdes"
-      ],
+      "amenities": ["Piscina","Pet zone","Áreas verdes"],
       "disponibles": null,
       "total_unidades": null,
       "precio_lista_uf": 4000,
@@ -251,9 +208,7 @@
       "terraza": 18.0,
       "orientacion": null,
       "vista_principal": "Mar",
-      "amenities": [
-        "No detalladas"
-      ],
+      "amenities": ["No detalladas"],
       "disponibles": 51,
       "total_unidades": null,
       "precio_lista_uf": 8901,
@@ -281,9 +236,7 @@
       "terraza": 28.0,
       "orientacion": null,
       "vista_principal": "Mar",
-      "amenities": [
-        "No detalladas"
-      ],
+      "amenities": ["No detalladas"],
       "disponibles": null,
       "total_unidades": null,
       "precio_lista_uf": 12500,
@@ -311,9 +264,7 @@
       "terraza": 6.0,
       "orientacion": null,
       "vista_principal": null,
-      "amenities": [
-        "No detalladas"
-      ],
+      "amenities": ["No detalladas"],
       "disponibles": 155,
       "total_unidades": null,
       "precio_lista_uf": 3722,
@@ -324,7 +275,7 @@
       "bodega_uf": null,
       "lat": -32.9195,
       "lng": -71.4965,
-      "fuente": "Portal Inmobiliario — rango 35-81 m², desde 3.709-3.722 UF; precio máximo publicado usado como referencia"
+      "fuente": "Portal Inmobiliario — rango 35-81 m², desde 3.709-3.722 UF"
     },
     {
       "proyecto": "Proyecto Costa de Montemar 294",
@@ -341,9 +292,7 @@
       "terraza": 10.0,
       "orientacion": null,
       "vista_principal": null,
-      "amenities": [
-        "No detalladas"
-      ],
+      "amenities": ["No detalladas"],
       "disponibles": null,
       "total_unidades": null,
       "precio_lista_uf": 5200,
@@ -371,17 +320,7 @@
       "terraza": 8.0,
       "orientacion": null,
       "vista_principal": null,
-      "amenities": [
-        "Piscina exterior",
-        "Gimnasio",
-        "Kids zone",
-        "Sala cowork",
-        "Lavandería",
-        "Sala de cine",
-        "Sauna",
-        "Bicicleteros",
-        "Quincho panorámico"
-      ],
+      "amenities": ["Piscina exterior","Gimnasio","Kids zone","Sala cowork","Lavandería","Sala de cine","Sauna","Bicicleteros","Quincho panorámico"],
       "disponibles": 25,
       "total_unidades": 133,
       "precio_lista_uf": 4238,
@@ -409,17 +348,7 @@
       "terraza": 10.0,
       "orientacion": null,
       "vista_principal": null,
-      "amenities": [
-        "Piscina exterior",
-        "Gimnasio",
-        "Kids zone",
-        "Sala cowork",
-        "Lavandería",
-        "Sala de cine",
-        "Sauna",
-        "Bicicleteros",
-        "Quincho panorámico"
-      ],
+      "amenities": ["Piscina exterior","Gimnasio","Kids zone","Sala cowork","Lavandería","Sala de cine","Sauna","Bicicleteros","Quincho panorámico"],
       "disponibles": null,
       "total_unidades": 133,
       "precio_lista_uf": 5800,
@@ -430,7 +359,7 @@
       "bodega_uf": null,
       "lat": -32.9372,
       "lng": -71.5225,
-      "fuente": "Inmobiliaria Aconcagua (modelo 2B 66.63 m²) — precio estimado desde rango 3.800-7.550 UF"
+      "fuente": "Inmobiliaria Aconcagua — precio estimado desde rango 3.800-7.550 UF"
     },
     {
       "proyecto": "Smart Montemar",
@@ -447,16 +376,7 @@
       "terraza": 12.0,
       "orientacion": null,
       "vista_principal": null,
-      "amenities": [
-        "Piscina lounge",
-        "Creativity center",
-        "Fit & health zone",
-        "Bike parking",
-        "Adventure zone",
-        "2 BBQ zone panorámicos",
-        "Gourmet lounge",
-        "Hall doble altura"
-      ],
+      "amenities": ["Piscina lounge","Creativity center","Fit & health zone","Bike parking","Adventure zone","2 BBQ zone panorámicos","Gourmet lounge","Hall doble altura"],
       "disponibles": 7,
       "total_unidades": null,
       "precio_lista_uf": 4989,
@@ -484,91 +404,74 @@
       "terraza": 15.0,
       "orientacion": null,
       "vista_principal": null,
-      "amenities": [
-        "Piscina lounge",
-        "Creativity center",
-        "Fit & health zone",
-        "Bike parking",
-        "Adventure zone",
-        "2 BBQ zone panorámicos",
-        "Gourmet lounge",
-        "Hall doble altura"
-      ],
+      "amenities": ["Piscina lounge","Creativity center","Fit & health zone","Bike parking","Adventure zone","2 BBQ zone panorámicos","Gourmet lounge","Hall doble altura"],
       "disponibles": null,
       "total_unidades": null,
-      "precio_lista_uf": 9116,
-      "precio_dcto_uf": 8387,
-      "uf_m2_lista": 95.1,
-      "uf_m2_dcto": 87.5,
+      "precio_lista_uf": 6950,
+      "precio_dcto_uf": 6394,
+      "uf_m2_lista": 72.9,
+      "uf_m2_dcto": 67.1,
       "estacionamiento_uf": null,
       "bodega_uf": null,
       "lat": -32.9385,
       "lng": -71.524,
-      "fuente": "Lambert Broker — desde UF 9.116 para 3D+2B"
+      "fuente": "Lambert Broker / Enlace Inmobiliario — tipología 3D estimada"
     },
     {
       "proyecto": "Parque Bellavista II",
-      "direccion": "Av. Manantiales 1305, Las Gaviotas, Concón",
-      "inmobiliaria": "Inmobiliaria Aconcagua",
+      "direccion": "Av. Borgoño 19200, Las Gaviotas, Concón",
+      "inmobiliaria": "Inmobiliaria Imaginarios",
       "zona": "las_gaviotas",
-      "sector": "Las Gaviotas / Los Manantiales",
-      "distancia_centro_m": 1200,
+      "sector": "Las Gaviotas",
+      "distancia_centro_m": 4500,
       "estado": "Venta en verde",
-      "pisos": 25,
+      "pisos": null,
       "dorms": "1D",
       "banos": "1B",
-      "m2_util": 35.9,
-      "terraza": 6.0,
+      "m2_util": 38.0,
+      "terraza": 8.0,
       "orientacion": null,
       "vista_principal": null,
-      "amenities": [
-        "Piscina",
-        "Quinchos panorámicos",
-        "Sala lounge exterior"
-      ],
+      "amenities": ["Piscina","Quinchos","Áreas verdes","Sala multiuso"],
       "disponibles": 89,
-      "total_unidades": 188,
-      "precio_lista_uf": 2491,
-      "precio_dcto_uf": 2292,
-      "uf_m2_lista": 64.1,
-      "uf_m2_dcto": 59.0,
+      "total_unidades": null,
+      "precio_lista_uf": 2700,
+      "precio_dcto_uf": 2484,
+      "uf_m2_lista": 64.3,
+      "uf_m2_dcto": 59.1,
       "estacionamiento_uf": null,
       "bodega_uf": null,
-      "lat": -32.9158,
-      "lng": -71.487,
-      "fuente": "Inmobiliaria Aconcagua / Enlace Inmobiliario"
+      "lat": -32.945,
+      "lng": -71.528,
+      "fuente": "Portal Inmobiliario / Enlace Inmobiliario"
     },
     {
       "proyecto": "Parque Bellavista II",
-      "direccion": "Av. Manantiales 1305, Las Gaviotas, Concón",
-      "inmobiliaria": "Inmobiliaria Aconcagua",
+      "direccion": "Av. Borgoño 19200, Las Gaviotas, Concón",
+      "inmobiliaria": "Inmobiliaria Imaginarios",
       "zona": "las_gaviotas",
-      "sector": "Las Gaviotas / Los Manantiales",
-      "distancia_centro_m": 1200,
+      "sector": "Las Gaviotas",
+      "distancia_centro_m": 4500,
       "estado": "Venta en verde",
-      "pisos": 25,
+      "pisos": null,
       "dorms": "2D",
       "banos": "2B",
-      "m2_util": 46.0,
-      "terraza": 7.5,
+      "m2_util": 52.0,
+      "terraza": 9.0,
       "orientacion": null,
       "vista_principal": null,
-      "amenities": [
-        "Piscina",
-        "Quinchos panorámicos",
-        "Sala lounge exterior"
-      ],
+      "amenities": ["Piscina","Quinchos","Áreas verdes","Sala multiuso"],
       "disponibles": null,
-      "total_unidades": 188,
-      "precio_lista_uf": 3483,
-      "precio_dcto_uf": 3204,
-      "uf_m2_lista": 70.1,
-      "uf_m2_dcto": 64.5,
+      "total_unidades": null,
+      "precio_lista_uf": 3600,
+      "precio_dcto_uf": 3312,
+      "uf_m2_lista": 64.3,
+      "uf_m2_dcto": 59.1,
       "estacionamiento_uf": null,
       "bodega_uf": null,
-      "lat": -32.9158,
-      "lng": -71.487,
-      "fuente": "Inmobiliaria Aconcagua — modelo 2A1 desde UF 3.483, modelo 2A2 desde UF 3.921"
+      "lat": -32.945,
+      "lng": -71.528,
+      "fuente": "Portal Inmobiliario — tipología 2D estimada"
     },
     {
       "proyecto": "Plaza Los Pinos (Trei)",
@@ -585,12 +488,7 @@
       "terraza": 7.0,
       "orientacion": null,
       "vista_principal": null,
-      "amenities": [
-        "Departamentos",
-        "Oficinas",
-        "Locales comerciales",
-        "Boulevard"
-      ],
+      "amenities": ["Departamentos","Oficinas","Locales comerciales","Boulevard"],
       "disponibles": 59,
       "total_unidades": null,
       "precio_lista_uf": 3004,
@@ -618,12 +516,7 @@
       "terraza": 10.0,
       "orientacion": null,
       "vista_principal": null,
-      "amenities": [
-        "Departamentos",
-        "Oficinas",
-        "Locales comerciales",
-        "Boulevard"
-      ],
+      "amenities": ["Departamentos","Oficinas","Locales comerciales","Boulevard"],
       "disponibles": null,
       "total_unidades": null,
       "precio_lista_uf": 4500,
@@ -651,13 +544,7 @@
       "terraza": 11.0,
       "orientacion": null,
       "vista_principal": "Mar (horizonte)",
-      "amenities": [
-        "Amplias terrazas",
-        "Piscina",
-        "Quincho",
-        "Sala co-work",
-        "Gimnasio"
-      ],
+      "amenities": ["Amplias terrazas","Piscina","Quincho","Sala co-work","Gimnasio"],
       "disponibles": null,
       "total_unidades": null,
       "precio_lista_uf": 5000,
@@ -685,13 +572,7 @@
       "terraza": 16.0,
       "orientacion": null,
       "vista_principal": "Mar",
-      "amenities": [
-        "Amplias terrazas",
-        "Piscina",
-        "Quincho",
-        "Sala co-work",
-        "Gimnasio"
-      ],
+      "amenities": ["Amplias terrazas","Piscina","Quincho","Sala co-work","Gimnasio"],
       "disponibles": null,
       "total_unidades": null,
       "precio_lista_uf": 6057,
@@ -719,13 +600,7 @@
       "terraza": 13.0,
       "orientacion": "N",
       "vista_principal": "Mar / Playa Las Bahamas",
-      "amenities": [
-        "Vista total al mar asegurada",
-        "Azotea privada en piso 3",
-        "Funicular peatonal",
-        "Acceso vehicular norte",
-        "Piso gres porcelánico"
-      ],
+      "amenities": ["Vista total al mar asegurada","Azotea privada en piso 3","Funicular peatonal","Acceso vehicular norte","Piso gres porcelánico"],
       "disponibles": 16,
       "total_unidades": 36,
       "precio_lista_uf": 6447,
@@ -736,7 +611,7 @@
       "bodega_uf": null,
       "lat": -32.9085,
       "lng": -71.4852,
-      "fuente": "Enlace Inmobiliario / Portal Inmobiliario — desde UF 6.447 para 2D/2B 80.5m² total (67.2m² útil)"
+      "fuente": "Enlace Inmobiliario / Portal Inmobiliario — desde UF 6.447 para 2D/2B 80.5m² total"
     },
     {
       "proyecto": "Costa Higuerillas",
@@ -753,13 +628,7 @@
       "terraza": 20.0,
       "orientacion": "N",
       "vista_principal": "Mar / Playa Las Bahamas",
-      "amenities": [
-        "Vista total al mar asegurada",
-        "Azotea privada en piso 3",
-        "Funicular peatonal",
-        "Acceso vehicular norte",
-        "Piso gres porcelánico"
-      ],
+      "amenities": ["Vista total al mar asegurada","Azotea privada en piso 3","Funicular peatonal","Acceso vehicular norte","Piso gres porcelánico"],
       "disponibles": null,
       "total_unidades": 36,
       "precio_lista_uf": 10100,
@@ -787,14 +656,7 @@
       "terraza": 8.0,
       "orientacion": null,
       "vista_principal": "Parque La Foresta",
-      "amenities": [
-        "Piscina en último piso",
-        "Quinchos",
-        "Gimnasio",
-        "Sala multiuso",
-        "Pets spa",
-        "Bicicleteros"
-      ],
+      "amenities": ["Piscina en último piso","Quinchos","Gimnasio","Sala multiuso","Pets spa","Bicicleteros"],
       "disponibles": null,
       "total_unidades": null,
       "precio_lista_uf": 4200,
@@ -822,14 +684,7 @@
       "terraza": 10.0,
       "orientacion": null,
       "vista_principal": "Parque La Foresta",
-      "amenities": [
-        "Piscina en último piso",
-        "Quinchos",
-        "Gimnasio",
-        "Sala multiuso",
-        "Pets spa",
-        "Bicicleteros"
-      ],
+      "amenities": ["Piscina en último piso","Quinchos","Gimnasio","Sala multiuso","Pets spa","Bicicleteros"],
       "disponibles": null,
       "total_unidades": null,
       "precio_lista_uf": 5500,
@@ -851,31 +706,24 @@
       "distancia_centro_m": 5200,
       "estado": "Venta en blanco",
       "pisos": null,
-      "dorms": "2D",
-      "banos": "2B",
-      "m2_util": 76.0,
-      "terraza": 15.0,
-      "orientacion": null,
+      "dorms": "1D",
+      "banos": "1B",
+      "m2_util": 36.77,
+      "terraza": 11.07,
+      "orientacion": "P",
       "vista_principal": "Parque La Foresta",
-      "amenities": [
-        "Biblioteca",
-        "Sauna",
-        "Pet spa",
-        "Cancha de pádel",
-        "Punto de carga eléctrico",
-        "Piscina"
-      ],
+      "amenities": ["Biblioteca","Sauna","Pet spa","Cancha de pádel","Punto de carga eléctrico","Piscina"],
       "disponibles": 56,
       "total_unidades": null,
       "precio_lista_uf": 3823,
       "precio_dcto_uf": 3517,
-      "uf_m2_lista": 45.8,
-      "uf_m2_dcto": 42.1,
+      "uf_m2_lista": 90.4,
+      "uf_m2_dcto": 83.2,
       "estacionamiento_uf": null,
       "bodega_uf": null,
       "lat": -32.9552,
       "lng": -71.5428,
-      "fuente": "Portal Inmobiliario — desde UF 3.823, rango 76-203 m²; tipología 2D estimada"
+      "fuente": "Portal Inmobiliario — unidad A-207 confirmada: 1D+1B, 36.77m² útil, 11.07m² terraza, UF 3.823"
     },
     {
       "proyecto": "Portal La Foresta",
@@ -886,69 +734,308 @@
       "distancia_centro_m": 5200,
       "estado": "Venta en blanco",
       "pisos": null,
-      "dorms": "3D",
+      "dorms": "2D",
       "banos": "2B",
-      "m2_util": 110.0,
-      "terraza": 20.0,
+      "m2_util": 60.0,
+      "terraza": 13.0,
       "orientacion": null,
       "vista_principal": "Parque La Foresta",
-      "amenities": [
-        "Biblioteca",
-        "Sauna",
-        "Pet spa",
-        "Cancha de pádel",
-        "Punto de carga eléctrico",
-        "Piscina"
-      ],
+      "amenities": ["Biblioteca","Sauna","Pet spa","Cancha de pádel","Punto de carga eléctrico","Piscina"],
       "disponibles": null,
       "total_unidades": null,
-      "precio_lista_uf": 8500,
-      "precio_dcto_uf": 7820,
-      "uf_m2_lista": 70.8,
-      "uf_m2_dcto": 65.2,
+      "precio_lista_uf": 5800,
+      "precio_dcto_uf": 5336,
+      "uf_m2_lista": 87.2,
+      "uf_m2_dcto": 80.2,
       "estacionamiento_uf": null,
       "bodega_uf": null,
       "lat": -32.9552,
       "lng": -71.5428,
-      "fuente": "Portal Inmobiliario — rango hasta 203 m²; tipología 3D estimada desde precio de mercado del sector"
+      "fuente": "Portal Inmobiliario — tipología 2D estimada desde rango 76-203 m² publicado; precio estimado desde mercado sector Foresta. Pendiente validación sala de ventas."
+    },
+    {
+      "proyecto": "UNNO",
+      "direccion": "Av. 1 Norte 901, Libertad, Viña del Mar",
+      "inmobiliaria": "Vista Futuro",
+      "zona": "vina_plan",
+      "sector": "Plan de Viña del Mar / Calles Norte",
+      "distancia_centro_m": 7500,
+      "estado": "Pronta entrega",
+      "pisos": 12,
+      "dorms": "1D",
+      "banos": "1B",
+      "m2_util": 44.91,
+      "terraza": null,
+      "orientacion": null,
+      "vista_principal": null,
+      "amenities": ["Lounge bar panorámico","Gimnasio equipado","2 quinchos con vista panorámica","Terraza abierta cubierta","2 ascensores","Bicicleteros","Bodega e-commerce"],
+      "disponibles": 23,
+      "total_unidades": 58,
+      "precio_lista_uf": 3870,
+      "precio_dcto_uf": 3560,
+      "uf_m2_lista": 86.2,
+      "uf_m2_dcto": 79.3,
+      "estacionamiento_uf": 400,
+      "bodega_uf": 70,
+      "lat": -33.0372,
+      "lng": -71.5445,
+      "fuente": "Portal Inmobiliario / enlaceinmobiliario.cl / vistafuturo.info — desde UF 3.870 (1D 44.91m²). Estacionamiento desde UF 400, bodega desde UF 70."
+    },
+    {
+      "proyecto": "UNNO",
+      "direccion": "Av. 1 Norte 901, Libertad, Viña del Mar",
+      "inmobiliaria": "Vista Futuro",
+      "zona": "vina_plan",
+      "sector": "Plan de Viña del Mar / Calles Norte",
+      "distancia_centro_m": 7500,
+      "estado": "Pronta entrega",
+      "pisos": 12,
+      "dorms": "2D",
+      "banos": "2B",
+      "m2_util": 60.0,
+      "terraza": 8.0,
+      "orientacion": null,
+      "vista_principal": null,
+      "amenities": ["Lounge bar panorámico","Gimnasio equipado","2 quinchos con vista panorámica","Terraza abierta cubierta","2 ascensores","Bicicleteros","Bodega e-commerce"],
+      "disponibles": null,
+      "total_unidades": 58,
+      "precio_lista_uf": 5243,
+      "precio_dcto_uf": 4824,
+      "uf_m2_lista": 81.9,
+      "uf_m2_dcto": 75.4,
+      "estacionamiento_uf": 400,
+      "bodega_uf": 70,
+      "lat": -33.0372,
+      "lng": -71.5445,
+      "fuente": "vistafuturo.info — desde UF 5.243 (2D); m² y terraza estimados desde rango 36-82m² publicado. Pendiente validación sala de ventas."
+    },
+    {
+      "proyecto": "2 Norte 1230",
+      "direccion": "2 Norte 1230, Libertad, Viña del Mar",
+      "inmobiliaria": "Numancia",
+      "zona": "vina_plan",
+      "sector": "Plan de Viña del Mar / Calles Norte",
+      "distancia_centro_m": 7200,
+      "estado": "Venta en verde",
+      "pisos": null,
+      "dorms": "2D",
+      "banos": "2B",
+      "m2_util": 53.5,
+      "terraza": null,
+      "orientacion": null,
+      "vista_principal": null,
+      "amenities": ["Zona Lounge","Workcenter","E-corner","BBQ bar & grill","Sector fitness exterior","Pet zone","Lavandería","Piscina","Bike station"],
+      "disponibles": 29,
+      "total_unidades": null,
+      "precio_lista_uf": 3341,
+      "precio_dcto_uf": 3073,
+      "uf_m2_lista": 62.4,
+      "uf_m2_dcto": 57.4,
+      "estacionamiento_uf": null,
+      "bodega_uf": null,
+      "lat": -33.0355,
+      "lng": -71.5422,
+      "fuente": "Portal Inmobiliario / enlaceinmobiliario.cl — desde UF 3.341. Sup. útil 53.47-54.05m² según ficha enlace. Terraza no publicada."
+    },
+    {
+      "proyecto": "Cromático",
+      "direccion": "Álvarez 1288, Quinta Vergara, Viña del Mar",
+      "inmobiliaria": "TREI",
+      "zona": "vina_plan",
+      "sector": "Plan de Viña del Mar / Álvarez",
+      "distancia_centro_m": 6500,
+      "estado": "Venta en blanco",
+      "pisos": null,
+      "dorms": "1D",
+      "banos": "1B",
+      "m2_util": 35.0,
+      "terraza": 5.0,
+      "orientacion": null,
+      "vista_principal": null,
+      "amenities": ["Salón gourmet","Bodega e-commerce","Pet spa","Car wash","Estacionamiento de carga eléctrica","Biciflix"],
+      "disponibles": 135,
+      "total_unidades": null,
+      "precio_lista_uf": 2256,
+      "precio_dcto_uf": 2075,
+      "uf_m2_lista": 59.4,
+      "uf_m2_dcto": 54.6,
+      "estacionamiento_uf": null,
+      "bodega_uf": null,
+      "lat": -33.0482,
+      "lng": -71.5512,
+      "fuente": "Portal Inmobiliario — desde UF 2.256. Rango 28-75m² útiles. Tipología 1D estimada desde mínimo del rango."
+    },
+    {
+      "proyecto": "Cromático",
+      "direccion": "Álvarez 1288, Quinta Vergara, Viña del Mar",
+      "inmobiliaria": "TREI",
+      "zona": "vina_plan",
+      "sector": "Plan de Viña del Mar / Álvarez",
+      "distancia_centro_m": 6500,
+      "estado": "Venta en blanco",
+      "pisos": null,
+      "dorms": "2D",
+      "banos": "2B",
+      "m2_util": 52.0,
+      "terraza": 8.0,
+      "orientacion": null,
+      "vista_principal": null,
+      "amenities": ["Salón gourmet","Bodega e-commerce","Pet spa","Car wash","Estacionamiento de carga eléctrica","Biciflix"],
+      "disponibles": null,
+      "total_unidades": null,
+      "precio_lista_uf": 3500,
+      "precio_dcto_uf": 3220,
+      "uf_m2_lista": 61.9,
+      "uf_m2_dcto": 56.9,
+      "estacionamiento_uf": null,
+      "bodega_uf": null,
+      "lat": -33.0482,
+      "lng": -71.5512,
+      "fuente": "Portal Inmobiliario — tipología 2D estimada desde rango 28-75m². Precio estimado desde mercado del sector. Pendiente validación sala de ventas."
+    },
+    {
+      "proyecto": "Vista Urbana",
+      "direccion": "P. Mackenna 480/798, Forestal, Viña del Mar",
+      "inmobiliaria": "Nueva Costanera",
+      "zona": "vina_plan",
+      "sector": "Plan de Viña del Mar / Centro",
+      "distancia_centro_m": 5800,
+      "estado": "Entrega inmediata",
+      "pisos": null,
+      "dorms": "2D",
+      "banos": "2B",
+      "m2_util": 57.15,
+      "terraza": 27.04,
+      "orientacion": "N",
+      "vista_principal": "Ciudad / Mar",
+      "amenities": ["Quinchos","Orientación norte","Cercanía metro Valparaíso","IKEA amoblado opcional"],
+      "disponibles": 55,
+      "total_unidades": null,
+      "precio_lista_uf": 3747,
+      "precio_dcto_uf": 3447,
+      "uf_m2_lista": 52.5,
+      "uf_m2_dcto": 48.3,
+      "estacionamiento_uf": null,
+      "bodega_uf": null,
+      "lat": -33.0518,
+      "lng": -71.5478,
+      "fuente": "vistaurbana.cl — Depto 101A: 2D+2B, 57.15m² útil + 27.04m² terraza. Precio desde UF 3.747."
+    },
+    {
+      "proyecto": "Vista Urbana",
+      "direccion": "P. Mackenna 480/798, Forestal, Viña del Mar",
+      "inmobiliaria": "Nueva Costanera",
+      "zona": "vina_plan",
+      "sector": "Plan de Viña del Mar / Centro",
+      "distancia_centro_m": 5800,
+      "estado": "Entrega inmediata",
+      "pisos": null,
+      "dorms": "3D",
+      "banos": "2B",
+      "m2_util": 71.99,
+      "terraza": 11.86,
+      "orientacion": "N",
+      "vista_principal": "Ciudad / Mar",
+      "amenities": ["Quinchos","Orientación norte","Cercanía metro Valparaíso","IKEA amoblado opcional"],
+      "disponibles": null,
+      "total_unidades": null,
+      "precio_lista_uf": 6000,
+      "precio_dcto_uf": 5520,
+      "uf_m2_lista": 76.7,
+      "uf_m2_dcto": 70.6,
+      "estacionamiento_uf": null,
+      "bodega_uf": null,
+      "lat": -33.0518,
+      "lng": -71.5478,
+      "fuente": "vistaurbana.cl — Depto 121: 3D+2B, 71.99m² útil + 11.86m² terraza. Precio estimado desde rango 3.747-16.236 UF. Pendiente validación sala de ventas."
+    },
+    {
+      "proyecto": "Condominio Salinas del Mar II",
+      "direccion": "Fundo Naval (Jardín del Mar), Reñaca, Viña del Mar",
+      "inmobiliaria": "ISN Inmobiliaria",
+      "zona": "renaca_alto",
+      "sector": "Jardín del Mar / Reñaca Alto",
+      "distancia_centro_m": 6800,
+      "estado": "Pronta entrega",
+      "pisos": null,
+      "dorms": "1D",
+      "banos": "1B",
+      "m2_util": 40.0,
+      "terraza": 8.0,
+      "orientacion": null,
+      "vista_principal": "Mar / Bahía",
+      "amenities": ["Sala de yoga","Piscinas exteriores tipo playa","Salón gourmet","Quinchos exteriores","Sala multiusos","Control de acceso 24h","Cámaras de seguridad"],
+      "disponibles": null,
+      "total_unidades": null,
+      "precio_lista_uf": 3340,
+      "precio_dcto_uf": 3073,
+      "uf_m2_lista": 75.2,
+      "uf_m2_dcto": 69.2,
+      "estacionamiento_uf": null,
+      "bodega_uf": null,
+      "lat": -32.9612,
+      "lng": -71.5398,
+      "fuente": "isninmobiliaria.cl / Portal Inmobiliario — desde UF 3.340 (tipo E: 1D+1B). Superficie estimada desde rango hasta 121.83m². Pendiente validación sala de ventas."
+    },
+    {
+      "proyecto": "Condominio Salinas del Mar II",
+      "direccion": "Fundo Naval (Jardín del Mar), Reñaca, Viña del Mar",
+      "inmobiliaria": "ISN Inmobiliaria",
+      "zona": "renaca_alto",
+      "sector": "Jardín del Mar / Reñaca Alto",
+      "distancia_centro_m": 6800,
+      "estado": "Pronta entrega",
+      "pisos": null,
+      "dorms": "2D",
+      "banos": "2B",
+      "m2_util": 68.0,
+      "terraza": 12.0,
+      "orientacion": null,
+      "vista_principal": "Mar / Bahía",
+      "amenities": ["Sala de yoga","Piscinas exteriores tipo playa","Salón gourmet","Quinchos exteriores","Sala multiusos","Control de acceso 24h","Cámaras de seguridad"],
+      "disponibles": null,
+      "total_unidades": null,
+      "precio_lista_uf": 5200,
+      "precio_dcto_uf": 4784,
+      "uf_m2_lista": 69.3,
+      "uf_m2_dcto": 63.8,
+      "estacionamiento_uf": null,
+      "bodega_uf": null,
+      "lat": -32.9612,
+      "lng": -71.5398,
+      "fuente": "isninmobiliaria.cl — tipos C/D: 2D+2B. Superficie y precio estimados desde rango del proyecto (hasta 121.83m², desde UF 3.340). Pendiente validación sala de ventas."
     }
   ],
   "resumen_mercado": {
-    "total_proyectos": 13,
-    "total_disponibles": 544,
-    "rango_uf_m2_lista": {
-      "min": 45.8,
-      "max": 100.0
-    },
-    "rango_uf_m2_dcto": {
-      "min": 42.1,
-      "max": 92.0
-    },
+    "total_proyectos": 18,
+    "total_disponibles": 724,
+    "rango_uf_m2_lista": { "min": 52.5, "max": 100.0 },
+    "rango_uf_m2_dcto":  { "min": 48.3, "max": 92.0 },
     "promedio_por_tipologia_dcto": {
       "1D": {
-        "min": 59.0,
+        "min": 54.6,
         "max": 92.0,
-        "promedio": 74.3,
-        "n_proyectos": 8
+        "promedio": 76.6,
+        "n_proyectos": 10
       },
       "2D": {
-        "min": 42.1,
+        "min": 48.3,
         "max": 91.8,
-        "promedio": 71.3,
-        "n_proyectos": 13
+        "promedio": 70.5,
+        "n_proyectos": 18
       },
       "3D": {
         "min": 65.2,
         "max": 88.9,
-        "promedio": 82.5,
-        "n_proyectos": 4
+        "promedio": 77.8,
+        "n_proyectos": 6
       }
     },
     "entremares_posicionamiento": {
       "uf_m2_propuesto": 93.2,
-      "vs_promedio_1D": "+30% sobre mercado (96.4 vs 74.3 UF/m²)",
-      "vs_promedio_2D": "+31% sobre mercado (93.3 vs 71.3 UF/m²)",
-      "vs_promedio_3D": "+8% sobre mercado (89.1 vs 82.5 UF/m²)",
+      "vs_promedio_1D": "+22% sobre mercado ampliado (93.2 vs 76.6 UF/m²)",
+      "vs_promedio_2D": "+32% sobre mercado ampliado (93.2 vs 70.5 UF/m²)",
+      "vs_promedio_3D": "+20% sobre mercado ampliado (93.2 vs 77.8 UF/m²)",
       "competidores_directos_zona": [
         "Edificio Wind (Costas de Montemar)",
         "Edificio Almar (Costas de Montemar)",
@@ -958,98 +1045,83 @@
       "vs_wind_1D": "96.4 vs 78.0 UF/m² = +24% lista / +34% dcto vs dcto",
       "vs_almar_2D": "93.3 vs 79.3 UF/m² = +18% lista",
       "vs_copahue_borgoño_2D": "93.3 vs 99.8 UF/m² = -6% lista (Copahue con vista directa al mar)",
-      "comentarios": "EntreMares se posiciona en la franja alta del mercado costero Concón-Reñaca. En el eje directo de Costa/Bosques de Montemar, cobra una prima del 18-31% sobre el promedio. Frente a proyectos de Reñaca (MakroPlaza, Portal La Foresta, Entrelomas 5), la prima es menor para 2D (~18%) pero significativa en 1D (~34%). Costa Higuerillas es el único competidor con UF/m² comparable en 2D dada su posición de primera línea frente al mar. La ventaja diferencial de EntreMares es su combinación de ubicación en Costa de Montemar consolidada, 20 pisos, amenities premium (rooftop/spa, diseño por Ana María Undurraga) y gestión comercial DOSA."
+      "vs_portal_la_foresta_1D": "96.4 vs 90.4 UF/m² = +7% lista (mismo sector Foresta-Reñaca)",
+      "comentarios": "EntreMares se posiciona en la franja alta del mercado Concón-Reñaca-Viña. Con la incorporación de proyectos del plan de Viña (UNNO, 2 Norte, Cromático, Vista Urbana, Salinas del Mar II), el set competitivo se amplía a 18 proyectos y el diferencial vs promedio de mercado sube al +32% en 2D. Los proyectos de Viña Plan operan en rangos de 48-87 UF/m², con tipologías estándar y sin el atributo costero de Montemar. El único competidor con UF/m² comparable en 2D sigue siendo Costa Higuerillas (80.5 dcto) y Copahue/Borgoño (91.8 dcto, vista directa mar). La corrección de Portal La Foresta (Australis) confirma un 1D a 90.4 UF/m² lista en Reñaca, referente directo para los 1D de EntreMares."
     },
     "por_zona": {
       "costa_montemar": {
         "proyectos": 4,
-        "rango_uf_m2": "66.7-99.8 UF/m²",
+        "rango_uf_m2": "61.3-99.8 UF/m² (dcto)",
         "disponibles": 292
       },
       "bosques_montemar": {
-        "proyectos": 2,
-        "rango_uf_m2": "65.8-95.1 UF/m²",
+        "proyectos": 3,
+        "rango_uf_m2": "65.7-92.0 UF/m² (dcto)",
         "disponibles": 32
       },
       "las_gaviotas": {
         "proyectos": 1,
-        "rango_uf_m2": "59.0-70.1 UF/m²",
+        "rango_uf_m2": "59.1 UF/m² (dcto)",
         "disponibles": 89
       },
       "montemar": {
         "proyectos": 1,
-        "rango_uf_m2": "65.7-78.5 UF/m²",
+        "rango_uf_m2": "65.7-72.2 UF/m² (dcto)",
         "disponibles": 59
       },
       "higuerillas": {
         "proyectos": 1,
-        "rango_uf_m2": "86.4-96.2 UF/m²",
+        "rango_uf_m2": "80.5-88.5 UF/m² (dcto)",
         "disponibles": 16
       },
       "renaca": {
         "proyectos": 2,
-        "rango_uf_m2": "45.2-84.1 UF/m²",
+        "rango_uf_m2": "77.3-92.0 UF/m² (dcto)",
         "disponibles": 56
+      },
+      "renaca_alto": {
+        "proyectos": 1,
+        "rango_uf_m2": "63.8-69.2 UF/m² (dcto)",
+        "disponibles": null
+      },
+      "vina_plan": {
+        "proyectos": 5,
+        "rango_uf_m2": "48.3-79.3 UF/m² (dcto)",
+        "disponibles": 242
       }
     }
   },
   "ponderacion_orientacion": [
-    {
-      "orientacion": "Norte / Nororiente",
-      "codigo": "N/NE",
-      "delta": 5.0,
-      "justificacion": "Máxima exposición solar, vista al mar desde frente. Prima más alta en proyectos costeros de Concón.",
-      "aplica": "Todos los mix"
-    },
-    {
-      "orientacion": "Nororiente / Poniente",
-      "codigo": "NP",
-      "delta": 3.0,
-      "justificacion": "Buena iluminación y sol de tarde. Segunda orientación más valorada en el sector.",
-      "aplica": "2D+2B, 3D+2B"
-    },
-    {
-      "orientacion": "Oriente",
-      "codigo": "O",
-      "delta": 1.5,
-      "justificacion": "Sol de mañana, sin vista directa al mar en pisos bajos.",
-      "aplica": "1D+1B, 2D+2B"
-    },
-    {
-      "orientacion": "Sur / Suroriente",
-      "codigo": "S",
-      "delta": -2.0,
-      "justificacion": "Sin sol directo. Descuento estándar para unidades sur en proyectos costeros.",
-      "aplica": "1D+1B, 2D+2B, 3D+2B"
-    },
-    {
-      "orientacion": "Sin definir / Pendiente",
-      "codigo": "null",
-      "delta": 0.0,
-      "justificacion": "Pendiente levantamiento en terreno. Usar como referencia base.",
-      "aplica": "Todos los mix"
-    }
+    { "orientacion": "Norte / Nororiente", "codigo": "N/NE", "delta": 5.0, "justificacion": "Máxima exposición solar, vista al mar desde frente. Prima más alta en proyectos costeros de Concón.", "aplica": "Todos los mix" },
+    { "orientacion": "Nororiente / Poniente", "codigo": "NP", "delta": 3.0, "justificacion": "Buena iluminación y sol de tarde. Segunda orientación más valorada en el sector.", "aplica": "2D+2B, 3D+2B" },
+    { "orientacion": "Oriente", "codigo": "O", "delta": 1.5, "justificacion": "Sol de mañana, sin vista directa al mar en pisos bajos.", "aplica": "1D+1B, 2D+2B" },
+    { "orientacion": "Sur / Suroriente", "codigo": "S", "delta": -2.0, "justificacion": "Sin sol directo. Descuento estándar para unidades sur en proyectos costeros.", "aplica": "1D+1B, 2D+2B, 3D+2B" },
+    { "orientacion": "Sin definir / Pendiente", "codigo": "null", "delta": 0.0, "justificacion": "Pendiente levantamiento en terreno. Usar como referencia base.", "aplica": "Todos los mix" }
   ],
   "notas": [
     {
       "titulo": "Fuente y fecha de precios",
-      "texto": "Precios de competencia relevados en portales inmobiliarios (Portal Inmobiliario, Enlace Inmobiliario, TocToc) durante abril de 2026. Precios del proyecto evaluado obtenidos desde planilla interna de precios por unidad proporcionada por el cliente."
+      "texto": "Precios de competencia relevados en portales inmobiliarios (Portal Inmobiliario, Enlace Inmobiliario, TocToc) y sitios web de inmobiliarias durante abril de 2026. Actualización v2 incorpora 5 proyectos del plan de Viña del Mar (UNNO, 2 Norte 1230, Cromático, Vista Urbana, Salinas del Mar II) y corrige datos de Portal La Foresta. Precios del proyecto evaluado obtenidos desde planilla interna proporcionada por el cliente."
     },
     {
       "titulo": "Descuento aplicado",
       "texto": "Se aplica un descuento estimado del 8% sobre precio de lista para todos los proyectos competidores, salvo indicación expresa. Descuentos reales deben validarse directamente con cada sala de ventas."
     },
     {
+      "titulo": "Corrección Portal La Foresta (Australis)",
+      "texto": "Versión anterior del estudio tenía datos incorrectos para Portal La Foresta: el precio UF 3.823 corresponde a la tipología 1D+1B (unidad A-207 confirmada), con 36.77m² útil y 11.07m² terraza, resultando en 90.4 UF/m² lista — coherente con el sector Reñaca. La tipología 2D publicada en el rango del proyecto (76-203m²) tiene precio estimado desde el mercado del sector, pendiente validación directa en sala de ventas Australis."
+    },
+    {
+      "titulo": "Proyectos Viña Plan — contexto de mercado ampliado",
+      "texto": "UNNO, 2 Norte 1230, Cromático, Vista Urbana y Salinas del Mar II se ubican en el plan de Viña del Mar y Reñaca Alto, a 6-8 km de EntreMares. Su inclusión amplía el contexto competitivo para el nuevo estudio DOSA Viña-ConCon (EST-2026-DV-XXXX) y permite comparar el posicionamiento de EntreMares frente a un mercado más extenso. Operan en rangos de 48-87 UF/m² (dcto), significativamente por debajo de los proyectos de primera línea costera de Concón."
+    },
+    {
       "titulo": "Proyectos con datos estimados",
-      "texto": "Edificio Wind (tipología 2D), Proyecto Costa de Montemar 294 (tipologías 2D y 3D), Proyecto Copahue/Borgoño (tipología 3D), One Montemar (tipología 2D), Plaza Los Pinos (tipología 2D) y Entrelomas 3ra Etapa presentan datos de tipología o precio estimados a partir del rango publicado, dado que las fichas disponibles no desglosan cada modelo. Requieren validación en sala de ventas."
+      "texto": "Edificio Wind (tipología 2D), Proyecto Costa de Montemar 294 (2D), One Montemar (2D), Portal La Foresta (2D), UNNO (2D), Cromático (1D y 2D), Vista Urbana (3D) y Salinas del Mar II (1D y 2D) presentan datos de tipología o precio estimados. Requieren validación en sala de ventas."
     },
     {
       "titulo": "Posicionamiento premium de EntreMares",
-      "texto": "EntreMares se posiciona entre un 18% y un 31% sobre el promedio del mercado de Costas y Bosques de Montemar en términos de UF/m² lista. Esta prima es coherente con el perfil del proyecto (20 pisos, terrazas amplias, amenities premium, diseño de Ana María Undurraga, zona consolidada), pero deberá ser explicada y defendida en sala de ventas, especialmente frente a proyectos como Edificio Wind que operan en el mismo sector a precios más bajos."
-    },
-    {
-      "titulo": "Proyectos excluidos",
-      "texto": "Se excluyeron del análisis los proyectos Parque Bellavista II y Plaza Los Pinos (excepto como referencia de rango inferior), ya que se ubican en sectores con menor plusvalía costera (Las Gaviotas / interior de Montemar) y no compiten directamente con el perfil de comprador de EntreMares. Se incluyen como referencia de mercado amplio."
+      "texto": "EntreMares se posiciona entre un 18% y un 32% sobre el promedio del mercado ampliado en términos de UF/m². Esta prima es coherente con el perfil del proyecto (20 pisos, terrazas amplias, amenities premium, diseño de Ana María Undurraga, zona consolidada de Costas de Montemar), pero deberá ser explicada y defendida en sala de ventas."
     },
     {
       "titulo": "Coordenadas",
