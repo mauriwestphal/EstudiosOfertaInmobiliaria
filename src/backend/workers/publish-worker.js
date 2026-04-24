@@ -108,7 +108,6 @@ export default {
       }, env);
 
       if (!emailResult.success) {
-        console.warn('Email sending failed, but study was published:', emailResult.error);
         // Continue anyway - the study is published
       }
 
@@ -129,8 +128,6 @@ export default {
       });
 
     } catch (error) {
-      console.error('Error in publish-worker:', error);
-      
       return new Response(JSON.stringify({
         success: false,
         error: error.message,
@@ -168,7 +165,6 @@ async function pushToGitHub(codigo, jsonData, env) {
     }
   } catch (error) {
     // File doesn't exist yet, that's fine
-    console.log(`File ${filePath} doesn't exist yet, will create new`);
   }
 
   // Prepare commit message
@@ -201,7 +197,6 @@ async function pushToGitHub(codigo, jsonData, env) {
 
   if (!putResponse.ok) {
     const errorText = await putResponse.text();
-    console.error('GitHub API error:', errorText);
     return {
       success: false,
       error: `GitHub API returned ${putResponse.status}: ${errorText}`
@@ -391,7 +386,6 @@ RW Consulting · estudios@rwconsulting.cl
 
     if (!resendResponse.ok) {
       const errorText = await resendResponse.text();
-      console.error('Resend API error:', errorText);
       return {
         success: false,
         error: `Resend API returned ${resendResponse.status}: ${errorText}`
@@ -399,7 +393,6 @@ RW Consulting · estudios@rwconsulting.cl
     }
 
     const result = await resendResponse.json();
-    console.log('Email sent successfully:', result.id);
     
     return {
       success: true,
@@ -407,7 +400,6 @@ RW Consulting · estudios@rwconsulting.cl
     };
 
   } catch (error) {
-    console.error('Error sending email:', error);
     return {
       success: false,
       error: error.message
