@@ -240,6 +240,10 @@ export default {
       return handleGenerate(body, env, allowedOrigin);
     } else if (url.pathname === '/admin/pending') {
       return handleAdminPending(body, env, allowedOrigin);
+    } else if (url.pathname === '/admin/approve') {
+      return handleAdminApprove(body, env, allowedOrigin);
+    } else if (url.pathname === '/admin/reject') {
+      return handleAdminReject(body, env, allowedOrigin);
     }
 
     return errorResponse('Not found', 404, allowedOrigin);
@@ -393,6 +397,72 @@ async function handleAdminPending(body, env, allowedOrigin) {
 
   } catch (error) {
     return errorResponse('Failed to fetch studies: ' + error.message, 502, allowedOrigin);
+  }
+}
+
+
+async function handleAdminApprove(body, env, allowedOrigin) {
+  try {
+    const { estudio_id, admin_secret } = body;
+
+    if (!admin_secret || admin_secret !== env.ADMIN_SECRET) {
+      return errorResponse('Unauthorized', 403, allowedOrigin);
+    }
+
+    if (!estudio_id) {
+      return errorResponse('estudio_id is required', 400, allowedOrigin);
+    }
+
+    const kvKey = `estudio:${estudio_id}`;
+    const value = await env.ESTUDIOS_KV.get(kvKey);
+
+    if (!value) {
+      return errorResponse('Study not found', 404, allowedOrigin);
+    }
+
+    const estudio = JSON.parse(value);
+    estudio.estado = 'aprobado';
+    estudio.aprobadoAt = new Date().toISOString();
+
+    await env.ESTUDIOS_KV.put(kvKey, JSON.stringify(estudio), { expirationTtl: 60 * 60 * 24 * 30 });
+
+    return jsonResponse({ success: true, message: 'Study approved' }, allowedOrigin);
+
+  } catch (error) {
+    return errorResponse('Failed to approve study: ' + error.message, 502, allowedOrigin);
+  }
+}
+
+async function handleAdminReject(body, env, allowedOrigin) {
+  try {
+    const { estudio_id, admin_secret, motivo } = body;
+
+    if (!admin_secret || admin_secret !== env.ADMIN_SECRET) {
+      return errorResponse('Unauthorized', 403, allowedOrigin);
+    }
+
+    if (!estudio_id) {
+      return errorResponse('estudio_id is required', 400, allowedOrigin);
+    }
+
+    const kvKey = `estudio:${estudio_id}`;
+    const value = await env.ESTUDIOS_KV.get(kvKey);
+
+    if (!value) {
+      return errorResponse('Study not found', 404, allowedOrigin);
+    }
+
+    const estudio = JSON.parse(value);
+    estudio.estado = 'rechazado';
+    estudio.rechazadoAt = new Date().toISOString();
+    estudio.motivo_rechazo = motivo || '';
+
+    await env.ESTUDIOS_KV.put(kvKey, JSON.stringify(estudio), { expirationTtl: 60 * 60 * 24 * 30 });
+
+    return jsonResponse({ success: true, message: 'Study rejected' }, allowedOrigin);
+
+  } catch (error) {
+    return errorResponse('Failed to reject study: ' + error.message, 502, allowedOrigin);
   }
 }
 

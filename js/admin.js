@@ -1,13 +1,17 @@
 // Admin Console JavaScript
 // RW Consulting — Consola de administración
 
+const INTAKE_WORKER_URL = 'https://rw-intake.rw-consulting.workers.dev';
+const PUBLISH_WORKER_URL = 'https://rw-publish.rw-consulting.workers.dev';
+
 // State management
 const state = {
   currentSection: 'dashboard',
   studies: [],
   filteredStudies: [],
   currentStudy: null,
-  adminSecret: null
+  adminSecret: null,
+  loading: false
 };
 
 // DOM elements
@@ -17,6 +21,7 @@ const pendingCountElements = document.querySelectorAll('#pendingCount, #pendingC
 const statPending = document.getElementById('stat-pending');
 const statApproved = document.getElementById('stat-approved');
 const statRejected = document.getElementById('stat-rejected');
+const statTotal = document.getElementById('stat-total');
 const logoutButton = document.getElementById('logoutButton');
 const currentDateElement = document.getElementById('current-date');
 const studiesTableBody = document.querySelector('#studies-table tbody');
@@ -31,17 +36,15 @@ const refreshButton = document.getElementById('refreshButton');
 
 // Initialize admin console
 function initAdminConsole() {
-  // Check for admin secret in URL
   const urlParams = new URLSearchParams(window.location.search);
   state.adminSecret = urlParams.get('admin_secret');
-  
+
   if (!state.adminSecret) {
     alert('Acceso no autorizado. Se requiere admin_secret en la URL.');
     window.location.href = 'index.html';
     return;
   }
-  
-  // Set current date
+
   const now = new Date();
   currentDateElement.textContent = now.toLocaleDateString('es-CL', {
     weekday: 'long',
@@ -49,71 +52,48 @@ function initAdminConsole() {
     month: 'long',
     day: 'numeric'
   });
-  
-  // Setup event listeners
+
   setupEventListeners();
-  
-  // Load studies
   loadStudies();
-  
-  // Show dashboard by default
   showSection('dashboard');
 }
 
-// Setup event listeners
 function setupEventListeners() {
-  // Navigation
   navItems.forEach(item => {
     item.addEventListener('click', (e) => {
       e.preventDefault();
       const section = item.dataset.section;
-      if (section) {
-        showSection(section);
-      }
+      if (section) showSection(section);
     });
   });
-  
-  // Logout
+
   logoutButton.addEventListener('click', () => {
     if (confirm('¿Cerrar sesión de administración?')) {
       window.location.href = 'index.html';
     }
   });
-  
-  // Modal
+
   modalClose.addEventListener('click', closeModal);
   modalOverlay.addEventListener('click', (e) => {
-    if (e.target === modalOverlay) {
-      closeModal();
-    }
+    if (e.target === modalOverlay) closeModal();
   });
-  
-  // Modal tabs
+
   modalTabs.forEach(tab => {
     tab.addEventListener('click', () => {
-      const tabId = tab.dataset.tab;
-      showTab(tabId);
+      showTab(tab.dataset.tab);
     });
   });
-  
-  // Study actions
-  if (approveButton) {
-    approveButton.addEventListener('click', approveStudy);
-  }
-  
-  if (rejectButton) {
-    rejectButton.addEventListener('click', rejectStudy);
-  }
-  
-  if (refreshButton) {
-    refreshButton.addEventListener('click', loadStudies);
-  }
+
+  if (approveButton) approveButton.addEventListener('click', () => approveStudy());
+  if (rejectButton) rejectButton.addEventListener('click', () => rejectStudy());
+  if (refreshButton) refreshButton.addEventListener('click', loadStudies);
 }
 
-// Load studies from API
 async function loadStudies() {
+  if (state.loading) return;
+  state.loading = true;
+
   try {
-    // Show loading state
     if (studiesTableBody) {
       studiesTableBody.innerHTML = `
         <tr>
@@ -124,135 +104,73 @@ async function loadStudies() {
         </tr>
       `;
     }
-    
-    // In production, this would call the admin API
-    // For now, simulate loading
-    setTimeout(() => {
-      // Simulated data
-      state.studies = [
-        {
-          id: '1',
-          codigo: 'EST-2026-KI-4V7P',
-          proyecto: 'Edificio PUQON',
-          cliente: 'Klein Inmobiliaria',
-          fecha: '2026-04-05',
-          estado: 'pendiente',
-          contacto_email: 'cliente@ejemplo.cl',
-          json: {
-            meta: {
-              codigo: 'EST-2026-KI-4V7P',
-              version_esquema: '2.0',
-              proyecto: 'Edificio PUQON',
-              direccion: 'Calle Principal 123, Pucón',
-              cliente: 'Klein Inmobiliaria',
-              autor: 'RW Consulting',
-              fecha: '2026-04-05'
-            },
-            proyecto_evaluado: {
-              nombre: 'Edificio PUQON',
-              desarrollador: 'Klein Inmobiliaria',
-              direccion: 'Calle Principal 123, Pucón',
-              sector: 'Centro',
-              total_unidades: 50,
-              precio_promedio_uf: 1800,
-              uf_m2_neto_depto: 32.5
-            }
-          }
-        },
-        {
-          id: '2',
-          codigo: 'EST-2026-GV-9X2M',
-          proyecto: 'Condominio Vicuña',
-          cliente: 'Grupo Vicuña',
-          fecha: '2026-04-03',
-          estado: 'aprobado',
-          contacto_email: 'vicuña@ejemplo.cl',
-          json: {
-            meta: {
-              codigo: 'EST-2026-GV-9X2M',
-              version_esquema: '2.0',
-              proyecto: 'Condominio Vicuña',
-              direccion: 'Av. Principal 456, Peñaflor',
-              cliente: 'Grupo Vicuña',
-              autor: 'RW Consulting',
-              fecha: '2026-04-03'
-            },
-            proyecto_evaluado: {
-              nombre: 'Condominio Vicuña',
-              desarrollador: 'Grupo Vicuña',
-              direccion: 'Av. Principal 456, Peñaflor',
-              sector: 'Residencial',
-              total_unidades: 120,
-              precio_promedio_uf: 2200,
-              uf_m2_neto_depto: 28.7
-            }
-          }
-        }
-      ];
-      
-      updateStats();
-      renderStudiesTable();
-    }, 1000);
-    
+
+    const response = await fetch(`${INTAKE_WORKER_URL}/admin/pending`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ admin_secret: state.adminSecret })
+    });
+
+    if (!response.ok) {
+      const errData = await response.json().catch(() => ({}));
+      throw new Error(errData.error || `HTTP ${response.status}`);
+    }
+
+    const result = await response.json();
+    state.studies = result.success && Array.isArray(result.estudios) ? result.estudios : [];
+    updateStats();
+    renderStudiesTable();
+
   } catch (error) {
     console.error('Error loading studies:', error);
     if (studiesTableBody) {
       studiesTableBody.innerHTML = `
         <tr>
-          <td colspan="6" style="text-align: center; color: var(--error); padding: 40px;">
-            Error al cargar los estudios. Intenta nuevamente.
+          <td colspan="6" style="text-align: center; padding: 40px;">
+            <p style="color: var(--error); margin-bottom: 8px;">Error: ${error.message}</p>
+            <p style="color: var(--text-muted); font-size: 0.85em;">Verifica que el intake-worker funcione y ADMIN_SECRET sea correcto.</p>
+            <button onclick="loadStudies()" style="margin-top: 12px; padding: 8px 20px; background: var(--teal); color: white; border: none; border-radius: 6px; cursor: pointer;">Reintentar</button>
           </td>
         </tr>
       `;
     }
+  } finally {
+    state.loading = false;
   }
 }
 
-// Update statistics
 function updateStats() {
   const pending = state.studies.filter(s => s.estado === 'pendiente').length;
   const approved = state.studies.filter(s => s.estado === 'aprobado').length;
   const rejected = state.studies.filter(s => s.estado === 'rechazado').length;
   const total = state.studies.length;
-  
-  // Update stats cards
+
   if (statPending) statPending.textContent = pending;
   if (statApproved) statApproved.textContent = approved;
   if (statRejected) statRejected.textContent = rejected;
-  
-  // Update badge counts
-  pendingCountElements.forEach(el => {
-    el.textContent = pending;
-  });
+  if (statTotal) statTotal.textContent = total;
+
+  pendingCountElements.forEach(el => { el.textContent = pending; });
 }
 
-// Render studies table
 function renderStudiesTable() {
   if (!studiesTableBody) return;
-  
-  // Filter studies based on current section
+
   let filteredStudies = [];
   switch (state.currentSection) {
-    case 'pending':
-      filteredStudies = state.studies.filter(s => s.estado === 'pendiente');
-      break;
-    case 'approved':
-      filteredStudies = state.studies.filter(s => s.estado === 'aprobado');
-      break;
-    case 'rejected':
-      filteredStudies = state.studies.filter(s => s.estado === 'rechazado');
-      break;
-    default:
-      filteredStudies = state.studies;
+    case 'pending':    filteredStudies = state.studies.filter(s => s.estado === 'pendiente'); break;
+    case 'approved':   filteredStudies = state.studies.filter(s => s.estado === 'aprobado'); break;
+    case 'rejected':   filteredStudies = state.studies.filter(s => s.estado === 'rechazado'); break;
+    default:           filteredStudies = state.studies;
   }
-  
+
   state.filteredStudies = filteredStudies;
-  
+
   if (filteredStudies.length === 0) {
     studiesTableBody.innerHTML = `
       <tr>
         <td colspan="6" class="empty-state">
-          <svg viewBox="0 0 20 20" fill="currentColor">
+          <svg viewBox="0 0 20 20" fill="currentColor" width="40" height="40">
             <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
           </svg>
           <p>No hay estudios en esta categoría</p>
@@ -261,46 +179,25 @@ function renderStudiesTable() {
     `;
     return;
   }
-  
+
   studiesTableBody.innerHTML = filteredStudies.map(study => `
-    <tr data-study-id="${study.id}">
-      <td>
-        <div class="study-code">${study.codigo}</div>
-      </td>
-      <td>
-        <div class="study-project">${study.proyecto}</div>
-        <div class="study-client">${study.cliente}</div>
-      </td>
-      <td>
-        <div class="study-date">${study.fecha}</div>
-      </td>
-      <td>
-        <span class="status-badge status-${study.estado}">
-          ${study.estado === 'pendiente' ? 'Pendiente' : 
-            study.estado === 'aprobado' ? 'Aprobado' : 'Rechazado'}
-        </span>
-      </td>
-      <td>
-        ${study.contacto_email}
-      </td>
+    <tr data-study-id="${study.estudio_id}">
+      <td><div class="study-code">${study.codigo}</div></td>
+      <td><div class="study-project">${study.proyecto}</div><div class="study-client">${study.cliente || ''}</div></td>
+      <td><div class="study-date">${study.createdAt ? new Date(study.createdAt).toLocaleDateString('es-CL') : '-'}</div></td>
+      <td><span class="status-badge status-${study.estado}">${study.estado === 'pendiente' ? 'Pendiente' : study.estado === 'aprobado' ? 'Aprobado' : 'Rechazado'}</span></td>
+      <td>${study.contacto_email || '-'}</td>
       <td>
         <div class="action-buttons">
-          <button class="action-button view" title="Ver detalles" onclick="viewStudy('${study.id}')">
-            <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
-              <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
-              <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/>
-            </svg>
+          <button class="action-button view" title="Ver detalles" onclick="viewStudy('${study.estudio_id}')">
+            <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/></svg>
           </button>
           ${study.estado === 'pendiente' ? `
-            <button class="action-button approve" title="Aprobar" onclick="approveStudy('${study.id}')">
-              <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
-                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-              </svg>
+            <button class="action-button approve" title="Aprobar" onclick="approveStudy('${study.estudio_id}')">
+              <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
             </button>
-            <button class="action-button reject" title="Rechazar" onclick="rejectStudy('${study.id}')">
-              <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
-                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
-              </svg>
+            <button class="action-button reject" title="Rechazar" onclick="rejectStudy('${study.estudio_id}')">
+              <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
             </button>
           ` : ''}
         </div>
@@ -309,185 +206,137 @@ function renderStudiesTable() {
   `).join('');
 }
 
-// Show section
 function showSection(section) {
-  // Update navigation
   navItems.forEach(item => {
-    if (item.dataset.section === section) {
-      item.classList.add('active');
-    } else {
-      item.classList.remove('active');
-    }
+    item.classList.toggle('active', item.dataset.section === section);
   });
-  
-  // Update content sections
-  contentSections.forEach(contentSection => {
-    if (contentSection.id === `${section}-section`) {
-      contentSection.classList.add('active');
-    } else {
-      contentSection.classList.remove('active');
-    }
+  contentSections.forEach(el => {
+    el.classList.toggle('active', el.id === `${section}-section`);
   });
-  
-  // Update state
   state.currentSection = section;
-  
-  // Render studies table for this section
-  if (section !== 'settings') {
-    renderStudiesTable();
-  }
+  if (section !== 'settings') renderStudiesTable();
 }
 
-// View study details
-function viewStudy(studyId) {
-  const study = state.studies.find(s => s.id === studyId);
+function viewStudy(estudioId) {
+  const study = state.studies.find(s => s.estudio_id === estudioId);
   if (!study) return;
-  
+
   state.currentStudy = study;
-  
-  // Update modal content
+
   document.querySelector('.modal-header h2').textContent = study.proyecto;
   document.querySelector('.study-code-modal').textContent = study.codigo;
-  document.querySelector('.study-status-modal').textContent = 
-    study.estado === 'pendiente' ? 'Pendiente' : 
-    study.estado === 'aprobado' ? 'Aprobado' : 'Rechazado';
-  document.querySelector('.study-status-modal').className = `study-status-modal status-${study.estado}`;
-  
-  // Show JSON in viewer
-  jsonViewer.textContent = JSON.stringify(study.json, null, 2);
-  
-  // Update action buttons
-  if (study.estado === 'pendiente') {
-    approveButton.style.display = 'inline-block';
-    rejectButton.style.display = 'inline-block';
-  } else {
-    approveButton.style.display = 'none';
-    rejectButton.style.display = 'none';
+  const statusEl = document.querySelector('.study-status-modal');
+  statusEl.textContent = study.estado === 'pendiente' ? 'Pendiente' : study.estado === 'aprobado' ? 'Aprobado' : 'Rechazado';
+  statusEl.className = `study-status-modal status-${study.estado}`;
+
+  jsonViewer.textContent = JSON.stringify(study.json || {}, null, 2);
+
+  const contactInfo = document.querySelector('#details-tab .study-contact-info');
+  if (contactInfo) {
+    contactInfo.innerHTML = `
+      <p><strong>Contacto:</strong> ${study.contacto_nombre || 'No especificado'}</p>
+      <p><strong>Email:</strong> ${study.contacto_email || 'No especificado'}</p>
+      <p><strong>Tipo:</strong> ${study.tipo === 'tipo1' ? 'Nueva oferta' : study.tipo === 'tipo2' ? 'Posicionamiento' : study.tipo || 'No especificado'}</p>
+      <p><strong>Código:</strong> ${study.codigo}</p>
+      <p><strong>Fecha solicitud:</strong> ${study.createdAt ? new Date(study.createdAt).toLocaleString('es-CL') : '-'}</p>
+    `;
   }
-  
-  // Show modal
+
+  approveButton.style.display = study.estado === 'pendiente' ? 'inline-block' : 'none';
+  rejectButton.style.display = study.estado === 'pendiente' ? 'inline-block' : 'none';
+
   modalOverlay.classList.add('active');
   showTab('details');
 }
 
-// Close modal
 function closeModal() {
   modalOverlay.classList.remove('active');
   state.currentStudy = null;
 }
 
-// Show tab in modal
 function showTab(tabId) {
-  modalTabs.forEach(tab => {
-    if (tab.dataset.tab === tabId) {
-      tab.classList.add('active');
-    } else {
-      tab.classList.remove('active');
-    }
-  });
-  
-  tabContents.forEach(content => {
-    if (content.id === `${tabId}-tab`) {
-      content.classList.add('active');
-    } else {
-      content.classList.remove('active');
-    }
-  });
+  modalTabs.forEach(tab => tab.classList.toggle('active', tab.dataset.tab === tabId));
+  tabContents.forEach(el => el.classList.toggle('active', el.id === `${tabId}-tab`));
 }
 
-// Approve study
-async function approveStudy(studyId) {
-  const study = studyId ? state.studies.find(s => s.id === studyId) : state.currentStudy;
+async function approveStudy(estudioId) {
+  const study = (estudioId ? state.studies.find(s => s.estudio_id === estudioId) : state.currentStudy);
   if (!study) return;
-  
-  if (!confirm(`¿Aprobar el estudio ${study.codigo}? Esto publicará el estudio y enviará un email al cliente.`)) {
-    return;
-  }
-  
+
+  if (!confirm(`¿Aprobar el estudio ${study.codigo}?\n\nEsto publicará el JSON en GitHub y enviará un email al cliente.`)) return;
+
   try {
-    // Call publish-worker
-    const response = await fetch('https://rw-publish.rw-consulting.workers.dev/publish', {
+    const response = await fetch(`${PUBLISH_WORKER_URL}/publish`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${state.adminSecret}`
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        estudio_id: study.id,
+        estudio_id: study.estudio_id,
         codigo: study.codigo,
         json: study.json,
         email_cliente: study.contacto_email,
-        cliente_nombre: study.cliente,
-        proyecto_nombre: study.proyecto
+        cliente_nombre: study.contacto_nombre || study.cliente || '',
+        proyecto_nombre: study.proyecto,
+        admin_secret: state.adminSecret
       })
     });
-    
+
     if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.error || `HTTP ${response.status}`);
+      const errData = await response.json().catch(() => ({}));
+      throw new Error(errData.error || `HTTP ${response.status}`);
     }
-    
+
     const result = await response.json();
-    
+
     if (result.success) {
-      // Update study status
       study.estado = 'aprobado';
-      
-      // Update UI
       updateStats();
       renderStudiesTable();
-      
-      if (state.currentStudy) {
-        closeModal();
-      }
-      
-      alert(`Estudio ${study.codigo} aprobado y publicado correctamente.\n\nEmail enviado: ${result.email_sent ? 'Sí' : 'No'}\nCommit: ${result.github?.commit_url || 'N/A'}`);
+
+      if (state.currentStudy) closeModal();
+
+      alert(`✅ Estudio ${study.codigo} publicado correctamente.\n\n${result.email_sent ? '📧 Email enviado.' : '⚠️ Email no enviado.'}`);
     } else {
       throw new Error(result.error || 'Error desconocido');
     }
-    
   } catch (error) {
     console.error('Error approving study:', error);
-    alert(`Error al aprobar el estudio: ${error.message}\n\nEl estudio no se publicó. Intenta nuevamente.`);
+    alert(`❌ Error al aprobar: ${error.message}`);
   }
 }
 
-// Reject study
-async function rejectStudy(studyId) {
-  const study = studyId ? state.studies.find(s => s.id === studyId) : state.currentStudy;
+async function rejectStudy(estudioId) {
+  const study = (estudioId ? state.studies.find(s => s.estudio_id === estudioId) : state.currentStudy);
   if (!study) return;
-  
+
   const reason = prompt(`¿Por qué rechazas el estudio ${study.codigo}? (opcional)`);
-  
-  if (reason === null) {
-    return; // User cancelled
-  }
-  
+  if (reason === null) return;
+
   try {
-    // In production, this would call the admin API
-    // For now, simulate rejection
+    const response = await fetch(`${INTAKE_WORKER_URL}/admin/reject`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ estudio_id: study.estudio_id, admin_secret: state.adminSecret, motivo: reason || '' })
+    });
+
+    if (!response.ok) {
+      const errData = await response.json().catch(() => ({}));
+      throw new Error(errData.error || `HTTP ${response.status}`);
+    }
+
     study.estado = 'rechazado';
-    
-    // Update UI
     updateStats();
     renderStudiesTable();
-    
-    if (state.currentStudy) {
-      closeModal();
-    }
-    
+    if (state.currentStudy) closeModal();
     alert(`Estudio ${study.codigo} rechazado.`);
-    
   } catch (error) {
     console.error('Error rejecting study:', error);
-    alert('Error al rechazar el estudio. Intenta nuevamente.');
+    alert(`Error al rechazar: ${error.message}`);
   }
 }
 
-// Make functions available globally
 window.viewStudy = viewStudy;
 window.approveStudy = approveStudy;
 window.rejectStudy = rejectStudy;
+window.loadStudies = loadStudies;
 
-// Initialize on load
 document.addEventListener('DOMContentLoaded', initAdminConsole);
