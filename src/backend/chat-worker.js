@@ -18,7 +18,7 @@ const ALLOWED_ORIGINS = [
   'http://127.0.0.1:8000',
   'http://127.0.0.1:8080'
 ];
-const MODEL      = 'claude-sonnet-4-5-20251022';
+const MODEL      = 'claude-sonnet-4-6';
 const MAX_TOKENS = 4096;
 
 // Prompt de sistema — asesor estratégico inmobiliario
