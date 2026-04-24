@@ -379,6 +379,7 @@ async function approveStudy(estudioId) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${state.adminSecret}`
       },
       body: JSON.stringify({
         estudio_id: study.estudio_id,
@@ -386,8 +387,7 @@ async function approveStudy(estudioId) {
         json: study.json,
         email_cliente: study.contacto_email,
         cliente_nombre: study.contacto_nombre || study.cliente || '',
-        proyecto_nombre: study.proyecto,
-        admin_secret: state.adminSecret
+        proyecto_nombre: study.proyecto
       })
     });
 

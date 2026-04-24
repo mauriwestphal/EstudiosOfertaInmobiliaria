@@ -268,15 +268,14 @@ async function approveStudy(estudioId) {
   try {
     const response = await fetch(`${PUBLISH_WORKER_URL}/publish`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${state.adminSecret}` },
       body: JSON.stringify({
         estudio_id: study.estudio_id,
         codigo: study.codigo,
         json: study.json,
         email_cliente: study.contacto_email,
         cliente_nombre: study.contacto_nombre || study.cliente || '',
-        proyecto_nombre: study.proyecto,
-        admin_secret: state.adminSecret
+        proyecto_nombre: study.proyecto
       })
     });
 
