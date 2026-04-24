@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -2161,10 +2161,10 @@ function setupNavScroll(sections) {
 
   <!-- Sugerencias rápidas -->
   <div class="chat-suggestions" id="chat-suggestions">
-    <button class="chat-suggestion-btn" data-q="¿Cuáles son los proyectos más baratos en UF/m²?">💰 Más baratos UF/m²</button>
-    <button class="chat-suggestion-btn" data-q="¿Cómo se posiciona el proyecto evaluado frente a la competencia?">📊 Posicionamiento</button>
-    <button class="chat-suggestion-btn" data-q="¿Cuántas unidades disponibles hay en total en el mercado?">🏢 Stock disponible</button>
-    <button class="chat-suggestion-btn" data-q="¿Cuáles son los competidores más directos del proyecto?">🎯 Competidores directos</button>
+    <button class="chat-suggestion-btn" data-q="¿Está el precio de este proyecto bien posicionado frente a la competencia? ¿Está caro, en línea o económico?">📊 ¿Precio competitivo?</button>
+    <button class="chat-suggestion-btn" data-q="¿Qué estrategia de precios recomiendas para este proyecto? ¿Debería subir, mantener o bajar sus precios?">💡 Estrategia de precios</button>
+    <button class="chat-suggestion-btn" data-q="¿Qué tipología tiene más oportunidad en este mercado según los datos del estudio?">🎯 Tipología con más oportunidad</button>
+    <button class="chat-suggestion-btn" data-q="¿Hay nichos de mercado desatendidos o brechas de precio que este proyecto pueda aprovechar?">🔍 Nichos de mercado</button>
   </div>
 
   <!-- Mensajes -->
@@ -2187,7 +2187,7 @@ function setupNavScroll(sections) {
 
   <!-- Disclaimer -->
   <div class="chat-disclaimer">
-    Respuestas basadas en datos del estudio · No constituye asesoría de inversión
+    Análisis estratégico · Basado en datos del estudio · Orientativo
   </div>
 </div>
 <!-- ══════════════════════════════════════════
@@ -2279,7 +2279,7 @@ function setupNavScroll(sections) {
   function showWelcome() {
     const nombre = estudioData?.meta?.proyecto || 'este estudio';
     appendMsg('assistant',
-      `👋 Hola, soy el asistente IA de RW Consulting.\n\nPuedo responderte preguntas sobre **${nombre}**: precios, competencia, tipologías, zonas y más.\n\n¿En qué te ayudo?`
+      `👋 Hola, soy el asesor estratégico IA de RW Consulting.\n\nPuedo ayudarte con análisis sobre **${nombre}**: posicionamiento de precios, estrategias competitivas, oportunidades de mercado y análisis por tipología.\n\n¿Eres **inversionista** evaluando este proyecto, o de la **inmobiliaria** buscando estrategia de precios?`
     );
   }
 

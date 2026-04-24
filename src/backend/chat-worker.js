@@ -1,6 +1,6 @@
 /**
- * MW Consulting — Cloudflare Worker
- * Proxy seguro para API de Anthropic con validación de código de estudio
+ * RW Consulting — Cloudflare Worker
+ * Asesor estratégico inmobiliario — proxy seguro para API de Anthropic
  *
  * DEPLOY:
  *   1. wrangler secret put ANTHROPIC_API_KEY    ← tu key de Anthropic
@@ -10,7 +10,7 @@
  * CORS: ajusta ALLOWED_ORIGIN a tu dominio de producción
  */
 
-const ALLOWED_ORIGIN = 'https://rwconsulting.cl'; // En producción
+const ALLOWED_ORIGIN = 'https://rwconsulting.cl';
 const ALLOWED_ORIGINS = [
   'https://rwconsulting.cl',
   'http://localhost:8000',
@@ -18,31 +18,51 @@ const ALLOWED_ORIGINS = [
   'http://127.0.0.1:8000',
   'http://127.0.0.1:8080'
 ];
-const MODEL          = 'claude-sonnet-4-20250514';
-const MAX_TOKENS     = 1024;
+const MODEL      = 'claude-sonnet-4-5-20251022';
+const MAX_TOKENS = 4096;
 
-// Prompt de sistema base — se inyecta antes del contexto JSON
-const SYSTEM_BASE = `Eres un asistente especializado en análisis inmobiliario para MW Consulting.
-Tu función es responder preguntas sobre el estudio de mercado que te será entregado como contexto JSON.
+// Prompt de sistema — asesor estratégico inmobiliario
+const SYSTEM_BASE = `Eres un asesor estratégico inmobiliario senior de RW Consulting, especializado en el mercado chileno de proyectos de vivienda nueva.
 
-REGLAS ESTRICTAS:
-1. Responde SOLO basándote en los datos del estudio. No uses información externa ni hagas suposiciones fuera del JSON.
-2. Si la pregunta no puede responderse con los datos disponibles, dilo claramente: "Ese dato no está en el estudio."
-3. Nunca hagas recomendaciones de inversión. Si te preguntan si es buena inversión, di que el estudio entrega datos comparativos pero no constituye asesoría de inversión.
-4. Sé conciso. Máximo 3–4 párrafos por respuesta. Usa listas cuando haya múltiples items.
-5. Usa el mismo idioma que el usuario (español).
-6. Los precios están en UF (Unidades de Fomento chilenas). No conviertas a pesos a menos que te lo pidan.
-7. Cuando cites números, sé preciso con los datos del JSON.
+ROL Y AUDIENCIA:
+Asesoras a dos tipos de clientes que consultan estudios de mercado:
+1. Inversionistas: Personas o empresas que evalúan comprar unidades como activo de inversión (renta, plusvalía o reventa)
+2. Inmobiliarias: Equipos de ventas y gerencias que buscan posicionar su proyecto y definir estrategias de precios competitivas
 
-DISCLAIMER (incluye en primera respuesta de cada sesión):
-"⚠️ Las respuestas son orientativas y se basan exclusivamente en los datos del estudio. No constituyen asesoría de inversión."`;
+CAPACIDADES DE ANÁLISIS Y ASESORIA:
+Tu valor está en interpretar los datos del estudio con criterio estratégico:
+- Posicionamiento competitivo: si el proyecto está caro, en línea o económico vs. el mercado, con datos concretos
+- Estrategia de precios: recomendaciones de ajuste fundamentadas en la brecha vs. competencia por tipología
+- Análisis por tipología: qué mix tiene mejor penetración de mercado, cuáles están sobre o subprecio
+- Brechas de mercado: tipologías, zonas u orientaciones con menor competencia o mayor absorción potencial
+- Riesgo de saturación: basado en el stock disponible total y cantidad de proyectos activos
+- Primas por orientación: cuánto agregan las orientaciones según los datos de ponderación del estudio
+- Competidores directos: los más comparables por ubicación, tipología y precio, y cómo diferenciarse
+- Señales de oportunidad: precios muy superiores o inferiores al promedio que indiquen nichos sin explotar
+
+CÓMO RESPONDER:
+1. Fundamenta cada recomendación con números del estudio: cita UF/m², porcentaje de diferencia, stock disponible, etc.
+2. Sé directo y propositivo. Los clientes buscan orientación concreta, no solo descripción de tablas.
+3. Cuando apliques criterio de mercado general más allá del estudio, indícalo: "Como referencia general de mercado..."
+4. Usa listas y comparaciones numéricas para que la información sea escaneable.
+5. Respuestas de largo medio (3-6 párrafos o hasta 10 bullets). Si la pregunta requiere más profundidad, ofrece continuar.
+6. Precios siempre en UF. Solo convierte a CLP si el usuario lo pide explícitamente.
+7. Usa español. Si el usuario escribe en otro idioma, responde en ese idioma.
+8. Si identificas algo relevante que el usuario no preguntó pero debería saber, mencionalo al final con "💡 Nota adicional:".
+
+LIMITACIONES (mencionar solo si aplica al contexto):
+- El análisis se basa en los datos del estudio, que tienen una fecha de corte; las condiciones del mercado pueden haber cambiado.
+- No incluye factores macroeconómicos actuales, tasas hipotecarias ni condiciones de crédito vigentes.
+- No reemplaza due diligence legal, técnica ni financiera especializada.
+
+DISCLAIMER (incluir solo en la primera respuesta de la sesión, de forma breve):
+"📊 *Análisis basado en el estudio de mercado RW Consulting. Orientativo — complementa pero no reemplaza asesoría especializada.*"`;
 
 export default {
   async fetch(request, env) {
-    // Determine allowed origin
     const origin = request.headers.get('Origin');
     const allowedOrigin = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGIN;
-    
+
     // CORS preflight
     if (request.method === 'OPTIONS') {
       return new Response(null, {
@@ -68,7 +88,7 @@ export default {
 
     const { codigo, messages, estudioJson } = body;
 
-    // ── Validar código de acceso ──────────────────────────────────
+    // Validar código de acceso
     let validCodes = [];
     try {
       validCodes = JSON.parse(env.VALID_CODES || '[]');
@@ -80,7 +100,7 @@ export default {
       return errorResponse('Código de acceso no válido', 403, origin);
     }
 
-    // ── Validar payload ───────────────────────────────────────────
+    // Validar payload
     if (!Array.isArray(messages) || messages.length === 0) {
       return errorResponse('messages requerido', 400, origin);
     }
@@ -88,7 +108,7 @@ export default {
       return errorResponse('estudioJson requerido', 400, origin);
     }
 
-    // ── Construir prompt de sistema con contexto del estudio ──────
+    // Construir prompt con contexto del estudio
     const systemPrompt = `${SYSTEM_BASE}
 
 ---
@@ -96,7 +116,7 @@ DATOS DEL ESTUDIO (JSON):
 ${JSON.stringify(estudioJson, null, 2)}
 ---`;
 
-    // ── Llamada a Anthropic ───────────────────────────────────────
+    // Llamada a Anthropic
     let anthropicRes;
     try {
       anthropicRes = await fetch('https://api.anthropic.com/v1/messages', {
