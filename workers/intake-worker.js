@@ -28,7 +28,6 @@ const GENERATE_TOKENS  = 8192;
 
 // ── System prompts ──────────────────────────────────────────────────
 
-// Prompt para análisis conversacional (liviano, respuestas JSON rápidas)
 const ANALYSIS_SYSTEM_PROMPT = `Eres el asistente de intake de RW Consulting. Tu trabajo es recopilar información para generar estudios de mercado inmobiliario siguiendo el playbook v2.0.
 
 CAMPOS REQUERIDOS según tipo de estudio:
@@ -55,7 +54,6 @@ Responde SOLO con JSON válido:
  "progress_pct": 40
 }`;
 
-// Playbook completo para generación (hardcodeado del playbook-estudio-ia.md)
 const PLAYBOOK = `# Playbook — Generación de Estudios de Oferta Inmobiliaria
 ## Versión esquema 2.0 · MW Consulting
 
@@ -307,7 +305,6 @@ Datos recopilados: ${JSON.stringify(datos, null, 2)}`;
     const estudioId = crypto.randomUUID();
     const codigo = estudioJSON.meta.codigo;
 
-    // Guardar en KV con estado 'pendiente'
     const kvData = {
       ...estudioJSON,
       estado: 'pendiente',
@@ -324,7 +321,6 @@ Datos recopilados: ${JSON.stringify(datos, null, 2)}`;
       { expirationTtl: 60 * 60 * 24 * 30 }
     );
 
-    // También guardar con key por código para búsqueda fácil
     await env.ESTUDIOS_KV.put(
       `codigo:${codigo}`,
       estudioId,
@@ -353,7 +349,6 @@ async function handleAdminPending(body, env, allowedOrigin) {
 
     const estudios = [];
 
-    // Listar todas las keys con prefijo 'estudio:'
     let cursor;
     do {
       const listResult = await env.ESTUDIOS_KV.list({
@@ -388,7 +383,6 @@ async function handleAdminPending(body, env, allowedOrigin) {
       cursor = listResult.cursor;
     } while (cursor);
 
-    // Ordenar por fecha descendente
     estudios.sort((a, b) => {
       if (!a.createdAt) return 1;
       if (!b.createdAt) return -1;
