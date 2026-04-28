@@ -836,7 +836,9 @@ tr.hidden-row { display: none; }
   margin-bottom: 16px;
 }
 .chart-wrap { position: relative; height: 260px; }
+.chart-wrap-scroll { overflow-y: auto; }
 canvas { max-height: 260px; }
+.chart-wrap-scroll canvas { max-height: none; }
 .chart-full { grid-column: 1 / -1; }
 
 /* ══ CHART FILTER ═════════════════════════════════════════════════ */
@@ -1581,7 +1583,7 @@ function renderGraficos(d) {
       <button class="chart-xfilter-clear" id="chart-xfilter-clear">Limpiar ×</button>
     </div>
     <div class="charts-grid">
-      <div class="chart-card"><div class="chart-title">UF/m² por proyecto</div><div class="chart-wrap" id="wrap-chart-4"><canvas id="chart-4"></canvas></div></div>
+      <div class="chart-card"><div class="chart-title">UF/m² por proyecto</div><div class="chart-wrap chart-wrap-scroll" id="wrap-chart-4"></div></div>
       <div class="chart-card"><div class="chart-title">${hasPrecios ? 'Precio lista por tipología + orientación' : 'Precio lista promedio por distribución'}</div><div class="chart-wrap"><canvas id="chart-1"></canvas></div></div>
       <div class="chart-card"><div class="chart-title">UF/m² por zona</div><div class="chart-wrap"><canvas id="chart-2"></canvas></div></div>
       <div class="chart-card"><div class="chart-title">Stock disponible por zona</div><div class="chart-wrap"><canvas id="chart-3"></canvas></div></div>
@@ -1840,7 +1842,9 @@ function renderGraficos(d) {
     const bg4       = colorsByLabel(labels4, sVals4, 46, 46, 56, hiIdx4);
     const bw4       = labels4.map(l => isEM(l) ? 2 : 0);
 
-    document.getElementById('wrap-chart-4').innerHTML = '<canvas id="chart-4"></canvas>';
+    const barH4   = 32;
+    const totalH4 = Math.max(260, labels4.length * barH4);
+    document.getElementById('wrap-chart-4').innerHTML = `<div style="position:relative;height:${totalH4}px"><canvas id="chart-4"></canvas></div>`;
     charts.c4 = new Chart(document.getElementById('chart-4'), {
       type: 'bar',
       data: { labels: labels4, datasets: [{
