@@ -17,7 +17,9 @@
       "orientaciones": "Pendiente levantamiento en terreno"
     },
     "estado": "en_evaluacion",
-    "nota_estado": "Proyecto en etapa de evaluación de mercado. No existen aún definiciones de tipologías, pisos, mix de unidades ni precios objetivo. El posicionamiento competitivo deberá calcularse en una actualización posterior del estudio."
+    "nota_estado": "Proyecto en etapa de evaluación de mercado. No existen aún definiciones de tipologías, pisos, mix de unidades ni precios objetivo. El posicionamiento competitivo deberá calcularse en una actualización posterior del estudio.",
+    "fecha_modificacion": "2026-04-28",
+    "nota_modificacion": "v5: Stocks actualizados desde Portal Inmobiliario (abril 2026). Entrelomas 5 estado → Pronta entrega. Álvarez Oriente sin stock (no tiene página de proyecto en portal). Pendientes: Cromático 2D y Vista Urbana 1D (cotización precio lista)."
   },
   "proyecto_evaluado": {
     "nombre": "DOSA: Viña - ConCon",
@@ -238,32 +240,35 @@
       "distancia_centro_m": 1800,
       "estado": "Venta en blanco",
       "pisos": null,
-      "dorms": "1D",
-      "banos": "1B",
-      "m2_util": 35.0,
-      "terraza": 5.0,
-      "orientacion": null,
       "vista_principal": null,
       "amenities": [
         "Salón gourmet",
         "Bodega e-commerce",
         "Pet spa",
         "Car wash",
-        "Estacionamiento de carga eléctrica",
-        "Biciflix"
+        "Carga eléctrica EV",
+        "Biciflix",
+        "Lavandería",
+        "Quincho",
+        "Gimnasio"
       ],
-      "disponibles": 135,
+      "disponibles": null,
       "total_unidades": null,
-      "precio_lista_uf": 2256,
-      "precio_dcto_uf": 2075,
-      "uf_m2_lista": 60.2,
-      "uf_m2_dcto": 55.3,
-      "estacionamiento_uf": null,
-      "bodega_uf": null,
+      "stock_portal": 136,
+      "estacionamiento_uf": 450,
+      "bodega_uf": 80,
       "lat": -33.0482,
       "lng": -71.5512,
-      "fuente": "Portal Inmobiliario — desde UF 2.256. Hasta 10% OFF en 11 unidades. Rango 28-75m². Tipología 1D estimada.",
-      "stock_portal": 135
+      "dorms": "E",
+      "banos": "1B",
+      "m2_util": 28.08,
+      "terraza": null,
+      "orientacion": "O",
+      "precio_lista_uf": 2580,
+      "precio_dcto_uf": null,
+      "uf_m2_lista": 91.9,
+      "uf_m2_dcto": null,
+      "fuente": "Cotización oficial TREI N°118595 (mayo 2025): Depto B, 28.08m² sin terraza, orientación Oriente, piso 12, UF 2.580 lista. Precio dcto pendiente — TREI aplica descuento variable no estándar. Est. UF 450, Bod. UF 80."
     },
     {
       "proyecto": "Cromático",
@@ -274,67 +279,74 @@
       "distancia_centro_m": 1800,
       "estado": "Venta en blanco",
       "pisos": null,
-      "dorms": "2D",
-      "banos": "2B",
-      "m2_util": 52.0,
-      "terraza": 8.0,
-      "orientacion": null,
       "vista_principal": null,
       "amenities": [
         "Salón gourmet",
         "Bodega e-commerce",
         "Pet spa",
         "Car wash",
-        "Estacionamiento de carga eléctrica",
-        "Biciflix"
+        "Carga eléctrica EV",
+        "Biciflix",
+        "Lavandería",
+        "Quincho",
+        "Gimnasio"
       ],
       "disponibles": null,
       "total_unidades": null,
-      "precio_lista_uf": 3500,
-      "precio_dcto_uf": 3220,
-      "uf_m2_lista": 62.5,
-      "uf_m2_dcto": 57.5,
-      "estacionamiento_uf": null,
-      "bodega_uf": null,
+      "stock_portal": 136,
+      "estacionamiento_uf": 450,
+      "bodega_uf": 80,
       "lat": -33.0482,
       "lng": -71.5512,
-      "fuente": "Portal Inmobiliario — tipología 2D estimada. Precio estimado desde mercado del sector. Pendiente validación.",
-      "stock_portal": 135
-    },
-    {
-      "proyecto": "Vista Urbana",
-      "direccion": "P. Mackenna 480/798, Forestal, Viña del Mar",
-      "inmobiliaria": "Nueva Costanera",
-      "zona": "vina_plan",
-      "sector": "Plan de Viña del Mar / Centro",
-      "distancia_centro_m": 2200,
-      "estado": "Entrega inmediata",
-      "pisos": null,
       "dorms": "2D",
       "banos": "2B",
-      "m2_util": 57.15,
-      "terraza": 27.04,
-      "orientacion": "N",
-      "vista_principal": "Ciudad / Mar",
+      "m2_util": 52.0,
+      "terraza": 8.0,
+      "orientacion": null,
+      "precio_lista_uf": 4500,
+      "precio_dcto_uf": null,
+      "uf_m2_lista": 80.4,
+      "uf_m2_dcto": null,
+      "fuente": "Tipología 2D estimada desde rango publicado (28-75m²). Precio estimado desde mercado sector Álvarez. Precio lista y m² exactos pendientes de cotización en sala de ventas TREI. Dcto no cargado — TREI aplica variable."
+    },
+    {
+      "proyecto": "Cromático",
+      "direccion": "Álvarez 1288, Quinta Vergara, Viña del Mar",
+      "inmobiliaria": "TREI",
+      "zona": "vina_plan",
+      "sector": "Plan de Viña del Mar / Álvarez",
+      "distancia_centro_m": 1800,
+      "estado": "Venta en blanco",
+      "pisos": null,
+      "vista_principal": null,
       "amenities": [
-        "Quinchos",
-        "Orientación norte",
-        "Cercanía metro Valparaíso",
-        "IKEA amoblado opcional",
-        "Pie en 60 cuotas sin interés"
+        "Salón gourmet",
+        "Bodega e-commerce",
+        "Pet spa",
+        "Car wash",
+        "Carga eléctrica EV",
+        "Biciflix",
+        "Lavandería",
+        "Quincho",
+        "Gimnasio"
       ],
-      "disponibles": 55,
+      "disponibles": null,
       "total_unidades": null,
-      "precio_lista_uf": 3747,
-      "precio_dcto_uf": 3447,
-      "uf_m2_lista": 53.0,
-      "uf_m2_dcto": 48.8,
-      "estacionamiento_uf": null,
-      "bodega_uf": null,
-      "lat": -33.0518,
-      "lng": -71.5478,
-      "fuente": "vistaurbana.cl — Depto 101A: 2D+2B, 57.15m² útil + 27.04m² terraza. UF 3.747. Orientación norte confirmada.",
-      "stock_portal": 55
+      "stock_portal": 136,
+      "estacionamiento_uf": 450,
+      "bodega_uf": 80,
+      "lat": -33.0482,
+      "lng": -71.5512,
+      "dorms": "3D",
+      "banos": "2B",
+      "m2_util": 74.41,
+      "terraza": 5.93,
+      "orientacion": "N",
+      "precio_lista_uf": 6785,
+      "precio_dcto_uf": null,
+      "uf_m2_lista": 87.7,
+      "uf_m2_dcto": null,
+      "fuente": "Cotización oficial TREI N°130694 (noviembre 2025): Depto E, 3D+2B, piso 11, orientación N, 74.41m² útil + 5.93m² terraza, UF 6.785 lista. Est. UF 450, Bod. UF 80. Dcto variable no cargado."
     },
     {
       "proyecto": "Vista Urbana",
@@ -368,7 +380,7 @@
       "bodega_uf": null,
       "lat": -33.0518,
       "lng": -71.5478,
-      "fuente": "vistaurbana.cl — Depto 121: 3D+2B, 71.99m² + 11.86m² terraza. Precio estimado desde rango del proyecto. Pendiente validación.",
+      "fuente": "vistaurbana.cl — Depto 121: 3D+2B, 71.99m² útil + 11.86m² terraza, precio estimado desde rango publicado. La tipología 2D (57.15m²+27.04t) fue excluida por terraza atípica que distorsiona UF/m². Tipología 1D pendiente cotización en Portal Inmobiliario.",
       "stock_portal": 55
     },
     {
@@ -405,7 +417,7 @@
       "lat": -32.9612,
       "lng": -71.5398,
       "fuente": "isninmobiliaria.cl / Portal Inmobiliario — desde UF 3.340. Tipología E: 1D+1B. Sup. estimada. Pendiente validación.",
-      "stock_portal": null
+      "stock_portal": 5
     },
     {
       "proyecto": "Condominio Salinas del Mar II",
@@ -441,7 +453,7 @@
       "lat": -32.9612,
       "lng": -71.5398,
       "fuente": "Portal Inmobiliario — unidad 110 confirmada: 2D+2B, 58.75m² útil + 10.17m² terraza, UF 6.313.",
-      "stock_portal": null
+      "stock_portal": 5
     },
     {
       "proyecto": "Condominio Salinas del Mar II",
@@ -477,7 +489,7 @@
       "lat": -32.9612,
       "lng": -71.5398,
       "fuente": "Portal Inmobiliario — unidad 403 confirmada: 3D+3B, 103.55m² útil + 18.28m² terraza, UF 10.098.",
-      "stock_portal": null
+      "stock_portal": 5
     },
     {
       "proyecto": "Edificio Wind",
@@ -1219,7 +1231,7 @@
       "zona": "bosques_montemar",
       "sector": "Bosques de Montemar / Parque La Foresta",
       "distancia_centro_m": 4500,
-      "estado": "Venta en blanco",
+      "estado": "Pronta entrega",
       "pisos": null,
       "dorms": "1D",
       "banos": "1B",
@@ -1246,7 +1258,7 @@
       "lat": -32.9448,
       "lng": -71.5368,
       "fuente": "Avenco / Enlace Inmobiliario — desde UF 4.200 (1er semestre 2027)",
-      "stock_portal": null
+      "stock_portal": 27
     },
     {
       "proyecto": "Entrelomas 5",
@@ -1255,7 +1267,7 @@
       "zona": "bosques_montemar",
       "sector": "Bosques de Montemar / Parque La Foresta",
       "distancia_centro_m": 4500,
-      "estado": "Venta en blanco",
+      "estado": "Pronta entrega",
       "pisos": null,
       "dorms": "2D",
       "banos": "2B",
@@ -1282,7 +1294,7 @@
       "lat": -32.9448,
       "lng": -71.5368,
       "fuente": "Enlace Inmobiliario — rango 4.100-6.845 UF para 1D-3D; tipología 2D estimada",
-      "stock_portal": null
+      "stock_portal": 27
     },
     {
       "proyecto": "Portal La Foresta",
@@ -1318,7 +1330,7 @@
       "lat": -32.9552,
       "lng": -71.5428,
       "fuente": "Portal Inmobiliario — unidad A-207 confirmada: 1D+1B, 36.77m² útil, 11.07m² terraza, UF 3.823",
-      "stock_portal": 53
+      "stock_portal": 56
     },
     {
       "proyecto": "Portal La Foresta",
@@ -1354,7 +1366,7 @@
       "lat": -32.9552,
       "lng": -71.5428,
       "fuente": "Portal Inmobiliario — tipología 2D estimada desde rango 76-203 m² publicado; precio estimado desde mercado sector Foresta. Pendiente validación sala de ventas.",
-      "stock_portal": 53
+      "stock_portal": 56
     },
     {
       "proyecto": "Parque Marañón Torre A",
@@ -1383,7 +1395,7 @@
       ],
       "disponibles": null,
       "total_unidades": null,
-      "stock_portal": null,
+      "stock_portal": 8,
       "precio_lista_uf": 3055,
       "precio_dcto_uf": 2811,
       "uf_m2_lista": 51.3,
@@ -1421,7 +1433,7 @@
       ],
       "disponibles": null,
       "total_unidades": null,
-      "stock_portal": null,
+      "stock_portal": 8,
       "precio_lista_uf": 3520,
       "precio_dcto_uf": 3238,
       "uf_m2_lista": 50.3,
@@ -1490,7 +1502,7 @@
       ],
       "disponibles": 16,
       "total_unidades": null,
-      "stock_portal": 16,
+      "stock_portal": 5,
       "precio_lista_uf": 3534,
       "precio_dcto_uf": 3251,
       "uf_m2_lista": 96.2,
@@ -1526,7 +1538,7 @@
       ],
       "disponibles": null,
       "total_unidades": null,
-      "stock_portal": 16,
+      "stock_portal": 5,
       "precio_lista_uf": 4720,
       "precio_dcto_uf": 4342,
       "uf_m2_lista": 85.2,
@@ -1562,7 +1574,7 @@
       ],
       "disponibles": null,
       "total_unidades": null,
-      "stock_portal": 16,
+      "stock_portal": 5,
       "precio_lista_uf": 4933,
       "precio_dcto_uf": 4538,
       "uf_m2_lista": 66.8,
@@ -1611,7 +1623,7 @@
       "zona": "vina_plan",
       "sector": "Plan de Viña del Mar / Plan Vergara",
       "distancia_centro_m": 1500,
-      "estado": "Venta en blanco",
+      "estado": "Venta en verde",
       "pisos": null,
       "dorms": "1D",
       "banos": "1B",
@@ -1632,7 +1644,7 @@
       ],
       "disponibles": null,
       "total_unidades": null,
-      "stock_portal": null,
+      "stock_portal": 173,
       "precio_lista_uf": 4100,
       "precio_dcto_uf": 3772,
       "uf_m2_lista": 108.6,
@@ -1650,7 +1662,7 @@
       "zona": "vina_plan",
       "sector": "Plan de Viña del Mar / Plan Vergara",
       "distancia_centro_m": 1500,
-      "estado": "Venta en blanco",
+      "estado": "Venta en verde",
       "pisos": null,
       "dorms": "2D",
       "banos": "2B",
@@ -1671,7 +1683,7 @@
       ],
       "disponibles": null,
       "total_unidades": null,
-      "stock_portal": null,
+      "stock_portal": 173,
       "precio_lista_uf": 4800,
       "precio_dcto_uf": 4416,
       "uf_m2_lista": 73.1,
@@ -1689,7 +1701,7 @@
       "zona": "vina_plan",
       "sector": "Plan de Viña del Mar / Plan Vergara",
       "distancia_centro_m": 1500,
-      "estado": "Venta en blanco",
+      "estado": "Venta en verde",
       "pisos": null,
       "dorms": "3D",
       "banos": "2B",
@@ -1710,7 +1722,7 @@
       ],
       "disponibles": null,
       "total_unidades": null,
-      "stock_portal": null,
+      "stock_portal": 173,
       "precio_lista_uf": 5500,
       "precio_dcto_uf": 5060,
       "uf_m2_lista": 66.8,
@@ -1724,7 +1736,7 @@
   ],
   "resumen_mercado": {
     "total_proyectos": 23,
-    "total_disponibles": 792,
+    "total_disponibles": 998,
     "rango_uf_m2_lista": {
       "min": 50.3,
       "max": 124.6
@@ -1735,22 +1747,22 @@
     },
     "promedio_por_tipologia_dcto": {
       "1D": {
-        "min": 55.3,
+        "min": 59.1,
         "max": 114.7,
-        "promedio": 79.0,
-        "n_proyectos": 15
+        "promedio": 80.7,
+        "n_proyectos": 14
       },
       "2D": {
         "min": 47.2,
         "max": 110.5,
-        "promedio": 73.4,
-        "n_proyectos": 22
+        "promedio": 74.2,
+        "n_proyectos": 21
       },
       "3D": {
         "min": 46.3,
         "max": 89.1,
-        "promedio": 72.1,
-        "n_proyectos": 9
+        "promedio": 73.6,
+        "n_proyectos": 10
       }
     },
     "dv_posicionamiento": {
@@ -1772,56 +1784,56 @@
     "por_zona": {
       "bosques_montemar": {
         "proyectos": 3,
-        "rango_uf_m2": "65.9-92.0 UF/m² (dcto)",
-        "disponibles": 49
+        "rango_uf_m2": "65.9-92.0 UF/m² (lista/dcto)",
+        "disponibles": 76
       },
       "costa_montemar": {
         "proyectos": 5,
-        "rango_uf_m2": "61.3-92.0 UF/m² (dcto)",
+        "rango_uf_m2": "61.3-92.0 UF/m² (lista/dcto)",
         "disponibles": 247
       },
       "higuerillas": {
         "proyectos": 1,
-        "rango_uf_m2": "80.5-88.5 UF/m² (dcto)",
+        "rango_uf_m2": "80.5-88.5 UF/m² (lista/dcto)",
         "disponibles": 16
       },
       "las_gaviotas": {
         "proyectos": 1,
-        "rango_uf_m2": "58.6-59.1 UF/m² (dcto)",
+        "rango_uf_m2": "58.6-59.1 UF/m² (lista/dcto)",
         "disponibles": 89
       },
       "montemar": {
         "proyectos": 1,
-        "rango_uf_m2": "65.7-71.2 UF/m² (dcto)",
+        "rango_uf_m2": "65.7-71.2 UF/m² (lista/dcto)",
         "disponibles": 63
       },
       "renaca": {
         "proyectos": 2,
-        "rango_uf_m2": "77.3-83.1 UF/m² (dcto)",
-        "disponibles": 53
+        "rango_uf_m2": "77.3-83.1 UF/m² (lista/dcto)",
+        "disponibles": 56
       },
       "renaca_alto": {
         "proyectos": 1,
-        "rango_uf_m2": "69.8-91.0 UF/m² (dcto)",
-        "disponibles": null
+        "rango_uf_m2": "69.8-91.0 UF/m² (lista/dcto)",
+        "disponibles": 5
       },
       "vina_alto": {
         "proyectos": 1,
-        "rango_uf_m2": "46.3-47.2 UF/m² (dcto)",
-        "disponibles": null
+        "rango_uf_m2": "46.3-47.2 UF/m² (lista/dcto)",
+        "disponibles": 8
       },
       "vina_oriente": {
         "proyectos": 1,
-        "rango_uf_m2": "56.4-56.4 UF/m² (dcto)",
+        "rango_uf_m2": "56.4-56.4 UF/m² (lista/dcto)",
         "disponibles": null
       },
       "vina_plan": {
         "proyectos": 7,
-        "rango_uf_m2": "55.3-114.7 UF/m² (dcto)",
-        "disponibles": 275
+        "rango_uf_m2": "61.4-114.7 UF/m² (lista/dcto)",
+        "disponibles": 438
       }
     },
-    "nota_metodologia_promedio": "Se excluye del promedio: Cromático tipología E (estudio, no 1D) y Vista Urbana 2D (terraza de 27m² distorsiona UF/m² ponderado). stock_portal refleja unidades disponibles publicadas en Portal Inmobiliario a nivel de proyecto completo (abril 2026)."
+    "nota_metodologia_promedio": "Se excluye del promedio: Cromático 2D (precio estimado, pendiente cotización). Cromático studio/E y 3D usan precio lista de cotización oficial TREI (precio_dcto_uf=null — TREI aplica descuento variable no estándar). Vista Urbana 2D excluida (terraza 27m² distorsiona UF/m²). stock_portal refleja unidades publicadas en Portal Inmobiliario a nivel proyecto (abril 2026)."
   },
   "ponderacion_orientacion": [
     {
