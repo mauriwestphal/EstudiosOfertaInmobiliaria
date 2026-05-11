@@ -1,0 +1,99 @@
+﻿PLANTILLA DE DATOS — Informe Afluencias Parque VistaSol
+Instrucciones: Complete las columnas "Nuevo valor". No modifique filas de encabezado.
+
+=== 1. ENCABEZADO ===
+Campo,Valor actual (Marzo),Nuevo valor (Abril)
+Período del informe,Marzo – Abril 2026,
+Fecha del informe,11 abr 2026,
+Día número de gestión,36,
+Agente de ventas,DOSA,
+Proyecto,Parque VistaSol · Desco,
+Fecha inicio gestión,07 marzo 2026,
+
+=== 2. VISITAS SALA DE VENTA ===
+(Agregar una fila por visita nueva. Tipo: normal / warn / reserva)
+Mes,Fecha,Nombre visitante,Tipo,Notas
+Marzo,03 mar,Daniela Mendoza,normal,Su hija compró antes. Recién mirando bajo interés.
+Marzo,06 mar,Sofía de los Reyes,normal,1ª vivienda renta $1.5M busca 2D+2B.
+Marzo,20 mar,Claudia Portillo,normal,Le gustó el proyecto renta baja deberá complementar.
+Marzo,27 mar,Karla Rojas,normal,Profesora con madre. Busca 2D1B o 2D2B. Sin ahorros para el pie.
+Abril,01 abr,Osvaldo Cuadra,normal,Oficial Armada + Sra. enfermera ~5M renta. Regresa con pareja.
+Abril,04 abr,Bárbara Correa,normal,Psicóloga pie $25M. Pareja ingeniero ENAP. Renta combinada $3M. Regresa con papá.
+Abril,04 abr,Osvaldo Cuadra + Nataly,normal,2ª visita con hijos. Renta combinada $4.5M. Gestión hipotecario en curso. Consulta convenio Armada.
+Abril,04 abr,Manuel Monsalve,warn,Línea 5 (unidad 1205B · UF 4.073). En evaluación Consorcio. Topa en PIE descartó bono pie.
+Abril,07 abr,Diego Pérez,reserva,Marcha blanca — pendiente firma promesa de compraventa. Unidad 405.
+Abril,07 abr,Tania Balvontine,normal,Profesora busca 3D2B $15M ahorro. En evaluación Banco Chile.
+Abril,09 abr,Kerim Pinilla,normal,Viene con padre (vive en el barrio). Busca casa las encontró muy chicas. Regresa con marido.
+Abril,10 abr,Alejandra Boada,normal,Doctora renta $4M. Derivada a deptos le gustó 2D2B. Viene con marido.
+Abril,11 abr,Lorena Orellana,normal,Busca depto piso bajo (movilidad reducida). Visita agendada.
+Abril,11 abr,Manuel Monsalve,warn,2ª visita. Evaluado en Consorcio busca pie en paralelo. Viene a ver bono pie.
+Abril,11 abr,Carla Encalada,normal,Busca 1ª vivienda. Visita agendada.
+
+=== 3. HITOS DEL PERÍODO ===
+(Máximo 3 hitos. Tipo: normal / featured)
+Tipo,Fecha,Título,Descripción
+normal,07 mar 2026,Inicio gestión DOSA.,Arranque oficial de la venta del proyecto VistaSol por parte de DOSA.
+normal,11 abr 2026,Hoy — día 36.,"15 visitas presenciales completadas (4 en marzo, 11 en abril). 1 reserva en marcha blanca anticipada (Diego Pérez unidad 405). Aceleración notable de afluencia en abril."
+featured,21 abr 2026,Día 45 — umbral de efectividad.,"Faltan 10 días. Primera fecha esperada para promesas de compraventa. Leads calientes activos: Osvaldo Cuadra (hipotecario en gestión), Bárbara Correa (pie $25M disponible), Manuel Monsalve (evaluación Consorcio), Tania Balvontine (evaluación Banco Chile), Alejandra Boada (viene con marido)."
+
+=== 4. MÉTRICAS RESUMEN AFLUENCIA ===
+Métrica,Valor actual,Nuevo valor
+Visitas Marzo,4,
+Visitas Abril (al corte),11,
+Total visitas,15,
+Reservas confirmadas,1,
+Nota reservas,"marcha blanca · unidad 405",
+
+=== 5. EMBUDO CONVERSIÓN — DEPTOS ===
+Métrica,Valor actual,Nuevo valor
+Leads Meta,267,
+Cotizados Meta (PlanOK),44,
+Total registros PlanOK,58,
+Meta cotización %,17,
+Meta ventas %,10,
+Reservas / Promesas,1,
+
+=== 6. EMBUDO CONVERSIÓN — TOWNHOUSES ===
+Métrica,Valor actual,Nuevo valor
+Leads Meta,241,
+Cotizados Meta (PlanOK),24,
+Total registros PlanOK,29,
+Meta cotización %,17,
+Meta ventas %,10,
+Reservas / Promesas,0,
+
+=== 7. CANALES PLANOK — DEPTOS ===
+Canal,Cantidad actual,Nueva cantidad
+Instagram,22,
+Landing,19,
+Referido,5,
+Portal Inmobiliario,4,
+Landing Proyecto,2,
+Otros,6,
+
+=== 8. CANALES PLANOK — TOWNHOUSES ===
+Canal,Cantidad actual,Nueva cantidad
+Instagram,12,
+Landing,9,
+WhatsApp,2,
+Facebook,2,
+Otros,4,
+
+=== 9. PIEZAS DE CAMPAÑA META ===
+(Agregar filas nuevas si hay nuevas piezas)
+Producto,Pieza,Fecha período,Alcance,Impresiones,Clics,Contactos formulario
+Townhouses,Video 1,Marzo 2026,75450,202612,3425,241
+Townhouses,Carrusel,Marzo 2026,28,43,0,0
+Deptos Vistasol,Video 1,Marzo 2026,25162,95816,2149,240
+Deptos Vistasol,Carrusel,Marzo 2026,61,83,8,1
+
+=== 10. TABLA RESUMEN CAMPAÑA META ===
+Producto,Leads (resultados),Alcance,Impresiones,Clics,Importe gastado (CLP)
+Townhouses,241,75479,203291,3441,356444
+Deptos Vistasol,267,25722,103155,1651,355587
+
+=== 11. GRÁFICO DIARIO — LEADS POR DÍA ===
+(Ingresar una columna por cada día del período. Formato fecha: DD/MM)
+Producto,10/03,11/03,12/03,13/03,14/03,15/03,16/03,17/03,18/03,19/03,20/03,21/03,22/03,23/03,24/03,25/03,26/03,27/03,28/03,29/03,30/03,31/03
+Townhouses,10,8,18,17,10,11,13,11,15,8,7,13,14,9,9,9,5,13,7,20,10,4
+Deptos Vistasol,20,16,15,8,14,22,11,9,10,12,9,10,18,7,10,15,12,6,14,13,12,4
