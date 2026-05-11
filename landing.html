@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RW Consulting · Estudios de Oferta Inmobiliaria</title>
+<meta name="description" content="Estudios de oferta competitiva para inmobiliarias chilenas. Análisis de mercado con asesor IA incluido.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><rect width='20' height='20' rx='4' fill='%231D6A6A'/><rect x='2' y='10' width='4' height='8' fill='white' rx='1'/><rect x='8' y='6' width='4' height='12' fill='white' rx='1'/><rect x='14' y='2' width='4' height='16' fill='white' rx='1'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=DM+Serif+Display&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --teal:           #1D6A6A;
+  --teal-mid:       #177A6C;
+  --teal-light:     #E0F0EF;
+  --teal-dark:      #155A5A;
+  --warm:           #C49A3C;
+  --warm-light:     #FBF4E3;
+  --warm-dark:      #96741E;
+  --deep-ink:       #2E2E38;
+  --ink-mid:        #3A3A48;
+  --mist:           #F7F9F9;
+  --white:          #FFFFFF;
+  --border:         rgba(29,106,106,0.15);
+  --border-solid:   #D8E8E7;
+  --shadow-sm:      0 1px 3px rgba(46,46,56,0.08);
+  --shadow-md:      0 4px 12px rgba(46,46,56,0.10);
+  --shadow-lg:      0 8px 24px rgba(46,46,56,0.12);
+  --text-primary:   #2E2E38;
+  --text-secondary: #5A6B6B;
+  --text-muted:     #6A7B7B;
+  --text-on-dark:   #F7F9F9;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background: var(--white);
+}
+
+h1, h2 { font-family: 'DM Serif Display', serif; line-height: 1.15; }
+h1 { font-size: clamp(2rem, 5vw, 3.4rem); }
+h2 { font-size: clamp(1.5rem, 3.5vw, 2.4rem); }
+h3 { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: clamp(1rem, 2vw, 1.2rem); line-height: 1.3; }
+
+.eyebrow {
+  display: block;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 14px;
+}
+.eyebrow--light { color: var(--teal-light); }
+
+.container { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+.section   { padding: 96px 0; }
+
+@media (max-width: 768px) {
+  .section    { padding: 64px 0; }
+  .container  { padding: 0 20px; }
+}
+
+/* ── Buttons ── */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 26px;
+  background: var(--teal); color: #fff;
+  font-family: 'DM Sans', sans-serif; font-size: 0.93rem; font-weight: 500;
+  border: none; border-radius: 8px; cursor: pointer; text-decoration: none;
+  transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+}
+.btn-primary:hover { background: var(--teal-mid); box-shadow: 0 4px 16px rgba(29,106,106,0.3); transform: translateY(-1px); }
+.btn-primary:active { background: var(--teal-dark); transform: scale(0.98); }
+
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 26px;
+  background: transparent; color: rgba(224,240,239,0.85);
+  font-family: 'DM Sans', sans-serif; font-size: 0.93rem; font-weight: 500;
+  border: 1.5px solid rgba(224,240,239,0.25); border-radius: 8px;
+  cursor: pointer; text-decoration: none; transition: all 0.2s;
+}
+.btn-ghost:hover { border-color: var(--teal-light); background: rgba(224,240,239,0.07); color: var(--teal-light); }
+
+.btn-warm {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 15px 34px;
+  background: var(--warm); color: #fff;
+  font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 500;
+  border: none; border-radius: 8px; cursor: pointer; text-decoration: none;
+  transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+}
+.btn-warm:hover { background: var(--warm-dark); box-shadow: 0 4px 16px rgba(196,154,60,0.3); transform: translateY(-1px); }
+
+/* ── NAV ── */
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(46,46,56,0.96);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.nav-inner {
+  max-width: 1100px; margin: 0 auto; padding: 0 24px;
+  display: flex; align-items: center; justify-content: space-between; height: 60px;
+}
+.nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo-mark {
+  width: 32px; height: 32px; background: var(--teal); border-radius: 6px;
+  display: grid; place-items: center; flex-shrink: 0;
+}
+.logo-mark svg { width: 18px; height: 18px; }
+.brand { font-family: 'DM Sans', sans-serif; font-size: 0.98rem; font-weight: 500; color: var(--text-on-dark); letter-spacing: 0.02em; }
+.brand-dot { color: var(--teal-light); font-weight: 700; }
+.nav-links { display: flex; align-items: center; gap: 4px; }
+.nav-link {
+  font-family: 'DM Sans', sans-serif; font-size: 0.86rem; font-weight: 500;
+  color: rgba(247,249,249,0.62); text-decoration: none;
+  padding: 8px 13px; border-radius: 6px; transition: color 0.2s, background 0.2s;
+}
+.nav-link:hover { color: var(--text-on-dark); background: rgba(255,255,255,0.06); }
+.nav-cta {
+  font-family: 'DM Sans', sans-serif; font-size: 0.86rem; font-weight: 500;
+  color: #fff; background: var(--teal);
+  text-decoration: none; padding: 8px 17px; border-radius: 6px;
+  margin-left: 4px; transition: background 0.2s;
+}
+.nav-cta:hover { background: var(--teal-mid); }
+
+@media (max-width: 640px) { .nav-links .nav-link { display: none; } }
+
+/* ── HERO ── */
+.hero {
+  background: var(--deep-ink); color: var(--text-on-dark);
+  position: relative; overflow: hidden; padding: 100px 0 84px;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(29,106,106,.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(29,106,106,.07) 1px, transparent 1px);
+  background-size: 48px 48px; pointer-events: none;
+}
+.hero-glow {
+  position: absolute; top: -180px; left: -180px;
+  width: 560px; height: 560px;
+  background: radial-gradient(circle, rgba(29,106,106,0.13) 0%, transparent 68%);
+  pointer-events: none;
+}
+.hero-inner {
+  position: relative; z-index: 1;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+}
+.hero-content h1 { color: var(--text-on-dark); margin-bottom: 18px; }
+.hero-content h1 em { font-style: italic; color: var(--teal-light); }
+.hero-subtitle {
+  font-size: 1.04rem; color: rgba(247,249,249,0.68);
+  line-height: 1.72; margin-bottom: 34px; max-width: 460px;
+}
+.hero-subtitle strong { color: var(--teal-light); font-weight: 500; }
+.hero-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 48px; }
+.hero-stats {
+  display: flex; gap: 32px;
+  padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.08);
+}
+.hero-stat-val {
+  font-family: 'Roboto Mono', monospace; font-size: 1.6rem; font-weight: 700;
+  color: var(--teal-light); line-height: 1; display: block;
+}
+.hero-stat-lbl {
+  font-size: 0.75rem; color: rgba(247,249,249,0.42);
+  margin-top: 5px; display: block; letter-spacing: 0.03em;
+}
+
+/* ── Product Mock ── */
+.mock-window {
+  background: rgba(255,255,255,0.045);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 14px; overflow: hidden;
+  box-shadow: 0 28px 72px rgba(0,0,0,0.35);
+}
+.mock-bar {
+  background: rgba(255,255,255,0.035);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  padding: 11px 16px; display: flex; align-items: center; gap: 6px;
+}
+.mock-dot { width: 8px; height: 8px; border-radius: 50%; }
+.mock-dot:nth-child(1) { background: rgba(255,255,255,0.18); }
+.mock-dot:nth-child(2) { background: rgba(255,255,255,0.10); }
+.mock-dot:nth-child(3) { background: rgba(255,255,255,0.06); }
+.mock-url {
+  margin-left: 8px; font-family: 'Roboto Mono', monospace;
+  font-size: 0.68rem; color: rgba(247,249,249,0.32);
+}
+.mock-body { padding: 20px; }
+.mock-code-badge {
+  font-family: 'Roboto Mono', monospace; font-size: 0.68rem;
+  color: rgba(224,240,239,0.65); background: rgba(29,106,106,0.22);
+  padding: 3px 8px; border-radius: 4px; display: inline-block; margin-bottom: 8px;
+}
+.mock-proj { font-size: 0.9rem; font-weight: 600; color: var(--text-on-dark); }
+.mock-proj-sub { font-size: 0.72rem; color: rgba(247,249,249,0.38); margin-top: 2px; }
+.mock-metrics {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin: 14px 0;
+}
+.mock-metric {
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 8px; padding: 9px 10px; text-align: center;
+}
+.mock-metric-val {
+  font-family: 'Roboto Mono', monospace; font-size: 0.95rem; font-weight: 700;
+  color: var(--teal-light); display: block; line-height: 1.2;
+}
+.mock-metric-lbl { font-size: 0.62rem; color: rgba(247,249,249,0.38); display: block; margin-top: 2px; }
+.mock-hr { border: none; border-top: 1px solid rgba(255,255,255,0.06); margin: 12px 0; }
+.mock-chat-label {
+  font-size: 0.63rem; color: rgba(247,249,249,0.32);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  margin-bottom: 10px; display: flex; align-items: center; gap: 6px;
+}
+.mock-pulse {
+  width: 6px; height: 6px; background: var(--teal); border-radius: 50%;
+  box-shadow: 0 0 0 3px rgba(29,106,106,0.35);
+  animation: pulse-dot 2.2s infinite;
+}
+@keyframes pulse-dot {
+  0%,100% { box-shadow: 0 0 0 3px rgba(29,106,106,0.35); }
+  50%      { box-shadow: 0 0 0 5px rgba(29,106,106,0.12); }
+}
+.mock-q { display: flex; justify-content: flex-end; margin-bottom: 8px; }
+.mock-q span {
+  background: var(--teal); color: #fff; font-size: 0.73rem;
+  padding: 6px 11px; border-radius: 12px 12px 3px 12px; max-width: 80%; line-height: 1.4;
+}
+.mock-a { display: flex; }
+.mock-a span {
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.07);
+  color: rgba(247,249,249,0.82); font-size: 0.73rem;
+  padding: 6px 11px; border-radius: 12px 12px 12px 3px; max-width: 88%; line-height: 1.5;
+}
+.mock-a span strong { color: var(--teal-light); font-weight: 600; }
+
+/* ── Section utils ── */
+.section--white { background: var(--white); }
+.section--mist  { background: var(--mist); }
+.section--dark  { background: var(--deep-ink); color: var(--text-on-dark); }
+.section--dark h2, .section--dark h3 { color: var(--text-on-dark); }
+.section--dark .section-sub { color: rgba(247,249,249,0.6); }
+
+.section-hd { text-align: center; margin-bottom: 52px; }
+.section-hd h2 { margin-top: 10px; }
+.section-sub {
+  font-size: 0.97rem; color: var(--text-secondary); line-height: 1.7;
+  margin-top: 12px; max-width: 500px; margin-left: auto; margin-right: auto;
+}
+
+/* ── Pain cards ── */
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 22px; }
+
+.pain-card {
+  background: var(--white); border: 1px solid var(--border-solid);
+  border-radius: 12px; padding: 28px 24px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.pain-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.pain-icon {
+  width: 40px; height: 40px; background: #FFF3F3;
+  border-radius: 8px; display: flex; align-items: center;
+  justify-content: center; font-size: 1.15rem; margin-bottom: 16px;
+}
+.pain-card h3 { font-size: 0.97rem; color: var(--text-primary); margin-bottom: 8px; }
+.pain-card p  { font-size: 0.86rem; color: var(--text-secondary); line-height: 1.6; }
+
+/* ── Features ── */
+.grid-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px,1fr)); gap: 18px; }
+
+.feat-item {
+  background: var(--white); border: 1px solid var(--border-solid);
+  border-radius: 10px; padding: 20px 18px;
+  display: flex; align-items: flex-start; gap: 14px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.feat-item:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+.feat-icon {
+  width: 36px; height: 36px; background: var(--teal-light); border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; font-size: 1rem;
+}
+.feat-text h3 { font-size: 0.9rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
+.feat-text p  { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; }
+.feat-item--highlight {
+  background: var(--teal-light); border-color: rgba(29,106,106,0.2);
+}
+.feat-item--highlight .feat-icon { background: var(--teal); }
+.feat-item--highlight h3 { color: var(--teal-dark); }
+.feat-item--highlight p  { color: var(--teal); }
+
+/* ── Advisor ── */
+.advisor-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+}
+.advisor-content h2 { color: var(--text-on-dark); margin-bottom: 16px; }
+.advisor-content p  { color: rgba(247,249,249,0.7); font-size: 0.97rem; line-height: 1.72; margin-bottom: 14px; }
+.advisor-list { list-style: none; margin-top: 22px; display: flex; flex-direction: column; gap: 10px; }
+.advisor-list li {
+  font-size: 0.88rem; color: rgba(247,249,249,0.68);
+  display: flex; align-items: flex-start; gap: 10px; line-height: 1.5;
+}
+.check-icon {
+  width: 16px; height: 16px; flex-shrink: 0; margin-top: 2px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='8' fill='%231D6A6A'/%3E%3Cpath d='M5 8.2l2.2 2.2L11 6' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
+}
+
+/* ── Chat window ── */
+.chat-window {
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 14px; overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.3);
+}
+.chat-bar {
+  background: rgba(29,106,106,0.22); border-bottom: 1px solid rgba(255,255,255,0.07);
+  padding: 13px 18px; display: flex; align-items: center; gap: 10px;
+}
+.chat-avatar {
+  width: 28px; height: 28px; background: var(--teal); border-radius: 50%;
+  display: grid; place-items: center; flex-shrink: 0;
+}
+.chat-avatar svg { width: 13px; height: 13px; }
+.chat-bar-title strong { font-size: 0.86rem; font-weight: 600; color: var(--text-on-dark); display: block; }
+.chat-bar-title span  { font-size: 0.68rem; color: var(--teal-light); display: flex; align-items: center; gap: 5px; }
+.online-dot { width: 5px; height: 5px; background: #4ade80; border-radius: 50%; display: inline-block; }
+
+.chat-msgs { padding: 20px; display: flex; flex-direction: column; gap: 13px; }
+
+.msg-u, .msg-a {
+  display: flex;
+  opacity: 0;
+  animation: fadeUp 0.45s ease forwards;
+}
+.msg-u { justify-content: flex-end; }
+.msg-a { justify-content: flex-start; }
+
+.msg-u span {
+  background: var(--teal); color: #fff; font-size: 0.82rem;
+  padding: 9px 13px; border-radius: 15px 15px 4px 15px;
+  max-width: 76%; line-height: 1.5;
+}
+.msg-a span {
+  background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.08);
+  color: rgba(247,249,249,0.88); font-size: 0.82rem;
+  padding: 9px 13px; border-radius: 15px 15px 15px 4px;
+  max-width: 82%; line-height: 1.6;
+}
+.msg-a span strong { color: var(--teal-light); font-weight: 600; }
+
+.msg-u:nth-child(1) { animation-delay: 0.2s; }
+.msg-a:nth-child(2) { animation-delay: 0.9s; }
+.msg-u:nth-child(3) { animation-delay: 1.9s; }
+.msg-a:nth-child(4) { animation-delay: 2.7s; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.chat-input-row {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 11px 15px; display: flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.02);
+}
+.chat-input-row input {
+  flex: 1; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 7px; padding: 7px 12px;
+  font-family: 'DM Sans', sans-serif; font-size: 0.78rem;
+  color: rgba(247,249,249,0.4); outline: none; pointer-events: none;
+}
+.chat-input-row .send-btn {
+  width: 30px; height: 30px; background: var(--teal); border: none;
+  border-radius: 6px; display: grid; place-items: center; flex-shrink: 0; cursor: default;
+}
+.chat-note {
+  padding: 9px 18px; font-size: 0.66rem;
+  color: rgba(247,249,249,0.28); border-top: 1px solid rgba(255,255,255,0.04);
+  text-align: center; font-style: italic;
+}
+
+/* ── Steps ── */
+.steps {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  position: relative;
+}
+.steps::before {
+  content: ''; position: absolute; top: 28px;
+  left: 16.666%; right: 16.666%; height: 1px;
+  background: linear-gradient(90deg, var(--teal), var(--border-solid), var(--teal));
+  opacity: 0.35;
+}
+.step { text-align: center; padding: 0 24px; }
+.step-num {
+  width: 56px; height: 56px; background: var(--teal); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 20px; font-family: 'Roboto Mono', monospace;
+  font-size: 1rem; font-weight: 700; color: #fff; position: relative; z-index: 1;
+}
+.step h3 { font-size: 0.97rem; color: var(--text-primary); margin-bottom: 8px; }
+.step p   { font-size: 0.84rem; color: var(--text-secondary); line-height: 1.6; }
+.step-tag {
+  display: inline-block; margin-top: 12px; padding: 3px 10px;
+  background: var(--teal-light); color: var(--teal);
+  font-size: 0.7rem; font-weight: 500; border-radius: 20px; letter-spacing: 0.03em;
+}
+
+/* ── Clients ── */
+.clients-row { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 36px; }
+.client-chip {
+  padding: 9px 18px; background: var(--white); border: 1px solid var(--border-solid);
+  border-radius: 40px; font-size: 0.86rem; font-weight: 500; color: var(--text-secondary);
+  display: flex; align-items: center; gap: 8px;
+  transition: border-color 0.2s, color 0.2s;
+}
+.client-chip:hover { border-color: var(--teal); color: var(--teal); }
+.client-chip small { font-size: 0.7rem; color: var(--text-muted); font-weight: 400; }
+.disclaimer-note {
+  font-size: 0.74rem; color: var(--text-muted); font-style: italic;
+  text-align: center; margin-top: 28px;
+  border-left: 2px solid var(--border-solid); padding-left: 12px; display: inline-block;
+}
+
+/* ── CTA ── */
+.cta-section {
+  background: var(--deep-ink); position: relative; overflow: hidden;
+  text-align: center; padding: 104px 0;
+}
+.cta-section::before {
+  content: ''; position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(29,106,106,.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(29,106,106,.08) 1px, transparent 1px);
+  background-size: 48px 48px; pointer-events: none;
+}
+.cta-glow {
+  position: absolute; bottom: -160px; right: -160px;
+  width: 520px; height: 520px;
+  background: radial-gradient(circle, rgba(29,106,106,0.11) 0%, transparent 68%);
+  pointer-events: none;
+}
+.cta-inner { position: relative; z-index: 1; }
+.cta-inner h2 { color: var(--text-on-dark); font-size: clamp(1.6rem, 4vw, 2.7rem); margin-bottom: 14px; }
+.cta-inner p  { color: rgba(247,249,249,0.58); font-size: 0.97rem; max-width: 440px; margin: 0 auto 34px; line-height: 1.72; }
+.cta-actions  { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.cta-hint     { font-size: 0.73rem; color: rgba(247,249,249,0.28); margin-top: 18px; }
+
+/* ── Footer ── */
+.footer { background: var(--deep-ink); border-top: 1px solid rgba(255,255,255,0.06); padding: 52px 0 24px; }
+.footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 32px; margin-bottom: 40px; }
+.footer-about p { font-size: 0.81rem; color: rgba(247,249,249,0.42); margin-top: 12px; line-height: 1.65; max-width: 220px; }
+.footer-col h4 { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(247,249,249,0.3); margin-bottom: 14px; }
+.footer-col a  { display: block; font-size: 0.84rem; color: rgba(247,249,249,0.55); text-decoration: none; margin-bottom: 8px; transition: color 0.2s; }
+.footer-col a:hover { color: var(--teal-light); }
+.footer-hr { border: none; border-top: 1px solid rgba(255,255,255,0.06); margin-bottom: 20px; }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+.footer-bottom p, .footer-bottom a { font-size: 0.74rem; color: rgba(247,249,249,0.28); text-decoration: none; }
+.footer-bottom a:hover { color: var(--teal-light); }
+
+/* ── Fade-in hero ── */
+.fi { opacity: 0; animation: fadeUp 0.6s ease forwards; }
+.fi-1 { animation-delay: 0.08s; }
+.fi-2 { animation-delay: 0.22s; }
+.fi-3 { animation-delay: 0.38s; }
+.fi-4 { animation-delay: 0.52s; }
+.fi-5 { animation-delay: 0.64s; }
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .hero-inner    { grid-template-columns: 1fr; gap: 48px; }
+  .advisor-grid  { grid-template-columns: 1fr; gap: 40px; }
+  .footer-grid   { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  .steps { grid-template-columns: 1fr; gap: 28px; }
+  .steps::before { display: none; }
+  .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+}
+@media (max-width: 600px) {
+  .mock-window { display: none; }
+  .hero { padding: 72px 0 56px; }
+  .hero-stats { gap: 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="landing.html" class="nav-brand">
+      <div class="logo-mark">
+        <svg viewBox="0 0 20 20" fill="none">
+          <rect x="2" y="10" width="4" height="8" fill="white" rx="1"/>
+          <rect x="8" y="6"  width="4" height="12" fill="white" rx="1"/>
+          <rect x="14" y="2" width="4" height="16" fill="white" rx="1"/>
+        </svg>
+      </div>
+      <span class="brand">RW Consulting<span class="brand-dot">.</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="#como-funciona" class="nav-link">Cómo funciona</a>
+      <a href="#asesor-ia" class="nav-link">Asesor IA</a>
+      <a href="index.html" class="nav-link">Soy cliente</a>
+      <a href="intake.html" class="nav-cta">Solicitar estudio →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <span class="eyebrow eyebrow--light fi fi-1">Inteligencia de mercado inmobiliario</span>
+        <h1 class="fi fi-2">Conoce el mercado.<br><em>Fija el precio correcto.</em></h1>
+        <p class="hero-subtitle fi fi-3">
+          Estudios de oferta competitiva para inmobiliarias chilenas —<br>
+          con <strong>asesor IA</strong> que analiza tus datos y responde en tiempo real.
+        </p>
+        <div class="hero-actions fi fi-4">
+          <a href="intake.html" class="btn-primary">Solicitar estudio →</a>
+          <a href="index.html" class="btn-ghost">Soy cliente</a>
+        </div>
+        <div class="hero-stats fi fi-5">
+          <div>
+            <span class="hero-stat-val">+10</span>
+            <span class="hero-stat-lbl">Estudios entregados</span>
+          </div>
+          <div>
+            <span class="hero-stat-val">48h</span>
+            <span class="hero-stat-lbl">Tiempo de entrega</span>
+          </div>
+          <div>
+            <span class="hero-stat-val">100%</span>
+            <span class="hero-stat-lbl">Datos de mercado real</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product mock window -->
+      <div class="fi fi-3">
+        <div class="mock-window">
+          <div class="mock-bar">
+            <div class="mock-dot"></div><div class="mock-dot"></div><div class="mock-dot"></div>
+            <span class="mock-url">viewer.rwconsulting.cl</span>
+          </div>
+          <div class="mock-body">
+            <div class="mock-code-badge">EST-2026-DV-7H3Q</div>
+            <div class="mock-proj">Torre Pacífico — Concón</div>
+            <div class="mock-proj-sub">Zona Oriente · 7 proyectos analizados</div>
+            <div class="mock-metrics">
+              <div class="mock-metric">
+                <span class="mock-metric-val">85.4</span>
+                <span class="mock-metric-lbl">UF/m² prom.</span>
+              </div>
+              <div class="mock-metric">
+                <span class="mock-metric-val">−3.2%</span>
+                <span class="mock-metric-lbl">vs mercado</span>
+              </div>
+              <div class="mock-metric">
+                <span class="mock-metric-val">+8.4%</span>
+                <span class="mock-metric-lbl">prima NE</span>
+              </div>
+            </div>
+            <hr class="mock-hr">
+            <div class="mock-chat-label">
+              <span class="mock-pulse"></span>Asesor IA · activo
+            </div>
+            <div class="mock-q">
+              <span>¿Cómo me posiciono vs la competencia?</span>
+            </div>
+            <div class="mock-a">
+              <span>Estás <strong>3.2% bajo el promedio</strong> en 2D — posición competitiva. Prima nororiente del 8.4% disponible.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAIN -->
+<section class="section section--white">
+  <div class="container">
+    <div class="section-hd">
+      <span class="eyebrow">El problema</span>
+      <h2>Fijar el precio sin datos es adivinar</h2>
+      <p class="section-sub">Las inmobiliarias toman decisiones de precio basadas en intuición o datos desactualizados. Eso deja dinero sobre la mesa — o proyectos fuera de mercado.</p>
+    </div>
+    <div class="grid-3">
+      <div class="pain-card">
+        <div class="pain-icon">📋</div>
+        <h3>Datos dispersos y desactualizados</h3>
+        <p>Compilar precios de competencia manualmente toma días. Cuando terminas, los datos ya están viejos.</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">🔢</div>
+        <h3>Sin benchmarks por tipología</h3>
+        <p>Comparar un 1D con un 3D+T es inútil. Sin estructura por tipo de unidad, el análisis no sirve.</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">🎯</div>
+        <h3>Precio sin respaldo de mercado</h3>
+        <p>Fijarlo a ojo o "al precio de la competencia" sin contexto lleva a sobre o sub-cotizar tu proyecto.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section section--mist">
+  <div class="container">
+    <div class="section-hd">
+      <span class="eyebrow">Qué incluye el estudio</span>
+      <h2>Todo lo que necesitas para posicionarte</h2>
+      <p class="section-sub">Cada estudio es estructurado en visor web, entregado con código de acceso y potenciado con asesor IA.</p>
+    </div>
+    <div class="grid-features">
+      <div class="feat-item">
+        <div class="feat-icon">📊</div>
+        <div class="feat-text">
+          <h3>Análisis por tipología</h3>
+          <p>Desglose de precio UF/m² por tipo de unidad: 1D, 2D, 3D, 3D+T y más.</p>
+        </div>
+      </div>
+      <div class="feat-item">
+        <div class="feat-icon">📍</div>
+        <div class="feat-text">
+          <h3>Benchmarks por zona</h3>
+          <p>Mínimo, máximo y promedio de mercado para la zona y comunas vecinas.</p>
+        </div>
+      </div>
+      <div class="feat-item">
+        <div class="feat-icon">🧭</div>
+        <div class="feat-text">
+          <h3>Ponderación de orientación</h3>
+          <p>Prima o descuento por orientación cardinal — cuánto paga el mercado por nororiente vs poniente.</p>
+        </div>
+      </div>
+      <div class="feat-item">
+        <div class="feat-icon">🏗️</div>
+        <div class="feat-text">
+          <h3>Stock disponible</h3>
+          <p>Unidades activas por proyecto para medir saturación y oportunidades de nicho.</p>
+        </div>
+      </div>
+      <div class="feat-item">
+        <div class="feat-icon">🎯</div>
+        <div class="feat-text">
+          <h3>Posicionamiento relativo</h3>
+          <p>Dónde queda tu proyecto respecto al rango del mercado — caro, competitivo o bajo precio.</p>
+        </div>
+      </div>
+      <div class="feat-item feat-item--highlight">
+        <div class="feat-icon">✨</div>
+        <div class="feat-text">
+          <h3>Asesor IA incluido</h3>
+          <p>Cada estudio incluye acceso al asesor IA entrenado con los datos de tu mercado.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI ADVISOR -->
+<section class="section section--dark" id="asesor-ia">
+  <div class="container">
+    <div class="advisor-grid">
+      <div class="advisor-content">
+        <span class="eyebrow eyebrow--light">Asesor IA</span>
+        <h2>Tu estudio habla contigo</h2>
+        <p>Cada estudio viene con un asesor IA especializado en tu mercado. No es un chatbot genérico — está entrenado con los datos reales de tu zona, tu competencia y tu tipología.</p>
+        <p>Pregúntale lo que necesitas para tomar decisiones de precio con respaldo.</p>
+        <ul class="advisor-list">
+          <li><span class="check-icon"></span>Posicionamiento competitivo de tu proyecto vs el mercado</li>
+          <li><span class="check-icon"></span>Oportunidades de precio por tipología y zona</li>
+          <li><span class="check-icon"></span>Análisis de primas por orientación cardinal</li>
+          <li><span class="check-icon"></span>Proyectos con mayor y menor saturación de stock</li>
+          <li><span class="check-icon"></span>Recomendaciones estratégicas accionables</li>
+        </ul>
+      </div>
+
+      <div class="chat-window" id="chat-demo">
+        <div class="chat-bar">
+          <div class="chat-avatar">
+            <svg viewBox="0 0 20 20" fill="none">
+              <rect x="2" y="10" width="4" height="8" fill="white" rx="1"/>
+              <rect x="8" y="6"  width="4" height="12" fill="white" rx="1"/>
+              <rect x="14" y="2" width="4" height="16" fill="white" rx="1"/>
+            </svg>
+          </div>
+          <div class="chat-bar-title">
+            <strong>Asesor RW Consulting</strong>
+            <span><span class="online-dot"></span> Activo · EST-2026-DV-7H3Q</span>
+          </div>
+        </div>
+        <div class="chat-msgs">
+          <div class="msg-u"><span>¿Cómo se posiciona mi proyecto vs el mercado?</span></div>
+          <div class="msg-a">
+            <span>Tu proyecto está <strong>3.2% bajo el promedio de la zona</strong> en tipología 2D — posición competitiva. Los comparables directos son Parque Acuático y Vista Oriente. Tu precio en 1D es el más ajustado del cuadrante.</span>
+          </div>
+          <div class="msg-u"><span>¿Dónde hay oportunidad de subir precio?</span></div>
+          <div class="msg-a">
+            <span>Orientación nororiente tiene una <strong>prima del 8.4%</strong> que el mercado acepta. Solo 2 de 7 proyectos la cobran activamente. Si tienes unidades con esa vista, hay margen para subir sin perder competitividad.</span>
+          </div>
+        </div>
+        <div class="chat-input-row">
+          <input type="text" placeholder="Pregunta sobre tu estudio..." readonly>
+          <button class="send-btn">
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+              <path d="M2 7h10M7 2l5 5-5 5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+        <div class="chat-note">📊 Análisis basado en estudio de mercado RW Consulting · Orientativo</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section section--white" id="como-funciona">
+  <div class="container">
+    <div class="section-hd">
+      <span class="eyebrow">Cómo funciona</span>
+      <h2>De la solicitud al análisis en 3 pasos</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h3>Solicitas</h3>
+        <p>Conversación guiada con IA para capturar los datos de tu proyecto y zona de análisis. Sin formularios largos.</p>
+        <span class="step-tag">~10 minutos</span>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h3>Generamos</h3>
+        <p>Investigamos el mercado real, estructuramos el estudio y lo revisamos antes de publicarlo.</p>
+        <span class="step-tag">~48 horas</span>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h3>Accedes</h3>
+        <p>Recibes tu código de acceso. Visor web con asesor IA disponible de inmediato y sin límite de tiempo.</p>
+        <span class="step-tag">Acceso permanente</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENTS -->
+<section class="section section--mist">
+  <div class="container" style="text-align:center;">
+    <span class="eyebrow">Quiénes confían en nosotros</span>
+    <h2>Proyectos reales en todo Chile</h2>
+    <div class="clients-row">
+      <div class="client-chip">DOSA <small>Viña del Mar · Concón</small></div>
+      <div class="client-chip">Inmobiliaria VK <small>Peñablanca</small></div>
+      <div class="client-chip">Grupo Vías <small>Peñaflor</small></div>
+      <div class="client-chip">Kant Inmobiliaria <small>Pucón</small></div>
+      <div class="client-chip">Alborada <small>RM</small></div>
+    </div>
+    <p class="disclaimer-note">Los proyectos presentados corresponden a desarrollos reales. Los datos han sido adaptados para fines demostrativos, resguardando la confidencialidad de cada cliente.</p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-glow"></div>
+  <div class="container">
+    <div class="cta-inner">
+      <span class="eyebrow eyebrow--light">¿Listo para conocer tu mercado?</span>
+      <h2>Deja de adivinar.<br>Empieza a posicionarte.</h2>
+      <p>Un estudio de oferta con asesor IA incluido. Datos reales, análisis estratégico, entregado en 48 horas.</p>
+      <div class="cta-actions">
+        <a href="intake.html" class="btn-warm">Solicitar estudio →</a>
+        <a href="index.html" class="btn-ghost">Ya soy cliente</a>
+      </div>
+      <p class="cta-hint">Disponible para proyectos en Chile · Respuesta en menos de 24h</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-about">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+          <div class="logo-mark">
+            <svg viewBox="0 0 20 20" fill="none">
+              <rect x="2" y="10" width="4" height="8" fill="white" rx="1"/>
+              <rect x="8" y="6"  width="4" height="12" fill="white" rx="1"/>
+              <rect x="14" y="2" width="4" height="16" fill="white" rx="1"/>
+            </svg>
+          </div>
+          <span class="brand">RW Consulting<span class="brand-dot">.</span></span>
+        </div>
+        <p>Estudios de oferta competitiva para inmobiliarias chilenas. Análisis con asesor IA incluido.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Producto</h4>
+        <a href="#como-funciona">Cómo funciona</a>
+        <a href="#asesor-ia">Asesor IA</a>
+        <a href="intake.html">Solicitar estudio</a>
+      </div>
+      <div class="footer-col">
+        <h4>Acceso</h4>
+        <a href="index.html">Ingresar con código</a>
+        <a href="portal.html">Portal de cliente</a>
+      </div>
+    </div>
+    <hr class="footer-hr">
+    <div class="footer-bottom">
+      <p>© 2025–2026 RW Consulting · Mauricio Westphal<span style="color:var(--teal-light);font-weight:700;">.</span> · Todos los derechos reservados</p>
+      <a href="intake.html">Solicitar un estudio →</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* Trigger chat animation when section scrolls into view */
+  const chatDemo = document.getElementById('chat-demo');
+  if (chatDemo) {
+    const msgs = chatDemo.querySelectorAll('.msg-u, .msg-a');
+    msgs.forEach(m => m.style.animationPlayState = 'paused');
+
+    const obs = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) {
+        msgs.forEach(m => m.style.animationPlayState = 'running');
+        obs.disconnect();
+      }
+    }, { threshold: 0.3 });
+    obs.observe(chatDemo);
+  }
+</script>
+</body>
+</html>
