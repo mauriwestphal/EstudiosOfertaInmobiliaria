@@ -1,16 +1,18 @@
 /**
- * RW Consulting — Cloudflare Worker
- * Asesor estratégico inmobiliario — proxy seguro para API de Anthropic
+ * RW Consulting — Chat Worker
+ * Asesor estratégico inmobiliario con sistema de créditos
  *
  * DEPLOY:
- *   1. wrangler secret put ANTHROPIC_API_KEY    ← tu key de Anthropic
- *   2. wrangler secret put VALID_CODES          ← JSON array: ["EST-2026-KI-4V7P","EST-2025-GC-8F3K"]
- *   3. wrangler deploy
+ *   1. wrangler kv:namespace create "CHAT_CREDITS"  → copiar id a wrangler.toml
+ *   2. wrangler secret put ANTHROPIC_API_KEY
+ *   3. wrangler secret put VALID_CODES              ← JSON array: ["EST-2026-KI-4V7P",...]
+ *   4. wrangler deploy
  *
- * CORS: ajusta ALLOWED_ORIGIN a tu dominio de producción
+ * Rutas:
+ *   GET  /credits?codigo=XXX  → devuelve créditos restantes (sin consumir)
+ *   POST /                    → envía mensaje al asesor (consume 1 crédito)
  */
 
-const ALLOWED_ORIGIN = 'https://rwconsulting.cl';
 const ALLOWED_ORIGINS = [
   'https://rwconsulting.cl',
   'http://localhost:8000',
@@ -18,10 +20,11 @@ const ALLOWED_ORIGINS = [
   'http://127.0.0.1:8000',
   'http://127.0.0.1:8080'
 ];
-const MODEL      = 'claude-sonnet-4-6';
-const MAX_TOKENS = 4096;
+const FALLBACK_ORIGIN  = 'https://rwconsulting.cl';
+const MODEL            = 'claude-sonnet-4-6';
+const MAX_TOKENS       = 4096;
+const DEFAULT_CREDITS  = 30;
 
-// Prompt de sistema — asesor estratégico inmobiliario
 const SYSTEM_BASE = `Eres un asesor estratégico inmobiliario senior de RW Consulting, especializado en el mercado chileno de proyectos de vivienda nueva.
 
 ROL Y AUDIENCIA:
@@ -60,67 +63,88 @@ DISCLAIMER (incluir solo en la primera respuesta de la sesión, de forma breve):
 
 export default {
   async fetch(request, env) {
-    const origin = request.headers.get('Origin');
-    const allowedOrigin = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGIN;
+    const origin        = request.headers.get('Origin');
+    const allowedOrigin = ALLOWED_ORIGINS.includes(origin) ? origin : FALLBACK_ORIGIN;
 
-    // CORS preflight
+    const corsHeaders = {
+      'Access-Control-Allow-Origin':  allowedOrigin,
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Max-Age':       '86400',
+    };
+
     if (request.method === 'OPTIONS') {
-      return new Response(null, {
-        headers: {
-          'Access-Control-Allow-Origin':  allowedOrigin,
-          'Access-Control-Allow-Methods': 'POST, OPTIONS',
-          'Access-Control-Allow-Headers': 'Content-Type',
-          'Access-Control-Max-Age':       '86400',
-        }
-      });
+      return new Response(null, { headers: corsHeaders });
+    }
+
+    // ── GET /credits?codigo=XXX ──────────────────────────────────────
+    if (request.method === 'GET') {
+      const url    = new URL(request.url);
+      const codigo = url.searchParams.get('codigo');
+
+      if (!codigo) {
+        return jsonResponse({ error: 'codigo requerido' }, 400, corsHeaders);
+      }
+
+      let validCodes = [];
+      try { validCodes = JSON.parse(env.VALID_CODES || '[]'); } catch {}
+
+      if (!validCodes.includes(codigo)) {
+        return jsonResponse({ error: 'Código no válido' }, 403, corsHeaders);
+      }
+
+      const credits = await getCredits(env, codigo);
+      return jsonResponse({ credits_remaining: credits }, 200, corsHeaders);
     }
 
     if (request.method !== 'POST') {
-      return new Response('Method not allowed', { status: 405 });
+      return new Response('Method not allowed', { status: 405, headers: corsHeaders });
     }
 
+    // ── POST / ── enviar mensaje ─────────────────────────────────────
     let body;
     try {
       body = await request.json();
     } catch {
-      return errorResponse('Invalid JSON body', 400, origin);
+      return jsonResponse({ error: 'Invalid JSON body' }, 400, corsHeaders);
     }
 
     const { codigo, messages, estudioJson } = body;
 
-    // Validar código de acceso
     let validCodes = [];
-    try {
-      validCodes = JSON.parse(env.VALID_CODES || '[]');
-    } catch {
-      return errorResponse('Worker misconfigured', 500, origin);
+    try { validCodes = JSON.parse(env.VALID_CODES || '[]'); } catch {
+      return jsonResponse({ error: 'Worker misconfigured' }, 500, corsHeaders);
     }
 
     if (!codigo || !validCodes.includes(codigo)) {
-      return errorResponse('Código de acceso no válido', 403, origin);
+      return jsonResponse({ error: 'Código de acceso no válido' }, 403, corsHeaders);
     }
 
-    // Validar payload
     if (!Array.isArray(messages) || messages.length === 0) {
-      return errorResponse('messages requerido', 400, origin);
+      return jsonResponse({ error: 'messages requerido' }, 400, corsHeaders);
     }
     if (!estudioJson || typeof estudioJson !== 'object') {
-      return errorResponse('estudioJson requerido', 400, origin);
+      return jsonResponse({ error: 'estudioJson requerido' }, 400, corsHeaders);
     }
 
-    // Construir prompt con contexto del estudio
-    const systemPrompt = `${SYSTEM_BASE}
+    // ── Verificar créditos ───────────────────────────────────────────
+    const credits = await getCredits(env, codigo);
 
----
-DATOS DEL ESTUDIO (JSON):
-${JSON.stringify(estudioJson, null, 2)}
----`;
+    if (credits <= 0) {
+      return jsonResponse({
+        error:    'sin_creditos',
+        message:  'Has utilizado todas las consultas incluidas en este estudio. Contacta a RW Consulting para adquirir más.',
+        credits_remaining: 0
+      }, 402, corsHeaders);
+    }
 
-    // Llamada a Anthropic
+    // ── Llamada a Anthropic ──────────────────────────────────────────
+    const systemPrompt = `${SYSTEM_BASE}\n\n---\nDATOS DEL ESTUDIO (JSON):\n${JSON.stringify(estudioJson, null, 2)}\n---`;
+
     let anthropicRes;
     try {
       anthropicRes = await fetch('https://api.anthropic.com/v1/messages', {
-        method: 'POST',
+        method:  'POST',
         headers: {
           'Content-Type':      'application/json',
           'x-api-key':         env.ANTHROPIC_API_KEY,
@@ -130,37 +154,40 @@ ${JSON.stringify(estudioJson, null, 2)}
           model:      MODEL,
           max_tokens: MAX_TOKENS,
           system:     systemPrompt,
-          messages:   messages,
+          messages,
         }),
       });
-    } catch (err) {
-      return errorResponse('Error contacting Anthropic API', 502, origin);
+    } catch {
+      return jsonResponse({ error: 'Error contacting Anthropic API' }, 502, corsHeaders);
     }
 
     if (!anthropicRes.ok) {
       const errText = await anthropicRes.text();
-      return errorResponse(`Anthropic error: ${errText}`, anthropicRes.status, origin);
+      return jsonResponse({ error: `Anthropic error: ${errText}` }, anthropicRes.status, corsHeaders);
     }
 
     const data = await anthropicRes.json();
     const text = data.content?.find(b => b.type === 'text')?.text || '';
 
-    return new Response(JSON.stringify({ response: text }), {
-      headers: {
-        'Content-Type':                'application/json',
-        'Access-Control-Allow-Origin': allowedOrigin,
-      }
-    });
+    // ── Decrementar crédito ──────────────────────────────────────────
+    const remaining = credits - 1;
+    await env.CHAT_CREDITS.put(`credits:${codigo}`, String(remaining));
+
+    return jsonResponse({ response: text, credits_remaining: remaining }, 200, corsHeaders);
   }
 };
 
-function errorResponse(msg, status = 400, origin) {
-  const allowedOrigin = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGIN;
-  return new Response(JSON.stringify({ error: msg }), {
+// ── helpers ─────────────────────────────────────────────────────────
+
+async function getCredits(env, codigo) {
+  if (!env.CHAT_CREDITS) return DEFAULT_CREDITS;
+  const raw = await env.CHAT_CREDITS.get(`credits:${codigo}`);
+  return raw !== null ? parseInt(raw, 10) : DEFAULT_CREDITS;
+}
+
+function jsonResponse(body, status, corsHeaders) {
+  return new Response(JSON.stringify(body), {
     status,
-    headers: {
-      'Content-Type':                'application/json',
-      'Access-Control-Allow-Origin': allowedOrigin,
-    }
+    headers: { 'Content-Type': 'application/json', ...corsHeaders }
   });
 }

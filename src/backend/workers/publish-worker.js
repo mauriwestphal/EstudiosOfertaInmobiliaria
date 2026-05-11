@@ -49,7 +49,7 @@ export default {
       // Check authorization
       const authHeader = request.headers.get('Authorization');
       if (!authHeader || !authHeader.startsWith('Bearer ')) {
-        return new Response('Missing or invalid Authorization header', { 
+        return new Response('Missing or invalid Authorization header', {
           status: 401,
           headers: { ...corsHeaders, 'Content-Type': 'text/plain' }
         });
@@ -57,9 +57,37 @@ export default {
 
       const token = authHeader.substring(7);
       if (token !== env.ADMIN_SECRET) {
-        return new Response('Invalid admin token', { 
+        return new Response('Invalid admin token', {
           status: 403,
           headers: { ...corsHeaders, 'Content-Type': 'text/plain' }
+        });
+      }
+
+      // ── Ruta: POST /credits — gestión de créditos ────────────────
+      const url = new URL(request.url);
+      if (url.pathname === '/credits') {
+        const body = await request.json().catch(() => ({}));
+        const { codigo, amount, action = 'add' } = body;
+
+        if (!codigo || typeof amount !== 'number' || amount < 0) {
+          return new Response(JSON.stringify({ error: 'codigo y amount requeridos' }), {
+            status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+          });
+        }
+
+        const key = `credits:${codigo}`;
+        let newCredits;
+        if (action === 'set') {
+          newCredits = amount;
+        } else {
+          const current  = await env.CHAT_CREDITS?.get(key);
+          const base     = current !== null ? parseInt(current, 10) : 30;
+          newCredits     = base + amount;
+        }
+        await env.CHAT_CREDITS?.put(key, String(newCredits));
+
+        return new Response(JSON.stringify({ success: true, codigo, credits: newCredits }), {
+          status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' }
         });
       }
 
@@ -112,7 +140,15 @@ export default {
         // Continue anyway - the study is published
       }
 
-      // Step 3: Return success response
+      // Step 3: Inicializar créditos en KV (solo si no existen ya)
+      if (env.CHAT_CREDITS) {
+        const existingCredits = await env.CHAT_CREDITS.get(`credits:${codigo}`);
+        if (existingCredits === null) {
+          await env.CHAT_CREDITS.put(`credits:${codigo}`, '30');
+        }
+      }
+
+      // Step 4: Return success response
       return new Response(JSON.stringify({
         success: true,
         estudio_id,
@@ -122,6 +158,7 @@ export default {
           file_url: githubResult.file_url
         },
         email_sent: emailResult.success,
+        chat_credits_initialized: 30,
         message: 'Estudio publicado exitosamente'
       }), {
         status: 200,

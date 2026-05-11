@@ -167,6 +167,34 @@
   font-size: .68rem;
   color: rgba(247,249,249,.5);
 }
+.chat-credits-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 8px;
+  padding: 5px 10px;
+  min-width: 52px;
+  flex-shrink: 0;
+}
+.chat-credits-num {
+  font-family: 'Urbanist', sans-serif;
+  font-size: .95rem;
+  font-weight: 700;
+  color: var(--teal-light);
+  line-height: 1;
+}
+.chat-credits-lbl {
+  font-size: .52rem;
+  color: rgba(247,249,249,.38);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  margin-top: 2px;
+}
+.chat-credits-badge.credits-low  .chat-credits-num { color: var(--warm); }
+.chat-credits-badge.credits-zero .chat-credits-num { color: #ef4444; }
 .chat-close-btn {
   background: none;
   border: none;
@@ -2164,6 +2192,10 @@ function setupNavScroll(sections) {
       <div class="chat-header-title">Asistente IA · RW Consulting</div>
       <div class="chat-header-sub" id="chat-header-sub">Cargando estudio…</div>
     </div>
+    <div class="chat-credits-badge" id="chat-credits-badge" title="Consultas restantes">
+      <span class="chat-credits-num" id="chat-credits-num">—</span>
+      <span class="chat-credits-lbl">consultas</span>
+    </div>
     <button class="chat-close-btn" id="chat-close-btn" aria-label="Cerrar chat">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
         <path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -2216,9 +2248,10 @@ function setupNavScroll(sections) {
   // ── ESTADO ───────────────────────────────────────────────────────
   let chatOpen      = false;
   let isLoading     = false;
-  let estudioData   = null;  // se llena cuando DATA esté disponible
-  let chatHistory   = [];    // [{role, content}]
+  let estudioData   = null;
+  let chatHistory   = [];
   let firstMessage  = true;
+  let creditsLeft   = null;
 
   // ── ELEMENTOS ────────────────────────────────────────────────────
   const launcher    = document.getElementById('chat-launcher');
@@ -2227,9 +2260,11 @@ function setupNavScroll(sections) {
   const messagesEl  = document.getElementById('chat-messages');
   const inputEl     = document.getElementById('chat-input');
   const sendBtn     = document.getElementById('chat-send-btn');
-  const badge       = document.getElementById('chat-badge');
-  const headerSub   = document.getElementById('chat-header-sub');
-  const suggestions = document.querySelectorAll('.chat-suggestion-btn');
+  const badge        = document.getElementById('chat-badge');
+  const headerSub    = document.getElementById('chat-header-sub');
+  const suggestions  = document.querySelectorAll('.chat-suggestion-btn');
+  const creditsBadge = document.getElementById('chat-credits-badge');
+  const creditsNum   = document.getElementById('chat-credits-num');
 
   // ── CONECTAR CON DATA del viewer ──────────────────────────────────
   // El viewer define DATA una vez que carga el JSON. Esperamos a que esté.
@@ -2237,11 +2272,38 @@ function setupNavScroll(sections) {
     if (typeof DATA !== 'undefined' && DATA !== null) {
       estudioData = DATA;
       headerSub.textContent = DATA.meta?.proyecto || 'Estudio cargado';
+      fetchCredits();
     } else {
       setTimeout(tryConnectData, 300);
     }
   }
   tryConnectData();
+
+  async function fetchCredits() {
+    const codigo = (new URLSearchParams(location.search)).get('codigo') || '';
+    if (!codigo) return;
+    try {
+      const res  = await fetch(`${WORKER_URL}/credits?codigo=${encodeURIComponent(codigo)}`);
+      if (!res.ok) return;
+      const data = await res.json();
+      updateCreditsDisplay(data.credits_remaining);
+    } catch {}
+  }
+
+  function updateCreditsDisplay(n) {
+    if (n === null || n === undefined) return;
+    creditsLeft          = n;
+    creditsNum.textContent = n;
+    creditsBadge.classList.remove('credits-low', 'credits-zero');
+    if (n === 0)     creditsBadge.classList.add('credits-zero');
+    else if (n <= 5) creditsBadge.classList.add('credits-low');
+
+    if (n <= 0) {
+      inputEl.disabled       = true;
+      sendBtn.disabled       = true;
+      inputEl.placeholder    = 'Consultas agotadas — contacta a RW Consulting para recargar';
+    }
+  }
 
   // ── TOGGLE PANEL ─────────────────────────────────────────────────
   function openChat() {
@@ -2352,6 +2414,14 @@ function setupNavScroll(sections) {
 
       removeTyping(typingId);
 
+      if (res.status === 402) {
+        const err = await res.json().catch(() => ({}));
+        updateCreditsDisplay(0);
+        appendMsg('assistant', '🔒 Has utilizado todas las consultas incluidas en este estudio.\n\nContacta a **RW Consulting** para adquirir más consultas y seguir analizando tu mercado.');
+        setLoading(false);
+        return;
+      }
+
       if (!res.ok) {
         const err = await res.json().catch(() => ({}));
         throw new Error(err.error || `Error ${res.status}`);
@@ -2359,6 +2429,10 @@ function setupNavScroll(sections) {
 
       const data     = await res.json();
       const reply    = data.response || 'Sin respuesta.';
+
+      if (typeof data.credits_remaining === 'number') {
+        updateCreditsDisplay(data.credits_remaining);
+      }
 
       chatHistory.push({ role: 'assistant', content: reply });
       appendMsg('assistant', reply);

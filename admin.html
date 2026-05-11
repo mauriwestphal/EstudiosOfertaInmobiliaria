@@ -1030,6 +1030,7 @@
         <div class="modal-tabs">
           <button class="modal-tab active" data-tab="details">Detalles</button>
           <button class="modal-tab" data-tab="json">JSON completo</button>
+          <button class="modal-tab" data-tab="credits">Créditos IA</button>
           <button class="modal-tab" data-tab="actions">Acciones</button>
         </div>
         
@@ -1058,6 +1059,39 @@
           </div>
         </div>
         
+        <div id="credits-tab" class="tab-content">
+          <div style="padding: 4px 0 20px;">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:20px;">
+              <div>
+                <div style="font-size:0.85rem; color:var(--text-muted); margin-bottom:4px;">Consultas restantes</div>
+                <div style="font-size:2rem; font-weight:700; color:var(--teal);" id="credits-display">—</div>
+              </div>
+              <button onclick="loadCurrentCredits()" style="background:var(--mist); border:1px solid var(--border-solid); border-radius:6px; padding:8px 14px; font-size:0.82rem; cursor:pointer; color:var(--text-secondary);">↻ Actualizar</button>
+            </div>
+
+            <div style="background:var(--mist); border-radius:10px; padding:20px; margin-bottom:16px;">
+              <div style="font-size:0.82rem; font-weight:600; color:var(--text-primary); margin-bottom:12px;">Agregar consultas</div>
+              <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px;">
+                <button onclick="quickRecharge(10)" style="padding:8px 16px; background:var(--white); border:1px solid var(--border-solid); border-radius:6px; font-size:0.85rem; cursor:pointer; transition:all .2s;" onmouseover="this.style.borderColor='var(--teal)'" onmouseout="this.style.borderColor='var(--border-solid)'">+10</button>
+                <button onclick="quickRecharge(20)" style="padding:8px 16px; background:var(--white); border:1px solid var(--border-solid); border-radius:6px; font-size:0.85rem; cursor:pointer; transition:all .2s;" onmouseover="this.style.borderColor='var(--teal)'" onmouseout="this.style.borderColor='var(--border-solid)'">+20</button>
+                <button onclick="quickRecharge(50)" style="padding:8px 16px; background:var(--white); border:1px solid var(--border-solid); border-radius:6px; font-size:0.85rem; cursor:pointer; transition:all .2s;" onmouseover="this.style.borderColor='var(--teal)'" onmouseout="this.style.borderColor='var(--border-solid)'">+50</button>
+              </div>
+              <div style="display:flex; gap:8px;">
+                <input type="number" id="credits-custom-amount" min="1" max="500" placeholder="Cantidad personalizada" style="flex:1; padding:9px 12px; border:1px solid var(--border-solid); border-radius:6px; font-size:0.85rem; font-family:inherit; outline:none;">
+                <button onclick="customRecharge()" style="padding:9px 18px; background:var(--teal); color:#fff; border:none; border-radius:6px; font-size:0.85rem; cursor:pointer; font-family:inherit; font-weight:500;">Agregar</button>
+              </div>
+            </div>
+
+            <div style="background:var(--mist); border-radius:10px; padding:20px;">
+              <div style="font-size:0.82rem; font-weight:600; color:var(--text-primary); margin-bottom:12px;">Establecer valor fijo</div>
+              <div style="display:flex; gap:8px;">
+                <input type="number" id="credits-set-amount" min="0" max="9999" placeholder="Nuevo total (ej. 30)" style="flex:1; padding:9px 12px; border:1px solid var(--border-solid); border-radius:6px; font-size:0.85rem; font-family:inherit; outline:none;">
+                <button onclick="setCredits()" style="padding:9px 18px; background:var(--ink-mid); color:#fff; border:none; border-radius:6px; font-size:0.85rem; cursor:pointer; font-family:inherit; font-weight:500;">Establecer</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div id="actions-tab" class="tab-content">
           <div style="padding: 20px; text-align: center;">
             <p style="margin-bottom: 24px; color: var(--text-secondary);">Acciones disponibles para este estudio</p>

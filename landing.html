@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RW Consulting · Estudios de Oferta Inmobiliaria</title>
-<meta name="description" content="Estudios de oferta competitiva para inmobiliarias chilenas. Análisis de mercado con asesor IA incluido.">
+<meta name="description" content="Inteligencia competitiva de mercado para inmobiliarias y grupos de inversión en Chile. Precio de lanzamiento respaldado por datos reales y asesor IA especializado.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><rect width='20' height='20' rx='4' fill='%231D6A6A'/><rect x='2' y='10' width='4' height='8' fill='white' rx='1'/><rect x='8' y='6' width='4' height='12' fill='white' rx='1'/><rect x='14' y='2' width='4' height='16' fill='white' rx='1'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=DM+Serif+Display&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,400;0,500;0,700;1,400&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -38,21 +38,21 @@
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Urbanist', sans-serif;
   font-size: 16px;
   line-height: 1.6;
   color: var(--text-primary);
   background: var(--white);
 }
 
-h1, h2 { font-family: 'DM Serif Display', serif; line-height: 1.15; }
+h1, h2 { font-family: 'Urbanist', sans-serif; line-height: 1.15; }
 h1 { font-size: clamp(2rem, 5vw, 3.4rem); }
 h2 { font-size: clamp(1.5rem, 3.5vw, 2.4rem); }
-h3 { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: clamp(1rem, 2vw, 1.2rem); line-height: 1.3; }
+h3 { font-family: 'Urbanist', sans-serif; font-weight: 700; font-size: clamp(1rem, 2vw, 1.2rem); line-height: 1.3; }
 
 .eyebrow {
   display: block;
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Urbanist', sans-serif;
   font-size: 0.7rem;
   font-weight: 500;
   letter-spacing: 0.14em;
@@ -75,7 +75,7 @@ h3 { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: clamp(1rem
   display: inline-flex; align-items: center; gap: 8px;
   padding: 13px 26px;
   background: var(--teal); color: #fff;
-  font-family: 'DM Sans', sans-serif; font-size: 0.93rem; font-weight: 500;
+  font-family: 'Urbanist', sans-serif; font-size: 0.93rem; font-weight: 500;
   border: none; border-radius: 8px; cursor: pointer; text-decoration: none;
   transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
 }
@@ -86,7 +86,7 @@ h3 { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: clamp(1rem
   display: inline-flex; align-items: center; gap: 8px;
   padding: 13px 26px;
   background: transparent; color: rgba(224,240,239,0.85);
-  font-family: 'DM Sans', sans-serif; font-size: 0.93rem; font-weight: 500;
+  font-family: 'Urbanist', sans-serif; font-size: 0.93rem; font-weight: 500;
   border: 1.5px solid rgba(224,240,239,0.25); border-radius: 8px;
   cursor: pointer; text-decoration: none; transition: all 0.2s;
 }
@@ -96,7 +96,7 @@ h3 { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: clamp(1rem
   display: inline-flex; align-items: center; gap: 8px;
   padding: 15px 34px;
   background: var(--warm); color: #fff;
-  font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 500;
+  font-family: 'Urbanist', sans-serif; font-size: 1rem; font-weight: 500;
   border: none; border-radius: 8px; cursor: pointer; text-decoration: none;
   transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
 }
@@ -119,17 +119,17 @@ h3 { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: clamp(1rem
   display: grid; place-items: center; flex-shrink: 0;
 }
 .logo-mark svg { width: 18px; height: 18px; }
-.brand { font-family: 'DM Sans', sans-serif; font-size: 0.98rem; font-weight: 500; color: var(--text-on-dark); letter-spacing: 0.02em; }
+.brand { font-family: 'Urbanist', sans-serif; font-size: 0.98rem; font-weight: 500; color: var(--text-on-dark); letter-spacing: 0.02em; }
 .brand-dot { color: var(--teal-light); font-weight: 700; }
 .nav-links { display: flex; align-items: center; gap: 4px; }
 .nav-link {
-  font-family: 'DM Sans', sans-serif; font-size: 0.86rem; font-weight: 500;
+  font-family: 'Urbanist', sans-serif; font-size: 0.86rem; font-weight: 500;
   color: rgba(247,249,249,0.62); text-decoration: none;
   padding: 8px 13px; border-radius: 6px; transition: color 0.2s, background 0.2s;
 }
 .nav-link:hover { color: var(--text-on-dark); background: rgba(255,255,255,0.06); }
 .nav-cta {
-  font-family: 'DM Sans', sans-serif; font-size: 0.86rem; font-weight: 500;
+  font-family: 'Urbanist', sans-serif; font-size: 0.86rem; font-weight: 500;
   color: #fff; background: var(--teal);
   text-decoration: none; padding: 8px 17px; border-radius: 6px;
   margin-left: 4px; transition: background 0.2s;
@@ -275,8 +275,10 @@ h3 { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: clamp(1rem
 .pain-icon {
   width: 40px; height: 40px; background: #FFF3F3;
   border-radius: 8px; display: flex; align-items: center;
-  justify-content: center; font-size: 1.15rem; margin-bottom: 16px;
+  justify-content: center; margin-bottom: 16px;
+  color: var(--text-secondary);
 }
+.pain-icon svg { display: block; }
 .pain-card h3 { font-size: 0.97rem; color: var(--text-primary); margin-bottom: 8px; }
 .pain-card p  { font-size: 0.86rem; color: var(--text-secondary); line-height: 1.6; }
 
@@ -293,14 +295,15 @@ h3 { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: clamp(1rem
 .feat-icon {
   width: 36px; height: 36px; background: var(--teal-light); border-radius: 8px;
   display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0; font-size: 1rem;
+  flex-shrink: 0; color: var(--teal);
 }
+.feat-icon svg { display: block; }
 .feat-text h3 { font-size: 0.9rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
 .feat-text p  { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; }
 .feat-item--highlight {
   background: var(--teal-light); border-color: rgba(29,106,106,0.2);
 }
-.feat-item--highlight .feat-icon { background: var(--teal); }
+.feat-item--highlight .feat-icon { background: var(--teal); color: white; }
 .feat-item--highlight h3 { color: var(--teal-dark); }
 .feat-item--highlight p  { color: var(--teal); }
 
@@ -380,7 +383,7 @@ h3 { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: clamp(1rem
 .chat-input-row input {
   flex: 1; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08);
   border-radius: 7px; padding: 7px 12px;
-  font-family: 'DM Sans', sans-serif; font-size: 0.78rem;
+  font-family: 'Urbanist', sans-serif; font-size: 0.78rem;
   color: rgba(247,249,249,0.4); outline: none; pointer-events: none;
 }
 .chat-input-row .send-btn {
@@ -527,11 +530,12 @@ h3 { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: clamp(1rem
   <div class="container">
     <div class="hero-inner">
       <div class="hero-content">
-        <span class="eyebrow eyebrow--light fi fi-1">Inteligencia de mercado inmobiliario</span>
-        <h1 class="fi fi-2">Conoce el mercado.<br><em>Fija el precio correcto.</em></h1>
+        <span class="eyebrow eyebrow--light fi fi-1">Análisis competitivo para inmobiliarias y grupos de inversión</span>
+        <h1 class="fi fi-2">El precio de lanzamiento <br><em>no se adivina. Se analiza.</em></h1>
         <p class="hero-subtitle fi fi-3">
-          Estudios de oferta competitiva para inmobiliarias chilenas —<br>
-          con <strong>asesor IA</strong> que analiza tus datos y responde en tiempo real.
+          Un precio fuera de mercado en lanzamiento cuesta meses de velocidad de venta
+          — o deja UF sobre la mesa. Cada estudio entrega inteligencia competitiva real
+          con <strong>asesor IA</strong> para respaldar cada decisión.
         </p>
         <div class="hero-actions fi fi-4">
           <a href="intake.html" class="btn-primary">Solicitar estudio →</a>
@@ -540,11 +544,11 @@ h3 { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: clamp(1rem
         <div class="hero-stats fi fi-5">
           <div>
             <span class="hero-stat-val">+10</span>
-            <span class="hero-stat-lbl">Estudios entregados</span>
+            <span class="hero-stat-lbl">Proyectos analizados</span>
           </div>
           <div>
             <span class="hero-stat-val">48h</span>
-            <span class="hero-stat-lbl">Tiempo de entrega</span>
+            <span class="hero-stat-lbl">Entrega garantizada</span>
           </div>
           <div>
             <span class="hero-stat-val">100%</span>
@@ -583,10 +587,10 @@ h3 { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: clamp(1rem
               <span class="mock-pulse"></span>Asesor IA · activo
             </div>
             <div class="mock-q">
-              <span>¿Cómo me posiciono vs la competencia?</span>
+              <span>¿Tengo margen para subir en 2D?</span>
             </div>
             <div class="mock-a">
-              <span>Estás <strong>3.2% bajo el promedio</strong> en 2D — posición competitiva. Prima nororiente del 8.4% disponible.</span>
+              <span>Sí. Estás <strong>3.2% bajo el promedio</strong> — puedes subir hasta 86 UF/m² sin salir del rango competitivo.</span>
             </div>
           </div>
         </div>
@@ -599,25 +603,46 @@ h3 { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: clamp(1rem
 <section class="section section--white">
   <div class="container">
     <div class="section-hd">
-      <span class="eyebrow">El problema</span>
-      <h2>Fijar el precio sin datos es adivinar</h2>
-      <p class="section-sub">Las inmobiliarias toman decisiones de precio basadas en intuición o datos desactualizados. Eso deja dinero sobre la mesa — o proyectos fuera de mercado.</p>
+      <span class="eyebrow">El costo de no saber</span>
+      <h2>Un precio equivocado en lanzamiento<br>es el error más caro del ciclo</h2>
+      <p class="section-sub">Precio alto en lanzamiento frena la velocidad de venta y genera señales negativas al mercado. Precio bajo regala margen que el mercado habría pagado. Ninguno de los dos es opción.</p>
     </div>
     <div class="grid-3">
       <div class="pain-card">
-        <div class="pain-icon">📋</div>
-        <h3>Datos dispersos y desactualizados</h3>
-        <p>Compilar precios de competencia manualmente toma días. Cuando terminas, los datos ya están viejos.</p>
+        <div class="pain-icon">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="4" cy="9" r="1.5" fill="currentColor" stroke="none"/>
+            <circle cx="9" cy="5" r="1.5" fill="currentColor" stroke="none"/>
+            <circle cx="15" cy="7" r="1.5" fill="currentColor" stroke="none"/>
+            <circle cx="13" cy="14" r="1.5" fill="currentColor" stroke="none"/>
+            <circle cx="5" cy="14" r="1.5" fill="currentColor" stroke="none"/>
+            <path d="M3 17h14"/>
+          </svg>
+        </div>
+        <h3>Sin inteligencia competitiva estructurada</h3>
+        <p>Los datos de la competencia existen, pero dispersos, desactualizados y sin el desglose por tipología que requiere una decisión de precio seria.</p>
       </div>
       <div class="pain-card">
-        <div class="pain-icon">🔢</div>
-        <h3>Sin benchmarks por tipología</h3>
-        <p>Comparar un 1D con un 3D+T es inútil. Sin estructura por tipo de unidad, el análisis no sirve.</p>
+        <div class="pain-icon">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 10s3-6 8-6 8 6 8 6-3 6-8 6-8-6-8-6z"/>
+            <circle cx="10" cy="10" r="2.5"/>
+            <path d="M3 3l14 14"/>
+          </svg>
+        </div>
+        <h3>Decisiones de precio a ciegas por mix</h3>
+        <p>El 1D, el 2D y el 3D+T compiten en submercados distintos. Sin benchmarks por tipología, el pricing del mix queda expuesto.</p>
       </div>
       <div class="pain-card">
-        <div class="pain-icon">🎯</div>
-        <h3>Precio sin respaldo de mercado</h3>
-        <p>Fijarlo a ojo o "al precio de la competencia" sin contexto lleva a sobre o sub-cotizar tu proyecto.</p>
+        <div class="pain-icon">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10 3L2 17h16L10 3z"/>
+            <path d="M10 9v3.5"/>
+            <circle cx="10" cy="14.5" r="0.75" fill="currentColor" stroke="none"/>
+          </svg>
+        </div>
+        <h3>Ajustes de precio en obra: señal de riesgo</h3>
+        <p>Corregir el precio después del lanzamiento erosiona confianza, activa comparadores y complica el cierre de preventas en curso.</p>
       </div>
     </div>
   </div>
@@ -627,51 +652,89 @@ h3 { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: clamp(1rem
 <section class="section section--mist">
   <div class="container">
     <div class="section-hd">
-      <span class="eyebrow">Qué incluye el estudio</span>
-      <h2>Todo lo que necesitas para posicionarte</h2>
-      <p class="section-sub">Cada estudio es estructurado en visor web, entregado con código de acceso y potenciado con asesor IA.</p>
+      <span class="eyebrow">Inteligencia competitiva estructurada</span>
+      <h2>Cada variable que afecta tu precio,<br>analizada y en un solo lugar</h2>
+      <p class="section-sub">Entregado en visor web con código de acceso propio y asesor IA entrenado con los datos de tu mercado.</p>
     </div>
     <div class="grid-features">
       <div class="feat-item">
-        <div class="feat-icon">📊</div>
+        <div class="feat-icon">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 16h14"/>
+            <rect x="3.5" y="9" width="3" height="7" rx="1"/>
+            <rect x="8.5" y="5" width="3" height="11" rx="1"/>
+            <rect x="13.5" y="7" width="3" height="9" rx="1"/>
+          </svg>
+        </div>
         <div class="feat-text">
-          <h3>Análisis por tipología</h3>
-          <p>Desglose de precio UF/m² por tipo de unidad: 1D, 2D, 3D, 3D+T y más.</p>
+          <h3>Pricing por tipología</h3>
+          <p>UF/m² desglosado por tipo de unidad: 1D, 2D, 3D, 3D+T. Cada submercado tiene su propio rango.</p>
         </div>
       </div>
       <div class="feat-item">
-        <div class="feat-icon">📍</div>
+        <div class="feat-icon">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10 2C7.24 2 5 4.24 5 7c0 3.75 5 11 5 11s5-7.25 5-11c0-2.76-2.24-5-5-5z"/>
+            <circle cx="10" cy="7" r="1.5"/>
+          </svg>
+        </div>
         <div class="feat-text">
           <h3>Benchmarks por zona</h3>
-          <p>Mínimo, máximo y promedio de mercado para la zona y comunas vecinas.</p>
+          <p>Mínimo, máximo y promedio de mercado para la zona de tu proyecto y comunas de referencia.</p>
         </div>
       </div>
       <div class="feat-item">
-        <div class="feat-icon">🧭</div>
+        <div class="feat-icon">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="10" cy="10" r="8"/>
+            <path d="M10 3.5v2M10 14.5v2M3.5 10h2M14.5 10h2"/>
+            <circle cx="10" cy="10" r="1.5" fill="currentColor" stroke="none"/>
+          </svg>
+        </div>
         <div class="feat-text">
-          <h3>Ponderación de orientación</h3>
-          <p>Prima o descuento por orientación cardinal — cuánto paga el mercado por nororiente vs poniente.</p>
+          <h3>Prima por orientación</h3>
+          <p>Cuánto acepta pagar el mercado por nororiente vs poniente. Dato clave para el mix y la tabla de precios.</p>
         </div>
       </div>
       <div class="feat-item">
-        <div class="feat-icon">🏗️</div>
+        <div class="feat-icon">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="7" height="7" rx="1.5"/>
+            <rect x="11" y="2" width="7" height="7" rx="1.5"/>
+            <rect x="2" y="11" width="7" height="7" rx="1.5"/>
+            <rect x="11" y="11" width="7" height="7" rx="1.5"/>
+          </svg>
+        </div>
         <div class="feat-text">
-          <h3>Stock disponible</h3>
-          <p>Unidades activas por proyecto para medir saturación y oportunidades de nicho.</p>
+          <h3>Stock activo y saturación</h3>
+          <p>Unidades disponibles por proyecto competidor — para medir absorción del mercado y detectar nichos libres.</p>
         </div>
       </div>
       <div class="feat-item">
-        <div class="feat-icon">🎯</div>
+        <div class="feat-icon">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 15a7 7 0 0 1 12 0"/>
+            <path d="M10 15L8.5 9"/>
+            <circle cx="10" cy="15" r="1.5" fill="currentColor" stroke="none"/>
+          </svg>
+        </div>
         <div class="feat-text">
-          <h3>Posicionamiento relativo</h3>
-          <p>Dónde queda tu proyecto respecto al rango del mercado — caro, competitivo o bajo precio.</p>
+          <h3>Posición relativa del proyecto</h3>
+          <p>Dónde queda tu proyecto en el rango de mercado: caro, competitivo o con margen para subir.</p>
         </div>
       </div>
       <div class="feat-item feat-item--highlight">
-        <div class="feat-icon">✨</div>
+        <div class="feat-icon">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H7l-4 3V4z"/>
+            <circle cx="7.5" cy="8" r="0.75" fill="currentColor" stroke="none"/>
+            <circle cx="10" cy="8" r="0.75" fill="currentColor" stroke="none"/>
+            <circle cx="12.5" cy="8" r="0.75" fill="currentColor" stroke="none"/>
+          </svg>
+        </div>
         <div class="feat-text">
           <h3>Asesor IA incluido</h3>
-          <p>Cada estudio incluye acceso al asesor IA entrenado con los datos de tu mercado.</p>
+          <p>Análisis estratégico en segundos. Pregúntale sobre precio, competidores y oportunidades de mercado.</p>
         </div>
       </div>
     </div>
@@ -683,16 +746,16 @@ h3 { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: clamp(1rem
   <div class="container">
     <div class="advisor-grid">
       <div class="advisor-content">
-        <span class="eyebrow eyebrow--light">Asesor IA</span>
-        <h2>Tu estudio habla contigo</h2>
-        <p>Cada estudio viene con un asesor IA especializado en tu mercado. No es un chatbot genérico — está entrenado con los datos reales de tu zona, tu competencia y tu tipología.</p>
-        <p>Pregúntale lo que necesitas para tomar decisiones de precio con respaldo.</p>
+        <span class="eyebrow eyebrow--light">Asesor IA especializado</span>
+        <h2>Tu analista de mercado<br>disponible al instante</h2>
+        <p>No es un chatbot de propósito general. Está entrenado con los datos reales de tu zona, tu competencia y tu mix de tipologías — y tiene acceso a web para ampliar el análisis cuando lo necesites.</p>
+        <p>Úsalo antes del lanzamiento, durante la campaña de preventas o al evaluar una nueva zona de inversión.</p>
         <ul class="advisor-list">
-          <li><span class="check-icon"></span>Posicionamiento competitivo de tu proyecto vs el mercado</li>
-          <li><span class="check-icon"></span>Oportunidades de precio por tipología y zona</li>
-          <li><span class="check-icon"></span>Análisis de primas por orientación cardinal</li>
-          <li><span class="check-icon"></span>Proyectos con mayor y menor saturación de stock</li>
-          <li><span class="check-icon"></span>Recomendaciones estratégicas accionables</li>
+          <li><span class="check-icon"></span>¿Mi precio de lanzamiento es competitivo por tipología?</li>
+          <li><span class="check-icon"></span>¿Qué margen tengo para subir en nororiente?</li>
+          <li><span class="check-icon"></span>¿Qué tan saturada está la zona en 2D y 3D?</li>
+          <li><span class="check-icon"></span>¿Cuáles son mis comparables directos y cómo me diferencio?</li>
+          <li><span class="check-icon"></span>¿Hay oportunidades de precio que el mercado aún no está cobrando?</li>
         </ul>
       </div>
 
@@ -711,13 +774,13 @@ h3 { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: clamp(1rem
           </div>
         </div>
         <div class="chat-msgs">
-          <div class="msg-u"><span>¿Cómo se posiciona mi proyecto vs el mercado?</span></div>
+          <div class="msg-u"><span>¿Mi precio de lanzamiento es competitivo en 2D?</span></div>
           <div class="msg-a">
-            <span>Tu proyecto está <strong>3.2% bajo el promedio de la zona</strong> en tipología 2D — posición competitiva. Los comparables directos son Parque Acuático y Vista Oriente. Tu precio en 1D es el más ajustado del cuadrante.</span>
+            <span>En 2D estás <strong>3.2% bajo el promedio de la zona</strong> — posición sólida para velocidad de venta. Si quieres mantener ese diferencial, el rango óptimo es 83–86 UF/m². Subir a 87 te pone en línea con Parque Acuático, que lleva 6 meses sin ajustar.</span>
           </div>
-          <div class="msg-u"><span>¿Dónde hay oportunidad de subir precio?</span></div>
+          <div class="msg-u"><span>¿Cuánto puedo subir en las unidades nororiente?</span></div>
           <div class="msg-a">
-            <span>Orientación nororiente tiene una <strong>prima del 8.4%</strong> que el mercado acepta. Solo 2 de 7 proyectos la cobran activamente. Si tienes unidades con esa vista, hay margen para subir sin perder competitividad.</span>
+            <span>El mercado acepta una <strong>prima de 8.4% en nororiente</strong>. Solo 2 de 7 competidores la cobran explícitamente. Tienes espacio para subirlas entre 7–9% sobre tu precio base sin salir del rango que el comprador actual absorbe.</span>
           </div>
         </div>
         <div class="chat-input-row">
@@ -738,27 +801,27 @@ h3 { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: clamp(1rem
 <section class="section section--white" id="como-funciona">
   <div class="container">
     <div class="section-hd">
-      <span class="eyebrow">Cómo funciona</span>
-      <h2>De la solicitud al análisis en 3 pasos</h2>
+      <span class="eyebrow">Proceso</span>
+      <h2>Inteligencia de mercado lista<br>en menos de 48 horas</h2>
     </div>
     <div class="steps">
       <div class="step">
         <div class="step-num">01</div>
-        <h3>Solicitas</h3>
-        <p>Conversación guiada con IA para capturar los datos de tu proyecto y zona de análisis. Sin formularios largos.</p>
+        <h3>Briefing con IA</h3>
+        <p>Conversación guiada para capturar tu proyecto, zona y tipologías objetivo. Sin formularios. Sin reuniones previas.</p>
         <span class="step-tag">~10 minutos</span>
       </div>
       <div class="step">
         <div class="step-num">02</div>
-        <h3>Generamos</h3>
-        <p>Investigamos el mercado real, estructuramos el estudio y lo revisamos antes de publicarlo.</p>
+        <h3>Análisis y validación</h3>
+        <p>Investigamos el mercado real, estructuramos el estudio por tipología y zona, y lo validamos antes de publicar.</p>
         <span class="step-tag">~48 horas</span>
       </div>
       <div class="step">
         <div class="step-num">03</div>
-        <h3>Accedes</h3>
-        <p>Recibes tu código de acceso. Visor web con asesor IA disponible de inmediato y sin límite de tiempo.</p>
-        <span class="step-tag">Acceso permanente</span>
+        <h3>Acceso inmediato</h3>
+        <p>Visor web con todos los datos + asesor IA activado. 30 consultas incluidas; recarga cuando necesites más.</p>
+        <span class="step-tag">30 consultas incluidas</span>
       </div>
     </div>
   </div>
@@ -767,8 +830,8 @@ h3 { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: clamp(1rem
 <!-- CLIENTS -->
 <section class="section section--mist">
   <div class="container" style="text-align:center;">
-    <span class="eyebrow">Quiénes confían en nosotros</span>
-    <h2>Proyectos reales en todo Chile</h2>
+    <span class="eyebrow">Clientes</span>
+    <h2>Inmobiliarias y grupos de inversión<br>que tomaron mejores decisiones</h2>
     <div class="clients-row">
       <div class="client-chip">DOSA <small>Viña del Mar · Concón</small></div>
       <div class="client-chip">Inmobiliaria VK <small>Peñablanca</small></div>
@@ -785,14 +848,14 @@ h3 { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: clamp(1rem
   <div class="cta-glow"></div>
   <div class="container">
     <div class="cta-inner">
-      <span class="eyebrow eyebrow--light">¿Listo para conocer tu mercado?</span>
-      <h2>Deja de adivinar.<br>Empieza a posicionarte.</h2>
-      <p>Un estudio de oferta con asesor IA incluido. Datos reales, análisis estratégico, entregado en 48 horas.</p>
+      <span class="eyebrow eyebrow--light">¿Próximo lanzamiento o evaluación de zona?</span>
+      <h2>Datos reales. Decisiones informadas.<br>Mejor retorno.</h2>
+      <p>Inteligencia competitiva lista en 48 horas. Con asesor IA incluido para responder cada pregunta antes, durante y después del lanzamiento.</p>
       <div class="cta-actions">
-        <a href="intake.html" class="btn-warm">Solicitar estudio →</a>
+        <a href="intake.html" class="btn-warm">Solicitar estudio estratégico →</a>
         <a href="index.html" class="btn-ghost">Ya soy cliente</a>
       </div>
-      <p class="cta-hint">Disponible para proyectos en Chile · Respuesta en menos de 24h</p>
+      <p class="cta-hint">Para proyectos en Chile · Respuesta en menos de 24h</p>
     </div>
   </div>
 </section>
@@ -812,7 +875,7 @@ h3 { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: clamp(1rem
           </div>
           <span class="brand">RW Consulting<span class="brand-dot">.</span></span>
         </div>
-        <p>Estudios de oferta competitiva para inmobiliarias chilenas. Análisis con asesor IA incluido.</p>
+        <p>Inteligencia competitiva de mercado para inmobiliarias y grupos de inversión en Chile.</p>
       </div>
       <div class="footer-col">
         <h4>Producto</h4>

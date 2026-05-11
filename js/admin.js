@@ -484,10 +484,99 @@ async function rejectStudy(studyId) {
   }
 }
 
+// ── Credits management ─────────────────────────────────────────────
+
+const PUBLISH_WORKER_URL = 'https://rw-publish.rw-consulting.workers.dev';
+const CHAT_WORKER_URL    = 'https://rw-consulting-chat.rw-consulting.workers.dev';
+
+async function loadCurrentCredits() {
+  const study = state.currentStudy;
+  if (!study) return;
+
+  const display = document.getElementById('credits-display');
+  if (display) display.textContent = '…';
+
+  try {
+    const res = await fetch(`${CHAT_WORKER_URL}/credits?codigo=${encodeURIComponent(study.codigo)}`);
+    const data = await res.json();
+    if (display) {
+      display.textContent = res.ok ? data.credits_remaining : `Error: ${data.error}`;
+    }
+  } catch (err) {
+    if (display) display.textContent = 'Error de red';
+  }
+}
+
+async function _postCredits(codigo, amount, action) {
+  const res = await fetch(`${PUBLISH_WORKER_URL}/credits`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${state.adminSecret}`
+    },
+    body: JSON.stringify({ codigo, amount, action })
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+  return data;
+}
+
+async function quickRecharge(amount) {
+  const study = state.currentStudy;
+  if (!study) return;
+  try {
+    const data = await _postCredits(study.codigo, amount, 'add');
+    const display = document.getElementById('credits-display');
+    if (display) display.textContent = data.credits;
+    alert(`+${amount} créditos agregados. Total: ${data.credits}`);
+  } catch (err) {
+    alert(`Error: ${err.message}`);
+  }
+}
+
+async function customRecharge() {
+  const study = state.currentStudy;
+  if (!study) return;
+  const input = document.getElementById('credits-custom-amount');
+  const amount = parseInt(input?.value, 10);
+  if (!amount || amount <= 0) { alert('Ingresa un número válido mayor a 0.'); return; }
+  try {
+    const data = await _postCredits(study.codigo, amount, 'add');
+    const display = document.getElementById('credits-display');
+    if (display) display.textContent = data.credits;
+    if (input) input.value = '';
+    alert(`+${amount} créditos agregados. Total: ${data.credits}`);
+  } catch (err) {
+    alert(`Error: ${err.message}`);
+  }
+}
+
+async function setCredits() {
+  const study = state.currentStudy;
+  if (!study) return;
+  const input = document.getElementById('credits-set-amount');
+  const amount = parseInt(input?.value, 10);
+  if (amount === undefined || amount < 0 || isNaN(amount)) { alert('Ingresa un número válido (0 o más).'); return; }
+  if (!confirm(`¿Establecer créditos de ${study.codigo} en ${amount}?`)) return;
+  try {
+    const data = await _postCredits(study.codigo, amount, 'set');
+    const display = document.getElementById('credits-display');
+    if (display) display.textContent = data.credits;
+    if (input) input.value = '';
+    alert(`Créditos establecidos en ${data.credits}`);
+  } catch (err) {
+    alert(`Error: ${err.message}`);
+  }
+}
+
 // Make functions available globally
 window.viewStudy = viewStudy;
 window.approveStudy = approveStudy;
 window.rejectStudy = rejectStudy;
+window.loadCurrentCredits = loadCurrentCredits;
+window.quickRecharge = quickRecharge;
+window.customRecharge = customRecharge;
+window.setCredits = setCredits;
 
 // Initialize on load
 document.addEventListener('DOMContentLoaded', initAdminConsole);
