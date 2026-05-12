@@ -176,6 +176,8 @@ export default {
       return handleAnalyze(body, env, request);
     } else if (url.pathname === '/generate') {
       return handleGenerate(body, env, request);
+    } else if (url.pathname === '/contact') {
+      return handleContact(body, env, request);
     }
 
     return errorResponse('Not found', 404, request);
@@ -266,6 +268,18 @@ ${JSON.stringify(datos, null, 2)}`;
   }
 }
 
+async function handleContact(body, env, request) {
+  const { nombre, email, empresa, mensaje, fuente } = body;
+
+  if (!nombre || !email) {
+    return errorResponse('nombre y email son requeridos', 400, request);
+  }
+
+  await notifyContacto({ nombre, email, empresa, mensaje, fuente }, env);
+
+  return corsResponse({ success: true }, 200, request);
+}
+
 // ── Helpers ───────────────────────────────────────────────────────
 
 async function callClaude(prompt, systemPrompt, env) {
@@ -295,6 +309,26 @@ async function callClaude(prompt, systemPrompt, env) {
 
   const data = await response.json();
   return data.content?.find(b => b.type === 'text')?.text || '';
+}
+
+async function notifyContacto(datos, env) {
+  if (!env.TELEGRAM_BOT_TOKEN || !env.TELEGRAM_CHAT_ID) return;
+
+  const lines = [
+    `📩 <b>Nuevo contacto — RW Consulting</b>`,
+    ``,
+    `👤 Nombre: ${datos.nombre}`,
+    `📧 Email: ${datos.email}`,
+    `🏢 Empresa: ${datos.empresa || '(no indicada)'}`,
+    `📍 Fuente: ${datos.fuente || 'web'}`,
+  ];
+  if (datos.mensaje) lines.push(``, `💬 Mensaje: ${datos.mensaje}`);
+
+  await fetch(`https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/sendMessage`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ chat_id: env.TELEGRAM_CHAT_ID, text: lines.join('\n'), parse_mode: 'HTML' }),
+  });
 }
 
 async function notifyAdmin(estudioId, codigo, tipo, datos, env) {

@@ -73,19 +73,20 @@ function init() {
 // ── Flujo de conversación ────────────────────────────────────────
 
 function startConversation() {
-  // Mensaje de bienvenida
   addMessage('assistant', 'Bienvenido a RW Consulting. Vamos a definir el estudio de mercado que necesita tu proyecto. ¿En qué etapa estás?');
-  
-  // Botones de tipo de estudio
+
   const buttonContainer = document.createElement('div');
   buttonContainer.className = 'suggestions-container';
   buttonContainer.style.marginTop = '12px';
-  
+
   const tipo1Button = createSuggestionChip('Tengo un proyecto por construir y quiero saber cómo posicionar precios');
   const tipo2Button = createSuggestionChip('Tengo un proyecto activo y quiero compararlo con el mercado');
-  
+  const contactButton = createSuggestionChip('Prefiero que me contacten');
+  contactButton.style.borderColor = 'var(--warm)';
+  contactButton.style.color = 'var(--warm)';
+
   function disableTypeButtons() {
-    [tipo1Button, tipo2Button].forEach(b => {
+    [tipo1Button, tipo2Button, contactButton].forEach(b => {
       b.style.pointerEvents = 'none';
       b.style.opacity = '0.5';
       b.style.cursor = 'default';
@@ -95,16 +96,97 @@ function startConversation() {
 
   tipo1Button.addEventListener('click', () => { disableTypeButtons(); selectStudyType('tipo1'); });
   tipo2Button.addEventListener('click', () => { disableTypeButtons(); selectStudyType('tipo2'); });
-  
+  contactButton.addEventListener('click', () => { disableTypeButtons(); showContactForm(); });
+
   buttonContainer.appendChild(tipo1Button);
   buttonContainer.appendChild(tipo2Button);
-  
-  // Agregar al chat
+  buttonContainer.appendChild(contactButton);
+
   const messageDiv = document.createElement('div');
   messageDiv.className = 'message assistant-message';
   messageDiv.appendChild(buttonContainer);
   chatContainer.appendChild(messageDiv);
   scrollToBottom();
+}
+
+function showContactForm() {
+  addMessage('user', 'Prefiero que me contacten');
+  addMessage('assistant', 'Perfecto. Dejá tus datos y te contactamos a la brevedad.');
+
+  const msgDiv = document.createElement('div');
+  msgDiv.className = 'message assistant-message';
+
+  const form = document.createElement('div');
+  form.style.cssText = 'background:var(--mist);border:1px solid var(--border-solid);border-radius:12px;padding:20px;margin-top:4px;display:flex;flex-direction:column;gap:12px;min-width:280px;';
+
+  const fields = [
+    { name: 'nombre',  label: 'Nombre',           type: 'text',  required: true  },
+    { name: 'email',   label: 'Email',             type: 'email', required: true  },
+    { name: 'empresa', label: 'Empresa (opcional)',type: 'text',  required: false },
+    { name: 'mensaje', label: 'Mensaje (opcional)',type: 'textarea', required: false },
+  ];
+
+  const inputs = {};
+  fields.forEach(f => {
+    const label = document.createElement('label');
+    label.style.cssText = 'display:flex;flex-direction:column;gap:4px;font-size:0.85rem;font-weight:600;color:var(--text-secondary);';
+    label.textContent = f.label;
+    const el = document.createElement(f.type === 'textarea' ? 'textarea' : 'input');
+    if (f.type !== 'textarea') el.type = f.type;
+    el.style.cssText = 'padding:10px 12px;border:1px solid var(--border-solid);border-radius:8px;font-family:Urbanist,sans-serif;font-size:0.9rem;outline:none;resize:vertical;';
+    el.rows = 3;
+    inputs[f.name] = el;
+    label.appendChild(el);
+    form.appendChild(label);
+  });
+
+  const submitBtn = document.createElement('button');
+  submitBtn.textContent = 'Enviar';
+  submitBtn.style.cssText = 'padding:12px;background:var(--teal);color:#fff;border:none;border-radius:8px;font-family:Urbanist,sans-serif;font-size:0.95rem;font-weight:600;cursor:pointer;';
+  submitBtn.addEventListener('click', () => submitContactForm(inputs, submitBtn));
+  form.appendChild(submitBtn);
+
+  msgDiv.appendChild(form);
+  chatContainer.appendChild(msgDiv);
+
+  // Ocultar input de texto
+  const inputArea = document.querySelector('.chat-input-area');
+  if (inputArea) inputArea.style.display = 'none';
+
+  scrollToBottom();
+}
+
+async function submitContactForm(inputs, btn) {
+  const nombre  = inputs.nombre.value.trim();
+  const email   = inputs.email.value.trim();
+  const empresa = inputs.empresa.value.trim();
+  const mensaje = inputs.mensaje.value.trim();
+
+  if (!nombre || !email) {
+    inputs.nombre.style.borderColor = nombre ? '' : 'red';
+    inputs.email.style.borderColor  = email  ? '' : 'red';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Enviando...';
+
+  try {
+    const res = await fetch('https://rw-intake.rw-consulting.workers.dev/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nombre, email, empresa, mensaje, fuente: 'intake' }),
+    });
+
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+
+    addMessage('assistant', `Listo, ${nombre}. Te contactamos pronto al ${email}. ¡Gracias!`);
+    btn.closest('div[style]').remove();
+  } catch {
+    btn.disabled = false;
+    btn.textContent = 'Reintentar';
+    addMessage('assistant', 'Hubo un error al enviar. Podés contactarnos directamente en contacto@rwconsulting.cl');
+  }
 }
 
 function selectStudyType(tipo) {
