@@ -495,6 +495,50 @@
     }
   }
 
+  /* ── summary card ── */
+  .summary-card {
+    background: var(--mist);
+    border: 1px solid var(--border-solid);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-top: 4px;
+  }
+
+  .summary-card-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--teal);
+    margin-bottom: 10px;
+  }
+
+  .summary-field {
+    display: flex;
+    gap: 10px;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border-solid);
+    font-size: 0.88rem;
+    line-height: 1.4;
+  }
+
+  .summary-field:last-child {
+    border-bottom: none;
+  }
+
+  .summary-field-label {
+    min-width: 150px;
+    flex-shrink: 0;
+    color: var(--text-secondary);
+    font-weight: 600;
+  }
+
+  .summary-field-value {
+    color: var(--text-primary);
+    word-break: break-word;
+    white-space: pre-wrap;
+  }
+
   /* ── utility ── */
   .hidden {
     display: none !important;
@@ -518,8 +562,8 @@
       <div class="chat-header">
         <div class="chat-header-icon">💬</div>
         <div class="chat-header-content">
-          <h1>Asistente de estudios de mercado</h1>
-          <p>Te guiaré paso a paso para generar tu estudio personalizado</p>
+          <h1>Asesor de mercado inmobiliario</h1>
+          <p>Análisis competitivo y estrategia de precios para tu proyecto</p>
         </div>
       </div>
 

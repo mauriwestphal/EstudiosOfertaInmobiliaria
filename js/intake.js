@@ -3,6 +3,21 @@
  * Interfaz de chat inteligente para recopilación de datos de estudios inmobiliarios
  */
 
+// ── Etiquetas legibles para campos recopilados ───────────────────
+
+const FIELD_LABELS = {
+  nombre_proyecto:  'Nombre del proyecto',
+  direccion_sector: 'Dirección / Sector',
+  direccion:        'Dirección',
+  inmobiliaria:     'Inmobiliaria',
+  tipologias:       'Tipologías',
+  amenities:        'Amenidades',
+  competencia:      'Competencia',
+  precios_propios:  'Precios propios',
+  contacto_nombre:  'Nombre de contacto',
+  contacto_email:   'Email de contacto',
+};
+
 // ── Estado global ─────────────────────────────────────────────────
 
 const state = {
@@ -59,7 +74,7 @@ function init() {
 
 function startConversation() {
   // Mensaje de bienvenida
-  addMessage('assistant', 'Hola, soy el asistente de RW Consulting. ¿Qué tipo de estudio necesitas?');
+  addMessage('assistant', 'Bienvenido a RW Consulting. Vamos a definir el estudio de mercado que necesita tu proyecto. ¿En qué etapa estás?');
   
   // Botones de tipo de estudio
   const buttonContainer = document.createElement('div');
@@ -69,8 +84,17 @@ function startConversation() {
   const tipo1Button = createSuggestionChip('Tengo un proyecto por construir y quiero saber cómo posicionar precios');
   const tipo2Button = createSuggestionChip('Tengo un proyecto activo y quiero compararlo con el mercado');
   
-  tipo1Button.addEventListener('click', () => selectStudyType('tipo1'));
-  tipo2Button.addEventListener('click', () => selectStudyType('tipo2'));
+  function disableTypeButtons() {
+    [tipo1Button, tipo2Button].forEach(b => {
+      b.style.pointerEvents = 'none';
+      b.style.opacity = '0.5';
+      b.style.cursor = 'default';
+      b.style.transform = 'none';
+    });
+  }
+
+  tipo1Button.addEventListener('click', () => { disableTypeButtons(); selectStudyType('tipo1'); });
+  tipo2Button.addEventListener('click', () => { disableTypeButtons(); selectStudyType('tipo2'); });
   
   buttonContainer.appendChild(tipo1Button);
   buttonContainer.appendChild(tipo2Button);
@@ -143,9 +167,9 @@ async function analyzeConversation() {
       // Mostrar sugerencias
       showSuggestions(result.suggestions || []);
       
-      // Si está completo, mostrar botón de generar
+      // Si está completo, mostrar resumen + botón de generar
       if (state.isComplete) {
-        showGenerateButton();
+        showSummaryAndGenerateButton();
       }
     } else {
       throw new Error(result.error || 'Unknown error');
@@ -328,13 +352,87 @@ function clearSuggestions() {
   }
 }
 
-function showGenerateButton() {
-  if (!generateButton) return;
-  
-  generateButton.classList.remove('hidden');
-  
-  // Agregar mensaje del asistente
-  addMessage('assistant', '¡Perfecto! Ya tengo toda la información necesaria. Puedes generar tu estudio ahora.');
+function formatFieldValue(value) {
+  if (Array.isArray(value)) {
+    return value.map(v => (typeof v === 'string' ? v : JSON.stringify(v))).join(', ');
+  }
+  if (typeof value === 'object' && value !== null) {
+    return JSON.stringify(value, null, 2);
+  }
+  return String(value);
+}
+
+function buildSummaryCard(datos) {
+  const card = document.createElement('div');
+  card.className = 'summary-card';
+
+  const title = document.createElement('div');
+  title.className = 'summary-card-title';
+  title.textContent = 'Resumen de tu solicitud';
+  card.appendChild(title);
+
+  const entries = Object.entries(datos);
+  if (entries.length === 0) {
+    const empty = document.createElement('p');
+    empty.textContent = 'No se registraron datos aún.';
+    empty.style.color = 'var(--text-secondary)';
+    card.appendChild(empty);
+    return card;
+  }
+
+  entries.forEach(([key, value]) => {
+    const row = document.createElement('div');
+    row.className = 'summary-field';
+
+    const label = document.createElement('span');
+    label.className = 'summary-field-label';
+    label.textContent = FIELD_LABELS[key] || key;
+
+    const val = document.createElement('span');
+    val.className = 'summary-field-value';
+    val.textContent = formatFieldValue(value);
+
+    row.appendChild(label);
+    row.appendChild(val);
+    card.appendChild(row);
+  });
+
+  return card;
+}
+
+function showSummaryAndGenerateButton() {
+  clearSuggestions();
+
+  // Mostrar resumen como burbuja del asistente (sin pushear al historial)
+  const msgDiv = document.createElement('div');
+  msgDiv.className = 'message assistant-message';
+
+  const bubble = document.createElement('div');
+  bubble.className = 'chat-bubble';
+
+  const intro = document.createElement('p');
+  intro.textContent = 'Revisá los datos antes de continuar. Si algo está mal, escríbelo abajo.';
+  intro.style.marginBottom = '12px';
+  bubble.appendChild(intro);
+
+  bubble.appendChild(buildSummaryCard(state.currentData.datos));
+
+  const note = document.createElement('p');
+  note.textContent = 'Cuando todo esté correcto, generá tu estudio con el botón de abajo.';
+  note.style.marginTop = '12px';
+  note.style.fontSize = '0.85rem';
+  note.style.color = 'var(--text-secondary)';
+  bubble.appendChild(note);
+
+  msgDiv.appendChild(bubble);
+  chatContainer.appendChild(msgDiv);
+
+  // TODO: [DEUDA TÉCNICA] — mostrar pasarela de pago aquí antes de habilitar el botón
+  if (generateButton) {
+    generateButton.classList.remove('hidden');
+  }
+
+  scrollToBottom();
 }
 
 function updateProgressBar() {
