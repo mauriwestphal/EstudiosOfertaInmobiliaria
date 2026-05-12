@@ -167,7 +167,13 @@ h3 { font-family: 'Urbanist', sans-serif; font-weight: 700; font-size: clamp(1re
   line-height: 1.72; margin-bottom: 34px; max-width: 460px;
 }
 .hero-subtitle strong { color: var(--teal-light); font-weight: 500; }
-.hero-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 48px; }
+.hero-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+.hero-demo-link {
+  display: inline-block; font-size: 0.82rem; color: rgba(247,249,249,0.42);
+  text-decoration: none; margin-bottom: 32px; transition: color .2s;
+  letter-spacing: 0.01em;
+}
+.hero-demo-link:hover { color: var(--teal-light); }
 .hero-stats {
   display: flex; gap: 32px;
   padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.08);
@@ -395,6 +401,13 @@ h3 { font-family: 'Urbanist', sans-serif; font-weight: 700; font-size: clamp(1re
   color: rgba(247,249,249,0.28); border-top: 1px solid rgba(255,255,255,0.04);
   text-align: center; font-style: italic;
 }
+.advisor-demo-cta {
+  margin-top: 32px; text-align: center;
+}
+.advisor-demo-cta p {
+  margin-top: 10px; font-size: 0.82rem;
+  color: rgba(247,249,249,0.42);
+}
 
 /* ── Steps ── */
 .steps {
@@ -541,6 +554,7 @@ h3 { font-family: 'Urbanist', sans-serif; font-weight: 700; font-size: clamp(1re
           <a href="intake.html" class="btn-primary">Solicitar estudio →</a>
           <a href="index.html" class="btn-ghost">Soy cliente</a>
         </div>
+        <a href="index.html" class="hero-demo-link fi fi-4">o explora un estudio demo →</a>
         <div class="hero-stats fi fi-5">
           <div>
             <span class="hero-stat-val">+10</span>
@@ -792,6 +806,10 @@ h3 { font-family: 'Urbanist', sans-serif; font-weight: 700; font-size: clamp(1re
           </button>
         </div>
         <div class="chat-note">📊 Análisis basado en estudio de mercado RW Consulting · Orientativo</div>
+      </div>
+      <div class="advisor-demo-cta">
+        <a href="index.html" class="btn-primary">Explorar demo en vivo →</a>
+        <p>Accede al estudio de ejemplo con el asesor IA activado</p>
       </div>
     </div>
   </div>
