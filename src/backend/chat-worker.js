@@ -5,8 +5,7 @@
  * DEPLOY:
  *   1. wrangler kv:namespace create "CHAT_CREDITS"  → copiar id a wrangler.toml
  *   2. wrangler secret put ANTHROPIC_API_KEY
- *   3. wrangler secret put VALID_CODES              ← JSON array: ["EST-2026-KI-4V7P",...]
- *   4. wrangler deploy
+ *   3. wrangler deploy
  *
  * Rutas:
  *   GET  /credits?codigo=XXX  → devuelve créditos restantes (sin consumir)
@@ -24,6 +23,7 @@ const FALLBACK_ORIGIN  = 'https://rwconsulting.cl';
 const MODEL            = 'claude-sonnet-4-6';
 const MAX_TOKENS       = 4096;
 const DEFAULT_CREDITS  = 30;
+const CODIGO_REGEX     = /^(EST|DEMO)-\d{4}-[A-Z]{2}-[A-Z0-9]{4}$/;
 
 const SYSTEM_BASE = `Eres un asesor estratégico inmobiliario senior de RW Consulting, especializado en el mercado chileno de proyectos de vivienda nueva.
 
@@ -86,10 +86,7 @@ export default {
         return jsonResponse({ error: 'codigo requerido' }, 400, corsHeaders);
       }
 
-      let validCodes = [];
-      try { validCodes = JSON.parse(env.VALID_CODES || '[]'); } catch {}
-
-      if (!validCodes.includes(codigo)) {
+      if (!CODIGO_REGEX.test(codigo)) {
         return jsonResponse({ error: 'Código no válido' }, 403, corsHeaders);
       }
 
@@ -111,12 +108,7 @@ export default {
 
     const { codigo, messages, estudioJson } = body;
 
-    let validCodes = [];
-    try { validCodes = JSON.parse(env.VALID_CODES || '[]'); } catch {
-      return jsonResponse({ error: 'Worker misconfigured' }, 500, corsHeaders);
-    }
-
-    if (!codigo || !validCodes.includes(codigo)) {
+    if (!codigo || !CODIGO_REGEX.test(codigo)) {
       return jsonResponse({ error: 'Código de acceso no válido' }, 403, corsHeaders);
     }
 
